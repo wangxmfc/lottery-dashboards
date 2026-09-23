@@ -462,12 +462,10 @@
                         </div>
                     </div>
                     
-                    <!-- 第二层：5层分类（2列网格卡片，每层可折叠看详情） -->
+                    <!-- 第二层：5层分类（单列卡片，每层可折叠看详情） -->
                     <div id="full-model-layers-list" style="margin-bottom:15px;">
                         <div style="font-size:0.9em;color:#C9A227;margin-bottom:10px;">📊 5层架构分类（点击展开查看详情）</div>
-                        <div id="full-layers-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
-                            <!-- 动态生成5层分类卡片 -->
-                        </div>
+                        <!-- 动态生成5层分类列表 -->
                     </div>
                     
                     <!-- 第三层：异常告警（只展示有问题的模型） -->
@@ -1038,14 +1036,14 @@
             if (normalEl) normalEl.textContent = fmm.total || 0;
             if (warningEl) warningEl.textContent = 0;
             
-            // 2. 渲染5层分类列表（2列网格卡片，和49个核心模型风格一致）
-            const layersGridEl = document.getElementById('full-layers-grid');
-            if (!layersGridEl) return;
+            // 2. 渲染5层分类列表（单列大卡片，每层可折叠看详情）
+            const layersListEl = document.getElementById('full-model-layers-list');
+            if (!layersListEl) return;
             
             const layerKeys = ['layer1_core', 'layer2_prediction', 'layer3_tools', 'layer4_lottery', 'layer5_system'];
             const layerColors = ['#C9A227', '#28a745', '#17a2b8', '#6f42c1', '#fd7e14'];
             
-            let gridHtml = '';
+            let listHtml = '<div style="font-size:0.9em;color:#C9A227;margin-bottom:10px;">📊 5层架构分类（点击展开查看详情）</div>';
             
             layerKeys.forEach((layerKey, index) => {
                 const layer = layers[layerKey];
@@ -1053,43 +1051,47 @@
                 
                 const color = layerColors[index] || '#C9A227';
                 const count = layer.count || 0;
+                const percentage = fmm.total ? Math.round(count / fmm.total * 100) : 0;
                 
-                gridHtml += `
-                    <div onclick="toggleFullLayer('${layerKey}')" style="cursor:pointer;padding:12px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid ${color};">
-                        <div style="font-size:1em;color:#fff;font-weight:500;margin-bottom:4px;">${layer.name || layerKey}</div>
-                        <div style="font-size:0.8em;color:${color};font-weight:500;">${count}个模型 · ${count}正常</div>
-                        <div style="font-size:0.7em;color:#9AA3AF;margin-top:2px;">${layer.desc || ''}</div>
+                listHtml += `
+                    <div style="margin-bottom:10px;">
+                        <div onclick="toggleFullLayer('${layerKey}')" style="cursor:pointer;padding:14px 16px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid ${color};display:flex;justify-content:space-between;align-items:center;">
+                            <div style="flex:1;">
+                                <span style="font-size:1.05em;color:#fff;font-weight:500;">${layer.name || layerKey}</span>
+                                <span style="font-size:0.85em;color:#9AA3AF;margin-left:12px;">${layer.desc || ''}</span>
+                            </div>
+                            <div style="text-align:right;display:flex;align-items:center;">
+                                <span style="font-size:1.2em;font-weight:bold;color:${color};">${count}</span>
+                                <span style="font-size:0.8em;color:#9AA3AF;margin-left:6px;">个 (${percentage}%)</span>
+                                <span id="layer-icon-${layerKey}" style="font-size:0.9em;color:#9AA3AF;margin-left:12px;">▼</span>
+                            </div>
+                        </div>
+                        <div id="layer-detail-${layerKey}" style="display:none;margin-top:8px;padding:12px;background:rgba(255,255,255,0.02);border-radius:10px;max-height:400px;overflow-y:auto;">
+                            <!-- 该层模型列表（展开后显示，保持美化后的卡片样式） -->
+                        </div>
                     </div>
                 `;
             });
             
-            // 第5个卡片后补一个空位保持网格整齐
-            if (layerKeys.length % 2 === 1) {
-                gridHtml += '<div style="visibility:hidden;"></div>';
-            }
+            layersListEl.innerHTML = listHtml;
             
-            layersGridEl.innerHTML = gridHtml;
-            
-            // 为每层创建详情容器（直接拼接到innerHTML，确保可靠）
-            const layersListEl = document.getElementById('full-model-layers-list');
-            let allDetailsHtml = '';
+            // 填充每一层的模型详情（保持美化后的卡片样式不变）
             layerKeys.forEach((layerKey, index) => {
                 const layer = layers[layerKey];
                 if (!layer) return;
                 
                 const color = layerColors[index] || '#C9A227';
                 const funcs = layer.functions || [];
+                const detailEl = document.getElementById(`layer-detail-${layerKey}`);
+                if (!detailEl) return;
                 
-                allDetailsHtml += `
-                    <div id="layer-detail-${layerKey}" style="display:none;margin-top:10px;padding:12px;background:rgba(255,255,255,0.02);border-radius:10px;border-left:3px solid ${color};max-height:400px;overflow-y:auto;">
-                        <div style="font-size:0.85em;color:${color};font-weight:500;margin-bottom:10px;">${layer.name} - 共${funcs.length}个函数</div>
-                `;
+                let detailHtml = `<div style="font-size:0.85em;color:${color};font-weight:500;margin-bottom:10px;">${layer.name} - 共${funcs.length}个函数</div>`;
                 
-                // 显示前30个，超出显示"还有X个"（美化成和49个核心模型一样的卡片样式）
+                // 显示前30个，超出显示"还有X个"（保持美化后的卡片样式）
                 const showCount = Math.min(funcs.length, 30);
                 for (let i = 0; i < showCount; i++) {
                     const func = funcs[i];
-                    allDetailsHtml += `
+                    detailHtml += `
                         <div style="padding:10px 12px;margin-bottom:8px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid ${color};">
                             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
                                 <div>
@@ -1105,27 +1107,35 @@
                 }
                 
                 if (funcs.length > 30) {
-                    allDetailsHtml += `<div style="text-align:center;padding:8px;font-size:0.75em;color:#9AA3AF;">... 还有 ${funcs.length - 30} 个函数（共${funcs.length}个）</div>`;
+                    detailHtml += `<div style="text-align:center;padding:8px;font-size:0.75em;color:#9AA3AF;">... 还有 ${funcs.length - 30} 个函数（共${funcs.length}个）</div>`;
                 }
                 
-                allDetailsHtml += '</div>';
+                detailEl.innerHTML = detailHtml;
             });
             
-            // 把所有详情容器追加到列表后面（用insertAdjacentHTML更可靠）
-            layersListEl.insertAdjacentHTML('beforeend', allDetailsHtml);
-            
             console.log('✅ 全量模型监控已渲染:', fmm.total + '个模型, ' + Object.keys(layers).length + '层架构');
+        }
+        
+        // 滚动到上方49个核心模型监控模块
+        function scrollToCoreModel() {
+            const el = document.getElementById('model-monitoring');
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
         
         // 切换全量模型某层的展开/收起
         function toggleFullLayer(layerKey) {
             const detailEl = document.getElementById(`layer-detail-${layerKey}`);
+            const iconEl = document.getElementById(`layer-icon-${layerKey}`);
             if (!detailEl) return;
             
             if (detailEl.style.display === 'none' || detailEl.style.display === '') {
                 detailEl.style.display = 'block';
+                if (iconEl) iconEl.textContent = '▲';
             } else {
                 detailEl.style.display = 'none';
+                if (iconEl) iconEl.textContent = '▼';
             }
         }
         
