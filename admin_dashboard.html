@@ -1433,7 +1433,7 @@
                 
                 // 组装完整HTML
                 let tabButtons = tabs.map((t, i) => 
-                    `<button class="lottery-tab-btn ${i === 0 ? 'active' : ''}" data-tab="${t.id}" onclick="switchLotteryTab('${lotteryId}', '${t.id}')" style="flex:1;padding:8px 4px;font-size:0.78em;border:1px solid rgba(201,162,39,0.3);background:${i === 0 ? 'linear-gradient(135deg,#C9A227,#b8941f)' : 'rgba(255,255,255,0.03)'};color:${i === 0 ? '#fff' : '#9AA3AF'};border-radius:8px;cursor:pointer;transition:all 0.2s;">${t.name}</button>`
+                    `<button class="lottery-tab-btn ${i === 0 ? 'active' : ''}" data-tab="${t.id}" onclick="switchLotteryTab('${lotteryId}', '${t.id}')" style="flex:1;padding:8px 2px;font-size:0.72em;border:1px solid rgba(201,162,39,0.3);background:${i === 0 ? 'linear-gradient(135deg,#C9A227,#b8941f)' : 'rgba(255,255,255,0.03)'};color:${i === 0 ? '#fff' : '#9AA3AF'};border-radius:8px;cursor:pointer;transition:all 0.2s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${t.name}</button>`
                 ).join('');
                 
                 section.innerHTML = `
