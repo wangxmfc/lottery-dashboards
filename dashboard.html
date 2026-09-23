@@ -1075,6 +1075,14 @@
             
             layersListEl.innerHTML = listHtml;
             
+            // 建立核心模型中文名称映射表（从model_monitoring数据获取）
+            const coreModelMap = {};
+            if (data.model_monitoring && data.model_monitoring.models) {
+                data.model_monitoring.models.forEach(m => {
+                    if (m.id) coreModelMap[m.id] = m;
+                });
+            }
+            
             // 填充每一层的模型详情（保持美化后的卡片样式不变）
             layerKeys.forEach((layerKey, index) => {
                 const layer = layers[layerKey];
@@ -1091,17 +1099,24 @@
                 const showCount = Math.min(funcs.length, 30);
                 for (let i = 0; i < showCount; i++) {
                     const func = funcs[i];
+                    // 第1层核心模型：优先显示中文名称和描述
+                    const isCore = layerKey === 'layer1_core';
+                    const coreInfo = isCore && coreModelMap[func.id || func.name] ? coreModelMap[func.id || func.name] : null;
+                    const displayName = coreInfo ? coreInfo.name : func.name;
+                    const displayDesc = coreInfo ? coreInfo.desc : (isCore ? '核心预测模型' : (func.category || '函数'));
+                    const displayCategory = coreInfo ? coreInfo.category : (func.category || '函数');
+                    
                     detailHtml += `
                         <div style="padding:10px 12px;margin-bottom:8px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid ${color};">
                             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
                                 <div>
-                                    <span style="font-size:0.95em;color:${color};font-weight:bold;">${i + 1}. ${func.name}</span>
-                                    <span style="font-size:0.8em;color:#9AA3AF;margin-left:10px;">${func.category || '函数'}</span>
+                                    <span style="font-size:0.95em;color:${color};font-weight:bold;">${i + 1}. ${displayName}</span>
+                                    <span style="font-size:0.8em;color:#9AA3AF;margin-left:10px;">${displayCategory}</span>
                                 </div>
                                 <span style="font-size:0.8em;padding:4px 14px;background:rgba(40,167,69,0.15);color:#28a745;border-radius:15px;font-weight:500;">正常</span>
                             </div>
-                            <div style="font-size:0.8em;color:#bbb;margin-bottom:4px;">所在文件: ${func.file || '未知'}</div>
-                            <div style="font-size:0.75em;color:#666;">ID: ${func.id || func.name} · 最近运行: ${new Date().toLocaleString('zh-CN')}</div>
+                            <div style="font-size:0.8em;color:#bbb;margin-bottom:4px;">${displayDesc}</div>
+                            <div style="font-size:0.75em;color:#666;">ID: ${func.id || func.name} · 所在文件: ${func.file || '未知'}</div>
                         </div>
                     `;
                 }
