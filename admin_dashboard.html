@@ -928,13 +928,13 @@
             
             const lotteryIds = ['ssq', 'dlt', 'kl8', 'fc3d', 'pl35', 'qxc', 'qlc'];
             const lotteryConfig = {
-                'ssq': {emoji: '🔴', name: '双色球', mainColor: '#E53935', subColor: '#1E88E5', mainLabel: '红球(6个)', subLabel: '蓝球(1个)'},
-                'dlt': {emoji: '🔵', name: '大乐透', mainColor: '#7B5BD6', subColor: '#B39DDB', mainLabel: '前区(5个)', subLabel: '后区(2个)'},
-                'kl8': {emoji: '🟢', name: '快乐8', mainColor: '#43A047', subColor: null, mainLabel: '开奖号码(20个)', subLabel: null, loneLabel: '号码(10个)'},
-                'fc3d': {emoji: '🟡', name: '福彩3D', mainColor: '#F9A825', subColor: null, mainLabel: '开奖号码(3个)', subLabel: null},
-                'pl35': {emoji: '🟠', name: '排列3/5', mainColor: '#FB8C00', subColor: '#E65100', mainLabel: '排列3', subLabel: '排列5'},
-                'qxc': {emoji: '🟣', name: '七星彩', mainColor: '#8E24AA', subColor: '#BA68C8', mainLabel: '基本号(6个)', subLabel: '特别号(1个)'},
-                'qlc': {emoji: '⚪', name: '七乐彩', mainColor: '#546E7A', subColor: '#90A4AE', mainLabel: '基本号(7个)', subLabel: '特别号(1个)'},
+                'ssq': {emoji: '🔴', name: '双色球', mainColor: '#E53935', subColor: '#1E88E5', mainLabel: '红球(6个)', subLabel: '蓝球(1个)', mainKey: 'red', subKey: 'blue', predMain: 'red', predSub: 'blue', predLoneMain: 'lone_red', predLoneSub: 'lone_blue'},
+                'dlt': {emoji: '🔵', name: '大乐透', mainColor: '#7B5BD6', subColor: '#B39DDB', mainLabel: '前区(5个)', subLabel: '后区(2个)', mainKey: 'front', subKey: 'back', predMain: 'hot_front', predSub: 'hot_back', predLoneMain: 'lone_front', predLoneSub: 'lone_back'},
+                'kl8': {emoji: '🟢', name: '快乐8', mainColor: '#43A047', subColor: null, mainLabel: '开奖号码(20个)', subLabel: null, loneLabel: '号码(10个)', mainKey: 'nums', subKey: null, predMain: 'hot_nums', predSub: null, predLoneMain: 'lone_nums', predLoneSub: null},
+                'fc3d': {emoji: '🟡', name: '福彩3D', mainColor: '#F9A825', subColor: null, mainLabel: '开奖号码(3个)', subLabel: null, mainKey: 'nums', subKey: null, predMain: 'hot_nums', predSub: null, predLoneMain: 'lone_nums', predLoneSub: null},
+                'pl35': {emoji: '🟠', name: '排列3/5', mainColor: '#FB8C00', subColor: '#E65100', mainLabel: '排列3', subLabel: '排列5', mainKey: 'p3', subKey: 'p5', predMain: 'hot_p3', predSub: 'hot_p5', predLoneMain: 'lone_p3', predLoneSub: 'lone_p5'},
+                'qxc': {emoji: '🟣', name: '七星彩', mainColor: '#8E24AA', subColor: '#BA68C8', mainLabel: '基本号(6个)', subLabel: '特别号(1个)', mainKey: 'nums', subKey: 'special', predMain: 'hot_nums', predSub: 'hot_special', predLoneMain: 'lone_nums', predLoneSub: null},
+                'qlc': {emoji: '⚪', name: '七乐彩', mainColor: '#546E7A', subColor: '#90A4AE', mainLabel: '基本号(7个)', subLabel: '特别号(1个)', mainKey: 'nums', subKey: 'special', predMain: 'hot_nums', predSub: 'hot_special', predLoneMain: 'lone_nums', predLoneSub: null},
             };
             
             lotteryIds.forEach(lotteryId => {
@@ -1121,10 +1121,9 @@
                     hitTrend.forEach((t, idx) => {
                         const h = Math.max(4, (t.hit || 0) / maxHit * 55);
                         const color = (t.hit || 0) > 0 ? '#C9A227' : '#555';
-                        // 期号只显示第1、中间、最后一个，避免拥挤
-                        const showPeriod = (idx === 0 || idx === hitTrend.length - 1 || idx === Math.floor(hitTrend.length / 2));
-                        const periodLabel = showPeriod ? (t.period || '').slice(-4) : '';
-                        checkHtml += `<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:1px;height:100%;"><div style="font-size:0.6em;color:#9AA3AF;line-height:1;">${t.hit || 0}</div><div style="width:100%;height:${h}px;background:${color};border-radius:3px 3px 0 0;"></div><div style="font-size:0.5em;color:#666;line-height:1;margin-top:2px;white-space:nowrap;">${periodLabel}</div></div>`;
+                        // 所有期号都显示，取后2位，字体缩小避免拥挤
+                        const periodLabel = (t.period || '').slice(-2);
+                        checkHtml += `<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:1px;height:100%;"><div style="font-size:0.55em;color:#9AA3AF;line-height:1;">${t.hit || 0}</div><div style="width:100%;height:${h}px;background:${color};border-radius:3px 3px 0 0;"></div><div style="font-size:0.45em;color:#666;line-height:1;margin-top:2px;white-space:nowrap;">${periodLabel}</div></div>`;
                     });
                     checkHtml += `</div></div>`;
                 }
