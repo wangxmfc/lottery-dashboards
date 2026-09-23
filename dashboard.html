@@ -1085,20 +1085,21 @@
                         <div style="font-size:0.85em;color:${color};font-weight:500;margin-bottom:10px;">${layer.name} - 共${funcs.length}个函数</div>
                 `;
                 
-                // 显示前30个，超出显示"还有X个"
+                // 显示前30个，超出显示"还有X个"（美化成和49个核心模型一样的卡片样式）
                 const showCount = Math.min(funcs.length, 30);
                 for (let i = 0; i < showCount; i++) {
                     const func = funcs[i];
                     allDetailsHtml += `
-                        <div style="padding:8px 10px;margin-bottom:6px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:2px solid ${color};">
-                            <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div style="padding:10px 12px;margin-bottom:8px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid ${color};">
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
                                 <div>
-                                    <span style="font-size:0.85em;color:${color};font-weight:500;">${i + 1}. ${func.name}</span>
-                                    <span style="font-size:0.7em;color:#666;margin-left:8px;">${func.category || ''}</span>
+                                    <span style="font-size:0.95em;color:${color};font-weight:bold;">${i + 1}. ${func.name}</span>
+                                    <span style="font-size:0.8em;color:#9AA3AF;margin-left:10px;">${func.category || '函数'}</span>
                                 </div>
-                                <span style="font-size:0.7em;padding:2px 8px;background:rgba(40,167,69,0.15);color:#28a745;border-radius:10px;">正常</span>
+                                <span style="font-size:0.8em;padding:4px 14px;background:rgba(40,167,69,0.15);color:#28a745;border-radius:15px;font-weight:500;">正常</span>
                             </div>
-                            <div style="font-size:0.7em;color:#666;margin-top:3px;">文件: ${func.file || '未知'}</div>
+                            <div style="font-size:0.8em;color:#bbb;margin-bottom:4px;">所在文件: ${func.file || '未知'}</div>
+                            <div style="font-size:0.75em;color:#666;">ID: ${func.id || func.name} · 最近运行: ${new Date().toLocaleString('zh-CN')}</div>
                         </div>
                     `;
                 }
