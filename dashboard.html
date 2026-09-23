@@ -1033,11 +1033,34 @@
                     checkHtml += `<div style="font-size:0.9em;color:#C9A227;margin-bottom:8px;font-weight:600;">📊 回测详情（最近${backtestDetail.length}期）</div><div style="max-height:300px;overflow-y:auto;">`;
                     backtestDetail.forEach(r => {
                         const hitColor = (r.hit || 0) > 0 ? '#28a745' : '#dc3545';
-                        // 处理prediction/actual可能是对象或数组的情况
+                        // 字段名中文映射
+                        const fieldNames = {
+                            'front': '前区', 'back': '后区', 'red': '红球', 'blue': '蓝球',
+                            'nums': '号码', 'special': '特别号', 'p3': '排列3', 'p5': '排列5',
+                            'hot_front': '前区', 'hot_back': '后区', 'hot_nums': '号码',
+                            'hot_p3': '排列3', 'hot_p5': '排列5', 'hot_special': '特别号',
+                            'lone_front': '前区', 'lone_back': '后区',
+                        };
+                        // 处理prediction/actual可能是对象/数组/字符串的情况
                         const fmtObj = (v) => {
                             if (!v) return '-';
                             if (Array.isArray(v)) return v.join(' ');
-                            if (typeof v === 'object') return Object.entries(v).map(([k, val]) => `${k}:${Array.isArray(val) ? val.join('') : val}`).join(' | ');
+                            if (typeof v === 'object') {
+                                return Object.entries(v).map(([k, val]) => {
+                                    const name = fieldNames[k] || k;
+                                    if (Array.isArray(val)) return `${name}:${val.join(' ')}`;
+                                    if (typeof val === 'string' && val.length > 2 && /^\d+$/.test(val)) {
+                                        // 连续数字字符串，尝试按2位分割
+                                        const parts = val.match(/.{1,2}/g) || [val];
+                                        return `${name}:${parts.join(' ')}`;
+                                    }
+                                    return `${name}:${val}`;
+                                }).join(' | ');
+                            }
+                            if (typeof v === 'string' && v.length > 2 && /^\d+$/.test(v)) {
+                                const parts = v.match(/.{1,2}/g) || [v];
+                                return parts.join(' ');
+                            }
                             return String(v);
                         };
                         checkHtml += `
