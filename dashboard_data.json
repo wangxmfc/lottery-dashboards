@@ -8271,5 +8271,107 @@
     "issues_found": 0,
     "issues": [],
     "status": "PASS"
-  }
+  },
+  "system_status": {
+    "update_time": "2026-09-24 01:11:22",
+    "update_timestamp": 1790183482,
+    "models": {
+      "total": 49,
+      "active": 49,
+      "active_rate": 100.0,
+      "normal": 49,
+      "warning": 0
+    },
+    "lotteries": {
+      "ssq": {
+        "code": "ssq",
+        "name": "双色球",
+        "latest_period": "2026110",
+        "latest_date": "2026-09-22",
+        "next_period": null,
+        "has_prediction": false,
+        "hit_rate": 97.5,
+        "avg_hit": 2.2,
+        "total_periods": 40,
+        "improvement": 86.4
+      },
+      "dlt": {
+        "code": "dlt",
+        "name": "大乐透",
+        "latest_period": "26109",
+        "latest_date": "2026-09-23",
+        "next_period": "26110",
+        "has_prediction": true,
+        "hit_rate": 100.0,
+        "avg_hit": 2.86,
+        "total_periods": 7,
+        "improvement": 172.1
+      },
+      "kl8": {
+        "code": "kl8",
+        "name": "快乐8",
+        "latest_period": "2026256",
+        "latest_date": "2026-09-23",
+        "next_period": "2026257",
+        "has_prediction": true,
+        "hit_rate": 100.0,
+        "avg_hit": 6.74,
+        "total_periods": 46,
+        "improvement": 34.5
+      },
+      "fc3d": {
+        "code": "fc3d",
+        "name": "福彩3D",
+        "latest_period": "2026256",
+        "latest_date": "2026-09-23",
+        "next_period": "2026257",
+        "has_prediction": true,
+        "hit_rate": 79.5,
+        "avg_hit": 1.27,
+        "total_periods": 44,
+        "improvement": 310.6
+      },
+      "pl35": {
+        "code": "pl35",
+        "name": "排列3/5",
+        "latest_period": "26256",
+        "latest_date": "2026-09-23",
+        "next_period": "26257",
+        "has_prediction": true,
+        "hit_rate": 50.0,
+        "avg_hit": 0.5,
+        "total_periods": 44,
+        "improvement": 66.7
+      },
+      "qxc": {
+        "code": "qxc",
+        "name": "七星彩",
+        "latest_period": "26110",
+        "latest_date": "2026-09-22",
+        "next_period": null,
+        "has_prediction": false,
+        "hit_rate": 50.0,
+        "avg_hit": 0.64,
+        "total_periods": 22,
+        "improvement": 6.1
+      },
+      "qlc": {
+        "code": "qlc",
+        "name": "七乐彩",
+        "latest_period": "2026110",
+        "latest_date": "2026-09-23",
+        "next_period": "2026111",
+        "has_prediction": true,
+        "hit_rate": 14.3,
+        "avg_hit": 0.14,
+        "total_periods": 7,
+        "improvement": -40.5
+      }
+    },
+    "tasks": {
+      "last_full_update": "2026-09-24 01:07:13",
+      "last_status_update": "2026-09-24 01:11:22"
+    }
+  },
+  "last_status_update": "2026-09-24 01:11:22"
 }
