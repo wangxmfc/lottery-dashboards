@@ -520,19 +520,24 @@
             box-shadow: 0 2px 10px rgba(201, 162, 39, 0.3);
         }
         
-        /* 系统状态条 */
+        /* 系统状态条（可折叠） */
         .status-bar {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 6px 14px;
-            padding: 10px 18px;
-            background: linear-gradient(135deg, rgba(201,162,39,0.08) 0%, rgba(15,42,67,0.6) 100%);
-            border-radius: 12px;
-            border: 1px solid rgba(201,162,39,0.25);
-            margin-bottom: 14px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, rgba(201,162,39,0.06) 0%, rgba(15,42,67,0.5) 100%);
+            border-radius: 10px;
+            border: 1px solid rgba(201,162,39,0.2);
+            margin-bottom: 12px;
             font-size: 0.78em;
-            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .status-bar:hover {
+            border-color: rgba(201,162,39,0.4);
+        }
+        .status-bar .status-main {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         .status-bar .status-item {
             display: inline-flex;
@@ -546,7 +551,7 @@
             letter-spacing: 0.3px;
         }
         .status-bar .status-models {
-            padding: 3px 10px;
+            padding: 2px 10px;
             border-radius: 20px;
             background: rgba(46,204,113,0.12);
             border: 1px solid rgba(46,204,113,0.3);
@@ -558,39 +563,37 @@
             border-color: rgba(231,76,60,0.3);
             color: #e74c3c;
         }
-        .status-bar .status-divider {
-            width: 1px;
-            height: 18px;
-            background: linear-gradient(to bottom, transparent, rgba(201,162,39,0.3), transparent);
+        .status-bar .status-expand-icon {
+            margin-left: auto;
+            color: #9AA3AF;
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+        }
+        .status-bar.status-expanded .status-expand-icon {
+            transform: rotate(180deg);
+        }
+        .status-bar .status-detail {
+            display: none;
+            flex-wrap: wrap;
+            gap: 6px 10px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(201,162,39,0.15);
+        }
+        .status-bar.status-expanded .status-detail {
+            display: flex;
         }
         .status-bar .lottery-tag {
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            padding: 3px 10px;
+            padding: 2px 10px;
             border-radius: 20px;
             font-weight: 500;
             transition: all 0.2s ease;
         }
         .status-bar .lottery-tag:hover {
             transform: translateY(-1px);
-        }
-        .status-bar .status-loading {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #9AA3AF;
-        }
-        .status-bar .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #C9A227;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(0.8); }
         }
         
         /* 手机端响应式：核验对比卡片左右变上下 */
@@ -599,8 +602,7 @@
                 grid-template-columns: 1fr !important;
             }
             .status-bar {
-                padding: 8px 12px;
-                gap: 5px 10px;
+                padding: 6px 12px;
                 font-size: 0.72em;
             }
         }
@@ -617,12 +619,14 @@
             </div>
         </div>
         
-        <!-- 系统状态条 -->
-        <div id="system-status-bar" class="status-bar">
-            <div class="status-loading">
-                <span class="status-dot"></span>
-                <span>状态加载中...</span>
+        <!-- 系统状态条（可折叠） -->
+        <div id="system-status-bar" class="status-bar status-collapsed" onclick="toggleStatusBar()">
+            <div class="status-main">
+                <span class="status-item status-time" id="status-time">🕐 加载中...</span>
+                <span class="status-item status-models" id="status-models">🤖 --</span>
+                <span class="status-expand-icon" id="status-expand-icon">▼</span>
             </div>
+            <div class="status-detail" id="status-detail"></div>
         </div>
         
         <div class="nav">
@@ -926,6 +930,14 @@
             }
         }
         
+        // 切换系统状态条展开/折叠
+        function toggleStatusBar() {
+            const bar = document.getElementById('system-status-bar');
+            if (bar) {
+                bar.classList.toggle('status-expanded');
+            }
+        }
+        
         // 渲染系统状态条
         function renderSystemStatus(data) {
             const bar = document.getElementById('system-status-bar');
@@ -941,7 +953,16 @@
             const modelTotal = models.total || 49;
             const modelOk = modelActive >= modelTotal;
             
-            // 各彩种状态标签
+            // 更新主行
+            const timeEl = document.getElementById('status-time');
+            const modelsEl = document.getElementById('status-models');
+            if (timeEl) timeEl.textContent = '🕐 ' + updateTime;
+            if (modelsEl) {
+                modelsEl.textContent = '🤖 ' + modelActive + '/' + modelTotal + ' 模型' + (modelOk ? '✓' : '!');
+                modelsEl.className = 'status-item status-models' + (modelOk ? '' : ' warning');
+            }
+            
+            // 各彩种状态标签（展开区域）
             const lotteryColors = {
                 ssq: '#e74c3c', dlt: '#3498db', kl8: '#2ecc71',
                 fc3d: '#f1c40f', pl35: '#e67e22', qxc: '#9b59b6', qlc: '#95a5a6'
@@ -957,14 +978,8 @@
                 </span>`;
             }
             
-            bar.innerHTML = `
-                <span class="status-item status-time">🕐 ${updateTime}</span>
-                <span class="status-item status-models ${modelOk ? '' : 'warning'}">
-                    🤖 ${modelActive}/${modelTotal} 模型${modelOk ? '✓' : '!'}
-                </span>
-                <span class="status-divider"></span>
-                ${lotteryTags}
-            `;
+            const detailEl = document.getElementById('status-detail');
+            if (detailEl) detailEl.innerHTML = lotteryTags;
         }
         
         // 渲染系统总览
