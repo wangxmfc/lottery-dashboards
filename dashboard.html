@@ -600,7 +600,7 @@
                         </div>
                         <div style="text-align:center;padding:10px;background:rgba(40,167,69,0.1);border-radius:10px;">
                             <div style="font-size:1.5em;font-weight:bold;color:#28a745;" id="full-model-layers">-</div>
-                            <div style="font-size:0.8em;color:#9AA3AF;">架构层数</div>
+                            <div style="font-size:0.8em;color:#9AA3AF;">全部启用</div>
                         </div>
                         <div style="text-align:center;padding:10px;background:rgba(40,167,69,0.1);border-radius:10px;">
                             <div style="font-size:1.5em;font-weight:bold;color:#28a745;" id="full-model-normal">-</div>
@@ -823,13 +823,22 @@
             if (!container || !data) return;
             
             const stats = data.system_overview;
+            const fmm = data.full_model_monitoring || {};
             const statusClass = stats.system_status === '正常运行' ? 'badge-good' : 'badge-warning';
             
             container.innerHTML = `
                 <h2>📊 系统总览</h2>
                 <div class="stat">
-                    <span class="stat-label">运行模型数</span>
+                    <span class="stat-label">核心预测模型</span>
                     <span class="stat-value">${stats.model_count}个</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">全量模型/函数</span>
+                    <span class="stat-value">${fmm.total || stats.model_count}个</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">全部启用</span>
+                    <span class="stat-value" style="color:#28a745;">${fmm.active || stats.model_count}个 ✅</span>
                 </div>
                 <div class="stat">
                     <span class="stat-label">支持彩种</span>
@@ -1022,9 +1031,9 @@
             const warningEl = document.getElementById('full-model-warning');
             
             if (totalEl) totalEl.textContent = fmm.total || 0;
-            if (layersEl) layersEl.textContent = Object.keys(layers).length || 5;
-            if (normalEl) normalEl.textContent = fmm.total || 0;
-            if (warningEl) warningEl.textContent = 0;
+            if (layersEl) layersEl.textContent = fmm.active || fmm.total || 0;
+            if (normalEl) normalEl.textContent = fmm.normal || fmm.total || 0;
+            if (warningEl) warningEl.textContent = fmm.warning || 0;
             
             // 2. 渲染5层分类列表（单列大卡片，每层可折叠看详情）
             const layersListEl = document.getElementById('full-model-layers-list');
