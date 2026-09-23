@@ -1136,12 +1136,12 @@
                             <div style="display:grid;grid-template-columns:${hasLone ? '1fr 1fr' : '1fr'};gap:10px;">
                                 <div style="font-size:0.78em;">
                                     <span style="color:#C9A227;font-weight:600;">主推命中：</span>
-                                    ${(mainHitNums.length > 0 || subHitNums.length > 0) ? `<span style="color:#4CAF50;font-weight:bold;">${[...new Set(allMainHitNums.split(' '))].join(' ') || '无'}</span>` : `<span style="color:#dc3545;">未命中</span>`}
+                                    ${(mainHitNums.length > 0 || subHitNums.length > 0) ? `<span style="color:#4CAF50;font-weight:bold;">${allMainHitNums || '无'}</span>` : `<span style="color:#dc3545;">未命中</span>`}
                                 </div>
                                 ${hasLone ? `
                                 <div style="font-size:0.78em;">
                                     <span style="color:#C9A227;font-weight:600;">孤注一掷命中：</span>
-                                    ${loneTotalHit > 0 ? `<span style="color:#4CAF50;font-weight:bold;">${[...new Set(loneAllHitNums.split(' '))].join(' ')}</span>` : `<span style="color:#dc3545;">未命中</span>`}
+                                    ${loneTotalHit > 0 ? `<span style="color:#4CAF50;font-weight:bold;">${loneAllHitNums}</span>` : `<span style="color:#dc3545;">未命中</span>`}
                                 </div>` : ''}
                             </div>
                         </div>
