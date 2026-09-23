@@ -537,7 +537,7 @@
         .status-bar .status-main {
             display: flex;
             align-items: center;
-            gap: 24px;
+            gap: 14px;
         }
         .status-bar .status-sep {
             width: 4px;
@@ -978,7 +978,7 @@
             const modelsEl = document.getElementById('status-models');
             if (timeEl) timeEl.textContent = '🕐 ' + updateTime;
             if (modelsEl) {
-                modelsEl.textContent = '🤖 ' + modelActive + '/' + modelTotal + ' 模型' + (modelOk ? '✓' : '!');
+                modelsEl.textContent = '🤖 ' + modelActive + '/' + modelTotal + (modelOk ? ' ✓' : ' !');
                 modelsEl.className = 'status-item status-models' + (modelOk ? '' : ' warning');
             }
             
