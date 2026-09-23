@@ -1489,21 +1489,17 @@
                                 </div>
                                 <span style="font-size:0.72em;padding:4px 10px;background:rgba(123,91,214,0.2);color:#B39DDB;border-radius:20px;font-weight:500;">已守号 ${stats.total_periods || '-'} 期</span>
                             </div>
-                            <div style="display:flex;align-items:stretch;gap:12px;">
-                                <!-- 前区卡片 -->
-                                <div style="flex:1;padding:14px 12px;background:rgba(123,91,214,0.12);border-radius:12px;border:1px solid rgba(123,91,214,0.3);text-align:center;">
-                                    <div style="font-size:0.75em;color:#B39DDB;margin-bottom:10px;letter-spacing:2px;font-weight:600;">前 区</div>
-                                    <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:6px;">${renderBalls(fixed.front || [], '#7B5BD6', 36)}</div>
-                                </div>
-                                <!-- 加号分隔 -->
-                                <div style="display:flex;align-items:center;justify-content:center;">
-                                    <span style="font-size:1.4em;color:#C9A227;font-weight:300;opacity:0.7;">+</span>
-                                </div>
-                                <!-- 后区卡片 -->
-                                <div style="flex:0.7;padding:14px 12px;background:rgba(179,157,219,0.1);border-radius:12px;border:1px solid rgba(179,157,219,0.35);text-align:center;">
-                                    <div style="font-size:0.75em;color:#D1C4E9;margin-bottom:10px;letter-spacing:2px;font-weight:600;">后 区</div>
-                                    <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:6px;">${renderBalls(fixed.back || [], '#B39DDB', 32)}</div>
-                                </div>
+                            <!-- 前区 -->
+                            <div style="margin-bottom:12px;">
+                                <div style="font-size:0.75em;color:#B39DDB;margin-bottom:8px;letter-spacing:2px;font-weight:600;">前 区（5个）</div>
+                                <div style="display:flex;justify-content:flex-start;flex-wrap:wrap;gap:8px;">${renderBalls(fixed.front || [], '#7B5BD6', 28)}</div>
+                            </div>
+                            <!-- 分隔线 -->
+                            <div style="height:1px;background:linear-gradient(90deg,rgba(123,91,214,0.3),transparent);margin:10px 0;"></div>
+                            <!-- 后区 -->
+                            <div>
+                                <div style="font-size:0.75em;color:#D1C4E9;margin-bottom:8px;letter-spacing:2px;font-weight:600;">后 区（2个）</div>
+                                <div style="display:flex;justify-content:flex-start;flex-wrap:wrap;gap:8px;">${renderBalls(fixed.back || [], '#B39DDB', 28)}</div>
                             </div>
                         </div>
                         
