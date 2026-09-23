@@ -343,7 +343,7 @@
 
         <div id="overview" class="section active">
             <div class="grid">
-                <div class="card">
+                <div class="card" id="system-overview">
                     <h2>📊 系统总览</h2>
                     <div class="stat">
                         <span class="stat-label">运行模型数</span>
@@ -363,7 +363,7 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card" id="hit-rates">
                     <h2>🎯 命中率概览</h2>
                     <div class="stat">
                         <span class="stat-label">双色球</span>
@@ -705,6 +705,108 @@
                 });
             }
         };
+    </script>
+    
+    <!-- 动态数据加载 -->
+    <script>
+        // 等级对应的CSS类
+        const gradeClass = {
+            '优秀': 'badge-good',
+            '一般': 'badge-warning',
+            '待提升': 'badge-bad'
+        };
+        
+        // 格式化提升百分比
+        function formatImprovement(value) {
+            if (value >= 0) {
+                return '+' + value + '%';
+            } else {
+                return value + '%';
+            }
+        }
+        
+        // 渲染系统总览
+        function renderSystemOverview(data) {
+            const container = document.getElementById('system-overview');
+            if (!container || !data) return;
+            
+            const stats = data.system_overview;
+            const statusClass = stats.system_status === '正常运行' ? 'badge-good' : 'badge-warning';
+            
+            container.innerHTML = `
+                <h2>📊 系统总览</h2>
+                <div class="stat">
+                    <span class="stat-label">运行模型数</span>
+                    <span class="stat-value">${stats.model_count}个</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">支持彩种</span>
+                    <span class="stat-value">${stats.lottery_count}种</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">模型启用率</span>
+                    <span class="stat-value">${stats.model_usage_rate}%</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">系统状态</span>
+                    <span class="badge ${statusClass}">✅ ${stats.system_status}</span>
+                </div>
+                <div class="stat" style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.1);">
+                    <span class="stat-label" style="font-size:0.85em;color:#9AA3AF;">数据更新时间</span>
+                    <span class="stat-value" style="font-size:0.85em;color:#C9A227;">${stats.last_update}</span>
+                </div>
+            `;
+        }
+        
+        // 渲染命中率概览
+        function renderHitRates(data) {
+            const container = document.getElementById('hit-rates');
+            if (!container || !data) return;
+            
+            let html = '<h2>🎯 命中率概览</h2>';
+            
+            data.hit_rates.forEach(item => {
+                const cls = gradeClass[item.grade] || 'badge-warning';
+                html += `
+                    <div class="stat">
+                        <span class="stat-label">${item.name}</span>
+                        <span class="badge ${cls}">${item.grade} ${formatImprovement(item.improvement)}</span>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        // 加载动态数据
+        async function loadDashboardData() {
+            try {
+                // 尝试加载dashboard_data.json（加时间戳防止缓存）
+                const response = await fetch('dashboard_data.json?t=' + Date.now());
+                if (!response.ok) {
+                    throw new Error('HTTP ' + response.status);
+                }
+                const data = await response.json();
+                
+                console.log('✅ 管理看板数据加载成功:', data.last_update);
+                
+                // 渲染数据
+                renderSystemOverview(data);
+                renderHitRates(data);
+                
+            } catch (error) {
+                console.warn('⚠️ 动态数据加载失败，使用默认硬编码数据:', error.message);
+                // 加载失败时保留原有的硬编码内容
+            }
+        }
+        
+        // 页面加载完成后加载数据
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDashboardData();
+            
+            // 每5分钟自动刷新一次数据
+            setInterval(loadDashboardData, 5 * 60 * 1000);
+        });
     </script>
 </body>
 </html>
