@@ -579,6 +579,18 @@
         .status-bar.status-expanded .status-expand-icon {
             transform: rotate(180deg);
         }
+        .status-bar .status-theme-icon {
+            margin-left: auto;
+            color: #C9A227;
+            font-size: 1em;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        .status-bar .status-theme-icon:hover {
+            background: rgba(201,162,39,0.15);
+        }
         .status-bar .status-detail {
             display: none;
             flex-wrap: wrap;
@@ -616,7 +628,6 @@
     </style>
 </head>
 <body>
-    <button class="theme-toggle" onclick="toggleTheme()">🌙 暗色模式</button>
     <div class="container">
         <div class="header">
             <h1>🎯 王者GP - 彩票预测数据看板</h1>
@@ -632,6 +643,7 @@
                 <span class="status-item status-time" id="status-time">🕐 加载中...</span>
                 <span class="status-sep"></span>
                 <span class="status-item status-models" id="status-models">🤖 --</span>
+                <span class="status-theme-icon" id="status-theme-icon" onclick="event.stopPropagation();toggleTheme()">🌙</span>
                 <span class="status-expand-icon" id="status-expand-icon">▼</span>
             </div>
             <div class="status-detail" id="status-detail"></div>
@@ -891,11 +903,11 @@
         
         function toggleTheme() {
             document.body.classList.toggle('dark');
-            const btn = document.querySelector('.theme-toggle');
+            const icon = document.getElementById('status-theme-icon');
             if (document.body.classList.contains('dark')) {
-                btn.textContent = '☀️ 亮色模式';
+                if (icon) icon.textContent = '☀️';
             } else {
-                btn.textContent = '🌙 暗色模式';
+                if (icon) icon.textContent = '🌙';
             }
         }
         
