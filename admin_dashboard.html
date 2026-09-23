@@ -1100,6 +1100,12 @@
                                     ${cfg.hasSub ? `<div><div style="font-size:1.3em;font-weight:bold;color:#28a745;">${subHit}</div><div style="font-size:0.7em;color:#9AA3AF;">${cfg.subHitLabel || '副区'}</div></div>` : ''}
                                     <div><div style="font-size:1.3em;font-weight:bold;color:${totalHit > 0 ? '#28a745' : '#dc3545'};">${totalHit}</div><div style="font-size:0.7em;color:#9AA3AF;">总计</div></div>
                                 </div>
+                                ${prevCheck.prize_main ? `
+                                <div style="margin-bottom:10px;padding:8px 10px;border-radius:8px;text-align:center;${prevCheck.prize_main.won ? 'background:linear-gradient(135deg,rgba(201,162,39,0.2),rgba(255,193,7,0.1));border:1px solid rgba(201,162,39,0.5);' : 'background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);'}">
+                                    <span style="font-size:1em;">${prevCheck.prize_main.won ? '🏆' : '😔'}</span>
+                                    <span style="font-size:0.85em;font-weight:700;margin-left:4px;${prevCheck.prize_main.won ? 'color:#FFD700;' : 'color:#9AA3AF;'}">${prevCheck.prize_main.level}</span>
+                                    ${prevCheck.prize_main.prize ? `<span style="font-size:0.75em;color:${prevCheck.prize_main.won ? '#FFC107' : '#9AA3AF'};margin-left:6px;">${prevCheck.prize_main.prize}</span>` : ''}
+                                </div>` : ''}
                                 <div style="font-size:0.75em;color:#9AA3AF;margin-bottom:4px;">主推${cfg.mainLabel || '号码'}</div>
                                 <div style="margin-bottom:8px;">${renderBallsHighlight(cleanNums(prevCheck.prediction ? (prevCheck.prediction[cfg.predMain || 'hot_front'] || prevCheck.prediction[cfg.predMain || 'red'] || prevCheck.prediction['hot_nums'] || []) : [], cfg.mainCount || 99, !cfg.allowDuplicate), actualMain, cfg.mainColor || '#C9A227', 28)}</div>
                                 ${cfg.hasSub ? `<div style="font-size:0.75em;color:#9AA3AF;margin-bottom:4px;">主推${cfg.subLabel}</div><div>${renderBallsHighlight(cleanNums(prevCheck.prediction ? (prevCheck.prediction[cfg.predSub || 'hot_back'] || prevCheck.prediction[cfg.predSub || 'blue'] || []) : [], cfg.subCount || 99, !cfg.allowDuplicate), actualSub, cfg.subColor || '#9AA3AF', 28)}</div>` : ''}
@@ -1113,6 +1119,12 @@
                                     ${cfg.hasSub ? `<div><div style="font-size:1.3em;font-weight:bold;color:#D4AF37;">${loneSubHit}</div><div style="font-size:0.7em;color:#9AA3AF;">${cfg.subHitLabel || '副区'}</div></div>` : ''}
                                     <div><div style="font-size:1.3em;font-weight:bold;color:${loneTotalHit > 0 ? '#28a745' : '#dc3545'};">${loneTotalHit}</div><div style="font-size:0.7em;color:#9AA3AF;">总计</div></div>
                                 </div>
+                                ${prevCheck.prize_lone ? `
+                                <div style="margin-bottom:10px;padding:8px 10px;border-radius:8px;text-align:center;${prevCheck.prize_lone.won ? 'background:linear-gradient(135deg,rgba(255,193,7,0.25),rgba(201,162,39,0.15));border:1px solid rgba(255,215,0,0.6);box-shadow:0 0 12px rgba(255,215,0,0.2);' : 'background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);'}">
+                                    <span style="font-size:1em;">${prevCheck.prize_lone.won ? '🎉' : '😔'}</span>
+                                    <span style="font-size:0.85em;font-weight:700;margin-left:4px;${prevCheck.prize_lone.won ? 'color:#FFD700;' : 'color:#9AA3AF;'}">${prevCheck.prize_lone.level}</span>
+                                    ${prevCheck.prize_lone.prize ? `<span style="font-size:0.75em;color:${prevCheck.prize_lone.won ? '#FFC107' : '#9AA3AF'};margin-left:6px;">${prevCheck.prize_lone.prize}</span>` : ''}
+                                </div>` : ''}
                                 <div style="font-size:0.75em;color:#D4B85A;margin-bottom:4px;">精选${cfg.loneLabel || cfg.mainLabel || '号码'}</div>
                                 <div style="margin-bottom:8px;">${renderBallsHighlight(cleanNums(prevCheck.lone_main || [], cfg.mainCount || 99, !cfg.allowDuplicate), actualMain, '#C9A227', 28)}</div>
                                 ${cfg.hasSub && prevCheck.lone_sub && prevCheck.lone_sub.length ? `<div style="font-size:0.75em;color:#D4B85A;margin-bottom:4px;">精选${cfg.subLabel}</div><div>${renderBallsHighlight(cleanNums(prevCheck.lone_sub || [], cfg.subCount || 99, !cfg.allowDuplicate), actualSub, '#D4AF37', 28)}</div>` : ''}
