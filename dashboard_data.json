@@ -4,7 +4,7 @@
     "lottery_count": 7,
     "model_usage_rate": 100,
     "system_status": "正常运行",
-    "last_update": "2026-09-23 11:33:15"
+    "last_update": "2026-09-23 11:49:57"
   },
   "hit_rates": [
     {
@@ -143,5 +143,497 @@
       "latest_date": "2026-09-21"
     }
   },
-  "last_update": "2026-09-23 11:33:15"
+  "model_monitoring": {
+    "total": 49,
+    "active": 49,
+    "active_rate": 100.0,
+    "normal": 49,
+    "warning": 0,
+    "categories": {
+      "统计分析": {
+        "count": 12,
+        "normal": 12,
+        "warning": 0
+      },
+      "信号检测": {
+        "count": 5,
+        "normal": 5,
+        "warning": 0
+      },
+      "数据挖掘": {
+        "count": 3,
+        "normal": 3,
+        "warning": 0
+      },
+      "机器学习": {
+        "count": 6,
+        "normal": 6,
+        "warning": 0
+      },
+      "权重优化": {
+        "count": 8,
+        "normal": 8,
+        "warning": 0
+      },
+      "模型融合": {
+        "count": 5,
+        "normal": 5,
+        "warning": 0
+      },
+      "高级学习": {
+        "count": 5,
+        "normal": 5,
+        "warning": 0
+      },
+      "系统工具": {
+        "count": 5,
+        "normal": 5,
+        "warning": 0
+      }
+    },
+    "models": [
+      {
+        "id": "freq_weighted",
+        "name": "频率加权分析",
+        "category": "统计分析",
+        "desc": "基于历史出现频率的加权预测",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "omission_of",
+        "name": "遗漏分析",
+        "category": "统计分析",
+        "desc": "分析号码遗漏周期和回补概率",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "pattern_analysis",
+        "name": "模式分析",
+        "category": "统计分析",
+        "desc": "识别历史开奖中的重复模式",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "markov_transition",
+        "name": "马尔可夫链",
+        "category": "统计分析",
+        "desc": "基于状态转移概率的预测",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "cooccurrence_analysis",
+        "name": "共现分析",
+        "category": "统计分析",
+        "desc": "分析号码共同出现的概率",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "hot_cold_trend",
+        "name": "冷热趋势",
+        "category": "统计分析",
+        "desc": "分析号码冷热转换趋势",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "omission_cycle_analysis",
+        "name": "遗漏周期",
+        "category": "统计分析",
+        "desc": "分析号码遗漏的周期性规律",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "tail_analysis",
+        "name": "尾数分析",
+        "category": "统计分析",
+        "desc": "分析号码尾数的分布规律",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "road_012_analysis",
+        "name": "012路分析",
+        "category": "统计分析",
+        "desc": "分析号码除3余数的分布",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "mutex_pair_analysis",
+        "name": "互斥对分析",
+        "category": "统计分析",
+        "desc": "分析 rarely 同时出现的号码对",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "poisson_omission",
+        "name": "泊松遗漏",
+        "category": "统计分析",
+        "desc": "基于泊松分布的遗漏概率计算",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "repeat_probability",
+        "name": "重复概率",
+        "category": "统计分析",
+        "desc": "计算号码重复出现的概率",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "cold_to_warm_signal",
+        "name": "冷转热信号",
+        "category": "信号检测",
+        "desc": "检测冷号转热号的拐点信号",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "time_series_ma",
+        "name": "时间序列MA",
+        "category": "信号检测",
+        "desc": "移动平均时间序列分析",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "grey_gm11",
+        "name": "灰色预测GM(1,1)",
+        "category": "信号检测",
+        "desc": "灰色系统理论预测模型",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "linear_trend",
+        "name": "线性回归趋势",
+        "category": "信号检测",
+        "desc": "线性回归趋势外推预测",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "variance_analysis",
+        "name": "方差分析",
+        "category": "信号检测",
+        "desc": "基于方差的波动性分析",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "apriori_rules",
+        "name": "关联规则挖掘",
+        "category": "数据挖掘",
+        "desc": "Apriori算法挖掘号码关联规则",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "kmeans_cluster",
+        "name": "K均值聚类",
+        "category": "数据挖掘",
+        "desc": "K-means聚类分析号码分组",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "monte_carlo_filter",
+        "name": "蒙特卡洛滤波",
+        "category": "数据挖掘",
+        "desc": "蒙特卡洛模拟筛选组合",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "random_forest_prediction",
+        "name": "随机森林",
+        "category": "机器学习",
+        "desc": "随机森林集成学习预测",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "gradient_boosting_predict",
+        "name": "梯度提升",
+        "category": "机器学习",
+        "desc": "梯度提升树GBDT预测",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "lstm_style_predict",
+        "name": "LSTM时序",
+        "category": "机器学习",
+        "desc": "LSTM长短期记忆网络预测",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "logistic_regression_predict",
+        "name": "逻辑回归",
+        "category": "机器学习",
+        "desc": "逻辑回归分类预测",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "mlp_neural_network",
+        "name": "MLP神经网络",
+        "category": "机器学习",
+        "desc": "多层感知机神经网络",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "lstm_time_series",
+        "name": "LSTM完整时序",
+        "category": "机器学习",
+        "desc": "完整LSTM时间序列模型",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "entropy_weight_adjust",
+        "name": "熵权调整",
+        "category": "权重优化",
+        "desc": "基于信息熵的权重调整",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "bayesian_update_weights",
+        "name": "贝叶斯更新",
+        "category": "权重优化",
+        "desc": "贝叶斯方法动态更新权重",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "genetic_optimize_weights",
+        "name": "遗传算法优化",
+        "category": "权重优化",
+        "desc": "遗传算法优化模型权重",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "time_decay_optimization",
+        "name": "时间衰减优化",
+        "category": "权重优化",
+        "desc": "基于时间衰减的权重优化",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "auto_tune_weights",
+        "name": "自动调权",
+        "category": "权重优化",
+        "desc": "自动调整各模型权重",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "auto_weight_search",
+        "name": "自动权重搜索",
+        "category": "权重优化",
+        "desc": "网格搜索最优权重组合",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "optimized_weight_search",
+        "name": "优化权重搜索",
+        "category": "权重优化",
+        "desc": "优化算法搜索最优权重",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "get_dynamic_weights",
+        "name": "动态权重获取",
+        "category": "权重优化",
+        "desc": "获取动态计算的模型权重",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "cross_lottery_correlation",
+        "name": "跨彩种关联",
+        "category": "模型融合",
+        "desc": "跨彩种数据关联分析",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "cross_lottery_vote",
+        "name": "跨彩种投票",
+        "category": "模型融合",
+        "desc": "跨彩种模型投票融合",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "model_blending",
+        "name": "模型融合",
+        "category": "模型融合",
+        "desc": "多模型结果混合融合",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "stacking_predict",
+        "name": "堆叠预测",
+        "category": "模型融合",
+        "desc": "Stacking集成学习预测",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "attention_weighting",
+        "name": "注意力加权",
+        "category": "模型融合",
+        "desc": "注意力机制加权融合",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "transfer_learning",
+        "name": "迁移学习",
+        "category": "高级学习",
+        "desc": "跨领域迁移学习",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "per_model_weight_learning",
+        "name": "分模型权重学习",
+        "category": "高级学习",
+        "desc": "每个模型独立学习权重",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "k_fold_cross_validation",
+        "name": "K折交叉验证",
+        "category": "高级学习",
+        "desc": "K折交叉验证评估模型",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:56"
+      },
+      {
+        "id": "hyperparameter_tuning",
+        "name": "超参数调优",
+        "category": "高级学习",
+        "desc": "自动调优模型超参数",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:57"
+      },
+      {
+        "id": "online_learning_update",
+        "name": "在线学习更新",
+        "category": "高级学习",
+        "desc": "在线学习实时更新模型",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:57"
+      },
+      {
+        "id": "get_active_weights",
+        "name": "激活权重获取",
+        "category": "系统工具",
+        "desc": "获取当前激活的模型权重",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:57"
+      },
+      {
+        "id": "get_online_weights",
+        "name": "在线权重获取",
+        "category": "系统工具",
+        "desc": "获取在线学习的权重",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:57"
+      },
+      {
+        "id": "calc_dimension_correlation",
+        "name": "维度关联计算",
+        "category": "系统工具",
+        "desc": "计算各维度间的相关性",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:57"
+      },
+      {
+        "id": "diversity_check",
+        "name": "多样性检查",
+        "category": "系统工具",
+        "desc": "检查预测结果的多样性",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:57"
+      },
+      {
+        "id": "calc_confidence",
+        "name": "置信度计算",
+        "category": "系统工具",
+        "desc": "计算预测结果的置信度",
+        "status": "正常",
+        "exists": true,
+        "last_run": "2026-09-23 11:49:57"
+      }
+    ]
+  },
+  "last_update": "2026-09-23 11:49:57"
 }
