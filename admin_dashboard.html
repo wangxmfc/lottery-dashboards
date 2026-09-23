@@ -1332,18 +1332,18 @@
                                 </div>
                             </div>
                             <!-- 命中统计 -->
-                            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;padding:12px;background:rgba(255,255,255,0.02);border-radius:10px;">
+                            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;text-align:center;padding:10px 8px;background:rgba(255,255,255,0.03);border-radius:10px;margin:8px 0;">
                                 <div>
-                                    <div style="font-size:1.6em;font-weight:bold;color:#7B5BD6;">${cc.hit_front ?? '-'}</div>
-                                    <div style="font-size:0.7em;color:#9AA3AF;">前区命中</div>
+                                    <div style="font-size:1.4em;font-weight:bold;color:#7B5BD6;">${cc.hit_front ?? '-'}</div>
+                                    <div style="font-size:0.68em;color:#9AA3AF;margin-top:2px;">前区命中</div>
                                 </div>
                                 <div>
-                                    <div style="font-size:1.6em;font-weight:bold;color:#B39DDB;">${cc.hit_back ?? '-'}</div>
-                                    <div style="font-size:0.7em;color:#9AA3AF;">后区命中</div>
+                                    <div style="font-size:1.4em;font-weight:bold;color:#B39DDB;">${cc.hit_back ?? '-'}</div>
+                                    <div style="font-size:0.68em;color:#9AA3AF;margin-top:2px;">后区命中</div>
                                 </div>
                                 <div>
-                                    <div style="font-size:1.6em;font-weight:bold;color:${(cc.hit_total ?? 0) >= 3 ? '#28a745' : '#C9A227'};">${cc.hit_total ?? '-'}</div>
-                                    <div style="font-size:0.7em;color:#9AA3AF;">合计命中</div>
+                                    <div style="font-size:1.4em;font-weight:bold;color:${(cc.hit_total ?? 0) >= 3 ? '#28a745' : '#C9A227'};">${cc.hit_total ?? '-'}</div>
+                                    <div style="font-size:0.68em;color:#9AA3AF;margin-top:2px;">合计命中</div>
                                 </div>
                             </div>
                             ${(hitFNums.length > 0 || hitBNums.length > 0) ? `
