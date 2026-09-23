@@ -931,9 +931,9 @@
                 'ssq': {emoji: '🔴', name: '双色球', mainColor: '#E53935', subColor: '#1E88E5', mainLabel: '红球(6个)', subLabel: '蓝球(1个)', mainKey: 'red', subKey: 'blue', predMain: 'red', predSub: 'blue', predLoneMain: 'lone_red', predLoneSub: 'lone_blue', mainCount: 6, subCount: 1, hasSub: true, mainHitLabel: '红球', subHitLabel: '蓝球'},
                 'dlt': {emoji: '🔵', name: '大乐透', mainColor: '#7B5BD6', subColor: '#B39DDB', mainLabel: '前区(5个)', subLabel: '后区(2个)', mainKey: 'front', subKey: 'back', predMain: 'hot_front', predSub: 'hot_back', predLoneMain: 'lone_front', predLoneSub: 'lone_back', mainCount: 5, subCount: 2, hasSub: true, mainHitLabel: '前区', subHitLabel: '后区'},
                 'kl8': {emoji: '🟢', name: '快乐8', mainColor: '#43A047', subColor: null, mainLabel: '开奖号码(20个)', subLabel: null, loneLabel: '号码(10个)', mainKey: 'nums', subKey: null, predMain: 'hot_nums', predSub: null, predLoneMain: 'lone_nums', predLoneSub: null, mainCount: 20, subCount: 0, hasSub: false, mainHitLabel: '命中', subHitLabel: null},
-                'fc3d': {emoji: '🟡', name: '福彩3D', mainColor: '#F9A825', subColor: null, mainLabel: '开奖号码(3个)', subLabel: null, mainKey: 'nums', subKey: null, predMain: 'hot_nums', predSub: null, predLoneMain: 'lone_nums', predLoneSub: null, mainCount: 3, subCount: 0, hasSub: false, mainHitLabel: '命中', subHitLabel: null},
-                'pl35': {emoji: '🟠', name: '排列3/5', mainColor: '#FB8C00', subColor: '#E65100', mainLabel: '排列3', subLabel: '排列5', mainKey: 'p3', subKey: 'p5', predMain: 'hot_p3', predSub: 'hot_p5', predLoneMain: 'lone_p3', predLoneSub: 'lone_p5', mainCount: 3, subCount: 5, hasSub: true, mainHitLabel: '排列3', subHitLabel: '排列5'},
-                'qxc': {emoji: '🟣', name: '七星彩', mainColor: '#8E24AA', subColor: '#BA68C8', mainLabel: '基本号(6个)', subLabel: '特别号(1个)', mainKey: 'nums', subKey: 'special', predMain: 'hot_nums', predSub: 'hot_special', predLoneMain: 'lone_nums', predLoneSub: null, mainCount: 6, subCount: 1, hasSub: true, mainHitLabel: '基本号', subHitLabel: '特别号'},
+                'fc3d': {emoji: '🟡', name: '福彩3D', mainColor: '#F9A825', subColor: null, mainLabel: '开奖号码(3个)', subLabel: null, mainKey: 'nums', subKey: null, predMain: 'hot_nums', predSub: null, predLoneMain: 'lone_nums', predLoneSub: null, mainCount: 3, subCount: 0, hasSub: false, mainHitLabel: '命中', subHitLabel: null, allowDuplicate: true},
+                'pl35': {emoji: '🟠', name: '排列3/5', mainColor: '#FB8C00', subColor: '#E65100', mainLabel: '排列3', subLabel: '排列5', mainKey: 'p3', subKey: 'p5', predMain: 'hot_p3', predSub: 'hot_p5', predLoneMain: 'lone_p3', predLoneSub: 'lone_p5', mainCount: 3, subCount: 5, hasSub: true, mainHitLabel: '排列3', subHitLabel: '排列5', allowDuplicate: true},
+                'qxc': {emoji: '🟣', name: '七星彩', mainColor: '#8E24AA', subColor: '#BA68C8', mainLabel: '基本号(6个)', subLabel: '特别号(1个)', mainKey: 'nums', subKey: 'special', predMain: 'hot_nums', predSub: 'hot_special', predLoneMain: 'lone_nums', predLoneSub: null, mainCount: 6, subCount: 1, hasSub: true, mainHitLabel: '基本号', subHitLabel: '特别号', allowDuplicate: true},
                 'qlc': {emoji: '⚪', name: '七乐彩', mainColor: '#546E7A', subColor: '#90A4AE', mainLabel: '基本号(7个)', subLabel: '特别号(1个)', mainKey: 'nums', subKey: 'special', predMain: 'hot_nums', predSub: 'hot_special', predLoneMain: 'lone_nums', predLoneSub: null, mainCount: 7, subCount: 1, hasSub: true, mainHitLabel: '基本号', subHitLabel: '特别号'},
             };
             
@@ -1030,13 +1030,17 @@
                 // 上期预测核验（主推+孤注一掷 左右对比合并）
                 if (prevCheck.period) {
                     // 辅助：号码去重并截取前count个
-                    const cleanNums = (nums, count) => {
+                    const cleanNums = (nums, count, dedup) => {
                         if (!nums || !nums.length) return [];
                         const seen = new Set();
                         const result = [];
                         for (const n of nums) {
                             const num = String(n).padStart(2, '0');
-                            if (!seen.has(num)) { seen.add(num); result.push(num); }
+                            if (dedup === false) {
+                                result.push(num);
+                            } else {
+                                if (!seen.has(num)) { seen.add(num); result.push(num); }
+                            }
                             if (result.length >= count) break;
                         }
                         return result;
@@ -1092,8 +1096,8 @@
                                     <div><div style="font-size:1.3em;font-weight:bold;color:${totalHit > 0 ? '#28a745' : '#dc3545'};">${totalHit}</div><div style="font-size:0.7em;color:#9AA3AF;">总计</div></div>
                                 </div>
                                 <div style="font-size:0.75em;color:#9AA3AF;margin-bottom:4px;">主推${cfg.mainLabel || '号码'}</div>
-                                <div style="margin-bottom:8px;">${renderBallsHighlight(cleanNums(prevCheck.prediction ? (prevCheck.prediction[cfg.predMain || 'hot_front'] || prevCheck.prediction[cfg.predMain || 'red'] || prevCheck.prediction['hot_nums'] || []) : [], cfg.mainCount || 99), actualMain, cfg.mainColor || '#C9A227', 28)}</div>
-                                ${cfg.hasSub ? `<div style="font-size:0.75em;color:#9AA3AF;margin-bottom:4px;">主推${cfg.subLabel}</div><div>${renderBallsHighlight(cleanNums(prevCheck.prediction ? (prevCheck.prediction[cfg.predSub || 'hot_back'] || prevCheck.prediction[cfg.predSub || 'blue'] || []) : [], cfg.subCount || 99), actualSub, cfg.subColor || '#9AA3AF', 28)}</div>` : ''}
+                                <div style="margin-bottom:8px;">${renderBallsHighlight(cleanNums(prevCheck.prediction ? (prevCheck.prediction[cfg.predMain || 'hot_front'] || prevCheck.prediction[cfg.predMain || 'red'] || prevCheck.prediction['hot_nums'] || []) : [], cfg.mainCount || 99, !cfg.allowDuplicate), actualMain, cfg.mainColor || '#C9A227', 28)}</div>
+                                ${cfg.hasSub ? `<div style="font-size:0.75em;color:#9AA3AF;margin-bottom:4px;">主推${cfg.subLabel}</div><div>${renderBallsHighlight(cleanNums(prevCheck.prediction ? (prevCheck.prediction[cfg.predSub || 'hot_back'] || prevCheck.prediction[cfg.predSub || 'blue'] || []) : [], cfg.subCount || 99, !cfg.allowDuplicate), actualSub, cfg.subColor || '#9AA3AF', 28)}</div>` : ''}
                             </div>
                             <!-- 孤注一掷 -->
                             ${hasLone ? `
@@ -1105,8 +1109,8 @@
                                     <div><div style="font-size:1.3em;font-weight:bold;color:${loneTotalHit > 0 ? '#28a745' : '#dc3545'};">${loneTotalHit}</div><div style="font-size:0.7em;color:#9AA3AF;">总计</div></div>
                                 </div>
                                 <div style="font-size:0.75em;color:#D4B85A;margin-bottom:4px;">精选${cfg.loneLabel || cfg.mainLabel || '号码'}</div>
-                                <div style="margin-bottom:8px;">${renderBallsHighlight(cleanNums(prevCheck.lone_main || [], cfg.mainCount || 99), actualMain, '#C9A227', 28)}</div>
-                                ${cfg.hasSub && prevCheck.lone_sub && prevCheck.lone_sub.length ? `<div style="font-size:0.75em;color:#D4B85A;margin-bottom:4px;">精选${cfg.subLabel}</div><div>${renderBallsHighlight(cleanNums(prevCheck.lone_sub || [], cfg.subCount || 99), actualSub, '#D4AF37', 28)}</div>` : ''}
+                                <div style="margin-bottom:8px;">${renderBallsHighlight(cleanNums(prevCheck.lone_main || [], cfg.mainCount || 99, !cfg.allowDuplicate), actualMain, '#C9A227', 28)}</div>
+                                ${cfg.hasSub && prevCheck.lone_sub && prevCheck.lone_sub.length ? `<div style="font-size:0.75em;color:#D4B85A;margin-bottom:4px;">精选${cfg.subLabel}</div><div>${renderBallsHighlight(cleanNums(prevCheck.lone_sub || [], cfg.subCount || 99, !cfg.allowDuplicate), actualSub, '#D4AF37', 28)}</div>` : ''}
                             </div>` : ''}
                         </div>
                         <!-- 命中号码汇总 -->
