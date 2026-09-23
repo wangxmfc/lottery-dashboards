@@ -292,27 +292,41 @@
         
         .footer {
             text-align: center;
-            margin-top: 40px;
-            padding: 24px;
-            color: rgba(255, 255, 255, 0.45);
-            font-size: 0.85em;
-            border-top: 1px solid rgba(201, 162, 39, 0.15);
+            margin-top: 30px;
+            padding: 20px 16px;
+            background: linear-gradient(135deg, rgba(201,162,39,0.06) 0%, rgba(15,42,67,0.4) 100%);
+            border-radius: 12px;
+            border: 1px solid rgba(201,162,39,0.2);
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.82em;
             position: relative;
         }
         
         .footer::before {
             content: '';
             position: absolute;
-            top: -1px;
+            top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 1px;
+            width: 60px;
+            height: 2px;
             background: linear-gradient(90deg, transparent, #C9A227, transparent);
+            border-radius: 2px;
         }
         
         .footer p {
-            margin: 6px 0;
+            margin: 5px 0;
+            line-height: 1.7;
+        }
+        .footer .footer-title {
+            color: #C9A227;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .footer .footer-version {
+            color: rgba(201,162,39,0.7);
+            font-size: 0.9em;
+            margin-top: 8px;
         }
         
         /* 移动端优化 */
@@ -883,8 +897,9 @@
         </div>
 
         <div class="footer">
-            <p>🎯 王者GP · 数据仅供统计参考 · 不构成投资建议 · 理性购彩，量力而行</p>
-            <p>系统版本：v2.0 · 更新时间：2026-09-22</p>
+            <p class="footer-title">🎯 王者GP · 彩票预测数据看板</p>
+            <p>数据仅供统计参考 · 不构成投资建议 · 理性购彩，量力而行</p>
+            <p class="footer-version" id="footer-version">系统版本：v2.0 · 更新时间：加载中...</p>
         </div>
     </div>
 
@@ -1897,6 +1912,13 @@
                 renderLotteryDetails(data);
                 renderModelMonitoring(data);
                 renderFullModelMonitoring(data);
+                
+                // 更新页脚时间
+                const footerVer = document.getElementById('footer-version');
+                if (footerVer) {
+                    const updateTime = (data.system_status && data.system_status.update_time) || data.last_update || '未知';
+                    footerVer.textContent = '系统版本：v2.0 · 更新时间：' + updateTime;
+                }
                 
             } catch (error) {
                 console.warn('⚠️ 动态数据加载失败，使用默认硬编码数据:', error.message);
