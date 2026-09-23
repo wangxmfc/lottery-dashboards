@@ -1043,7 +1043,7 @@
             const layerKeys = ['layer1_core', 'layer2_prediction', 'layer3_tools', 'layer4_lottery', 'layer5_system'];
             const layerColors = ['#C9A227', '#28a745', '#17a2b8', '#6f42c1', '#fd7e14'];
             
-            let listHtml = '<div style="font-size:0.9em;color:#C9A227;margin-bottom:10px;padding-right:80px;line-height:1.5;">📊 5层架构分类（点击展开查看详情）</div>';
+            let listHtml = '<div style="font-size:0.9em;color:#C9A227;margin-bottom:12px;padding-right:90px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">📊 5层架构分类（点击展开查看详情）</div>';
             
             layerKeys.forEach((layerKey, index) => {
                 const layer = layers[layerKey];
@@ -1055,15 +1055,17 @@
                 
                 listHtml += `
                     <div style="margin-bottom:10px;">
-                        <div onclick="toggleFullLayer('${layerKey}')" style="cursor:pointer;padding:14px 16px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid ${color};display:flex;justify-content:space-between;align-items:center;">
-                            <div style="flex:1;">
-                                <span style="font-size:1.05em;color:#fff;font-weight:500;">${layer.name || layerKey}</span>
-                                <span style="font-size:0.85em;color:#9AA3AF;margin-left:12px;">${layer.desc || ''}</span>
+                        <div onclick="toggleFullLayer('${layerKey}')" style="cursor:pointer;padding:14px 16px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid ${color};display:flex;justify-content:space-between;align-items:center;gap:12px;">
+                            <div style="flex:1;min-width:0;">
+                                <div style="font-size:1.05em;color:#fff;font-weight:500;margin-bottom:4px;">${layer.name || layerKey}</div>
+                                <div style="font-size:0.8em;color:#9AA3AF;line-height:1.4;">${layer.desc || ''}</div>
                             </div>
-                            <div style="text-align:right;display:flex;align-items:center;">
-                                <span style="font-size:1.2em;font-weight:bold;color:${color};">${count}</span>
-                                <span style="font-size:0.8em;color:#9AA3AF;margin-left:6px;">个 (${percentage}%)</span>
-                                <span id="layer-icon-${layerKey}" style="font-size:0.9em;color:#9AA3AF;margin-left:12px;">▼</span>
+                            <div style="text-align:right;flex-shrink:0;display:flex;align-items:center;gap:8px;">
+                                <div>
+                                    <div style="font-size:1.3em;font-weight:bold;color:${color};line-height:1;">${count}</div>
+                                    <div style="font-size:0.7em;color:#9AA3AF;margin-top:2px;">个 (${percentage}%)</div>
+                                </div>
+                                <span id="layer-icon-${layerKey}" style="font-size:0.9em;color:#9AA3AF;">▼</span>
                             </div>
                         </div>
                         <div id="layer-detail-${layerKey}" style="display:none;margin-top:8px;padding:12px;background:rgba(255,255,255,0.02);border-radius:10px;max-height:400px;overflow-y:auto;">
