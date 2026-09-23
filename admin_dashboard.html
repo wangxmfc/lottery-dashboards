@@ -395,6 +395,49 @@
                     </div>
                 </div>
 
+                <!-- 模型监控模块 -->
+                <div class="card" id="model-monitoring">
+                    <h2>🤖 核心模型监控 <span style="font-size:0.6em;color:#9AA3AF;font-weight:normal;">49个核心模型</span></h2>
+                    
+                    <!-- 模型总览 -->
+                    <div id="model-overview" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px;">
+                        <div style="text-align:center;padding:10px;background:rgba(201,162,39,0.1);border-radius:10px;">
+                            <div style="font-size:1.5em;font-weight:bold;color:#C9A227;" id="model-total">49</div>
+                            <div style="font-size:0.8em;color:#9AA3AF;">模型总数</div>
+                        </div>
+                        <div style="text-align:center;padding:10px;background:rgba(40,167,69,0.1);border-radius:10px;">
+                            <div style="font-size:1.5em;font-weight:bold;color:#28a745;" id="model-active">49</div>
+                            <div style="font-size:0.8em;color:#9AA3AF;">启用模型</div>
+                        </div>
+                        <div style="text-align:center;padding:10px;background:rgba(40,167,69,0.1);border-radius:10px;">
+                            <div style="font-size:1.5em;font-weight:bold;color:#28a745;" id="model-normal">49</div>
+                            <div style="font-size:0.8em;color:#9AA3AF;">运行正常</div>
+                        </div>
+                        <div style="text-align:center;padding:10px;background:rgba(220,53,69,0.1);border-radius:10px;">
+                            <div style="font-size:1.5em;font-weight:bold;color:#dc3545;" id="model-warning">0</div>
+                            <div style="font-size:0.8em;color:#9AA3AF;">异常模型</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 模型分类统计 -->
+                    <div id="model-categories" style="margin-bottom:15px;">
+                        <div style="font-size:0.9em;color:#C9A227;margin-bottom:8px;">📊 模型分类统计</div>
+                        <div id="category-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;">
+                            <!-- 动态生成分类列表 -->
+                        </div>
+                    </div>
+                    
+                    <!-- 模型列表（可折叠） -->
+                    <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:10px;">
+                        <button onclick="toggleModelList()" style="width:100%;padding:8px;background:rgba(201,162,39,0.1);border:1px solid #C9A227;border-radius:8px;color:#C9A227;cursor:pointer;font-size:0.9em;">
+                            📋 查看全部49个模型详情 <span id="toggle-icon">▼</span>
+                        </button>
+                        <div id="model-list" style="display:none;margin-top:10px;max-height:400px;overflow-y:auto;">
+                            <!-- 动态生成模型列表 -->
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card">
                     <h2>⚙️ 系统功能</h2>
                     <div class="stat">
@@ -859,6 +902,83 @@
             console.log('✅ 各彩种详情数据已动态更新');
         }
         
+        // 渲染模型监控
+        function renderModelMonitoring(data) {
+            if (!data || !data.model_monitoring) return;
+            
+            const monitoring = data.model_monitoring;
+            
+            // 1. 更新模型总览
+            const totalEl = document.getElementById('model-total');
+            const activeEl = document.getElementById('model-active');
+            const normalEl = document.getElementById('model-normal');
+            const warningEl = document.getElementById('model-warning');
+            
+            if (totalEl) totalEl.textContent = monitoring.total;
+            if (activeEl) activeEl.textContent = monitoring.active;
+            if (normalEl) normalEl.textContent = monitoring.normal;
+            if (warningEl) warningEl.textContent = monitoring.warning;
+            
+            // 2. 渲染模型分类统计
+            const categoryList = document.getElementById('category-list');
+            if (categoryList && monitoring.categories) {
+                let html = '';
+                for (const [catName, catData] of Object.entries(monitoring.categories)) {
+                    const statusColor = catData.warning > 0 ? '#ffc107' : '#28a745';
+                    html += `
+                        <div style="padding:8px 10px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:3px solid ${statusColor};">
+                            <div style="font-size:0.85em;color:#fff;font-weight:500;">${catName}</div>
+                            <div style="font-size:0.75em;color:#9AA3AF;margin-top:2px;">
+                                ${catData.count}个模型 · 
+                                <span style="color:#28a745;">${catData.normal}正常</span>
+                                ${catData.warning > 0 ? ` · <span style="color:#ffc107;">${catData.warning}异常</span>` : ''}
+                            </div>
+                        </div>
+                    `;
+                }
+                categoryList.innerHTML = html;
+            }
+            
+            // 3. 渲染模型列表
+            const modelList = document.getElementById('model-list');
+            if (modelList && monitoring.models) {
+                let html = '';
+                monitoring.models.forEach((model, index) => {
+                    const statusClass = model.status === '正常' ? 'badge-good' : 'badge-bad';
+                    const statusColor = model.status === '正常' ? '#28a745' : '#dc3545';
+                    html += `
+                        <div style="padding:8px 10px;margin-bottom:6px;background:rgba(255,255,255,0.02);border-radius:8px;border-left:3px solid ${statusColor};">
+                            <div style="display:flex;justify-content:space-between;align-items:center;">
+                                <div>
+                                    <span style="font-size:0.85em;color:#C9A227;font-weight:500;">${index + 1}. ${model.name}</span>
+                                    <span style="font-size:0.7em;color:#666;margin-left:8px;">${model.category}</span>
+                                </div>
+                                <span class="badge ${statusClass}" style="font-size:0.7em;">${model.status}</span>
+                            </div>
+                            <div style="font-size:0.75em;color:#9AA3AF;margin-top:4px;">${model.desc}</div>
+                            <div style="font-size:0.7em;color:#666;margin-top:2px;">ID: ${model.id} · 最近运行: ${model.last_run}</div>
+                        </div>
+                    `;
+                });
+                modelList.innerHTML = html;
+            }
+            
+            console.log('✅ 模型监控数据已动态更新:', monitoring.total + '个模型, ' + monitoring.normal + '正常');
+        }
+        
+        // 切换模型列表显示/隐藏
+        function toggleModelList() {
+            const modelList = document.getElementById('model-list');
+            const toggleIcon = document.getElementById('toggle-icon');
+            if (modelList.style.display === 'none') {
+                modelList.style.display = 'block';
+                toggleIcon.textContent = '▲';
+            } else {
+                modelList.style.display = 'none';
+                toggleIcon.textContent = '▼';
+            }
+        }
+        
         // 加载动态数据
         async function loadDashboardData() {
             try {
@@ -875,6 +995,7 @@
                 renderSystemOverview(data);
                 renderHitRates(data);
                 renderLotteryDetails(data);
+                renderModelMonitoring(data);
                 
             } catch (error) {
                 console.warn('⚠️ 动态数据加载失败，使用默认硬编码数据:', error.message);
