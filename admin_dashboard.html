@@ -59,8 +59,8 @@
         
         .header {
             text-align: center;
-            margin-bottom: 30px;
-            padding: 24px 16px 16px;
+            margin-bottom: 14px;
+            padding: 20px 16px 12px;
             position: relative;
         }
         
@@ -537,7 +537,14 @@
         .status-bar .status-main {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
+        }
+        .status-bar .status-sep {
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: rgba(201,162,39,0.4);
+            flex-shrink: 0;
         }
         .status-bar .status-item {
             display: inline-flex;
@@ -623,6 +630,7 @@
         <div id="system-status-bar" class="status-bar status-collapsed" onclick="toggleStatusBar()">
             <div class="status-main">
                 <span class="status-item status-time" id="status-time">🕐 加载中...</span>
+                <span class="status-sep"></span>
                 <span class="status-item status-models" id="status-models">🤖 --</span>
                 <span class="status-expand-icon" id="status-expand-icon">▼</span>
             </div>
