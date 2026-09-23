@@ -522,7 +522,7 @@
         
         /* 手机端响应式：核验对比卡片左右变上下 */
         @media (max-width: 600px) {
-            .lottery-tab-content > div > div[style*="grid-template-columns:1fr 1fr"] {
+            .responsive-split {
                 grid-template-columns: 1fr !important;
             }
         }
@@ -1092,7 +1092,7 @@
                             <span style="display:inline-block;width:9px;height:9px;border-radius:50%;border:2px solid #4CAF50;background:rgba(76,175,80,0.2);flex-shrink:0;"></span>
                             <span style="font-size:0.68em;color:#8B95A5;white-space:nowrap;">绿色边框 = 命中号码</span>
                         </div>
-                        <div style="display:grid;grid-template-columns:${hasLone ? '1fr 1fr' : '1fr'};gap:12px;">
+                        <div class="responsive-split" style="display:grid;grid-template-columns:${hasLone ? '1fr 1fr' : '1fr'};gap:12px;">
                             <!-- 主推号码 -->
                             <div style="padding:12px;background:rgba(255,255,255,0.03);border-radius:10px;border:1px solid rgba(255,255,255,0.08);">
                                 <div style="font-size:0.85em;color:#C9A227;font-weight:600;margin-bottom:8px;text-align:center;">📋 主推号码</div>
