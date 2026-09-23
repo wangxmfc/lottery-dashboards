@@ -778,6 +778,87 @@
             container.innerHTML = html;
         }
         
+        // 渲染各彩种详情
+        function renderLotteryDetails(data) {
+            if (!data || !data.details) return;
+            
+            const lotteryIds = ['ssq', 'dlt', 'kl8', 'fc3d', 'pl35', 'qxc', 'qlc'];
+            const lotteryEmojis = {
+                'ssq': '🔴', 'dlt': '🔵', 'kl8': '🟢', 
+                'fc3d': '🟡', 'pl35': '🟠', 'qxc': '🟣', 'qlc': '⚪'
+            };
+            
+            lotteryIds.forEach(lotteryId => {
+                const detail = data.details[lotteryId];
+                if (!detail) return;
+                
+                const section = document.getElementById(lotteryId);
+                if (!section) return;
+                
+                // 1. 更新命中率提升
+                const hitRateEl = section.querySelector('.hit-rate');
+                if (hitRateEl) {
+                    hitRateEl.textContent = '命中率提升 ' + formatImprovement(detail.improvement);
+                }
+                
+                // 2. 获取所有stat元素
+                const stats = section.querySelectorAll('.stat');
+                
+                // 平均命中（第1个stat）
+                if (stats[0]) {
+                    const valueEl = stats[0].querySelector('.stat-value');
+                    if (valueEl) {
+                        valueEl.textContent = detail.avg_hit + '个';
+                    }
+                }
+                
+                // 对比随机基准（第2个stat）
+                if (stats[1]) {
+                    const valueEl = stats[1].querySelector('.stat-value');
+                    if (valueEl) {
+                        valueEl.textContent = formatImprovement(detail.improvement);
+                    }
+                }
+                
+                // 样本期数（第3个stat）
+                if (stats[2]) {
+                    const valueEl = stats[2].querySelector('.stat-value');
+                    if (valueEl) {
+                        valueEl.textContent = detail.total_periods + '期';
+                    }
+                }
+                
+                // 命中率（第4个stat）
+                if (stats[3]) {
+                    const valueEl = stats[3].querySelector('.stat-value');
+                    if (valueEl) {
+                        valueEl.textContent = detail.hit_rate + '%';
+                    }
+                }
+                
+                // 状态等级（第5个stat）
+                if (stats[4]) {
+                    const badgeEl = stats[4].querySelector('.badge');
+                    if (badgeEl) {
+                        const cls = gradeClass[detail.grade] || 'badge-warning';
+                        badgeEl.className = 'badge ' + cls;
+                        badgeEl.textContent = detail.grade;
+                    }
+                }
+                
+                // 3. 更新最新期号和日期（h3元素）
+                const h3El = section.querySelector('h3');
+                if (h3El && detail.latest_period) {
+                    const emoji = lotteryEmojis[lotteryId] || '';
+                    const dateStr = detail.latest_date || '';
+                    const dateDisplay = dateStr ? ' · ' + dateStr + '开奖' : '';
+                    h3El.textContent = emoji + ' ' + detail.name + ' 第' + detail.latest_period + '期' + dateDisplay;
+                }
+            });
+            
+            console.log('✅ 各彩种详情数据已动态更新');
+        }
+        
         // 加载动态数据
         async function loadDashboardData() {
             try {
@@ -793,6 +874,7 @@
                 // 渲染数据
                 renderSystemOverview(data);
                 renderHitRates(data);
+                renderLotteryDetails(data);
                 
             } catch (error) {
                 console.warn('⚠️ 动态数据加载失败，使用默认硬编码数据:', error.message);
