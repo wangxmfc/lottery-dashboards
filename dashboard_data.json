@@ -5,7 +5,7 @@
     "lottery_count": 7,
     "model_usage_rate": 100,
     "system_status": "正常运行",
-    "last_update": "2026-09-23 20:45:53"
+    "last_update": "2026-09-23 20:55:34"
   },
   "hit_rates": [
     {
@@ -207,7 +207,7 @@
         "desc": "基于历史出现频率的加权预测",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "omission_of",
@@ -216,7 +216,7 @@
         "desc": "分析号码遗漏周期和回补概率",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "pattern_analysis",
@@ -225,7 +225,7 @@
         "desc": "识别历史开奖中的重复模式",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "markov_transition",
@@ -234,7 +234,7 @@
         "desc": "基于状态转移概率的预测",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "cooccurrence_analysis",
@@ -243,7 +243,7 @@
         "desc": "分析号码共同出现的概率",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "hot_cold_trend",
@@ -252,7 +252,7 @@
         "desc": "分析号码冷热转换趋势",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "omission_cycle_analysis",
@@ -261,7 +261,7 @@
         "desc": "分析号码遗漏的周期性规律",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "tail_analysis",
@@ -270,7 +270,7 @@
         "desc": "分析号码尾数的分布规律",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "road_012_analysis",
@@ -279,7 +279,7 @@
         "desc": "分析号码除3余数的分布",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "mutex_pair_analysis",
@@ -288,7 +288,7 @@
         "desc": "分析 rarely 同时出现的号码对",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "poisson_omission",
@@ -297,7 +297,7 @@
         "desc": "基于泊松分布的遗漏概率计算",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "repeat_probability",
@@ -306,7 +306,7 @@
         "desc": "计算号码重复出现的概率",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "cold_to_warm_signal",
@@ -315,7 +315,7 @@
         "desc": "检测冷号转热号的拐点信号",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "time_series_ma",
@@ -324,7 +324,7 @@
         "desc": "移动平均时间序列分析",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "grey_gm11",
@@ -333,7 +333,7 @@
         "desc": "灰色系统理论预测模型",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "linear_trend",
@@ -342,7 +342,7 @@
         "desc": "线性回归趋势外推预测",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "variance_analysis",
@@ -351,7 +351,7 @@
         "desc": "基于方差的波动性分析",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "apriori_rules",
@@ -360,7 +360,7 @@
         "desc": "Apriori算法挖掘号码关联规则",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "kmeans_cluster",
@@ -369,7 +369,7 @@
         "desc": "K-means聚类分析号码分组",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "monte_carlo_filter",
@@ -378,7 +378,7 @@
         "desc": "蒙特卡洛模拟筛选组合",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "random_forest_prediction",
@@ -387,7 +387,7 @@
         "desc": "随机森林集成学习预测",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "gradient_boosting_predict",
@@ -396,7 +396,7 @@
         "desc": "梯度提升树GBDT预测",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "lstm_style_predict",
@@ -405,7 +405,7 @@
         "desc": "LSTM长短期记忆网络预测",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "logistic_regression_predict",
@@ -414,7 +414,7 @@
         "desc": "逻辑回归分类预测",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "mlp_neural_network",
@@ -423,7 +423,7 @@
         "desc": "多层感知机神经网络",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "lstm_time_series",
@@ -432,7 +432,7 @@
         "desc": "完整LSTM时间序列模型",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "entropy_weight_adjust",
@@ -441,7 +441,7 @@
         "desc": "基于信息熵的权重调整",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "bayesian_update_weights",
@@ -450,7 +450,7 @@
         "desc": "贝叶斯方法动态更新权重",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "genetic_optimize_weights",
@@ -459,7 +459,7 @@
         "desc": "遗传算法优化模型权重",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "time_decay_optimization",
@@ -468,7 +468,7 @@
         "desc": "基于时间衰减的权重优化",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "auto_tune_weights",
@@ -477,7 +477,7 @@
         "desc": "自动调整各模型权重",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "auto_weight_search",
@@ -486,7 +486,7 @@
         "desc": "网格搜索最优权重组合",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "optimized_weight_search",
@@ -495,7 +495,7 @@
         "desc": "优化算法搜索最优权重",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "get_dynamic_weights",
@@ -504,7 +504,7 @@
         "desc": "获取动态计算的模型权重",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "cross_lottery_correlation",
@@ -513,7 +513,7 @@
         "desc": "跨彩种数据关联分析",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:33"
       },
       {
         "id": "cross_lottery_vote",
@@ -522,7 +522,7 @@
         "desc": "跨彩种模型投票融合",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:34"
       },
       {
         "id": "model_blending",
@@ -531,7 +531,7 @@
         "desc": "多模型结果混合融合",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:34"
       },
       {
         "id": "stacking_predict",
@@ -540,7 +540,7 @@
         "desc": "Stacking集成学习预测",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:34"
       },
       {
         "id": "attention_weighting",
@@ -549,7 +549,7 @@
         "desc": "注意力机制加权融合",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:34"
       },
       {
         "id": "transfer_learning",
@@ -558,7 +558,7 @@
         "desc": "跨领域迁移学习",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:34"
       },
       {
         "id": "per_model_weight_learning",
@@ -567,7 +567,7 @@
         "desc": "每个模型独立学习权重",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:34"
       },
       {
         "id": "k_fold_cross_validation",
@@ -576,7 +576,7 @@
         "desc": "K折交叉验证评估模型",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:34"
       },
       {
         "id": "hyperparameter_tuning",
@@ -585,7 +585,7 @@
         "desc": "自动调优模型超参数",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:34"
       },
       {
         "id": "online_learning_update",
@@ -594,7 +594,7 @@
         "desc": "在线学习实时更新模型",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:34"
       },
       {
         "id": "get_active_weights",
@@ -603,7 +603,7 @@
         "desc": "获取当前激活的模型权重",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:34"
       },
       {
         "id": "get_online_weights",
@@ -612,7 +612,7 @@
         "desc": "获取在线学习的权重",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:34"
       },
       {
         "id": "calc_dimension_correlation",
@@ -621,7 +621,7 @@
         "desc": "计算各维度间的相关性",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:34"
       },
       {
         "id": "diversity_check",
@@ -630,7 +630,7 @@
         "desc": "检查预测结果的多样性",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:34"
       },
       {
         "id": "calc_confidence",
@@ -639,12 +639,15 @@
         "desc": "计算预测结果的置信度",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-23 20:45:52"
+        "last_run": "2026-09-23 20:55:34"
       }
     ]
   },
   "full_model_monitoring": {
     "total": 595,
+    "active": 595,
+    "normal": 595,
+    "warning": 0,
     "layers": {
       "layer1_core": {
         "name": "核心预测模型",
@@ -654,298 +657,350 @@
             "name": "频率加权分析",
             "id": "freq_weighted",
             "category": "统计分析",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "遗漏分析",
             "id": "omission_of",
             "category": "统计分析",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "模式分析",
             "id": "pattern_analysis",
             "category": "统计分析",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "马尔可夫链",
             "id": "markov_transition",
             "category": "统计分析",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "共现分析",
             "id": "cooccurrence_analysis",
             "category": "统计分析",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "冷热趋势",
             "id": "hot_cold_trend",
             "category": "统计分析",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "遗漏周期",
             "id": "omission_cycle_analysis",
             "category": "统计分析",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "尾数分析",
             "id": "tail_analysis",
             "category": "统计分析",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "012路分析",
             "id": "road_012_analysis",
             "category": "统计分析",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "互斥对分析",
             "id": "mutex_pair_analysis",
             "category": "统计分析",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "泊松遗漏",
             "id": "poisson_omission",
             "category": "统计分析",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "重复概率",
             "id": "repeat_probability",
             "category": "统计分析",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "冷转热信号",
             "id": "cold_to_warm_signal",
             "category": "信号检测",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "时间序列MA",
             "id": "time_series_ma",
             "category": "信号检测",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "灰色预测GM(1,1)",
             "id": "grey_gm11",
             "category": "信号检测",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "线性回归趋势",
             "id": "linear_trend",
             "category": "信号检测",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "方差分析",
             "id": "variance_analysis",
             "category": "信号检测",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "关联规则挖掘",
             "id": "apriori_rules",
             "category": "数据挖掘",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "K均值聚类",
             "id": "kmeans_cluster",
             "category": "数据挖掘",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "蒙特卡洛滤波",
             "id": "monte_carlo_filter",
             "category": "数据挖掘",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "随机森林",
             "id": "random_forest_prediction",
             "category": "机器学习",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "梯度提升",
             "id": "gradient_boosting_predict",
             "category": "机器学习",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "LSTM时序",
             "id": "lstm_style_predict",
             "category": "机器学习",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "逻辑回归",
             "id": "logistic_regression_predict",
             "category": "机器学习",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "MLP神经网络",
             "id": "mlp_neural_network",
             "category": "机器学习",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "LSTM完整时序",
             "id": "lstm_time_series",
             "category": "机器学习",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "熵权调整",
             "id": "entropy_weight_adjust",
             "category": "权重优化",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "贝叶斯更新",
             "id": "bayesian_update_weights",
             "category": "权重优化",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "遗传算法优化",
             "id": "genetic_optimize_weights",
             "category": "权重优化",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "时间衰减优化",
             "id": "time_decay_optimization",
             "category": "权重优化",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "自动调权",
             "id": "auto_tune_weights",
             "category": "权重优化",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "自动权重搜索",
             "id": "auto_weight_search",
             "category": "权重优化",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "优化权重搜索",
             "id": "optimized_weight_search",
             "category": "权重优化",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "动态权重获取",
             "id": "get_dynamic_weights",
             "category": "权重优化",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "跨彩种关联",
             "id": "cross_lottery_correlation",
             "category": "模型融合",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "跨彩种投票",
             "id": "cross_lottery_vote",
             "category": "模型融合",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "模型融合",
             "id": "model_blending",
             "category": "模型融合",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "堆叠预测",
             "id": "stacking_predict",
             "category": "模型融合",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "注意力加权",
             "id": "attention_weighting",
             "category": "模型融合",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "迁移学习",
             "id": "transfer_learning",
             "category": "高级学习",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "分模型权重学习",
             "id": "per_model_weight_learning",
             "category": "高级学习",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "K折交叉验证",
             "id": "k_fold_cross_validation",
             "category": "高级学习",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "超参数调优",
             "id": "hyperparameter_tuning",
             "category": "高级学习",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "在线学习更新",
             "id": "online_learning_update",
             "category": "高级学习",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "激活权重获取",
             "id": "get_active_weights",
             "category": "系统工具",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "在线权重获取",
             "id": "get_online_weights",
             "category": "系统工具",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "维度关联计算",
             "id": "calc_dimension_correlation",
             "category": "系统工具",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "多样性检查",
             "id": "diversity_check",
             "category": "系统工具",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "置信度计算",
             "id": "calc_confidence",
             "category": "系统工具",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           }
         ],
-        "count": 49
+        "count": 49,
+        "active": 49,
+        "normal": 49,
+        "warning": 0
       },
       "layer2_prediction": {
         "name": "其他预测模型",
@@ -955,208 +1010,245 @@
             "name": "freq_of",
             "id": "freq_of",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "score_top",
             "id": "score_top",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "score_map",
             "id": "score_map",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "calc_combo_metrics",
             "id": "calc_combo_metrics",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "calc_history_metrics",
             "id": "calc_history_metrics",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "combo_cooccurrence_score",
             "id": "combo_cooccurrence_score",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "get_model_vs_random_report",
             "id": "get_model_vs_random_report",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "calc_all_extra_scores",
             "id": "calc_all_extra_scores",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "cold_hot_cycle_prediction",
             "id": "cold_hot_cycle_prediction",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "anomaly_combo_detection",
             "id": "anomaly_combo_detection",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "enhanced_backtest_report",
             "id": "enhanced_backtest_report",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "anomaly_number_detection",
             "id": "anomaly_number_detection",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "detailed_backtest_report",
             "id": "detailed_backtest_report",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "enhanced_cross_lottery",
             "id": "enhanced_cross_lottery",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "find_optimal_decay",
             "id": "find_optimal_decay",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "outlier_penalty",
             "id": "outlier_penalty",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "snapshot_compare",
             "id": "snapshot_compare",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "combo_entropy",
             "id": "combo_entropy",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "form_filter",
             "id": "form_filter",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "top_freq",
             "id": "top_freq",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "cold_top",
             "id": "cold_top",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "backtest_html",
             "id": "backtest_html",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "calc_detailed_backtest",
             "id": "calc_detailed_backtest",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "data_augmentation",
             "id": "data_augmentation",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "explain_prediction",
             "id": "explain_prediction",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "estimate_confidence",
             "id": "estimate_confidence",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "performance_timer",
             "id": "performance_timer",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "fast_freq_of",
             "id": "fast_freq_of",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "visualize_prediction",
             "id": "visualize_prediction",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "visualize_weight_contribution",
             "id": "visualize_weight_contribution",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "show_historical_performance",
             "id": "show_historical_performance",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "export_prediction_history",
             "id": "export_prediction_history",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "fault_tolerance_wrapper",
             "id": "fault_tolerance_wrapper",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "cache_predictions",
             "id": "cache_predictions",
             "category": "预测模型",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           }
         ],
-        "count": 34
+        "count": 34,
+        "active": 34,
+        "normal": 34,
+        "warning": 0
       },
       "layer3_tools": {
         "name": "工具运维函数",
@@ -1166,2824 +1258,3297 @@
             "name": "z2",
             "id": "z2",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "load_pred_history",
             "id": "load_pred_history",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "get_prev_pred",
             "id": "get_prev_pred",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "norm",
             "id": "norm",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "combination_optimization",
             "id": "combination_optimization",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "generate_weekly_report",
             "id": "generate_weekly_report",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "balls_html",
             "id": "balls_html",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "hot_items",
             "id": "hot_items",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "hot_html",
             "id": "hot_html",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "gen_card",
             "id": "gen_card",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "snap",
             "id": "snap",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "article_html",
             "id": "article_html",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "date_cn",
             "id": "date_cn",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "main",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "seasonal_adjustment",
             "id": "seasonal_adjustment",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "multi_objective_optimization",
             "id": "multi_objective_optimization",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "generate_daily_report",
             "id": "generate_daily_report",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "detect_gpu",
             "id": "detect_gpu",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "chat_with_model",
             "id": "chat_with_model",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "estimate_prize",
             "id": "estimate_prize",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "get_prize_level",
             "id": "get_prize_level",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "odd_even_analysis",
             "id": "odd_even_analysis",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "ac_value_analysis",
             "id": "ac_value_analysis",
             "category": "工具函数",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "load_alert_log",
             "id": "alert_levels.py:load_alert_log",
             "category": "工具函数",
-            "file": "alert_levels.py"
+            "file": "alert_levels.py",
+            "status": "正常"
           },
           {
             "name": "save_alert_log",
             "id": "alert_levels.py:save_alert_log",
             "category": "工具函数",
-            "file": "alert_levels.py"
+            "file": "alert_levels.py",
+            "status": "正常"
           },
           {
             "name": "push_alert",
             "id": "alert_levels.py:push_alert",
             "category": "工具函数",
-            "file": "alert_levels.py"
+            "file": "alert_levels.py",
+            "status": "正常"
           },
           {
             "name": "critical",
             "id": "alert_levels.py:critical",
             "category": "工具函数",
-            "file": "alert_levels.py"
+            "file": "alert_levels.py",
+            "status": "正常"
           },
           {
             "name": "warning",
             "id": "alert_levels.py:warning",
             "category": "工具函数",
-            "file": "alert_levels.py"
+            "file": "alert_levels.py",
+            "status": "正常"
           },
           {
             "name": "info",
             "id": "alert_levels.py:info",
             "category": "工具函数",
-            "file": "alert_levels.py"
+            "file": "alert_levels.py",
+            "status": "正常"
           },
           {
             "name": "print_alert_summary",
             "id": "alert_levels.py:print_alert_summary",
             "category": "工具函数",
-            "file": "alert_levels.py"
+            "file": "alert_levels.py",
+            "status": "正常"
           },
           {
             "name": "load_config",
             "id": "alert_notify.py:load_config",
             "category": "工具函数",
-            "file": "alert_notify.py"
+            "file": "alert_notify.py",
+            "status": "正常"
           },
           {
             "name": "send_wechat_alert",
             "id": "alert_notify.py:send_wechat_alert",
             "category": "工具函数",
-            "file": "alert_notify.py"
+            "file": "alert_notify.py",
+            "status": "正常"
           },
           {
             "name": "send_alert",
             "id": "alert_notify.py:send_alert",
             "category": "工具函数",
-            "file": "alert_notify.py"
+            "file": "alert_notify.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "api_server.py:main",
             "category": "工具函数",
-            "file": "api_server.py"
+            "file": "api_server.py",
+            "status": "正常"
           },
           {
             "name": "apply_yesterday_sentiment",
             "id": "apply_yesterday_sentiment.py:apply_yesterday_sentiment",
             "category": "工具函数",
-            "file": "apply_yesterday_sentiment.py"
+            "file": "apply_yesterday_sentiment.py",
+            "status": "正常"
           },
           {
             "name": "extract_text_from_html",
             "id": "article_quality_score.py:extract_text_from_html",
             "category": "工具函数",
-            "file": "article_quality_score.py"
+            "file": "article_quality_score.py",
+            "status": "正常"
           },
           {
             "name": "score_word_count",
             "id": "article_quality_score.py:score_word_count",
             "category": "工具函数",
-            "file": "article_quality_score.py"
+            "file": "article_quality_score.py",
+            "status": "正常"
           },
           {
             "name": "score_structure",
             "id": "article_quality_score.py:score_structure",
             "category": "工具函数",
-            "file": "article_quality_score.py"
+            "file": "article_quality_score.py",
+            "status": "正常"
           },
           {
             "name": "score_information_density",
             "id": "article_quality_score.py:score_information_density",
             "category": "工具函数",
-            "file": "article_quality_score.py"
+            "file": "article_quality_score.py",
+            "status": "正常"
           },
           {
             "name": "score_readability",
             "id": "article_quality_score.py:score_readability",
             "category": "工具函数",
-            "file": "article_quality_score.py"
+            "file": "article_quality_score.py",
+            "status": "正常"
           },
           {
             "name": "score_logic_consistency",
             "id": "article_quality_score.py:score_logic_consistency",
             "category": "工具函数",
-            "file": "article_quality_score.py"
+            "file": "article_quality_score.py",
+            "status": "正常"
           },
           {
             "name": "evaluate_article",
             "id": "article_quality_score.py:evaluate_article",
             "category": "工具函数",
-            "file": "article_quality_score.py"
+            "file": "article_quality_score.py",
+            "status": "正常"
           },
           {
             "name": "backup",
             "id": "auto_backup.py:backup",
             "category": "工具函数",
-            "file": "auto_backup.py"
+            "file": "auto_backup.py",
+            "status": "正常"
           },
           {
             "name": "cleanup_old_backups",
             "id": "auto_backup.py:cleanup_old_backups",
             "category": "工具函数",
-            "file": "auto_backup.py"
+            "file": "auto_backup.py",
+            "status": "正常"
           },
           {
             "name": "restore",
             "id": "auto_backup.py:restore",
             "category": "工具函数",
-            "file": "auto_backup.py"
+            "file": "auto_backup.py",
+            "status": "正常"
           },
           {
             "name": "log",
             "id": "auto_run_all.py:log",
             "category": "工具函数",
-            "file": "auto_run_all.py"
+            "file": "auto_run_all.py",
+            "status": "正常"
           },
           {
             "name": "run_script",
             "id": "auto_run_all.py:run_script",
             "category": "工具函数",
-            "file": "auto_run_all.py"
+            "file": "auto_run_all.py",
+            "status": "正常"
           },
           {
             "name": "step1_update_data",
             "id": "auto_run_all.py:step1_update_data",
             "category": "工具函数",
-            "file": "auto_run_all.py"
+            "file": "auto_run_all.py",
+            "status": "正常"
           },
           {
             "name": "step2_generate_prediction",
             "id": "auto_run_all.py:step2_generate_prediction",
             "category": "工具函数",
-            "file": "auto_run_all.py"
+            "file": "auto_run_all.py",
+            "status": "正常"
           },
           {
             "name": "step2_5_generate_dashboard",
             "id": "auto_run_all.py:step2_5_generate_dashboard",
             "category": "工具函数",
-            "file": "auto_run_all.py"
+            "file": "auto_run_all.py",
+            "status": "正常"
           },
           {
             "name": "step3_publish_wechat",
             "id": "auto_run_all.py:step3_publish_wechat",
             "category": "工具函数",
-            "file": "auto_run_all.py"
+            "file": "auto_run_all.py",
+            "status": "正常"
           },
           {
             "name": "step4_backup",
             "id": "auto_run_all.py:step4_backup",
             "category": "工具函数",
-            "file": "auto_run_all.py"
+            "file": "auto_run_all.py",
+            "status": "正常"
           },
           {
             "name": "step5_generate_report",
             "id": "auto_run_all.py:step5_generate_report",
             "category": "工具函数",
-            "file": "auto_run_all.py"
+            "file": "auto_run_all.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "auto_run_all.py:main",
             "category": "工具函数",
-            "file": "auto_run_all.py"
+            "file": "auto_run_all.py",
+            "status": "正常"
           },
           {
             "name": "load_stats",
             "id": "backtest_stats.py:load_stats",
             "category": "工具函数",
-            "file": "backtest_stats.py"
+            "file": "backtest_stats.py",
+            "status": "正常"
           },
           {
             "name": "save_stats",
             "id": "backtest_stats.py:save_stats",
             "category": "工具函数",
-            "file": "backtest_stats.py"
+            "file": "backtest_stats.py",
+            "status": "正常"
           },
           {
             "name": "add_record",
             "id": "backtest_stats.py:add_record",
             "category": "工具函数",
-            "file": "backtest_stats.py"
+            "file": "backtest_stats.py",
+            "status": "正常"
           },
           {
             "name": "calc_random_baseline",
             "id": "backtest_stats.py:calc_random_baseline",
             "category": "工具函数",
-            "file": "backtest_stats.py"
+            "file": "backtest_stats.py",
+            "status": "正常"
           },
           {
             "name": "update_summary",
             "id": "backtest_stats.py:update_summary",
             "category": "工具函数",
-            "file": "backtest_stats.py"
+            "file": "backtest_stats.py",
+            "status": "正常"
           },
           {
             "name": "summarize_recent",
             "id": "backtest_stats.py:summarize_recent",
             "category": "工具函数",
-            "file": "backtest_stats.py"
+            "file": "backtest_stats.py",
+            "status": "正常"
           },
           {
             "name": "calc_prize",
             "id": "backtest_stats.py:calc_prize",
             "category": "工具函数",
-            "file": "backtest_stats.py"
+            "file": "backtest_stats.py",
+            "status": "正常"
           },
           {
             "name": "get_summary",
             "id": "backtest_stats.py:get_summary",
             "category": "工具函数",
-            "file": "backtest_stats.py"
+            "file": "backtest_stats.py",
+            "status": "正常"
           },
           {
             "name": "calc_fixed_number_stats",
             "id": "backtest_stats.py:calc_fixed_number_stats",
             "category": "工具函数",
-            "file": "backtest_stats.py"
+            "file": "backtest_stats.py",
+            "status": "正常"
           },
           {
             "name": "backup_file",
             "id": "backup_system.py:backup_file",
             "category": "工具函数",
-            "file": "backup_system.py"
+            "file": "backup_system.py",
+            "status": "正常"
           },
           {
             "name": "backup_excel_library",
             "id": "backup_system.py:backup_excel_library",
             "category": "工具函数",
-            "file": "backup_system.py"
+            "file": "backup_system.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "backup_system.py:main",
             "category": "工具函数",
-            "file": "backup_system.py"
+            "file": "backup_system.py",
+            "status": "正常"
           },
           {
             "name": "login",
             "id": "baijiahao_login.py:login",
             "category": "工具函数",
-            "file": "baijiahao_login.py"
+            "file": "baijiahao_login.py",
+            "status": "正常"
           },
           {
             "name": "login_with_code",
             "id": "baijiahao_login_code.py:login_with_code",
             "category": "工具函数",
-            "file": "baijiahao_login_code.py"
+            "file": "baijiahao_login_code.py",
+            "status": "正常"
           },
           {
             "name": "login_qrcode",
             "id": "baijiahao_qrcode_login.py:login_qrcode",
             "category": "工具函数",
-            "file": "baijiahao_qrcode_login.py"
+            "file": "baijiahao_qrcode_login.py",
+            "status": "正常"
           },
           {
             "name": "login",
             "id": "baijiahao_sms.py:login",
             "category": "工具函数",
-            "file": "baijiahao_sms.py"
+            "file": "baijiahao_sms.py",
+            "status": "正常"
           },
           {
             "name": "verify",
             "id": "baijiahao_verify.py:verify",
             "category": "工具函数",
-            "file": "baijiahao_verify.py"
+            "file": "baijiahao_verify.py",
+            "status": "正常"
           },
           {
             "name": "load_audit_state",
             "id": "bjh_audit_monitor.py:load_audit_state",
             "category": "工具函数",
-            "file": "bjh_audit_monitor.py"
+            "file": "bjh_audit_monitor.py",
+            "status": "正常"
           },
           {
             "name": "save_audit_state",
             "id": "bjh_audit_monitor.py:save_audit_state",
             "category": "工具函数",
-            "file": "bjh_audit_monitor.py"
+            "file": "bjh_audit_monitor.py",
+            "status": "正常"
           },
           {
             "name": "record_article",
             "id": "bjh_audit_monitor.py:record_article",
             "category": "工具函数",
-            "file": "bjh_audit_monitor.py"
+            "file": "bjh_audit_monitor.py",
+            "status": "正常"
           },
           {
             "name": "check_audit_status",
             "id": "bjh_audit_monitor.py:check_audit_status",
             "category": "工具函数",
-            "file": "bjh_audit_monitor.py"
+            "file": "bjh_audit_monitor.py",
+            "status": "正常"
           },
           {
             "name": "print_audit_stats",
             "id": "bjh_audit_monitor.py:print_audit_stats",
             "category": "工具函数",
-            "file": "bjh_audit_monitor.py"
+            "file": "bjh_audit_monitor.py",
+            "status": "正常"
           },
           {
             "name": "img64",
             "id": "build_embed.py:img64",
             "category": "工具函数",
-            "file": "build_embed.py"
+            "file": "build_embed.py",
+            "status": "正常"
           },
           {
             "name": "replace_table",
             "id": "build_embed.py:replace_table",
             "category": "工具函数",
-            "file": "build_embed.py"
+            "file": "build_embed.py",
+            "status": "正常"
           },
           {
             "name": "replace_chart",
             "id": "build_embed.py:replace_chart",
             "category": "工具函数",
-            "file": "build_embed.py"
+            "file": "build_embed.py",
+            "status": "正常"
           },
           {
             "name": "img64",
             "id": "build_embed_index.py:img64",
             "category": "工具函数",
-            "file": "build_embed_index.py"
+            "file": "build_embed_index.py",
+            "status": "正常"
           },
           {
             "name": "replace_table",
             "id": "build_embed_index.py:replace_table",
             "category": "工具函数",
-            "file": "build_embed_index.py"
+            "file": "build_embed_index.py",
+            "status": "正常"
           },
           {
             "name": "replace_chart",
             "id": "build_embed_index.py:replace_chart",
             "category": "工具函数",
-            "file": "build_embed_index.py"
+            "file": "build_embed_index.py",
+            "status": "正常"
           },
           {
             "name": "img64",
             "id": "build_noon_v2.py:img64",
             "category": "工具函数",
-            "file": "build_noon_v2.py"
+            "file": "build_noon_v2.py",
+            "status": "正常"
           },
           {
             "name": "replace_table",
             "id": "build_noon_v2.py:replace_table",
             "category": "工具函数",
-            "file": "build_noon_v2.py"
+            "file": "build_noon_v2.py",
+            "status": "正常"
           },
           {
             "name": "replace_chart",
             "id": "build_noon_v2.py:replace_chart",
             "category": "工具函数",
-            "file": "build_noon_v2.py"
+            "file": "build_noon_v2.py",
+            "status": "正常"
           },
           {
             "name": "sec_title",
             "id": "build_noon_v2.py:sec_title",
             "category": "工具函数",
-            "file": "build_noon_v2.py"
+            "file": "build_noon_v2.py",
+            "status": "正常"
           },
           {
             "name": "img_block",
             "id": "build_noon_v2.py:img_block",
             "category": "工具函数",
-            "file": "build_noon_v2.py"
+            "file": "build_noon_v2.py",
+            "status": "正常"
           },
           {
             "name": "human_box",
             "id": "build_noon_v2.py:human_box",
             "category": "工具函数",
-            "file": "build_noon_v2.py"
+            "file": "build_noon_v2.py",
+            "status": "正常"
           },
           {
             "name": "hot_take",
             "id": "build_noon_v2.py:hot_take",
             "category": "工具函数",
-            "file": "build_noon_v2.py"
+            "file": "build_noon_v2.py",
+            "status": "正常"
           },
           {
             "name": "news_card",
             "id": "build_noon_v2.py:news_card",
             "category": "工具函数",
-            "file": "build_noon_v2.py"
+            "file": "build_noon_v2.py",
+            "status": "正常"
           },
           {
             "name": "strategy_box",
             "id": "build_noon_v2.py:strategy_box",
             "category": "工具函数",
-            "file": "build_noon_v2.py"
+            "file": "build_noon_v2.py",
+            "status": "正常"
           },
           {
             "name": "risk_box",
             "id": "build_noon_v2.py:risk_box",
             "category": "工具函数",
-            "file": "build_noon_v2.py"
+            "file": "build_noon_v2.py",
+            "status": "正常"
           },
           {
             "name": "footer",
             "id": "build_noon_v2.py:footer",
             "category": "工具函数",
-            "file": "build_noon_v2.py"
+            "file": "build_noon_v2.py",
+            "status": "正常"
           },
           {
             "name": "sec_title",
             "id": "build_noon_v3.py:sec_title",
             "category": "工具函数",
-            "file": "build_noon_v3.py"
+            "file": "build_noon_v3.py",
+            "status": "正常"
           },
           {
             "name": "img_block",
             "id": "build_noon_v3.py:img_block",
             "category": "工具函数",
-            "file": "build_noon_v3.py"
+            "file": "build_noon_v3.py",
+            "status": "正常"
           },
           {
             "name": "human_box",
             "id": "build_noon_v3.py:human_box",
             "category": "工具函数",
-            "file": "build_noon_v3.py"
+            "file": "build_noon_v3.py",
+            "status": "正常"
           },
           {
             "name": "hot_take",
             "id": "build_noon_v3.py:hot_take",
             "category": "工具函数",
-            "file": "build_noon_v3.py"
+            "file": "build_noon_v3.py",
+            "status": "正常"
           },
           {
             "name": "table_block",
             "id": "build_noon_v3.py:table_block",
             "category": "工具函数",
-            "file": "build_noon_v3.py"
+            "file": "build_noon_v3.py",
+            "status": "正常"
           },
           {
             "name": "strategy_box",
             "id": "build_noon_v3.py:strategy_box",
             "category": "工具函数",
-            "file": "build_noon_v3.py"
+            "file": "build_noon_v3.py",
+            "status": "正常"
           },
           {
             "name": "risk_box",
             "id": "build_noon_v3.py:risk_box",
             "category": "工具函数",
-            "file": "build_noon_v3.py"
+            "file": "build_noon_v3.py",
+            "status": "正常"
           },
           {
             "name": "footer",
             "id": "build_noon_v3.py:footer",
             "category": "工具函数",
-            "file": "build_noon_v3.py"
+            "file": "build_noon_v3.py",
+            "status": "正常"
           },
           {
             "name": "img64",
             "id": "build_preopen_embed_20260916.py:img64",
             "category": "工具函数",
-            "file": "build_preopen_embed_20260916.py"
+            "file": "build_preopen_embed_20260916.py",
+            "status": "正常"
           },
           {
             "name": "replace_table",
             "id": "build_preopen_embed_20260916.py:replace_table",
             "category": "工具函数",
-            "file": "build_preopen_embed_20260916.py"
+            "file": "build_preopen_embed_20260916.py",
+            "status": "正常"
           },
           {
             "name": "replace_chart",
             "id": "build_preopen_embed_20260916.py:replace_chart",
             "category": "工具函数",
-            "file": "build_preopen_embed_20260916.py"
+            "file": "build_preopen_embed_20260916.py",
+            "status": "正常"
           },
           {
             "name": "img64",
             "id": "build_preopen_embed_20260917.py:img64",
             "category": "工具函数",
-            "file": "build_preopen_embed_20260917.py"
+            "file": "build_preopen_embed_20260917.py",
+            "status": "正常"
           },
           {
             "name": "replace_table",
             "id": "build_preopen_embed_20260917.py:replace_table",
             "category": "工具函数",
-            "file": "build_preopen_embed_20260917.py"
+            "file": "build_preopen_embed_20260917.py",
+            "status": "正常"
           },
           {
             "name": "replace_chart",
             "id": "build_preopen_embed_20260917.py:replace_chart",
             "category": "工具函数",
-            "file": "build_preopen_embed_20260917.py"
+            "file": "build_preopen_embed_20260917.py",
+            "status": "正常"
           },
           {
             "name": "sync_quant_data",
             "id": "build_preopen_v2.py:sync_quant_data",
             "category": "工具函数",
-            "file": "build_preopen_v2.py"
+            "file": "build_preopen_v2.py",
+            "status": "正常"
           },
           {
             "name": "img64",
             "id": "build_preopen_v2.py:img64",
             "category": "工具函数",
-            "file": "build_preopen_v2.py"
+            "file": "build_preopen_v2.py",
+            "status": "正常"
           },
           {
             "name": "sec_title",
             "id": "build_preopen_v2.py:sec_title",
             "category": "工具函数",
-            "file": "build_preopen_v2.py"
+            "file": "build_preopen_v2.py",
+            "status": "正常"
           },
           {
             "name": "img_block",
             "id": "build_preopen_v2.py:img_block",
             "category": "工具函数",
-            "file": "build_preopen_v2.py"
+            "file": "build_preopen_v2.py",
+            "status": "正常"
           },
           {
             "name": "human_box",
             "id": "build_preopen_v2.py:human_box",
             "category": "工具函数",
-            "file": "build_preopen_v2.py"
+            "file": "build_preopen_v2.py",
+            "status": "正常"
           },
           {
             "name": "hot_take",
             "id": "build_preopen_v2.py:hot_take",
             "category": "工具函数",
-            "file": "build_preopen_v2.py"
+            "file": "build_preopen_v2.py",
+            "status": "正常"
           },
           {
             "name": "news_card",
             "id": "build_preopen_v2.py:news_card",
             "category": "工具函数",
-            "file": "build_preopen_v2.py"
+            "file": "build_preopen_v2.py",
+            "status": "正常"
           },
           {
             "name": "strategy_box",
             "id": "build_preopen_v2.py:strategy_box",
             "category": "工具函数",
-            "file": "build_preopen_v2.py"
+            "file": "build_preopen_v2.py",
+            "status": "正常"
           },
           {
             "name": "risk_box",
             "id": "build_preopen_v2.py:risk_box",
             "category": "工具函数",
-            "file": "build_preopen_v2.py"
+            "file": "build_preopen_v2.py",
+            "status": "正常"
           },
           {
             "name": "top6_block",
             "id": "build_preopen_v2.py:top6_block",
             "category": "工具函数",
-            "file": "build_preopen_v2.py"
+            "file": "build_preopen_v2.py",
+            "status": "正常"
           },
           {
             "name": "footer",
             "id": "build_preopen_v2.py:footer",
             "category": "工具函数",
-            "file": "build_preopen_v2.py"
+            "file": "build_preopen_v2.py",
+            "status": "正常"
           },
           {
             "name": "img64",
             "id": "build_recap_v2.py:img64",
             "category": "工具函数",
-            "file": "build_recap_v2.py"
+            "file": "build_recap_v2.py",
+            "status": "正常"
           },
           {
             "name": "replace_table",
             "id": "build_recap_v2.py:replace_table",
             "category": "工具函数",
-            "file": "build_recap_v2.py"
+            "file": "build_recap_v2.py",
+            "status": "正常"
           },
           {
             "name": "replace_chart",
             "id": "build_recap_v2.py:replace_chart",
             "category": "工具函数",
-            "file": "build_recap_v2.py"
+            "file": "build_recap_v2.py",
+            "status": "正常"
           },
           {
             "name": "sec_title",
             "id": "build_recap_v2.py:sec_title",
             "category": "工具函数",
-            "file": "build_recap_v2.py"
+            "file": "build_recap_v2.py",
+            "status": "正常"
           },
           {
             "name": "img_block",
             "id": "build_recap_v2.py:img_block",
             "category": "工具函数",
-            "file": "build_recap_v2.py"
+            "file": "build_recap_v2.py",
+            "status": "正常"
           },
           {
             "name": "human_box",
             "id": "build_recap_v2.py:human_box",
             "category": "工具函数",
-            "file": "build_recap_v2.py"
+            "file": "build_recap_v2.py",
+            "status": "正常"
           },
           {
             "name": "hot_take",
             "id": "build_recap_v2.py:hot_take",
             "category": "工具函数",
-            "file": "build_recap_v2.py"
+            "file": "build_recap_v2.py",
+            "status": "正常"
           },
           {
             "name": "strategy_box",
             "id": "build_recap_v2.py:strategy_box",
             "category": "工具函数",
-            "file": "build_recap_v2.py"
+            "file": "build_recap_v2.py",
+            "status": "正常"
           },
           {
             "name": "risk_box",
             "id": "build_recap_v2.py:risk_box",
             "category": "工具函数",
-            "file": "build_recap_v2.py"
+            "file": "build_recap_v2.py",
+            "status": "正常"
           },
           {
             "name": "excel_tip_section",
             "id": "build_recap_v2.py:excel_tip_section",
             "category": "工具函数",
-            "file": "build_recap_v2.py"
+            "file": "build_recap_v2.py",
+            "status": "正常"
           },
           {
             "name": "footer",
             "id": "build_recap_v2.py:footer",
             "category": "工具函数",
-            "file": "build_recap_v2.py"
+            "file": "build_recap_v2.py",
+            "status": "正常"
           },
           {
             "name": "sec_title",
             "id": "build_recap_v3.py:sec_title",
             "category": "工具函数",
-            "file": "build_recap_v3.py"
+            "file": "build_recap_v3.py",
+            "status": "正常"
           },
           {
             "name": "img_block",
             "id": "build_recap_v3.py:img_block",
             "category": "工具函数",
-            "file": "build_recap_v3.py"
+            "file": "build_recap_v3.py",
+            "status": "正常"
           },
           {
             "name": "human_box",
             "id": "build_recap_v3.py:human_box",
             "category": "工具函数",
-            "file": "build_recap_v3.py"
+            "file": "build_recap_v3.py",
+            "status": "正常"
           },
           {
             "name": "hot_take",
             "id": "build_recap_v3.py:hot_take",
             "category": "工具函数",
-            "file": "build_recap_v3.py"
+            "file": "build_recap_v3.py",
+            "status": "正常"
           },
           {
             "name": "table_block",
             "id": "build_recap_v3.py:table_block",
             "category": "工具函数",
-            "file": "build_recap_v3.py"
+            "file": "build_recap_v3.py",
+            "status": "正常"
           },
           {
             "name": "strategy_box",
             "id": "build_recap_v3.py:strategy_box",
             "category": "工具函数",
-            "file": "build_recap_v3.py"
+            "file": "build_recap_v3.py",
+            "status": "正常"
           },
           {
             "name": "risk_box",
             "id": "build_recap_v3.py:risk_box",
             "category": "工具函数",
-            "file": "build_recap_v3.py"
+            "file": "build_recap_v3.py",
+            "status": "正常"
           },
           {
             "name": "footer",
             "id": "build_recap_v3.py:footer",
             "category": "工具函数",
-            "file": "build_recap_v3.py"
+            "file": "build_recap_v3.py",
+            "status": "正常"
           },
           {
             "name": "calc_sentiment",
             "id": "calc_sentiment.py:calc_sentiment",
             "category": "工具函数",
-            "file": "calc_sentiment.py"
+            "file": "calc_sentiment.py",
+            "status": "正常"
           },
           {
             "name": "sentiment_from_html",
             "id": "calc_sentiment.py:sentiment_from_html",
             "category": "工具函数",
-            "file": "calc_sentiment.py"
+            "file": "calc_sentiment.py",
+            "status": "正常"
           },
           {
             "name": "check_file_integrity",
             "id": "check_files_integrity.py:check_file_integrity",
             "category": "工具函数",
-            "file": "check_files_integrity.py"
+            "file": "check_files_integrity.py",
+            "status": "正常"
           },
           {
             "name": "backup_corrupted_file",
             "id": "check_files_integrity.py:backup_corrupted_file",
             "category": "工具函数",
-            "file": "check_files_integrity.py"
+            "file": "check_files_integrity.py",
+            "status": "正常"
           },
           {
             "name": "rebuild_file",
             "id": "check_files_integrity.py:rebuild_file",
             "category": "工具函数",
-            "file": "check_files_integrity.py"
+            "file": "check_files_integrity.py",
+            "status": "正常"
           },
           {
             "name": "check_all_files",
             "id": "check_files_integrity.py:check_all_files",
             "category": "工具函数",
-            "file": "check_files_integrity.py"
+            "file": "check_files_integrity.py",
+            "status": "正常"
           },
           {
             "name": "get_export_ip",
             "id": "check_ip_before_publish.py:get_export_ip",
             "category": "工具函数",
-            "file": "check_ip_before_publish.py"
+            "file": "check_ip_before_publish.py",
+            "status": "正常"
           },
           {
             "name": "load_known_ips",
             "id": "check_ip_before_publish.py:load_known_ips",
             "category": "工具函数",
-            "file": "check_ip_before_publish.py"
+            "file": "check_ip_before_publish.py",
+            "status": "正常"
           },
           {
             "name": "save_known_ips",
             "id": "check_ip_before_publish.py:save_known_ips",
             "category": "工具函数",
-            "file": "check_ip_before_publish.py"
+            "file": "check_ip_before_publish.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "check_ip_before_publish.py:main",
             "category": "工具函数",
-            "file": "check_ip_before_publish.py"
+            "file": "check_ip_before_publish.py",
+            "status": "正常"
           },
           {
             "name": "check_html_layout",
             "id": "check_layout_issues.py:check_html_layout",
             "category": "工具函数",
-            "file": "check_layout_issues.py"
+            "file": "check_layout_issues.py",
+            "status": "正常"
           },
           {
             "name": "check_screenshot_layout",
             "id": "check_layout_issues.py:check_screenshot_layout",
             "category": "工具函数",
-            "file": "check_layout_issues.py"
+            "file": "check_layout_issues.py",
+            "status": "正常"
           },
           {
             "name": "validate_layout",
             "id": "check_layout_issues.py:validate_layout",
             "category": "工具函数",
-            "file": "check_layout_issues.py"
+            "file": "check_layout_issues.py",
+            "status": "正常"
           },
           {
             "name": "check_wechat",
             "id": "check_login_state.py:check_wechat",
             "category": "工具函数",
-            "file": "check_login_state.py"
+            "file": "check_login_state.py",
+            "status": "正常"
           },
           {
             "name": "check_baijiahao",
             "id": "check_login_state.py:check_baijiahao",
             "category": "工具函数",
-            "file": "check_login_state.py"
+            "file": "check_login_state.py",
+            "status": "正常"
           },
           {
             "name": "get_age_days",
             "id": "cleanup_temp.py:get_age_days",
             "category": "工具函数",
-            "file": "cleanup_temp.py"
+            "file": "cleanup_temp.py",
+            "status": "正常"
           },
           {
             "name": "delete_file",
             "id": "cleanup_temp.py:delete_file",
             "category": "工具函数",
-            "file": "cleanup_temp.py"
+            "file": "cleanup_temp.py",
+            "status": "正常"
           },
           {
             "name": "cleanup_patterns",
             "id": "cleanup_temp.py:cleanup_patterns",
             "category": "工具函数",
-            "file": "cleanup_temp.py"
+            "file": "cleanup_temp.py",
+            "status": "正常"
           },
           {
             "name": "sync_to_cloud",
             "id": "cloud_backup.py:sync_to_cloud",
             "category": "工具函数",
-            "file": "cloud_backup.py"
+            "file": "cloud_backup.py",
+            "status": "正常"
           },
           {
             "name": "cleanup_old_cloud_backups",
             "id": "cloud_backup.py:cleanup_old_cloud_backups",
             "category": "工具函数",
-            "file": "cloud_backup.py"
+            "file": "cloud_backup.py",
+            "status": "正常"
           },
           {
             "name": "auto_backup_to_cloud",
             "id": "cloud_backup.py:auto_backup_to_cloud",
             "category": "工具函数",
-            "file": "cloud_backup.py"
+            "file": "cloud_backup.py",
+            "status": "正常"
           },
           {
             "name": "restore_from_cloud",
             "id": "cloud_backup.py:restore_from_cloud",
             "category": "工具函数",
-            "file": "cloud_backup.py"
+            "file": "cloud_backup.py",
+            "status": "正常"
           },
           {
             "name": "monitor_competitors",
             "id": "competitor_monitor.py:monitor_competitors",
             "category": "工具函数",
-            "file": "competitor_monitor.py"
+            "file": "competitor_monitor.py",
+            "status": "正常"
           },
           {
             "name": "analyze_popular_content",
             "id": "competitor_monitor.py:analyze_popular_content",
             "category": "工具函数",
-            "file": "competitor_monitor.py"
+            "file": "competitor_monitor.py",
+            "status": "正常"
           },
           {
             "name": "generate_competitor_report",
             "id": "competitor_monitor.py:generate_competitor_report",
             "category": "工具函数",
-            "file": "competitor_monitor.py"
+            "file": "competitor_monitor.py",
+            "status": "正常"
           },
           {
             "name": "load_task_log",
             "id": "cron_health_check.py:load_task_log",
             "category": "工具函数",
-            "file": "cron_health_check.py"
+            "file": "cron_health_check.py",
+            "status": "正常"
           },
           {
             "name": "check_task_health",
             "id": "cron_health_check.py:check_task_health",
             "category": "工具函数",
-            "file": "cron_health_check.py"
+            "file": "cron_health_check.py",
+            "status": "正常"
           },
           {
             "name": "record_task_execution",
             "id": "cron_health_check.py:record_task_execution",
             "category": "工具函数",
-            "file": "cron_health_check.py"
+            "file": "cron_health_check.py",
+            "status": "正常"
           },
           {
             "name": "load_task_log",
             "id": "daily_summary.py:load_task_log",
             "category": "工具函数",
-            "file": "daily_summary.py"
+            "file": "daily_summary.py",
+            "status": "正常"
           },
           {
             "name": "generate_summary",
             "id": "daily_summary.py:generate_summary",
             "category": "工具函数",
-            "file": "daily_summary.py"
+            "file": "daily_summary.py",
+            "status": "正常"
           },
           {
             "name": "format_summary",
             "id": "daily_summary.py:format_summary",
             "category": "工具函数",
-            "file": "daily_summary.py"
+            "file": "daily_summary.py",
+            "status": "正常"
           },
           {
             "name": "init_db",
             "id": "data_warehouse.py:init_db",
             "category": "工具函数",
-            "file": "data_warehouse.py"
+            "file": "data_warehouse.py",
+            "status": "正常"
           },
           {
             "name": "save_stock_daily",
             "id": "data_warehouse.py:save_stock_daily",
             "category": "工具函数",
-            "file": "data_warehouse.py"
+            "file": "data_warehouse.py",
+            "status": "正常"
           },
           {
             "name": "save_lottery_daily",
             "id": "data_warehouse.py:save_lottery_daily",
             "category": "工具函数",
-            "file": "data_warehouse.py"
+            "file": "data_warehouse.py",
+            "status": "正常"
           },
           {
             "name": "save_stock_picks",
             "id": "data_warehouse.py:save_stock_picks",
             "category": "工具函数",
-            "file": "data_warehouse.py"
+            "file": "data_warehouse.py",
+            "status": "正常"
           },
           {
             "name": "query_top_performing_sectors",
             "id": "data_warehouse.py:query_top_performing_sectors",
             "category": "工具函数",
-            "file": "data_warehouse.py"
+            "file": "data_warehouse.py",
+            "status": "正常"
           },
           {
             "name": "generate_data_report",
             "id": "data_warehouse.py:generate_data_report",
             "category": "工具函数",
-            "file": "data_warehouse.py"
+            "file": "data_warehouse.py",
+            "status": "正常"
           },
           {
             "name": "build_html",
             "id": "gen_cover.py:build_html",
             "category": "工具函数",
-            "file": "gen_cover.py"
+            "file": "gen_cover.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "gen_cover.py:main",
             "category": "工具函数",
-            "file": "gen_cover.py"
+            "file": "gen_cover.py",
+            "status": "正常"
           },
           {
             "name": "load_pred",
             "id": "gen_doubao_cards.py:load_pred",
             "category": "工具函数",
-            "file": "gen_doubao_cards.py"
+            "file": "gen_doubao_cards.py",
+            "status": "正常"
           },
           {
             "name": "ball",
             "id": "gen_doubao_cards.py:ball",
             "category": "工具函数",
-            "file": "gen_doubao_cards.py"
+            "file": "gen_doubao_cards.py",
+            "status": "正常"
           },
           {
             "name": "section",
             "id": "gen_doubao_cards.py:section",
             "category": "工具函数",
-            "file": "gen_doubao_cards.py"
+            "file": "gen_doubao_cards.py",
+            "status": "正常"
           },
           {
             "name": "tip",
             "id": "gen_doubao_cards.py:tip",
             "category": "工具函数",
-            "file": "gen_doubao_cards.py"
+            "file": "gen_doubao_cards.py",
+            "status": "正常"
           },
           {
             "name": "idea_html",
             "id": "gen_doubao_cards.py:idea_html",
             "category": "工具函数",
-            "file": "gen_doubao_cards.py"
+            "file": "gen_doubao_cards.py",
+            "status": "正常"
           },
           {
             "name": "prev_prediction",
             "id": "gen_doubao_cards.py:prev_prediction",
             "category": "工具函数",
-            "file": "gen_doubao_cards.py"
+            "file": "gen_doubao_cards.py",
+            "status": "正常"
           },
           {
             "name": "hit_count",
             "id": "gen_doubao_cards.py:hit_count",
             "category": "工具函数",
-            "file": "gen_doubao_cards.py"
+            "file": "gen_doubao_cards.py",
+            "status": "正常"
           },
           {
             "name": "card_dlt",
             "id": "gen_doubao_cards.py:card_dlt",
             "category": "工具函数",
-            "file": "gen_doubao_cards.py"
+            "file": "gen_doubao_cards.py",
+            "status": "正常"
           },
           {
             "name": "card_kl8",
             "id": "gen_doubao_cards.py:card_kl8",
             "category": "工具函数",
-            "file": "gen_doubao_cards.py"
+            "file": "gen_doubao_cards.py",
+            "status": "正常"
           },
           {
             "name": "card_pos3",
             "id": "gen_doubao_cards.py:card_pos3",
             "category": "工具函数",
-            "file": "gen_doubao_cards.py"
+            "file": "gen_doubao_cards.py",
+            "status": "正常"
           },
           {
             "name": "card_fc3d",
             "id": "gen_doubao_cards.py:card_fc3d",
             "category": "工具函数",
-            "file": "gen_doubao_cards.py"
+            "file": "gen_doubao_cards.py",
+            "status": "正常"
           },
           {
             "name": "card_pl35",
             "id": "gen_doubao_cards.py:card_pl35",
             "category": "工具函数",
-            "file": "gen_doubao_cards.py"
+            "file": "gen_doubao_cards.py",
+            "status": "正常"
           },
           {
             "name": "card_ssq",
             "id": "gen_doubao_cards.py:card_ssq",
             "category": "工具函数",
-            "file": "gen_doubao_cards.py"
+            "file": "gen_doubao_cards.py",
+            "status": "正常"
           },
           {
             "name": "card_qxc",
             "id": "gen_doubao_cards.py:card_qxc",
             "category": "工具函数",
-            "file": "gen_doubao_cards.py"
+            "file": "gen_doubao_cards.py",
+            "status": "正常"
           },
           {
             "name": "card_qlc",
             "id": "gen_doubao_cards.py:card_qlc",
             "category": "工具函数",
-            "file": "gen_doubao_cards.py"
+            "file": "gen_doubao_cards.py",
+            "status": "正常"
           },
           {
             "name": "render",
             "id": "gen_doubao_cards.py:render",
             "category": "工具函数",
-            "file": "gen_doubao_cards.py"
+            "file": "gen_doubao_cards.py",
+            "status": "正常"
           },
           {
             "name": "weekday_cn",
             "id": "gen_doubao_cards.py:weekday_cn",
             "category": "工具函数",
-            "file": "gen_doubao_cards.py"
+            "file": "gen_doubao_cards.py",
+            "status": "正常"
           },
           {
             "name": "snap",
             "id": "gen_doubao_cards.py:snap",
             "category": "工具函数",
-            "file": "gen_doubao_cards.py"
+            "file": "gen_doubao_cards.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "gen_doubao_cards.py:main",
             "category": "工具函数",
-            "file": "gen_doubao_cards.py"
+            "file": "gen_doubao_cards.py",
+            "status": "正常"
           },
           {
             "name": "load_tips",
             "id": "gen_excel_cards.py:load_tips",
             "category": "工具函数",
-            "file": "gen_excel_cards.py"
+            "file": "gen_excel_cards.py",
+            "status": "正常"
           },
           {
             "name": "diff_color",
             "id": "gen_excel_cards.py:diff_color",
             "category": "工具函数",
-            "file": "gen_excel_cards.py"
+            "file": "gen_excel_cards.py",
+            "status": "正常"
           },
           {
             "name": "build_html",
             "id": "gen_excel_cards.py:build_html",
             "category": "工具函数",
-            "file": "gen_excel_cards.py"
+            "file": "gen_excel_cards.py",
+            "status": "正常"
           },
           {
             "name": "render_png",
             "id": "gen_excel_cards.py:render_png",
             "category": "工具函数",
-            "file": "gen_excel_cards.py"
+            "file": "gen_excel_cards.py",
+            "status": "正常"
           },
           {
             "name": "gen_all",
             "id": "gen_excel_cards.py:gen_all",
             "category": "工具函数",
-            "file": "gen_excel_cards.py"
+            "file": "gen_excel_cards.py",
+            "status": "正常"
           },
           {
             "name": "load_tips",
             "id": "gen_excel_weekly.py:load_tips",
             "category": "工具函数",
-            "file": "gen_excel_weekly.py"
+            "file": "gen_excel_weekly.py",
+            "status": "正常"
           },
           {
             "name": "get_week_formulas",
             "id": "gen_excel_weekly.py:get_week_formulas",
             "category": "工具函数",
-            "file": "gen_excel_weekly.py"
+            "file": "gen_excel_weekly.py",
+            "status": "正常"
           },
           {
             "name": "build_weekly_html",
             "id": "gen_excel_weekly.py:build_weekly_html",
             "category": "工具函数",
-            "file": "gen_excel_weekly.py"
+            "file": "gen_excel_weekly.py",
+            "status": "正常"
           },
           {
             "name": "gen_card_html",
             "id": "gen_lottery_batch.py:gen_card_html",
             "category": "工具函数",
-            "file": "gen_lottery_batch.py"
+            "file": "gen_lottery_batch.py",
+            "status": "正常"
           },
           {
             "name": "snap_card",
             "id": "gen_lottery_batch.py:snap_card",
             "category": "工具函数",
-            "file": "gen_lottery_batch.py"
+            "file": "gen_lottery_batch.py",
+            "status": "正常"
           },
           {
             "name": "gen_article_html",
             "id": "gen_lottery_batch.py:gen_article_html",
             "category": "工具函数",
-            "file": "gen_lottery_batch.py"
+            "file": "gen_lottery_batch.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "gen_lottery_batch.py:main",
             "category": "工具函数",
-            "file": "gen_lottery_batch.py"
+            "file": "gen_lottery_batch.py",
+            "status": "正常"
           },
           {
             "name": "load_card_urls",
             "id": "gen_user_dashboard.py:load_card_urls",
             "category": "工具函数",
-            "file": "gen_user_dashboard.py"
+            "file": "gen_user_dashboard.py",
+            "status": "正常"
           },
           {
             "name": "load_data",
             "id": "gen_user_dashboard.py:load_data",
             "category": "工具函数",
-            "file": "gen_user_dashboard.py"
+            "file": "gen_user_dashboard.py",
+            "status": "正常"
           },
           {
             "name": "get_lottery_nums",
             "id": "gen_user_dashboard.py:get_lottery_nums",
             "category": "工具函数",
-            "file": "gen_user_dashboard.py"
+            "file": "gen_user_dashboard.py",
+            "status": "正常"
           },
           {
             "name": "calc_hot_nums",
             "id": "gen_user_dashboard.py:calc_hot_nums",
             "category": "工具函数",
-            "file": "gen_user_dashboard.py"
+            "file": "gen_user_dashboard.py",
+            "status": "正常"
           },
           {
             "name": "calc_miss_nums",
             "id": "gen_user_dashboard.py:calc_miss_nums",
             "category": "工具函数",
-            "file": "gen_user_dashboard.py"
+            "file": "gen_user_dashboard.py",
+            "status": "正常"
           },
           {
             "name": "calc_zone_dist",
             "id": "gen_user_dashboard.py:calc_zone_dist",
             "category": "工具函数",
-            "file": "gen_user_dashboard.py"
+            "file": "gen_user_dashboard.py",
+            "status": "正常"
           },
           {
             "name": "calc_odd_even_ratio",
             "id": "gen_user_dashboard.py:calc_odd_even_ratio",
             "category": "工具函数",
-            "file": "gen_user_dashboard.py"
+            "file": "gen_user_dashboard.py",
+            "status": "正常"
           },
           {
             "name": "calc_big_small_ratio",
             "id": "gen_user_dashboard.py:calc_big_small_ratio",
             "category": "工具函数",
-            "file": "gen_user_dashboard.py"
+            "file": "gen_user_dashboard.py",
+            "status": "正常"
           },
           {
             "name": "generate_dashboard_html",
             "id": "gen_user_dashboard.py:generate_dashboard_html",
             "category": "工具函数",
-            "file": "gen_user_dashboard.py"
+            "file": "gen_user_dashboard.py",
+            "status": "正常"
           },
           {
             "name": "generate_all_in_one_dashboard",
             "id": "gen_user_dashboard.py:generate_all_in_one_dashboard",
             "category": "工具函数",
-            "file": "gen_user_dashboard.py"
+            "file": "gen_user_dashboard.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "gen_user_dashboard.py:main",
             "category": "工具函数",
-            "file": "gen_user_dashboard.py"
+            "file": "gen_user_dashboard.py",
+            "status": "正常"
           },
           {
             "name": "load_backtest_stats",
             "id": "history_query.py:load_backtest_stats",
             "category": "工具函数",
-            "file": "history_query.py"
+            "file": "history_query.py",
+            "status": "正常"
           },
           {
             "name": "query_history",
             "id": "history_query.py:query_history",
             "category": "工具函数",
-            "file": "history_query.py"
+            "file": "history_query.py",
+            "status": "正常"
           },
           {
             "name": "compare_predictions",
             "id": "history_query.py:compare_predictions",
             "category": "工具函数",
-            "file": "history_query.py"
+            "file": "history_query.py",
+            "status": "正常"
           },
           {
             "name": "show_trend",
             "id": "history_query.py:show_trend",
             "category": "工具函数",
-            "file": "history_query.py"
+            "file": "history_query.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "history_query.py:main",
             "category": "工具函数",
-            "file": "history_query.py"
+            "file": "history_query.py",
+            "status": "正常"
           },
           {
             "name": "set_language",
             "id": "i18n.py:set_language",
             "category": "工具函数",
-            "file": "i18n.py"
+            "file": "i18n.py",
+            "status": "正常"
           },
           {
             "name": "t",
             "id": "i18n.py:t",
             "category": "工具函数",
-            "file": "i18n.py"
+            "file": "i18n.py",
+            "status": "正常"
           },
           {
             "name": "get_available_languages",
             "id": "i18n.py:get_available_languages",
             "category": "工具函数",
-            "file": "i18n.py"
+            "file": "i18n.py",
+            "status": "正常"
           },
           {
             "name": "load_cache",
             "id": "image_cache.py:load_cache",
             "category": "工具函数",
-            "file": "image_cache.py"
+            "file": "image_cache.py",
+            "status": "正常"
           },
           {
             "name": "save_cache",
             "id": "image_cache.py:save_cache",
             "category": "工具函数",
-            "file": "image_cache.py"
+            "file": "image_cache.py",
+            "status": "正常"
           },
           {
             "name": "get_file_hash",
             "id": "image_cache.py:get_file_hash",
             "category": "工具函数",
-            "file": "image_cache.py"
+            "file": "image_cache.py",
+            "status": "正常"
           },
           {
             "name": "get_cached_url",
             "id": "image_cache.py:get_cached_url",
             "category": "工具函数",
-            "file": "image_cache.py"
+            "file": "image_cache.py",
+            "status": "正常"
           },
           {
             "name": "save_to_cache",
             "id": "image_cache.py:save_to_cache",
             "category": "工具函数",
-            "file": "image_cache.py"
+            "file": "image_cache.py",
+            "status": "正常"
           },
           {
             "name": "clear_old_cache",
             "id": "image_cache.py:clear_old_cache",
             "category": "工具函数",
-            "file": "image_cache.py"
+            "file": "image_cache.py",
+            "status": "正常"
           },
           {
             "name": "load_content_data",
             "id": "image_generator.py:load_content_data",
             "category": "工具函数",
-            "file": "image_generator.py"
+            "file": "image_generator.py",
+            "status": "正常"
           },
           {
             "name": "generate_table_quotes",
             "id": "image_generator.py:generate_table_quotes",
             "category": "工具函数",
-            "file": "image_generator.py"
+            "file": "image_generator.py",
+            "status": "正常"
           },
           {
             "name": "generate_chart_index",
             "id": "image_generator.py:generate_chart_index",
             "category": "工具函数",
-            "file": "image_generator.py"
+            "file": "image_generator.py",
+            "status": "正常"
           },
           {
             "name": "generate_chart_sectors",
             "id": "image_generator.py:generate_chart_sectors",
             "category": "工具函数",
-            "file": "image_generator.py"
+            "file": "image_generator.py",
+            "status": "正常"
           },
           {
             "name": "generate_chart_flows",
             "id": "image_generator.py:generate_chart_flows",
             "category": "工具函数",
-            "file": "image_generator.py"
+            "file": "image_generator.py",
+            "status": "正常"
           },
           {
             "name": "generate_chart_sentiment",
             "id": "image_generator.py:generate_chart_sentiment",
             "category": "工具函数",
-            "file": "image_generator.py"
+            "file": "image_generator.py",
+            "status": "正常"
           },
           {
             "name": "generate_quant_cards",
             "id": "image_generator.py:generate_quant_cards",
             "category": "工具函数",
-            "file": "image_generator.py"
+            "file": "image_generator.py",
+            "status": "正常"
           },
           {
             "name": "upload_image",
             "id": "image_generator.py:upload_image",
             "category": "工具函数",
-            "file": "image_generator.py"
+            "file": "image_generator.py",
+            "status": "正常"
           },
           {
             "name": "generate_generic_table",
             "id": "image_generator.py:generate_generic_table",
             "category": "工具函数",
-            "file": "image_generator.py"
+            "file": "image_generator.py",
+            "status": "正常"
           },
           {
             "name": "generate_table_flows",
             "id": "image_generator.py:generate_table_flows",
             "category": "工具函数",
-            "file": "image_generator.py"
+            "file": "image_generator.py",
+            "status": "正常"
           },
           {
             "name": "generate_all_images",
             "id": "image_generator.py:generate_all_images",
             "category": "工具函数",
-            "file": "image_generator.py"
+            "file": "image_generator.py",
+            "status": "正常"
           },
           {
             "name": "check_image_quality",
             "id": "image_optimize.py:check_image_quality",
             "category": "工具函数",
-            "file": "image_optimize.py"
+            "file": "image_optimize.py",
+            "status": "正常"
           },
           {
             "name": "detect_black_border",
             "id": "image_optimize.py:detect_black_border",
             "category": "工具函数",
-            "file": "image_optimize.py"
+            "file": "image_optimize.py",
+            "status": "正常"
           },
           {
             "name": "detect_white_space",
             "id": "image_optimize.py:detect_white_space",
             "category": "工具函数",
-            "file": "image_optimize.py"
+            "file": "image_optimize.py",
+            "status": "正常"
           },
           {
             "name": "trim_white_space",
             "id": "image_optimize.py:trim_white_space",
             "category": "工具函数",
-            "file": "image_optimize.py"
+            "file": "image_optimize.py",
+            "status": "正常"
           },
           {
             "name": "optimize_image",
             "id": "image_optimize.py:optimize_image",
             "category": "工具函数",
-            "file": "image_optimize.py"
+            "file": "image_optimize.py",
+            "status": "正常"
           },
           {
             "name": "batch_optimize",
             "id": "image_optimize.py:batch_optimize",
             "category": "工具函数",
-            "file": "image_optimize.py"
+            "file": "image_optimize.py",
+            "status": "正常"
           },
           {
             "name": "selector_priority",
             "id": "inline_css.py:selector_priority",
             "category": "工具函数",
-            "file": "inline_css.py"
+            "file": "inline_css.py",
+            "status": "正常"
           },
           {
             "name": "get_logger",
             "id": "logger.py:get_logger",
             "category": "工具函数",
-            "file": "logger.py"
+            "file": "logger.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "login_antidetect.py:main",
             "category": "工具函数",
-            "file": "login_antidetect.py"
+            "file": "login_antidetect.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "login_headless.py:main",
             "category": "工具函数",
-            "file": "login_headless.py"
+            "file": "login_headless.py",
+            "status": "正常"
           },
           {
             "name": "has_session_cookie",
             "id": "login_mp_final.py:has_session_cookie",
             "category": "工具函数",
-            "file": "login_mp_final.py"
+            "file": "login_mp_final.py",
+            "status": "正常"
           },
           {
             "name": "shoot_qr",
             "id": "login_mp_final.py:shoot_qr",
             "category": "工具函数",
-            "file": "login_mp_final.py"
+            "file": "login_mp_final.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "login_mp_final.py:main",
             "category": "工具函数",
-            "file": "login_mp_final.py"
+            "file": "login_mp_final.py",
+            "status": "正常"
           },
           {
             "name": "has_session_cookie",
             "id": "login_mp_visible.py:has_session_cookie",
             "category": "工具函数",
-            "file": "login_mp_visible.py"
+            "file": "login_mp_visible.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "login_mp_visible.py:main",
             "category": "工具函数",
-            "file": "login_mp_visible.py"
+            "file": "login_mp_visible.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "login_mp_weixin.py:main",
             "category": "工具函数",
-            "file": "login_mp_weixin.py"
+            "file": "login_mp_weixin.py",
+            "status": "正常"
           },
           {
             "name": "load_json",
             "id": "lottery_method_review.py:load_json",
             "category": "工具函数",
-            "file": "lottery_method_review.py"
+            "file": "lottery_method_review.py",
+            "status": "正常"
           },
           {
             "name": "save_json",
             "id": "lottery_method_review.py:save_json",
             "category": "工具函数",
-            "file": "lottery_method_review.py"
+            "file": "lottery_method_review.py",
+            "status": "正常"
           },
           {
             "name": "get_actual_draw",
             "id": "lottery_method_review.py:get_actual_draw",
             "category": "工具函数",
-            "file": "lottery_method_review.py"
+            "file": "lottery_method_review.py",
+            "status": "正常"
           },
           {
             "name": "calc_hit",
             "id": "lottery_method_review.py:calc_hit",
             "category": "工具函数",
-            "file": "lottery_method_review.py"
+            "file": "lottery_method_review.py",
+            "status": "正常"
           },
           {
             "name": "analyze_lottery",
             "id": "lottery_method_review.py:analyze_lottery",
             "category": "工具函数",
-            "file": "lottery_method_review.py"
+            "file": "lottery_method_review.py",
+            "status": "正常"
           },
           {
             "name": "suggest_weight_adjustment",
             "id": "lottery_method_review.py:suggest_weight_adjustment",
             "category": "工具函数",
-            "file": "lottery_method_review.py"
+            "file": "lottery_method_review.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "lottery_method_review.py:main",
             "category": "工具函数",
-            "file": "lottery_method_review.py"
+            "file": "lottery_method_review.py",
+            "status": "正常"
           },
           {
             "name": "fetch",
             "id": "lottery_pipeline.py:fetch",
             "category": "工具函数",
-            "file": "lottery_pipeline.py"
+            "file": "lottery_pipeline.py",
+            "status": "正常"
           },
           {
             "name": "grab_ssq",
             "id": "lottery_pipeline.py:grab_ssq",
             "category": "工具函数",
-            "file": "lottery_pipeline.py"
+            "file": "lottery_pipeline.py",
+            "status": "正常"
           },
           {
             "name": "grab_kl8",
             "id": "lottery_pipeline.py:grab_kl8",
             "category": "工具函数",
-            "file": "lottery_pipeline.py"
+            "file": "lottery_pipeline.py",
+            "status": "正常"
           },
           {
             "name": "grab_fc3d",
             "id": "lottery_pipeline.py:grab_fc3d",
             "category": "工具函数",
-            "file": "lottery_pipeline.py"
+            "file": "lottery_pipeline.py",
+            "status": "正常"
           },
           {
             "name": "grab_qlc",
             "id": "lottery_pipeline.py:grab_qlc",
             "category": "工具函数",
-            "file": "lottery_pipeline.py"
+            "file": "lottery_pipeline.py",
+            "status": "正常"
           },
           {
             "name": "grab_dlt",
             "id": "lottery_pipeline.py:grab_dlt",
             "category": "工具函数",
-            "file": "lottery_pipeline.py"
+            "file": "lottery_pipeline.py",
+            "status": "正常"
           },
           {
             "name": "grab_pl35",
             "id": "lottery_pipeline.py:grab_pl35",
             "category": "工具函数",
-            "file": "lottery_pipeline.py"
+            "file": "lottery_pipeline.py",
+            "status": "正常"
           },
           {
             "name": "grab_qxc",
             "id": "lottery_pipeline.py:grab_qxc",
             "category": "工具函数",
-            "file": "lottery_pipeline.py"
+            "file": "lottery_pipeline.py",
+            "status": "正常"
           },
           {
             "name": "stats_freq",
             "id": "lottery_pipeline.py:stats_freq",
             "category": "工具函数",
-            "file": "lottery_pipeline.py"
+            "file": "lottery_pipeline.py",
+            "status": "正常"
           },
           {
             "name": "calc_omission",
             "id": "lottery_pipeline.py:calc_omission",
             "category": "工具函数",
-            "file": "lottery_pipeline.py"
+            "file": "lottery_pipeline.py",
+            "status": "正常"
           },
           {
             "name": "score_pool",
             "id": "lottery_pipeline.py:score_pool",
             "category": "工具函数",
-            "file": "lottery_pipeline.py"
+            "file": "lottery_pipeline.py",
+            "status": "正常"
           },
           {
             "name": "pick_lone",
             "id": "lottery_pipeline.py:pick_lone",
             "category": "工具函数",
-            "file": "lottery_pipeline.py"
+            "file": "lottery_pipeline.py",
+            "status": "正常"
           },
           {
             "name": "hot_html",
             "id": "lottery_pipeline.py:hot_html",
             "category": "工具函数",
-            "file": "lottery_pipeline.py"
+            "file": "lottery_pipeline.py",
+            "status": "正常"
           },
           {
             "name": "gen_card",
             "id": "lottery_pipeline.py:gen_card",
             "category": "工具函数",
-            "file": "lottery_pipeline.py"
+            "file": "lottery_pipeline.py",
+            "status": "正常"
           },
           {
             "name": "snap",
             "id": "lottery_pipeline.py:snap",
             "category": "工具函数",
-            "file": "lottery_pipeline.py"
+            "file": "lottery_pipeline.py",
+            "status": "正常"
           },
           {
             "name": "article_html",
             "id": "lottery_pipeline.py:article_html",
             "category": "工具函数",
-            "file": "lottery_pipeline.py"
+            "file": "lottery_pipeline.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "lottery_pipeline.py:main",
             "category": "工具函数",
-            "file": "lottery_pipeline.py"
+            "file": "lottery_pipeline.py",
+            "status": "正常"
           },
           {
             "name": "calculate_metrics",
             "id": "metrics.py:calculate_metrics",
             "category": "工具函数",
-            "file": "metrics.py"
+            "file": "metrics.py",
+            "status": "正常"
           },
           {
             "name": "evaluate_model",
             "id": "metrics.py:evaluate_model",
             "category": "工具函数",
-            "file": "metrics.py"
+            "file": "metrics.py",
+            "status": "正常"
           },
           {
             "name": "parse_script",
             "id": "model_activation_audit.py:parse_script",
             "category": "工具函数",
-            "file": "model_activation_audit.py"
+            "file": "model_activation_audit.py",
+            "status": "正常"
           },
           {
             "name": "check_models",
             "id": "model_activation_audit.py:check_models",
             "category": "工具函数",
-            "file": "model_activation_audit.py"
+            "file": "model_activation_audit.py",
+            "status": "正常"
           },
           {
             "name": "generate_report",
             "id": "model_activation_audit.py:generate_report",
             "category": "工具函数",
-            "file": "model_activation_audit.py"
+            "file": "model_activation_audit.py",
+            "status": "正常"
           },
           {
             "name": "save_report",
             "id": "model_activation_audit.py:save_report",
             "category": "工具函数",
-            "file": "model_activation_audit.py"
+            "file": "model_activation_audit.py",
+            "status": "正常"
           },
           {
             "name": "run_audit",
             "id": "model_activation_audit.py:run_audit",
             "category": "工具函数",
-            "file": "model_activation_audit.py"
+            "file": "model_activation_audit.py",
+            "status": "正常"
           },
           {
             "name": "load_backtest_stats",
             "id": "model_auto_eval.py:load_backtest_stats",
             "category": "工具函数",
-            "file": "model_auto_eval.py"
+            "file": "model_auto_eval.py",
+            "status": "正常"
           },
           {
             "name": "load_pred_history",
             "id": "model_auto_eval.py:load_pred_history",
             "category": "工具函数",
-            "file": "model_auto_eval.py"
+            "file": "model_auto_eval.py",
+            "status": "正常"
           },
           {
             "name": "calc_random_baseline",
             "id": "model_auto_eval.py:calc_random_baseline",
             "category": "工具函数",
-            "file": "model_auto_eval.py"
+            "file": "model_auto_eval.py",
+            "status": "正常"
           },
           {
             "name": "evaluate_models",
             "id": "model_auto_eval.py:evaluate_models",
             "category": "工具函数",
-            "file": "model_auto_eval.py"
+            "file": "model_auto_eval.py",
+            "status": "正常"
           },
           {
             "name": "extract_function_body",
             "id": "module_audit.py:extract_function_body",
             "category": "工具函数",
-            "file": "module_audit.py"
+            "file": "module_audit.py",
+            "status": "正常"
           },
           {
             "name": "check_module_in_function",
             "id": "module_audit.py:check_module_in_function",
             "category": "工具函数",
-            "file": "module_audit.py"
+            "file": "module_audit.py",
+            "status": "正常"
           },
           {
             "name": "audit_lottery_modules",
             "id": "module_audit.py:audit_lottery_modules",
             "category": "工具函数",
-            "file": "module_audit.py"
+            "file": "module_audit.py",
+            "status": "正常"
           },
           {
             "name": "check_module_defined",
             "id": "module_audit_v2.py:check_module_defined",
             "category": "工具函数",
-            "file": "module_audit_v2.py"
+            "file": "module_audit_v2.py",
+            "status": "正常"
           },
           {
             "name": "audit_all_modules",
             "id": "module_audit_v2.py:audit_all_modules",
             "category": "工具函数",
-            "file": "module_audit_v2.py"
+            "file": "module_audit_v2.py",
+            "status": "正常"
           },
           {
             "name": "monthly_review",
             "id": "monthly_review.py:monthly_review",
             "category": "工具函数",
-            "file": "monthly_review.py"
+            "file": "monthly_review.py",
+            "status": "正常"
           },
           {
             "name": "format_review",
             "id": "monthly_review.py:format_review",
             "category": "工具函数",
-            "file": "monthly_review.py"
+            "file": "monthly_review.py",
+            "status": "正常"
           },
           {
             "name": "publish_to_platform",
             "id": "multi_publisher.py:publish_to_platform",
             "category": "工具函数",
-            "file": "multi_publisher.py"
+            "file": "multi_publisher.py",
+            "status": "正常"
           },
           {
             "name": "publish_all",
             "id": "multi_publisher.py:publish_all",
             "category": "工具函数",
-            "file": "multi_publisher.py"
+            "file": "multi_publisher.py",
+            "status": "正常"
           },
           {
             "name": "list_supported_platforms",
             "id": "multi_publisher.py:list_supported_platforms",
             "category": "工具函数",
-            "file": "multi_publisher.py"
+            "file": "multi_publisher.py",
+            "status": "正常"
           },
           {
             "name": "upload_to_cdn",
             "id": "noon_tables_to_images.py:upload_to_cdn",
             "category": "工具函数",
-            "file": "noon_tables_to_images.py"
+            "file": "noon_tables_to_images.py",
+            "status": "正常"
           },
           {
             "name": "img_block",
             "id": "noon_tables_to_images.py:img_block",
             "category": "工具函数",
-            "file": "noon_tables_to_images.py"
+            "file": "noon_tables_to_images.py",
+            "status": "正常"
           },
           {
             "name": "profile_function",
             "id": "perf_monitor.py:profile_function",
             "category": "工具函数",
-            "file": "perf_monitor.py"
+            "file": "perf_monitor.py",
+            "status": "正常"
           },
           {
             "name": "benchmark",
             "id": "perf_monitor.py:benchmark",
             "category": "工具函数",
-            "file": "perf_monitor.py"
+            "file": "perf_monitor.py",
+            "status": "正常"
           },
           {
             "name": "adapt_for_wechat",
             "id": "platform_adapter.py:adapt_for_wechat",
             "category": "工具函数",
-            "file": "platform_adapter.py"
+            "file": "platform_adapter.py",
+            "status": "正常"
           },
           {
             "name": "adapt_for_baijiahao",
             "id": "platform_adapter.py:adapt_for_baijiahao",
             "category": "工具函数",
-            "file": "platform_adapter.py"
+            "file": "platform_adapter.py",
+            "status": "正常"
           },
           {
             "name": "adapt_for_xiaohongshu",
             "id": "platform_adapter.py:adapt_for_xiaohongshu",
             "category": "工具函数",
-            "file": "platform_adapter.py"
+            "file": "platform_adapter.py",
+            "status": "正常"
           },
           {
             "name": "adapt_for_weibo",
             "id": "platform_adapter.py:adapt_for_weibo",
             "category": "工具函数",
-            "file": "platform_adapter.py"
+            "file": "platform_adapter.py",
+            "status": "正常"
           },
           {
             "name": "adapt_all_platforms",
             "id": "platform_adapter.py:adapt_all_platforms",
             "category": "工具函数",
-            "file": "platform_adapter.py"
+            "file": "platform_adapter.py",
+            "status": "正常"
           },
           {
             "name": "pre_prediction_check",
             "id": "pre_prediction_check.py:pre_prediction_check",
             "category": "工具函数",
-            "file": "pre_prediction_check.py"
+            "file": "pre_prediction_check.py",
+            "status": "正常"
           },
           {
             "name": "notify_step",
             "id": "progress_notify.py:notify_step",
             "category": "工具函数",
-            "file": "progress_notify.py"
+            "file": "progress_notify.py",
+            "status": "正常"
           },
           {
             "name": "notify_start",
             "id": "progress_notify.py:notify_start",
             "category": "工具函数",
-            "file": "progress_notify.py"
+            "file": "progress_notify.py",
+            "status": "正常"
           },
           {
             "name": "notify_complete",
             "id": "progress_notify.py:notify_complete",
             "category": "工具函数",
-            "file": "progress_notify.py"
+            "file": "progress_notify.py",
+            "status": "正常"
           },
           {
             "name": "notify_fail",
             "id": "progress_notify.py:notify_fail",
             "category": "工具函数",
-            "file": "progress_notify.py"
+            "file": "progress_notify.py",
+            "status": "正常"
           },
           {
             "name": "log",
             "id": "publish_baijiahao.py:log",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "build_stock_closing",
             "id": "publish_baijiahao.py:build_stock_closing",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "build_lottery_closing",
             "id": "publish_baijiahao.py:build_lottery_closing",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "extract_body_html",
             "id": "publish_baijiahao.py:extract_body_html",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "html_to_text",
             "id": "publish_baijiahao.py:html_to_text",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "convert_baijiahao_html",
             "id": "publish_baijiahao.py:convert_baijiahao_html",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "set_clipboard_html",
             "id": "publish_baijiahao.py:set_clipboard_html",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "wait_editor_ready",
             "id": "publish_baijiahao.py:wait_editor_ready",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "close_smart_title_tip",
             "id": "publish_baijiahao.py:close_smart_title_tip",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "mouse_click",
             "id": "publish_baijiahao.py:mouse_click",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "find_center",
             "id": "publish_baijiahao.py:find_center",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "remove_quality_popup",
             "id": "publish_baijiahao.py:remove_quality_popup",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "close_error_modal",
             "id": "publish_baijiahao.py:close_error_modal",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "fill_title",
             "id": "publish_baijiahao.py:fill_title",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "paste_body",
             "id": "publish_baijiahao.py:paste_body",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "parse_body_nodes",
             "id": "publish_baijiahao.py:parse_body_nodes",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "download_images",
             "id": "publish_baijiahao.py:download_images",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "set_body_cursor",
             "id": "publish_baijiahao.py:set_body_cursor",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "insert_one_image",
             "id": "publish_baijiahao.py:insert_one_image",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "insert_body_images",
             "id": "publish_baijiahao.py:insert_body_images",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "split_long_image",
             "id": "publish_baijiahao.py:split_long_image",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "insert_render_images",
             "id": "publish_baijiahao.py:insert_render_images",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "upload_cover",
             "id": "publish_baijiahao.py:upload_cover",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "auto_select_category",
             "id": "publish_baijiahao.py:auto_select_category",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "click_publish",
             "id": "publish_baijiahao.py:click_publish",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "verify_published",
             "id": "publish_baijiahao.py:verify_published",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "_record_lock",
             "id": "publish_baijiahao.py:_record_lock",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "load_records",
             "id": "publish_baijiahao.py:load_records",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "save_record",
             "id": "publish_baijiahao.py:save_record",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "file_md5",
             "id": "publish_baijiahao.py:file_md5",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "render_fingerprint",
             "id": "publish_baijiahao.py:render_fingerprint",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "_open_publish_search",
             "id": "publish_baijiahao.py:_open_publish_search",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "_count_exact_title_rows",
             "id": "publish_baijiahao.py:_count_exact_title_rows",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "count_published_by_title",
             "id": "publish_baijiahao.py:count_published_by_title",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "delete_all_but_latest",
             "id": "publish_baijiahao.py:delete_all_but_latest",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "delete_all_by_title",
             "id": "publish_baijiahao.py:delete_all_by_title",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "sync_old_by_title",
             "id": "publish_baijiahao.py:sync_old_by_title",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "gen_login_qr",
             "id": "publish_baijiahao.py:gen_login_qr",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "publish",
             "id": "publish_baijiahao.py:publish",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "publish_baijiahao.py:main",
             "category": "工具函数",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "load_time_log",
             "id": "publish_time_optimizer.py:load_time_log",
             "category": "工具函数",
-            "file": "publish_time_optimizer.py"
+            "file": "publish_time_optimizer.py",
+            "status": "正常"
           },
           {
             "name": "save_time_log",
             "id": "publish_time_optimizer.py:save_time_log",
             "category": "工具函数",
-            "file": "publish_time_optimizer.py"
+            "file": "publish_time_optimizer.py",
+            "status": "正常"
           },
           {
             "name": "record_publish",
             "id": "publish_time_optimizer.py:record_publish",
             "category": "工具函数",
-            "file": "publish_time_optimizer.py"
+            "file": "publish_time_optimizer.py",
+            "status": "正常"
           },
           {
             "name": "analyze_best_time",
             "id": "publish_time_optimizer.py:analyze_best_time",
             "category": "工具函数",
-            "file": "publish_time_optimizer.py"
+            "file": "publish_time_optimizer.py",
+            "status": "正常"
           },
           {
             "name": "get_suggested_schedule",
             "id": "publish_time_optimizer.py:get_suggested_schedule",
             "category": "工具函数",
-            "file": "publish_time_optimizer.py"
+            "file": "publish_time_optimizer.py",
+            "status": "正常"
           },
           {
             "name": "load_config",
             "id": "publish_wechat.py:load_config",
             "category": "工具函数",
-            "file": "publish_wechat.py"
+            "file": "publish_wechat.py",
+            "status": "正常"
           },
           {
             "name": "load_whitelist",
             "id": "publish_wechat.py:load_whitelist",
             "category": "工具函数",
-            "file": "publish_wechat.py"
+            "file": "publish_wechat.py",
+            "status": "正常"
           },
           {
             "name": "get_current_ip",
             "id": "publish_wechat.py:get_current_ip",
             "category": "工具函数",
-            "file": "publish_wechat.py"
+            "file": "publish_wechat.py",
+            "status": "正常"
           },
           {
             "name": "get_access_token",
             "id": "publish_wechat.py:get_access_token",
             "category": "工具函数",
-            "file": "publish_wechat.py"
+            "file": "publish_wechat.py",
+            "status": "正常"
           },
           {
             "name": "upload_thumb",
             "id": "publish_wechat.py:upload_thumb",
             "category": "工具函数",
-            "file": "publish_wechat.py"
+            "file": "publish_wechat.py",
+            "status": "正常"
           },
           {
             "name": "add_draft",
             "id": "publish_wechat.py:add_draft",
             "category": "工具函数",
-            "file": "publish_wechat.py"
+            "file": "publish_wechat.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "publish_wechat.py:main",
             "category": "工具函数",
-            "file": "publish_wechat.py"
+            "file": "publish_wechat.py",
+            "status": "正常"
           },
           {
             "name": "load_publish_state",
             "id": "publish_wechat_browser.py:load_publish_state",
             "category": "工具函数",
-            "file": "publish_wechat_browser.py"
+            "file": "publish_wechat_browser.py",
+            "status": "正常"
           },
           {
             "name": "save_publish_state",
             "id": "publish_wechat_browser.py:save_publish_state",
             "category": "工具函数",
-            "file": "publish_wechat_browser.py"
+            "file": "publish_wechat_browser.py",
+            "status": "正常"
           },
           {
             "name": "delete_old_by_state",
             "id": "publish_wechat_browser.py:delete_old_by_state",
             "category": "工具函数",
-            "file": "publish_wechat_browser.py"
+            "file": "publish_wechat_browser.py",
+            "status": "正常"
           },
           {
             "name": "_req_json",
             "id": "publish_wechat_browser.py:_req_json",
             "category": "工具函数",
-            "file": "publish_wechat_browser.py"
+            "file": "publish_wechat_browser.py",
+            "status": "正常"
           },
           {
             "name": "build_form",
             "id": "publish_wechat_browser.py:build_form",
             "category": "工具函数",
-            "file": "publish_wechat_browser.py"
+            "file": "publish_wechat_browser.py",
+            "status": "正常"
           },
           {
             "name": "extract_img_urls",
             "id": "publish_wechat_browser.py:extract_img_urls",
             "category": "工具函数",
-            "file": "publish_wechat_browser.py"
+            "file": "publish_wechat_browser.py",
+            "status": "正常"
           },
           {
             "name": "fetch_img",
             "id": "publish_wechat_browser.py:fetch_img",
             "category": "工具函数",
-            "file": "publish_wechat_browser.py"
+            "file": "publish_wechat_browser.py",
+            "status": "正常"
           },
           {
             "name": "upload_img",
             "id": "publish_wechat_browser.py:upload_img",
             "category": "工具函数",
-            "file": "publish_wechat_browser.py"
+            "file": "publish_wechat_browser.py",
+            "status": "正常"
           },
           {
             "name": "upload_and_replace",
             "id": "publish_wechat_browser.py:upload_and_replace",
             "category": "工具函数",
-            "file": "publish_wechat_browser.py"
+            "file": "publish_wechat_browser.py",
+            "status": "正常"
           },
           {
             "name": "list_drafts",
             "id": "publish_wechat_browser.py:list_drafts",
             "category": "工具函数",
-            "file": "publish_wechat_browser.py"
+            "file": "publish_wechat_browser.py",
+            "status": "正常"
           },
           {
             "name": "delete_draft",
             "id": "publish_wechat_browser.py:delete_draft",
             "category": "工具函数",
-            "file": "publish_wechat_browser.py"
+            "file": "publish_wechat_browser.py",
+            "status": "正常"
           },
           {
             "name": "delete_old_by_keyword",
             "id": "publish_wechat_browser.py:delete_old_by_keyword",
             "category": "工具函数",
-            "file": "publish_wechat_browser.py"
+            "file": "publish_wechat_browser.py",
+            "status": "正常"
           },
           {
             "name": "create_draft",
             "id": "publish_wechat_browser.py:create_draft",
             "category": "工具函数",
-            "file": "publish_wechat_browser.py"
+            "file": "publish_wechat_browser.py",
+            "status": "正常"
           },
           {
             "name": "publish_one",
             "id": "publish_wechat_browser.py:publish_one",
             "category": "工具函数",
-            "file": "publish_wechat_browser.py"
+            "file": "publish_wechat_browser.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "publish_wechat_browser.py:main",
             "category": "工具函数",
-            "file": "publish_wechat_browser.py"
+            "file": "publish_wechat_browser.py",
+            "status": "正常"
           },
           {
             "name": "log",
             "id": "publish_wechat_from_draft.py:log",
             "category": "工具函数",
-            "file": "publish_wechat_from_draft.py"
+            "file": "publish_wechat_from_draft.py",
+            "status": "正常"
           },
           {
             "name": "load_published",
             "id": "publish_wechat_from_draft.py:load_published",
             "category": "工具函数",
-            "file": "publish_wechat_from_draft.py"
+            "file": "publish_wechat_from_draft.py",
+            "status": "正常"
           },
           {
             "name": "save_published",
             "id": "publish_wechat_from_draft.py:save_published",
             "category": "工具函数",
-            "file": "publish_wechat_from_draft.py"
+            "file": "publish_wechat_from_draft.py",
+            "status": "正常"
           },
           {
             "name": "content_fingerprint",
             "id": "publish_wechat_from_draft.py:content_fingerprint",
             "category": "工具函数",
-            "file": "publish_wechat_from_draft.py"
+            "file": "publish_wechat_from_draft.py",
+            "status": "正常"
           },
           {
             "name": "check_dedupe",
             "id": "publish_wechat_from_draft.py:check_dedupe",
             "category": "工具函数",
-            "file": "publish_wechat_from_draft.py"
+            "file": "publish_wechat_from_draft.py",
+            "status": "正常"
           },
           {
             "name": "delete_draft_by_title",
             "id": "publish_wechat_from_draft.py:delete_draft_by_title",
             "category": "工具函数",
-            "file": "publish_wechat_from_draft.py"
+            "file": "publish_wechat_from_draft.py",
+            "status": "正常"
           },
           {
             "name": "record_published",
             "id": "publish_wechat_from_draft.py:record_published",
             "category": "工具函数",
-            "file": "publish_wechat_from_draft.py"
+            "file": "publish_wechat_from_draft.py",
+            "status": "正常"
           },
           {
             "name": "shot",
             "id": "publish_wechat_from_draft.py:shot",
             "category": "工具函数",
-            "file": "publish_wechat_from_draft.py"
+            "file": "publish_wechat_from_draft.py",
+            "status": "正常"
           },
           {
             "name": "click_by_text",
             "id": "publish_wechat_from_draft.py:click_by_text",
             "category": "工具函数",
-            "file": "publish_wechat_from_draft.py"
+            "file": "publish_wechat_from_draft.py",
+            "status": "正常"
           },
           {
             "name": "set_original",
             "id": "publish_wechat_from_draft.py:set_original",
             "category": "工具函数",
-            "file": "publish_wechat_from_draft.py"
+            "file": "publish_wechat_from_draft.py",
+            "status": "正常"
           },
           {
             "name": "set_appreciate",
             "id": "publish_wechat_from_draft.py:set_appreciate",
             "category": "工具函数",
-            "file": "publish_wechat_from_draft.py"
+            "file": "publish_wechat_from_draft.py",
+            "status": "正常"
           },
           {
             "name": "_pick_album",
             "id": "publish_wechat_from_draft.py:_pick_album",
             "category": "工具函数",
-            "file": "publish_wechat_from_draft.py"
+            "file": "publish_wechat_from_draft.py",
+            "status": "正常"
           },
           {
             "name": "create_album",
             "id": "publish_wechat_from_draft.py:create_album",
             "category": "工具函数",
-            "file": "publish_wechat_from_draft.py"
+            "file": "publish_wechat_from_draft.py",
+            "status": "正常"
           },
           {
             "name": "set_album",
             "id": "publish_wechat_from_draft.py:set_album",
             "category": "工具函数",
-            "file": "publish_wechat_from_draft.py"
+            "file": "publish_wechat_from_draft.py",
+            "status": "正常"
           },
           {
             "name": "set_source",
             "id": "publish_wechat_from_draft.py:set_source",
             "category": "工具函数",
-            "file": "publish_wechat_from_draft.py"
+            "file": "publish_wechat_from_draft.py",
+            "status": "正常"
           },
           {
             "name": "publish_draft",
             "id": "publish_wechat_from_draft.py:publish_draft",
             "category": "工具函数",
-            "file": "publish_wechat_from_draft.py"
+            "file": "publish_wechat_from_draft.py",
+            "status": "正常"
           },
           {
             "name": "list_drafts",
             "id": "publish_wechat_from_draft.py:list_drafts",
             "category": "工具函数",
-            "file": "publish_wechat_from_draft.py"
+            "file": "publish_wechat_from_draft.py",
+            "status": "正常"
           },
           {
             "name": "match_latest_draft",
             "id": "publish_wechat_from_draft.py:match_latest_draft",
             "category": "工具函数",
-            "file": "publish_wechat_from_draft.py"
+            "file": "publish_wechat_from_draft.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "publish_wechat_from_draft.py:main",
             "category": "工具函数",
-            "file": "publish_wechat_from_draft.py"
+            "file": "publish_wechat_from_draft.py",
+            "status": "正常"
           },
           {
             "name": "img_to_data_url",
             "id": "render_body_sections.py:img_to_data_url",
             "category": "工具函数",
-            "file": "render_body_sections.py"
+            "file": "render_body_sections.py",
+            "status": "正常"
           },
           {
             "name": "build_render_html",
             "id": "render_body_sections.py:build_render_html",
             "category": "工具函数",
-            "file": "render_body_sections.py"
+            "file": "render_body_sections.py",
+            "status": "正常"
           },
           {
             "name": "get_section_bounds",
             "id": "render_body_sections.py:get_section_bounds",
             "category": "工具函数",
-            "file": "render_body_sections.py"
+            "file": "render_body_sections.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "render_body_sections.py:main",
             "category": "工具函数",
-            "file": "render_body_sections.py"
+            "file": "render_body_sections.py",
+            "status": "正常"
           },
           {
             "name": "list_backups",
             "id": "restore.py:list_backups",
             "category": "工具函数",
-            "file": "restore.py"
+            "file": "restore.py",
+            "status": "正常"
           },
           {
             "name": "restore",
             "id": "restore.py:restore",
             "category": "工具函数",
-            "file": "restore.py"
+            "file": "restore.py",
+            "status": "正常"
           },
           {
             "name": "retry",
             "id": "retry_utils.py:retry",
             "category": "工具函数",
-            "file": "retry_utils.py"
+            "file": "retry_utils.py",
+            "status": "正常"
           },
           {
             "name": "safe_execute",
             "id": "retry_utils.py:safe_execute",
             "category": "工具函数",
-            "file": "retry_utils.py"
+            "file": "retry_utils.py",
+            "status": "正常"
           },
           {
             "name": "load_picks_history",
             "id": "return_tracker.py:load_picks_history",
             "category": "工具函数",
-            "file": "return_tracker.py"
+            "file": "return_tracker.py",
+            "status": "正常"
           },
           {
             "name": "save_picks_history",
             "id": "return_tracker.py:save_picks_history",
             "category": "工具函数",
-            "file": "return_tracker.py"
+            "file": "return_tracker.py",
+            "status": "正常"
           },
           {
             "name": "record_picks",
             "id": "return_tracker.py:record_picks",
             "category": "工具函数",
-            "file": "return_tracker.py"
+            "file": "return_tracker.py",
+            "status": "正常"
           },
           {
             "name": "track_returns",
             "id": "return_tracker.py:track_returns",
             "category": "工具函数",
-            "file": "return_tracker.py"
+            "file": "return_tracker.py",
+            "status": "正常"
           },
           {
             "name": "generate_monthly_report",
             "id": "return_tracker.py:generate_monthly_report",
             "category": "工具函数",
-            "file": "return_tracker.py"
+            "file": "return_tracker.py",
+            "status": "正常"
           },
           {
             "name": "save_yesterday_data",
             "id": "save_yesterday_data.py:save_yesterday_data",
             "category": "工具函数",
-            "file": "save_yesterday_data.py"
+            "file": "save_yesterday_data.py",
+            "status": "正常"
           },
           {
             "name": "log",
             "id": "scheduler.py:log",
             "category": "工具函数",
-            "file": "scheduler.py"
+            "file": "scheduler.py",
+            "status": "正常"
           },
           {
             "name": "check_hit_rate_alert",
             "id": "scheduler.py:check_hit_rate_alert",
             "category": "工具函数",
-            "file": "scheduler.py"
+            "file": "scheduler.py",
+            "status": "正常"
           },
           {
             "name": "auto_adjust_weights",
             "id": "scheduler.py:auto_adjust_weights",
             "category": "工具函数",
-            "file": "scheduler.py"
+            "file": "scheduler.py",
+            "status": "正常"
           },
           {
             "name": "generate_daily_report",
             "id": "scheduler.py:generate_daily_report",
             "category": "工具函数",
-            "file": "scheduler.py"
+            "file": "scheduler.py",
+            "status": "正常"
           },
           {
             "name": "run_daily_task",
             "id": "scheduler.py:run_daily_task",
             "category": "工具函数",
-            "file": "scheduler.py"
+            "file": "scheduler.py",
+            "status": "正常"
           },
           {
             "name": "main",
             "id": "scheduler.py:main",
             "category": "工具函数",
-            "file": "scheduler.py"
+            "file": "scheduler.py",
+            "status": "正常"
           },
           {
             "name": "validate_lottery_type",
             "id": "security.py:validate_lottery_type",
             "category": "工具函数",
-            "file": "security.py"
+            "file": "security.py",
+            "status": "正常"
           },
           {
             "name": "validate_number_list",
             "id": "security.py:validate_number_list",
             "category": "工具函数",
-            "file": "security.py"
+            "file": "security.py",
+            "status": "正常"
           },
           {
             "name": "sanitize_sensitive_data",
             "id": "security.py:sanitize_sensitive_data",
             "category": "工具函数",
-            "file": "security.py"
+            "file": "security.py",
+            "status": "正常"
           },
           {
             "name": "check_file_permissions",
             "id": "security.py:check_file_permissions",
             "category": "工具函数",
-            "file": "security.py"
+            "file": "security.py",
+            "status": "正常"
           },
           {
             "name": "security_audit",
             "id": "security.py:security_audit",
             "category": "工具函数",
-            "file": "security.py"
+            "file": "security.py",
+            "status": "正常"
           },
           {
             "name": "get_market_condition",
             "id": "smart_content_strategy.py:get_market_condition",
             "category": "工具函数",
-            "file": "smart_content_strategy.py"
+            "file": "smart_content_strategy.py",
+            "status": "正常"
           },
           {
             "name": "get_content_strategy",
             "id": "smart_content_strategy.py:get_content_strategy",
             "category": "工具函数",
-            "file": "smart_content_strategy.py"
+            "file": "smart_content_strategy.py",
+            "status": "正常"
           },
           {
             "name": "adjust_content_for_market",
             "id": "smart_content_strategy.py:adjust_content_for_market",
             "category": "工具函数",
-            "file": "smart_content_strategy.py"
+            "file": "smart_content_strategy.py",
+            "status": "正常"
           },
           {
             "name": "print_daily_suggestion",
             "id": "smart_content_strategy.py:print_daily_suggestion",
             "category": "工具函数",
-            "file": "smart_content_strategy.py"
+            "file": "smart_content_strategy.py",
+            "status": "正常"
           },
           {
             "name": "load_backtest_history",
             "id": "stock_backtest.py:load_backtest_history",
             "category": "工具函数",
-            "file": "stock_backtest.py"
+            "file": "stock_backtest.py",
+            "status": "正常"
           },
           {
             "name": "save_backtest_history",
             "id": "stock_backtest.py:save_backtest_history",
             "category": "工具函数",
-            "file": "stock_backtest.py"
+            "file": "stock_backtest.py",
+            "status": "正常"
           },
           {
             "name": "run_weekly_backtest",
             "id": "stock_backtest.py:run_weekly_backtest",
             "category": "工具函数",
-            "file": "stock_backtest.py"
+            "file": "stock_backtest.py",
+            "status": "正常"
           },
           {
             "name": "verify_last_week",
             "id": "stock_backtest.py:verify_last_week",
             "category": "工具函数",
-            "file": "stock_backtest.py"
+            "file": "stock_backtest.py",
+            "status": "正常"
           },
           {
             "name": "check_module_in_file",
             "id": "stock_module_audit.py:check_module_in_file",
             "category": "工具函数",
-            "file": "stock_module_audit.py"
+            "file": "stock_module_audit.py",
+            "status": "正常"
           },
           {
             "name": "run_stock_module_audit",
             "id": "stock_module_audit.py:run_stock_module_audit",
             "category": "工具函数",
-            "file": "stock_module_audit.py"
+            "file": "stock_module_audit.py",
+            "status": "正常"
           },
           {
             "name": "file_md5",
             "id": "sync_dashboards.py:file_md5",
             "category": "工具函数",
-            "file": "sync_dashboards.py"
+            "file": "sync_dashboards.py",
+            "status": "正常"
           },
           {
             "name": "sync_to_nginx",
             "id": "sync_dashboards.py:sync_to_nginx",
             "category": "工具函数",
-            "file": "sync_dashboards.py"
+            "file": "sync_dashboards.py",
+            "status": "正常"
           },
           {
             "name": "sync_to_github",
             "id": "sync_dashboards.py:sync_to_github",
             "category": "工具函数",
-            "file": "sync_dashboards.py"
+            "file": "sync_dashboards.py",
+            "status": "正常"
           },
           {
             "name": "sync_dashboards",
             "id": "sync_dashboards.py:sync_dashboards",
             "category": "工具函数",
-            "file": "sync_dashboards.py"
+            "file": "sync_dashboards.py",
+            "status": "正常"
           },
           {
             "name": "img_block",
             "id": "tables_to_images.py:img_block",
             "category": "工具函数",
-            "file": "tables_to_images.py"
+            "file": "tables_to_images.py",
+            "status": "正常"
           },
           {
             "name": "update_card_images",
             "id": "update_dashboard.py:update_card_images",
             "category": "工具函数",
-            "file": "update_dashboard.py"
+            "file": "update_dashboard.py",
+            "status": "正常"
           },
           {
             "name": "check_system_features",
             "id": "update_dashboard.py:check_system_features",
             "category": "工具函数",
-            "file": "update_dashboard.py"
+            "file": "update_dashboard.py",
+            "status": "正常"
           },
           {
             "name": "load_data",
             "id": "update_dashboard.py:load_data",
             "category": "工具函数",
-            "file": "update_dashboard.py"
+            "file": "update_dashboard.py",
+            "status": "正常"
           },
           {
             "name": "get_status_badge",
             "id": "update_dashboard.py:get_status_badge",
             "category": "工具函数",
-            "file": "update_dashboard.py"
+            "file": "update_dashboard.py",
+            "status": "正常"
           },
           {
             "name": "update_dashboard",
             "id": "update_dashboard.py:update_dashboard",
             "category": "工具函数",
-            "file": "update_dashboard.py"
+            "file": "update_dashboard.py",
+            "status": "正常"
           },
           {
             "name": "upload_file",
             "id": "upload_to_github.py:upload_file",
             "category": "工具函数",
-            "file": "upload_to_github.py"
+            "file": "upload_to_github.py",
+            "status": "正常"
           },
           {
             "name": "enable_pages",
             "id": "upload_to_github.py:enable_pages",
             "category": "工具函数",
-            "file": "upload_to_github.py"
+            "file": "upload_to_github.py",
+            "status": "正常"
           },
           {
             "name": "load_preferences",
             "id": "user_preference_learner.py:load_preferences",
             "category": "工具函数",
-            "file": "user_preference_learner.py"
+            "file": "user_preference_learner.py",
+            "status": "正常"
           },
           {
             "name": "save_preferences",
             "id": "user_preference_learner.py:save_preferences",
             "category": "工具函数",
-            "file": "user_preference_learner.py"
+            "file": "user_preference_learner.py",
+            "status": "正常"
           },
           {
             "name": "record_feedback",
             "id": "user_preference_learner.py:record_feedback",
             "category": "工具函数",
-            "file": "user_preference_learner.py"
+            "file": "user_preference_learner.py",
+            "status": "正常"
           },
           {
             "name": "get_preference_weight",
             "id": "user_preference_learner.py:get_preference_weight",
             "category": "工具函数",
-            "file": "user_preference_learner.py"
+            "file": "user_preference_learner.py",
+            "status": "正常"
           },
           {
             "name": "print_preference_summary",
             "id": "user_preference_learner.py:print_preference_summary",
             "category": "工具函数",
-            "file": "user_preference_learner.py"
+            "file": "user_preference_learner.py",
+            "status": "正常"
           },
           {
             "name": "validate_preopen_consistency",
             "id": "validate_consistency.py:validate_preopen_consistency",
             "category": "工具函数",
-            "file": "validate_consistency.py"
+            "file": "validate_consistency.py",
+            "status": "正常"
           },
           {
             "name": "get_today_weekday",
             "id": "validate_lottery_data.py:get_today_weekday",
             "category": "工具函数",
-            "file": "validate_lottery_data.py"
+            "file": "validate_lottery_data.py",
+            "status": "正常"
           },
           {
             "name": "get_expected_lotteries",
             "id": "validate_lottery_data.py:get_expected_lotteries",
             "category": "工具函数",
-            "file": "validate_lottery_data.py"
+            "file": "validate_lottery_data.py",
+            "status": "正常"
           },
           {
             "name": "validate_lottery_data",
             "id": "validate_lottery_data.py:validate_lottery_data",
             "category": "工具函数",
-            "file": "validate_lottery_data.py"
+            "file": "validate_lottery_data.py",
+            "status": "正常"
           },
           {
             "name": "load_yesterday_data",
             "id": "validate_stock_consistency.py:load_yesterday_data",
             "category": "工具函数",
-            "file": "validate_stock_consistency.py"
+            "file": "validate_stock_consistency.py",
+            "status": "正常"
           },
           {
             "name": "extract_data_from_html",
             "id": "validate_stock_consistency.py:extract_data_from_html",
             "category": "工具函数",
-            "file": "validate_stock_consistency.py"
+            "file": "validate_stock_consistency.py",
+            "status": "正常"
           },
           {
             "name": "validate_consistency",
             "id": "validate_stock_consistency.py:validate_consistency",
             "category": "工具函数",
-            "file": "validate_stock_consistency.py"
+            "file": "validate_stock_consistency.py",
+            "status": "正常"
           },
           {
             "name": "validate",
             "id": "validate_wechat.py:validate",
             "category": "工具函数",
-            "file": "validate_wechat.py"
+            "file": "validate_wechat.py",
+            "status": "正常"
           },
           {
             "name": "load_json",
             "id": "weekly_report.py:load_json",
             "category": "工具函数",
-            "file": "weekly_report.py"
+            "file": "weekly_report.py",
+            "status": "正常"
           },
           {
             "name": "lottery_report",
             "id": "weekly_report.py:lottery_report",
             "category": "工具函数",
-            "file": "weekly_report.py"
+            "file": "weekly_report.py",
+            "status": "正常"
           },
           {
             "name": "stock_report",
             "id": "weekly_report.py:stock_report",
             "category": "工具函数",
-            "file": "weekly_report.py"
+            "file": "weekly_report.py",
+            "status": "正常"
           },
           {
             "name": "bjh_report",
             "id": "weekly_report.py:bjh_report",
             "category": "工具函数",
-            "file": "weekly_report.py"
+            "file": "weekly_report.py",
+            "status": "正常"
           },
           {
             "name": "system_report",
             "id": "weekly_report.py:system_report",
             "category": "工具函数",
-            "file": "weekly_report.py"
+            "file": "weekly_report.py",
+            "status": "正常"
           },
           {
             "name": "generate_weekly_report",
             "id": "weekly_report.py:generate_weekly_report",
             "category": "工具函数",
-            "file": "weekly_report.py"
+            "file": "weekly_report.py",
+            "status": "正常"
           }
         ],
-        "count": 470
+        "count": 470,
+        "active": 470,
+        "normal": 470,
+        "warning": 0
       },
       "layer4_lottery": {
         "name": "彩种处理函数",
@@ -3993,58 +4558,70 @@
             "name": "post_process_prediction",
             "id": "post_process_prediction",
             "category": "彩种处理",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "process_ssq",
             "id": "process_ssq",
             "category": "彩种处理",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "process_kl8",
             "id": "process_kl8",
             "category": "彩种处理",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "process_fc3d",
             "id": "process_fc3d",
             "category": "彩种处理",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "process_pl35",
             "id": "process_pl35",
             "category": "彩种处理",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "process_3d_common",
             "id": "process_3d_common",
             "category": "彩种处理",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "process_qxc",
             "id": "process_qxc",
             "category": "彩种处理",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "process_dlt",
             "id": "process_dlt",
             "category": "彩种处理",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "process_qlc",
             "id": "process_qlc",
             "category": "彩种处理",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           }
         ],
-        "count": 9
+        "count": 9,
+        "active": 9,
+        "normal": 9,
+        "warning": 0
       },
       "layer5_system": {
         "name": "系统保障类",
@@ -4054,205 +4631,241 @@
             "name": "EarlyStopping",
             "id": "EarlyStopping",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "ABTestFramework",
             "id": "ABTestFramework",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "DataQualityMonitor",
             "id": "DataQualityMonitor",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "ModelPerformanceMonitor",
             "id": "ModelPerformanceMonitor",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "FaultTolerance",
             "id": "FaultTolerance",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "ModelVersionManager",
             "id": "ModelVersionManager",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "QLearningPredictor",
             "id": "QLearningPredictor",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "BankrollManager",
             "id": "BankrollManager",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "PersonalizedRecommender",
             "id": "PersonalizedRecommender",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "SubscriptionService",
             "id": "SubscriptionService",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "MembershipSystem",
             "id": "MembershipSystem",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "PredictionAPI",
             "id": "PredictionAPI",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "MultiUserManager",
             "id": "MultiUserManager",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "DataSourceFusion",
             "id": "DataSourceFusion",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "BIDashboard",
             "id": "BIDashboard",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "LLMAssistant",
             "id": "LLMAssistant",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "SecurityModule",
             "id": "SecurityModule",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "MobileAdapter",
             "id": "MobileAdapter",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "I18nSupport",
             "id": "I18nSupport",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "SmartCustomerService",
             "id": "SmartCustomerService",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "RiskWarningSystem",
             "id": "RiskWarningSystem",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "PredictionComparator",
             "id": "PredictionComparator",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "BlockchainEvidence",
             "id": "BlockchainEvidence",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "NFTCollection",
             "id": "NFTCollection",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "DataQualityMonitor",
             "id": "DataQualityMonitor",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "MultiAccountManager",
             "id": "MultiAccountManager",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "SmartCustomerService",
             "id": "SmartCustomerService",
             "category": "系统类",
-            "file": "gen_cards_v2.py"
+            "file": "gen_cards_v2.py",
+            "status": "正常"
           },
           {
             "name": "LotteryAPIHandler",
             "id": "api_server.py:LotteryAPIHandler",
             "category": "系统类",
-            "file": "api_server.py"
+            "file": "api_server.py",
+            "status": "正常"
           },
           {
             "name": "AutoRecovery",
             "id": "auto_recovery.py:AutoRecovery",
             "category": "系统类",
-            "file": "auto_recovery.py"
+            "file": "auto_recovery.py",
+            "status": "正常"
           },
           {
             "name": "Logger",
             "id": "logger.py:Logger",
             "category": "系统类",
-            "file": "logger.py"
+            "file": "logger.py",
+            "status": "正常"
           },
           {
             "name": "BlockExtractor",
             "id": "publish_baijiahao.py:BlockExtractor",
             "category": "系统类",
-            "file": "publish_baijiahao.py"
+            "file": "publish_baijiahao.py",
+            "status": "正常"
           },
           {
             "name": "TaskLogger",
             "id": "task_logger.py:TaskLogger",
             "category": "系统类",
-            "file": "task_logger.py"
+            "file": "task_logger.py",
+            "status": "正常"
           },
           {
             "name": "UserManager",
             "id": "user_manager.py:UserManager",
             "category": "系统类",
-            "file": "user_manager.py"
+            "file": "user_manager.py",
+            "status": "正常"
           }
         ],
-        "count": 33
+        "count": 33,
+        "active": 33,
+        "normal": 33,
+        "warning": 0
       }
     },
-    "last_update": "2026-09-23 20:45:53"
+    "last_update": "2026-09-23 20:55:34"
   },
-  "last_update": "2026-09-23 20:45:53"
+  "last_update": "2026-09-23 20:55:34"
 }
