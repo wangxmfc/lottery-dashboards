@@ -607,22 +607,24 @@
         }
         .status-bar .status-detail {
             display: none;
-            flex-wrap: wrap;
-            gap: 6px 10px;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
             margin-top: 10px;
-            padding-top: 10px;
+            padding-top: 12px;
             border-top: 1px solid rgba(201,162,39,0.15);
         }
         .status-bar.status-expanded .status-detail {
-            display: flex;
+            display: grid;
         }
         .status-bar .lottery-tag {
-            display: inline-flex;
+            display: flex;
             align-items: center;
+            justify-content: center;
             gap: 4px;
-            padding: 2px 10px;
+            padding: 6px 10px;
             border-radius: 20px;
             font-weight: 500;
+            font-size: 0.85em;
             transition: all 0.2s ease;
         }
         .status-bar .lottery-tag:hover {
