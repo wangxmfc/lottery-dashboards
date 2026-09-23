@@ -519,6 +519,13 @@
             border-color: #C9A227 !important;
             box-shadow: 0 2px 10px rgba(201, 162, 39, 0.3);
         }
+        
+        /* 手机端响应式：核验对比卡片左右变上下 */
+        @media (max-width: 600px) {
+            .lottery-tab-content > div > div[style*="grid-template-columns:1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1020,44 +1027,90 @@
                 const hitTrend = detail.hit_trend || [];
                 let checkHtml = `<div class="lottery-tab-content" id="${lotteryId}-tab-check" style="display:none;">`;
                 
-                // 上期预测核验
+                // 上期预测核验（主推+孤注一掷 左右对比合并）
                 if (prevCheck.period) {
+                    // 辅助：渲染带命中高亮的号码球
+                    const renderBallsHighlight = (nums, hitNums, color, size) => {
+                        if (!nums || !nums.length) return '<span style="color:#9AA3AF;">暂无</span>';
+                        const s = size || 30;
+                        const hitSet = new Set((hitNums || []).map(n => String(n).padStart(2,'0')));
+                        return nums.map(n => {
+                            const num = String(n).padStart(2, '0');
+                            const isHit = hitSet.has(num);
+                            return `<span style="display:inline-flex;align-items:center;justify-content:center;width:${s}px;height:${s}px;border-radius:50%;background:radial-gradient(circle at 32% 28%,${color}CC,${color} 65%);color:#fff;font-weight:bold;font-size:${s*0.4}px;box-shadow:0 2px 6px rgba(0,0,0,0.2);margin:2px;border:${isHit ? '2.5px solid #4CAF50' : 'none'};box-shadow:${isHit ? '0 0 8px rgba(76,175,80,0.6)' : '0 2px 6px rgba(0,0,0,0.2)'};">${num}</span>`;
+                        }).join('');
+                    };
+                    
+                    const mainHit = prevCheck.hit_main ?? 0;
+                    const subHit = prevCheck.hit_sub ?? 0;
+                    const totalHit = prevCheck.hit_total ?? 0;
+                    const loneMainHit = prevCheck.lone_hit_main ?? 0;
+                    const loneSubHit = prevCheck.lone_hit_sub ?? 0;
+                    const loneTotalHit = prevCheck.lone_hit_total ?? 0;
+                    const hasLone = prevCheck.lone_main && prevCheck.lone_main.length;
+                    
+                    // 从actual里取开奖号码用于高亮
+                    const actual = prevCheck.actual || {};
+                    const actualMain = Array.isArray(actual) ? actual : (actual[cfg.mainKey || 'front'] || actual[cfg.mainKey || 'red'] || actual['nums'] || []);
+                    const actualSub = cfg.subKey ? (actual[cfg.subKey] || []) : [];
+                    
+                    // 提前计算主推命中号码（简化模板字符串）
+                    const predMainNums = prevCheck.prediction ? (prevCheck.prediction[cfg.predMain || 'hot_front'] || prevCheck.prediction[cfg.predMain || 'red'] || prevCheck.prediction['hot_nums'] || []) : [];
+                    const predSubNums = prevCheck.prediction ? (prevCheck.prediction[cfg.predSub || 'hot_back'] || prevCheck.prediction[cfg.predSub || 'blue'] || []) : [];
+                    const predMainSet = new Set(predMainNums.map(x => String(x).padStart(2,'0')));
+                    const predSubSet = new Set(predSubNums.map(x => String(x).padStart(2,'0')));
+                    const mainHitNums = Array.isArray(actualMain) ? actualMain.filter(n => predMainSet.has(String(n).padStart(2,'0'))) : [];
+                    const subHitNums = cfg.subLabel && Array.isArray(actualSub) ? actualSub.filter(n => predSubSet.has(String(n).padStart(2,'0'))) : [];
+                    const allMainHitNums = [...mainHitNums, ...subHitNums].map(n => String(n).padStart(2,'0')).join(' ');
+                    const loneAllHitNums = [...(prevCheck.lone_hit_main_nums || []), ...(prevCheck.lone_hit_sub_nums || [])].join(' ');
+                    
                     checkHtml += `
-                    <div style="margin-bottom:20px;padding:15px;background:rgba(40,167,69,0.05);border-radius:12px;border:1px solid rgba(40,167,69,0.3);">
-                        <div style="font-size:0.9em;color:#28a745;margin-bottom:10px;font-weight:600;">📋 上期预测核验（第${prevCheck.period}期）</div>
-                        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center;">
-                            <div><div style="font-size:1.5em;font-weight:bold;color:#C9A227;">${prevCheck.hit_main ?? prevCheck.hit_total ?? '-'}</div><div style="font-size:0.75em;color:#9AA3AF;">${cfg.subLabel ? '主区命中' : '命中个数'}</div></div>
-                            ${cfg.subLabel ? `<div><div style="font-size:1.5em;font-weight:bold;color:#28a745;">${prevCheck.hit_sub ?? '-'}</div><div style="font-size:0.75em;color:#9AA3AF;">副区命中</div></div>` : ''}
-                            <div><div style="font-size:1.5em;font-weight:bold;color:${(prevCheck.hit_total ?? 0) > 0 ? '#28a745' : '#dc3545'};">${prevCheck.hit_total ?? '-'}</div><div style="font-size:0.75em;color:#9AA3AF;">总命中</div></div>
+                    <div style="margin-bottom:20px;padding:15px;background:rgba(40,167,69,0.04);border-radius:12px;border:1px solid rgba(40,167,69,0.25);">
+                        <div style="font-size:0.9em;color:#28a745;margin-bottom:12px;font-weight:700;display:flex;align-items:center;gap:6px;">
+                            <span>📊</span> 上期预测核验（第${prevCheck.period}期）
+                            <span style="font-size:0.7em;font-weight:400;color:#9AA3AF;margin-left:auto;">绿色边框 = 命中号码</span>
                         </div>
-                    </div>`;
-                }
-                
-                // 上期孤注一掷核验
-                if (prevCheck.period && prevCheck.lone_main && prevCheck.lone_main.length) {
-                    const loneHitColor = (prevCheck.lone_hit_total ?? 0) > 0 ? '#C9A227' : '#dc3545';
-                    checkHtml += `
-                    <div style="margin-bottom:20px;padding:15px;background:linear-gradient(135deg,rgba(201,162,39,0.08),rgba(184,148,31,0.03));border-radius:12px;border:2px solid rgba(201,162,39,0.4);">
-                        <div style="font-size:0.9em;color:#C9A227;margin-bottom:10px;font-weight:700;display:flex;align-items:center;gap:6px;">
-                            <span style="font-size:1.1em;">🎯</span> 上期孤注一掷核验（第${prevCheck.period}期）
+                        <div style="display:grid;grid-template-columns:${hasLone ? '1fr 1fr' : '1fr'};gap:12px;">
+                            <!-- 主推号码 -->
+                            <div style="padding:12px;background:rgba(255,255,255,0.03);border-radius:10px;border:1px solid rgba(255,255,255,0.08);">
+                                <div style="font-size:0.85em;color:#C9A227;font-weight:600;margin-bottom:8px;text-align:center;">📋 主推号码</div>
+                                <div style="display:grid;grid-template-columns:${cfg.subLabel ? '1fr 1fr 1fr' : '1fr'};gap:6px;text-align:center;margin-bottom:10px;">
+                                    <div><div style="font-size:1.3em;font-weight:bold;color:#C9A227;">${mainHit}</div><div style="font-size:0.7em;color:#9AA3AF;">${cfg.subLabel ? '主区' : '命中'}</div></div>
+                                    ${cfg.subLabel ? `<div><div style="font-size:1.3em;font-weight:bold;color:#28a745;">${subHit}</div><div style="font-size:0.7em;color:#9AA3AF;">副区</div></div>` : ''}
+                                    <div><div style="font-size:1.3em;font-weight:bold;color:${totalHit > 0 ? '#28a745' : '#dc3545'};">${totalHit}</div><div style="font-size:0.7em;color:#9AA3AF;">总计</div></div>
+                                </div>
+                                <div style="font-size:0.75em;color:#9AA3AF;margin-bottom:4px;">主推${cfg.mainLabel || '号码'}</div>
+                                <div style="margin-bottom:8px;">${renderBallsHighlight(prevCheck.prediction ? (prevCheck.prediction[cfg.predMain || 'hot_front'] || prevCheck.prediction[cfg.predMain || 'red'] || prevCheck.prediction['hot_nums'] || []) : [], actualMain, cfg.mainColor || '#C9A227', 28)}</div>
+                                ${cfg.subLabel ? `<div style="font-size:0.75em;color:#9AA3AF;margin-bottom:4px;">主推${cfg.subLabel}</div><div>${renderBallsHighlight(prevCheck.prediction ? (prevCheck.prediction[cfg.predSub || 'hot_back'] || prevCheck.prediction[cfg.predSub || 'blue'] || []) : [], actualSub, cfg.subColor || '#9AA3AF', 28)}</div>` : ''}
+                            </div>
+                            <!-- 孤注一掷 -->
+                            ${hasLone ? `
+                            <div style="padding:12px;background:linear-gradient(135deg,rgba(201,162,39,0.08),rgba(184,148,31,0.03));border-radius:10px;border:1px solid rgba(201,162,39,0.35);">
+                                <div style="font-size:0.85em;color:#C9A227;font-weight:700;margin-bottom:8px;text-align:center;">🎯 孤注一掷</div>
+                                <div style="display:grid;grid-template-columns:${cfg.subLabel ? '1fr 1fr 1fr' : '1fr'};gap:6px;text-align:center;margin-bottom:10px;">
+                                    <div><div style="font-size:1.3em;font-weight:bold;color:#C9A227;">${loneMainHit}</div><div style="font-size:0.7em;color:#9AA3AF;">${cfg.subLabel ? '主区' : '命中'}</div></div>
+                                    ${cfg.subLabel ? `<div><div style="font-size:1.3em;font-weight:bold;color:#D4AF37;">${loneSubHit}</div><div style="font-size:0.7em;color:#9AA3AF;">副区</div></div>` : ''}
+                                    <div><div style="font-size:1.3em;font-weight:bold;color:${loneTotalHit > 0 ? '#28a745' : '#dc3545'};">${loneTotalHit}</div><div style="font-size:0.7em;color:#9AA3AF;">总计</div></div>
+                                </div>
+                                <div style="font-size:0.75em;color:#D4B85A;margin-bottom:4px;">精选${cfg.mainLabel || '号码'}</div>
+                                <div style="margin-bottom:8px;">${renderBallsHighlight(prevCheck.lone_main || [], actualMain, '#C9A227', 28)}</div>
+                                ${cfg.subLabel && prevCheck.lone_sub && prevCheck.lone_sub.length ? `<div style="font-size:0.75em;color:#D4B85A;margin-bottom:4px;">精选${cfg.subLabel}</div><div>${renderBallsHighlight(prevCheck.lone_sub || [], actualSub, '#D4AF37', 28)}</div>` : ''}
+                            </div>` : ''}
                         </div>
-                        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center;margin-bottom:12px;">
-                            <div><div style="font-size:1.5em;font-weight:bold;color:#C9A227;">${prevCheck.lone_hit_main ?? '-'}</div><div style="font-size:0.75em;color:#9AA3AF;">${cfg.subLabel ? '主区命中' : '命中个数'}</div></div>
-                            ${cfg.subLabel ? `<div><div style="font-size:1.5em;font-weight:bold;color:#D4AF37;">${prevCheck.lone_hit_sub ?? '-'}</div><div style="font-size:0.75em;color:#9AA3AF;">副区命中</div></div>` : ''}
-                            <div><div style="font-size:1.5em;font-weight:bold;color:${loneHitColor};">${prevCheck.lone_hit_total ?? '-'}</div><div style="font-size:0.75em;color:#9AA3AF;">总命中</div></div>
+                        <!-- 命中号码汇总 -->
+                        <div style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.08);">
+                            <div style="display:grid;grid-template-columns:${hasLone ? '1fr 1fr' : '1fr'};gap:10px;">
+                                <div style="font-size:0.78em;">
+                                    <span style="color:#C9A227;font-weight:600;">主推命中：</span>
+                                    ${(mainHitNums.length > 0 || subHitNums.length > 0) ? `<span style="color:#4CAF50;font-weight:bold;">${allMainHitNums || '无'}</span>` : `<span style="color:#dc3545;">未命中</span>`}
+                                </div>
+                                ${hasLone ? `
+                                <div style="font-size:0.78em;">
+                                    <span style="color:#C9A227;font-weight:600;">孤注一掷命中：</span>
+                                    ${loneTotalHit > 0 ? `<span style="color:#4CAF50;font-weight:bold;">${loneAllHitNums}</span>` : `<span style="color:#dc3545;">未命中</span>`}
+                                </div>` : ''}
+                            </div>
                         </div>
-                        <div style="font-size:0.8em;color:#D4B85A;margin-bottom:6px;">孤注一掷号码</div>
-                        <div style="margin-bottom:10px;">${renderBalls(prevCheck.lone_main || [], '#C9A227', 30)}</div>
-                        ${cfg.subLabel && prevCheck.lone_sub && prevCheck.lone_sub.length ? `<div style="font-size:0.8em;color:#D4B85A;margin-bottom:6px;">孤注一掷${cfg.subLabel}</div><div style="margin-bottom:10px;">${renderBalls(prevCheck.lone_sub || [], '#D4AF37', 30)}</div>` : ''}
-                        ${(prevCheck.lone_hit_main_nums && prevCheck.lone_hit_main_nums.length) ? `
-                        <div style="padding:8px 10px;background:rgba(40,167,69,0.1);border-radius:8px;border-left:3px solid #28a745;">
-                            <span style="font-size:0.8em;color:#28a745;font-weight:600;">✅ 命中号码：</span>
-                            <span style="font-size:0.85em;color:#fff;font-weight:bold;">${prevCheck.lone_hit_main_nums.join(' ')}</span>
-                            ${prevCheck.lone_hit_sub_nums && prevCheck.lone_hit_sub_nums.length ? ` + <span style="font-size:0.85em;color:#fff;font-weight:bold;">${prevCheck.lone_hit_sub_nums.join(' ')}</span>` : ''}
-                        </div>` : `
-                        <div style="padding:8px 10px;background:rgba(220,53,69,0.1);border-radius:8px;border-left:3px solid #dc3545;">
-                            <span style="font-size:0.8em;color:#dc3545;font-weight:600;">❌ 未命中</span>
-                        </div>`}
                     </div>`;
                 }
                 
