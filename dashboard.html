@@ -1227,70 +1227,206 @@
                     </div>
                 </div>`;
                 
-                // ========== 大乐透固定号标签内容 ==========
+                // ========== 大乐透固定号标签内容（美化版） ==========
                 let fixedHtml = '';
                 if (lotteryId === 'dlt' && detail.fixed_number) {
                     const fn = detail.fixed_number;
                     const fixed = fn.fixed || {};
                     const cc = fn.current_check || {};
                     const stats = fn.stats || {};
+                    
+                    // 辅助：渲染带高亮的号码球
+                    const renderHighlightBalls = (nums, hitNums, color, size) => {
+                        if (!nums || !nums.length) return '<span style="color:#9AA3AF;">暂无</span>';
+                        const s = size || 32;
+                        const hitSet = new Set((hitNums || []).map(n => String(n).padStart(2,'0')));
+                        return nums.map(n => {
+                            const num = String(n).padStart(2, '0');
+                            const isHit = hitSet.has(num);
+                            return `<span style="display:inline-flex;align-items:center;justify-content:center;width:${s}px;height:${s}px;border-radius:50%;background:radial-gradient(circle at 32% 28%,${color}CC,${color} 65%);color:#fff;font-weight:bold;font-size:${s*0.4}px;box-shadow:0 2px 6px rgba(0,0,0,0.2);margin:2px;border:${isHit ? '2.5px solid #4CAF50' : 'none'};box-shadow:${isHit ? '0 0 10px rgba(76,175,80,0.7)' : '0 2px 6px rgba(0,0,0,0.2)'};">${num}</span>`;
+                        }).join('');
+                    };
+                    
+                    // 计算孤注一掷与固定号重合
+                    const loneF = (prediction.lone_main || []).map(n => String(n).padStart(2,'0'));
+                    const loneB = (prediction.lone_sub || []).map(n => String(n).padStart(2,'0'));
+                    const fixF = (fixed.front || []).map(n => String(n).padStart(2,'0'));
+                    const fixB = (fixed.back || []).map(n => String(n).padStart(2,'0'));
+                    const overlapF = loneF.filter(n => fixF.includes(n));
+                    const overlapB = loneB.filter(n => fixB.includes(n));
+                    const overlapTotal = overlapF.length + overlapB.length;
+                    
+                    // 本期比对的开奖号码（从latest_draw读取）
+                    const latestDraw = detail.latest_draw || {};
+                    const drawF = (latestDraw.front || []).map(n => String(n).padStart(2,'0'));
+                    const drawB = (latestDraw.back || []).map(n => String(n).padStart(2,'0'));
+                    const hitFNums = (cc.hit_front_nums || []).map(n => String(n).padStart(2,'0'));
+                    const hitBNums = (cc.hit_back_nums || []).map(n => String(n).padStart(2,'0'));
+                    
                     fixedHtml = `
                     <div class="lottery-tab-content" id="${lotteryId}-tab-fixed" style="display:none;">
-                        <div style="padding:15px;background:rgba(123,91,214,0.08);border-radius:12px;border:1px solid rgba(123,91,214,0.3);margin-bottom:15px;">
-                            <div style="font-size:0.9em;color:#B39DDB;margin-bottom:10px;font-weight:600;">🎯 你的固定号码</div>
-                            <div style="font-size:0.8em;color:#9AA3AF;margin-bottom:6px;">前区</div>
-                            <div style="margin-bottom:10px;">${renderBalls(fixed.front || [], '#7B5BD6', 34)}</div>
-                            <div style="font-size:0.8em;color:#9AA3AF;margin-bottom:6px;">后区</div>
-                            <div>${renderBalls(fixed.back || [], '#B39DDB', 34)}</div>
-                        </div>
-                        <div style="padding:15px;background:linear-gradient(135deg,rgba(201,162,39,0.1),rgba(123,91,214,0.08));border-radius:12px;border:2px solid rgba(201,162,39,0.4);margin-bottom:15px;">
-                            <div style="font-size:0.9em;color:#C9A227;margin-bottom:10px;font-weight:700;display:flex;align-items:center;gap:6px;">
-                                <span>⚔️</span> 孤注一掷 VS 固定号
-                                <span style="font-size:0.7em;font-weight:400;color:#9AA3AF;margin-left:auto;">本期重合度分析</span>
-                            </div>
-                            ${(() => {
-                                const loneF = (prediction.lone_main || []).map(n => String(n).padStart(2,'0'));
-                                const loneB = (prediction.lone_sub || []).map(n => String(n).padStart(2,'0'));
-                                const fixF = (fixed.front || []).map(n => String(n).padStart(2,'0'));
-                                const fixB = (fixed.back || []).map(n => String(n).padStart(2,'0'));
-                                const overlapF = loneF.filter(n => fixF.includes(n));
-                                const overlapB = loneB.filter(n => fixB.includes(n));
-                                const overlapTotal = overlapF.length + overlapB.length;
-                                return `
-                                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center;margin-bottom:12px;">
-                                    <div><div style="font-size:1.5em;font-weight:bold;color:#C9A227;">${overlapF.length}</div><div style="font-size:0.75em;color:#9AA3AF;">前区重合</div></div>
-                                    <div><div style="font-size:1.5em;font-weight:bold;color:#D4AF37;">${overlapB.length}</div><div style="font-size:0.75em;color:#9AA3AF;">后区重合</div></div>
-                                    <div><div style="font-size:1.5em;font-weight:bold;color:${overlapTotal >= 3 ? '#28a745' : '#C9A227'};">${overlapTotal}</div><div style="font-size:0.75em;color:#9AA3AF;">总重合</div></div>
+                        
+                        <!-- 1. 你的固定号码 -->
+                        <div style="margin-bottom:15px;padding:18px;background:linear-gradient(135deg,rgba(123,91,214,0.12),rgba(123,91,214,0.04));border-radius:14px;border:1px solid rgba(123,91,214,0.35);position:relative;overflow:hidden;">
+                            <div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;background:radial-gradient(circle,rgba(123,91,214,0.15),transparent);border-radius:50%;"></div>
+                            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                                <div style="font-size:1em;color:#B39DDB;font-weight:700;display:flex;align-items:center;gap:8px;">
+                                    <span style="font-size:1.2em;">🎯</span> 你的固定号码
                                 </div>
-                                <div style="font-size:0.8em;color:#D4B85A;margin-bottom:6px;">孤注一掷前区（重合高亮）</div>
-                                <div style="margin-bottom:10px;">${loneF.map(n => `<span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:${overlapF.includes(n) ? 'radial-gradient(circle at 32% 28%,#28a745,#1e7a34)' : 'radial-gradient(circle at 32% 28%,#C9A227CC,#C9A227 65%)'};color:#fff;font-weight:bold;font-size:13px;box-shadow:0 2px 6px rgba(0,0,0,0.2);margin:2px;border:${overlapF.includes(n) ? '2px solid #4CAF50' : 'none'};">${n}</span>`).join('')}</div>
-                                <div style="font-size:0.8em;color:#9AA3AF;margin-bottom:6px;">固定号前区</div>
-                                <div>${fixF.map(n => `<span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#7B5BD6CC,#7B5BD6 65%);color:#fff;font-weight:bold;font-size:13px;box-shadow:0 2px 6px rgba(0,0,0,0.2);margin:2px;border:${overlapF.includes(n) ? '2px solid #4CAF50' : 'none'};">${n}</span>`).join('')}</div>
-                                ${overlapTotal > 0 ? `<div style="margin-top:10px;padding:8px 10px;background:rgba(40,167,69,0.1);border-radius:8px;border-left:3px solid #28a745;"><span style="font-size:0.8em;color:#28a745;font-weight:600;">✅ 重合号码：</span><span style="font-size:0.85em;color:#fff;font-weight:bold;">${[...overlapF, ...overlapB].join(' ')}</span></div>` : `<div style="margin-top:10px;padding:8px 10px;background:rgba(154,163,175,0.1);border-radius:8px;border-left:3px solid #9AA3AF;"><span style="font-size:0.8em;color:#9AA3AF;">本期无重合号码，两组选号思路完全不同</span></div>`}
-                                `;
-                            })()}
-                        </div>
-                        <div style="padding:15px;background:rgba(40,167,69,0.05);border-radius:12px;border:1px solid rgba(40,167,69,0.3);margin-bottom:15px;">
-                            <div style="font-size:0.9em;color:#28a745;margin-bottom:10px;font-weight:600;">📋 本期比对（第${cc.period || '-'}期 · ${cc.date || ''}）</div>
-                            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center;margin-bottom:10px;">
-                                <div><div style="font-size:1.5em;font-weight:bold;color:#7B5BD6;">${cc.hit_front ?? '-'}</div><div style="font-size:0.75em;color:#9AA3AF;">前区命中</div></div>
-                                <div><div style="font-size:1.5em;font-weight:bold;color:#B39DDB;">${cc.hit_back ?? '-'}</div><div style="font-size:0.75em;color:#9AA3AF;">后区命中</div></div>
-                                <div><div style="font-size:1.5em;font-weight:bold;color:${(cc.hit_total ?? 0) >= 3 ? '#28a745' : '#C9A227'};">${cc.hit_total ?? '-'}</div><div style="font-size:0.75em;color:#9AA3AF;">合计命中</div></div>
+                                <span style="font-size:0.72em;padding:4px 10px;background:rgba(123,91,214,0.2);color:#B39DDB;border-radius:20px;font-weight:500;">已守号 ${stats.total_periods || '-'} 期</span>
                             </div>
-                            ${cc.hit_front_nums && cc.hit_front_nums.length ? `<div style="font-size:0.8em;color:#9AA3AF;">命中前区: <span style="color:#28a745;">${cc.hit_front_nums.join(' ')}</span></div>` : ''}
-                            <div style="font-size:0.85em;color:${(cc.hit_total ?? 0) >= 3 ? '#28a745' : '#9AA3AF'};margin-top:8px;font-weight:500;">${(cc.hit_total ?? 0) >= 3 ? '🎉 恭喜中奖！' : '未中奖，下期继续加油'}</div>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;">
+                                <div>
+                                    <div style="font-size:0.78em;color:#9AA3AF;margin-bottom:8px;letter-spacing:1px;">前区（5个）</div>
+                                    <div>${renderBalls(fixed.front || [], '#7B5BD6', 36)}</div>
+                                </div>
+                                <div>
+                                    <div style="font-size:0.78em;color:#9AA3AF;margin-bottom:8px;letter-spacing:1px;">后区（2个）</div>
+                                    <div>${renderBalls(fixed.back || [], '#B39DDB', 36)}</div>
+                                </div>
+                            </div>
                         </div>
-                        <div style="padding:15px;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid rgba(201,162,39,0.2);">
-                            <div style="font-size:0.9em;color:#C9A227;margin-bottom:10px;font-weight:600;">📊 累计统计（近${stats.total_periods || '-'}期）</div>
+                        
+                        <!-- 2. 本期比对（左右对比+命中高亮） -->
+                        <div style="margin-bottom:15px;padding:18px;background:rgba(40,167,69,0.05);border-radius:14px;border:1px solid rgba(40,167,69,0.3);">
+                            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                                <div style="font-size:1em;color:#28a745;font-weight:700;display:flex;align-items:center;gap:8px;">
+                                    <span style="font-size:1.2em;">📋</span> 本期比对
+                                </div>
+                                <span style="font-size:0.72em;color:#9AA3AF;">第${cc.period || '-'}期 · ${cc.date || ''}</span>
+                            </div>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+                                <!-- 固定号码 -->
+                                <div style="padding:12px;background:rgba(123,91,214,0.08);border-radius:10px;border:1px solid rgba(123,91,214,0.25);">
+                                    <div style="font-size:0.8em;color:#B39DDB;font-weight:600;margin-bottom:8px;text-align:center;">🎯 固定号码</div>
+                                    <div style="font-size:0.72em;color:#9AA3AF;margin-bottom:4px;">前区</div>
+                                    <div style="margin-bottom:8px;">${renderHighlightBalls(fixed.front, hitFNums, '#7B5BD6', 30)}</div>
+                                    <div style="font-size:0.72em;color:#9AA3AF;margin-bottom:4px;">后区</div>
+                                    <div>${renderHighlightBalls(fixed.back, hitBNums, '#B39DDB', 30)}</div>
+                                </div>
+                                <!-- 开奖号码 -->
+                                <div style="padding:12px;background:rgba(40,167,69,0.08);border-radius:10px;border:1px solid rgba(40,167,69,0.25);">
+                                    <div style="font-size:0.8em;color:#28a745;font-weight:600;margin-bottom:8px;text-align:center;">🎲 开奖号码</div>
+                                    <div style="font-size:0.72em;color:#9AA3AF;margin-bottom:4px;">前区</div>
+                                    <div style="margin-bottom:8px;">${renderBalls(drawF, '#5B8DEF', 30)}</div>
+                                    <div style="font-size:0.72em;color:#9AA3AF;margin-bottom:4px;">后区</div>
+                                    <div>${renderBalls(drawB, '#9AA3AF', 30)}</div>
+                                </div>
+                            </div>
+                            <!-- 命中统计 -->
+                            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;padding:12px;background:rgba(255,255,255,0.02);border-radius:10px;">
+                                <div>
+                                    <div style="font-size:1.6em;font-weight:bold;color:#7B5BD6;">${cc.hit_front ?? '-'}</div>
+                                    <div style="font-size:0.7em;color:#9AA3AF;">前区命中</div>
+                                </div>
+                                <div>
+                                    <div style="font-size:1.6em;font-weight:bold;color:#B39DDB;">${cc.hit_back ?? '-'}</div>
+                                    <div style="font-size:0.7em;color:#9AA3AF;">后区命中</div>
+                                </div>
+                                <div>
+                                    <div style="font-size:1.6em;font-weight:bold;color:${(cc.hit_total ?? 0) >= 3 ? '#28a745' : '#C9A227'};">${cc.hit_total ?? '-'}</div>
+                                    <div style="font-size:0.7em;color:#9AA3AF;">合计命中</div>
+                                </div>
+                            </div>
+                            ${(hitFNums.length > 0 || hitBNums.length > 0) ? `
+                            <div style="margin-top:12px;padding:10px 12px;background:rgba(40,167,69,0.1);border-radius:8px;border-left:3px solid #28a745;">
+                                <span style="font-size:0.8em;color:#28a745;font-weight:600;">✅ 命中号码：</span>
+                                <span style="font-size:0.9em;color:#fff;font-weight:bold;">${[...hitFNums, ...hitBNums].join(' ')}</span>
+                            </div>` : ''}
+                            <div style="margin-top:10px;text-align:center;font-size:0.85em;color:${(cc.hit_total ?? 0) >= 3 ? '#28a745' : '#9AA3AF'};font-weight:600;">
+                                ${(cc.hit_total ?? 0) >= 3 ? '🎉 恭喜中奖！' : '未中奖，下期继续加油 💪'}
+                            </div>
+                        </div>
+                        
+                        <!-- 3. 累计统计 -->
+                        <div style="margin-bottom:15px;padding:18px;background:rgba(255,255,255,0.03);border-radius:14px;border:1px solid rgba(201,162,39,0.25);">
+                            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                                <div style="font-size:1em;color:#C9A227;font-weight:700;display:flex;align-items:center;gap:8px;">
+                                    <span style="font-size:1.2em;">📊</span> 累计统计
+                                </div>
+                                <span style="font-size:0.72em;color:#9AA3AF;">近${stats.total_periods || '-'}期</span>
+                            </div>
                             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-                                <div class="stat" style="margin:0;"><span class="stat-label">命中≥3个期数</span><span class="stat-value">${stats.hit_periods || 0}期</span></div>
-                                <div class="stat" style="margin:0;"><span class="stat-label">命中率</span><span class="stat-value">${stats.total_periods ? ((stats.hit_periods || 0) / stats.total_periods * 100).toFixed(1) : 0}%</span></div>
-                                <div class="stat" style="margin:0;"><span class="stat-label">平均前区命中</span><span class="stat-value">${stats.avg_hit_f || 0}个</span></div>
-                                <div class="stat" style="margin:0;"><span class="stat-label">平均后区命中</span><span class="stat-value">${stats.avg_hit_b || 0}个</span></div>
-                                <div class="stat" style="margin:0;"><span class="stat-label">最高前区命中</span><span class="stat-value">${stats.max_hit_f || 0}个</span></div>
-                                <div class="stat" style="margin:0;"><span class="stat-label">最高后区命中</span><span class="stat-value">${stats.max_hit_b || 0}个</span></div>
+                                <div style="padding:12px;background:rgba(201,162,39,0.08);border-radius:10px;text-align:center;">
+                                    <div style="font-size:1.5em;font-weight:bold;color:#C9A227;">${stats.hit_periods || 0}</div>
+                                    <div style="font-size:0.72em;color:#9AA3AF;">命中≥3个期数</div>
+                                </div>
+                                <div style="padding:12px;background:rgba(40,167,69,0.08);border-radius:10px;text-align:center;">
+                                    <div style="font-size:1.5em;font-weight:bold;color:#28a745;">${stats.total_periods ? ((stats.hit_periods || 0) / stats.total_periods * 100).toFixed(1) : 0}%</div>
+                                    <div style="font-size:0.72em;color:#9AA3AF;">命中率</div>
+                                </div>
+                                <div style="padding:12px;background:rgba(91,141,239,0.08);border-radius:10px;text-align:center;">
+                                    <div style="font-size:1.5em;font-weight:bold;color:#5B8DEF;">${stats.avg_hit_f || 0}</div>
+                                    <div style="font-size:0.72em;color:#9AA3AF;">平均前区命中</div>
+                                </div>
+                                <div style="padding:12px;background:rgba(179,157,219,0.08);border-radius:10px;text-align:center;">
+                                    <div style="font-size:1.5em;font-weight:bold;color:#B39DDB;">${stats.avg_hit_b || 0}</div>
+                                    <div style="font-size:0.72em;color:#9AA3AF;">平均后区命中</div>
+                                </div>
+                                <div style="padding:12px;background:rgba(255,193,7,0.08);border-radius:10px;text-align:center;">
+                                    <div style="font-size:1.5em;font-weight:bold;color:#FFC107;">${stats.max_hit_f || 0}</div>
+                                    <div style="font-size:0.72em;color:#9AA3AF;">最高前区命中</div>
+                                </div>
+                                <div style="padding:12px;background:rgba(255,193,7,0.08);border-radius:10px;text-align:center;">
+                                    <div style="font-size:1.5em;font-weight:bold;color:#FFC107;">${stats.max_hit_b || 0}</div>
+                                    <div style="font-size:0.72em;color:#9AA3AF;">最高后区命中</div>
+                                </div>
                             </div>
-                            ${stats.total_prize ? `<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.1);font-size:0.85em;color:#C9A227;">累计中奖金额约: <span style="font-weight:bold;font-size:1.1em;">${stats.total_prize}元</span></div>` : ''}
+                            ${stats.total_prize ? `
+                            <div style="margin-top:12px;padding:12px;background:linear-gradient(135deg,rgba(201,162,39,0.15),rgba(201,162,39,0.05));border-radius:10px;text-align:center;">
+                                <div style="font-size:0.78em;color:#9AA3AF;margin-bottom:4px;">累计中奖金额约</div>
+                                <div style="font-size:1.6em;font-weight:bold;color:#C9A227;">${stats.total_prize} <span style="font-size:0.6em;">元</span></div>
+                            </div>` : ''}
+                        </div>
+                        
+                        <!-- 4. 孤注一掷 VS 固定号（左右对比） -->
+                        <div style="padding:18px;background:linear-gradient(135deg,rgba(201,162,39,0.1),rgba(123,91,214,0.06));border-radius:14px;border:1px solid rgba(201,162,39,0.35);">
+                            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                                <div style="font-size:1em;color:#C9A227;font-weight:700;display:flex;align-items:center;gap:8px;">
+                                    <span style="font-size:1.2em;">⚔️</span> 孤注一掷 VS 固定号
+                                </div>
+                                <span style="font-size:0.72em;padding:4px 10px;background:rgba(201,162,39,0.15);color:#C9A227;border-radius:20px;font-weight:500;">重合度分析</span>
+                            </div>
+                            <!-- 重合度数字 -->
+                            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;margin-bottom:14px;">
+                                <div style="padding:10px;background:rgba(201,162,39,0.1);border-radius:8px;">
+                                    <div style="font-size:1.4em;font-weight:bold;color:#C9A227;">${overlapF.length}</div>
+                                    <div style="font-size:0.7em;color:#9AA3AF;">前区重合</div>
+                                </div>
+                                <div style="padding:10px;background:rgba(212,175,55,0.1);border-radius:8px;">
+                                    <div style="font-size:1.4em;font-weight:bold;color:#D4AF37;">${overlapB.length}</div>
+                                    <div style="font-size:0.7em;color:#9AA3AF;">后区重合</div>
+                                </div>
+                                <div style="padding:10px;background:${overlapTotal >= 3 ? 'rgba(40,167,69,0.1)' : 'rgba(154,163,175,0.1)'};border-radius:8px;">
+                                    <div style="font-size:1.4em;font-weight:bold;color:${overlapTotal >= 3 ? '#28a745' : '#9AA3AF'};">${overlapTotal}</div>
+                                    <div style="font-size:0.7em;color:#9AA3AF;">总重合</div>
+                                </div>
+                            </div>
+                            <!-- 左右对比号码 -->
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                                <div style="padding:12px;background:rgba(201,162,39,0.08);border-radius:10px;border:1px solid rgba(201,162,39,0.25);">
+                                    <div style="font-size:0.8em;color:#C9A227;font-weight:600;margin-bottom:8px;text-align:center;">🎯 孤注一掷</div>
+                                    <div style="font-size:0.72em;color:#9AA3AF;margin-bottom:4px;">前区（重合高亮）</div>
+                                    <div style="margin-bottom:8px;">${renderHighlightBalls(loneF, overlapF, '#C9A227', 30)}</div>
+                                    <div style="font-size:0.72em;color:#9AA3AF;margin-bottom:4px;">后区</div>
+                                    <div>${renderHighlightBalls(loneB, overlapB, '#D4AF37', 30)}</div>
+                                </div>
+                                <div style="padding:12px;background:rgba(123,91,214,0.08);border-radius:10px;border:1px solid rgba(123,91,214,0.25);">
+                                    <div style="font-size:0.8em;color:#B39DDB;font-weight:600;margin-bottom:8px;text-align:center;">🎯 固定号码</div>
+                                    <div style="font-size:0.72em;color:#9AA3AF;margin-bottom:4px;">前区（重合高亮）</div>
+                                    <div style="margin-bottom:8px;">${renderHighlightBalls(fixF, overlapF, '#7B5BD6', 30)}</div>
+                                    <div style="font-size:0.72em;color:#9AA3AF;margin-bottom:4px;">后区</div>
+                                    <div>${renderHighlightBalls(fixB, overlapB, '#B39DDB', 30)}</div>
+                                </div>
+                            </div>
+                            ${overlapTotal > 0 ? `
+                            <div style="margin-top:12px;padding:10px 12px;background:rgba(40,167,69,0.1);border-radius:8px;border-left:3px solid #28a745;">
+                                <span style="font-size:0.8em;color:#28a745;font-weight:600;">✅ 重合号码：</span>
+                                <span style="font-size:0.9em;color:#fff;font-weight:bold;">${[...overlapF, ...overlapB].join(' ')}</span>
+                            </div>` : `
+                            <div style="margin-top:12px;padding:10px 12px;background:rgba(154,163,175,0.08);border-radius:8px;border-left:3px solid #9AA3AF;">
+                                <span style="font-size:0.8em;color:#9AA3AF;">💡 本期无重合号码，两组选号思路完全不同，分散风险更稳健</span>
+                            </div>`}
                         </div>
                     </div>`;
                 }
