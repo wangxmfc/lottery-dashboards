@@ -462,10 +462,12 @@
                         </div>
                     </div>
                     
-                    <!-- 第二层：5层分类（每层可折叠看详情） -->
-                    <div id="full-model-layers-list" style="margin-bottom:10px;">
-                        <div style="font-size:0.9em;color:#C9A227;margin-bottom:8px;">📊 5层架构分类（点击展开查看详情）</div>
-                        <!-- 动态生成5层分类列表 -->
+                    <!-- 第二层：5层分类（2列网格卡片，每层可折叠看详情） -->
+                    <div id="full-model-layers-list" style="margin-bottom:15px;">
+                        <div style="font-size:0.9em;color:#C9A227;margin-bottom:10px;">📊 5层架构分类（点击展开查看详情）</div>
+                        <div id="full-layers-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
+                            <!-- 动态生成5层分类卡片 -->
+                        </div>
                     </div>
                     
                     <!-- 第三层：异常告警（只展示有问题的模型） -->
@@ -1036,14 +1038,14 @@
             if (normalEl) normalEl.textContent = fmm.total || 0;
             if (warningEl) warningEl.textContent = 0;
             
-            // 2. 渲染5层分类列表（第二层：分类→可折叠详情）
-            const layersListEl = document.getElementById('full-model-layers-list');
-            if (!layersListEl) return;
+            // 2. 渲染5层分类列表（2列网格卡片，和49个核心模型风格一致）
+            const layersGridEl = document.getElementById('full-layers-grid');
+            if (!layersGridEl) return;
             
             const layerKeys = ['layer1_core', 'layer2_prediction', 'layer3_tools', 'layer4_lottery', 'layer5_system'];
             const layerColors = ['#C9A227', '#28a745', '#17a2b8', '#6f42c1', '#fd7e14'];
             
-            let html = '<div style="font-size:0.9em;color:#C9A227;margin-bottom:8px;">📊 5层架构分类（点击展开查看详情）</div>';
+            let gridHtml = '';
             
             layerKeys.forEach((layerKey, index) => {
                 const layer = layers[layerKey];
@@ -1051,58 +1053,65 @@
                 
                 const color = layerColors[index] || '#C9A227';
                 const count = layer.count || 0;
-                const percentage = fmm.total ? Math.round(count / fmm.total * 100) : 0;
                 
-                html += `
-                    <div style="margin-bottom:8px;">
-                        <div onclick="toggleFullLayer('${layerKey}')" style="cursor:pointer;padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:3px solid ${color};display:flex;justify-content:space-between;align-items:center;">
-                            <div>
-                                <span style="font-size:0.9em;color:#fff;font-weight:500;">${layer.name || layerKey}</span>
-                                <span style="font-size:0.75em;color:#9AA3AF;margin-left:10px;">${layer.desc || ''}</span>
-                            </div>
-                            <div style="text-align:right;">
-                                <span style="font-size:1.1em;font-weight:bold;color:${color};">${count}</span>
-                                <span style="font-size:0.75em;color:#9AA3AF;margin-left:5px;">个 (${percentage}%)</span>
-                                <span id="layer-icon-${layerKey}" style="font-size:0.8em;color:#9AA3AF;margin-left:10px;">▼</span>
-                            </div>
-                        </div>
-                        <div id="layer-detail-${layerKey}" style="display:none;margin-top:6px;padding:10px;background:rgba(255,255,255,0.02);border-radius:8px;max-height:300px;overflow-y:auto;">
-                            <!-- 该层模型列表（第三层：详情） -->
-                        </div>
+                gridHtml += `
+                    <div onclick="toggleFullLayer('${layerKey}')" style="cursor:pointer;padding:12px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid ${color};">
+                        <div style="font-size:1em;color:#fff;font-weight:500;margin-bottom:4px;">${layer.name || layerKey}</div>
+                        <div style="font-size:0.8em;color:${color};font-weight:500;">${count}个模型 · ${count}正常</div>
+                        <div style="font-size:0.7em;color:#9AA3AF;margin-top:2px;">${layer.desc || ''}</div>
                     </div>
                 `;
             });
             
-            layersListEl.innerHTML = html;
+            // 第5个卡片后补一个空位保持网格整齐
+            if (layerKeys.length % 2 === 1) {
+                gridHtml += '<div style="visibility:hidden;"></div>';
+            }
             
-            // 填充每一层的模型详情
-            layerKeys.forEach((layerKey) => {
+            layersGridEl.innerHTML = gridHtml;
+            
+            // 为每层创建详情容器（放在网格下面）
+            const layersListEl = document.getElementById('full-model-layers-list');
+            layerKeys.forEach((layerKey, index) => {
                 const layer = layers[layerKey];
                 if (!layer) return;
                 
-                const detailEl = document.getElementById(`layer-detail-${layerKey}`);
-                if (!detailEl) return;
-                
+                const color = layerColors[index] || '#C9A227';
                 const funcs = layer.functions || [];
-                let detailHtml = '';
                 
-                // 显示前20个，超出显示"还有X个"
-                const showCount = Math.min(funcs.length, 20);
+                let detailHtml = `
+                    <div id="layer-detail-${layerKey}" style="display:none;margin-top:10px;padding:12px;background:rgba(255,255,255,0.02);border-radius:10px;border-left:3px solid ${color};max-height:400px;overflow-y:auto;">
+                        <div style="font-size:0.85em;color:${color};font-weight:500;margin-bottom:10px;">${layer.name} - 共${funcs.length}个函数</div>
+                `;
+                
+                // 显示前30个，超出显示"还有X个"
+                const showCount = Math.min(funcs.length, 30);
                 for (let i = 0; i < showCount; i++) {
                     const func = funcs[i];
                     detailHtml += `
-                        <div style="padding:6px 8px;margin-bottom:4px;background:rgba(255,255,255,0.03);border-radius:6px;display:flex;justify-content:space-between;">
-                            <span style="font-size:0.8em;color:#ddd;">${i + 1}. ${func.name}</span>
-                            <span style="font-size:0.7em;color:#666;">${func.file || ''}</span>
+                        <div style="padding:8px 10px;margin-bottom:6px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:2px solid ${color};">
+                            <div style="display:flex;justify-content:space-between;align-items:center;">
+                                <div>
+                                    <span style="font-size:0.85em;color:${color};font-weight:500;">${i + 1}. ${func.name}</span>
+                                    <span style="font-size:0.7em;color:#666;margin-left:8px;">${func.category || ''}</span>
+                                </div>
+                                <span style="font-size:0.7em;padding:2px 8px;background:rgba(40,167,69,0.15);color:#28a745;border-radius:10px;">正常</span>
+                            </div>
+                            <div style="font-size:0.7em;color:#666;margin-top:3px;">文件: ${func.file || '未知'}</div>
                         </div>
                     `;
                 }
                 
-                if (funcs.length > 20) {
-                    detailHtml += `<div style="text-align:center;padding:6px;font-size:0.75em;color:#9AA3AF;">... 还有 ${funcs.length - 20} 个函数（共${funcs.length}个）</div>`;
+                if (funcs.length > 30) {
+                    detailHtml += `<div style="text-align:center;padding:8px;font-size:0.75em;color:#9AA3AF;">... 还有 ${funcs.length - 30} 个函数（共${funcs.length}个）</div>`;
                 }
                 
-                detailEl.innerHTML = detailHtml;
+                detailHtml += '</div>';
+                
+                // 把详情容器追加到列表后面
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = detailHtml;
+                layersListEl.appendChild(tempDiv.firstElementChild);
             });
             
             console.log('✅ 全量模型监控已渲染:', fmm.total + '个模型, ' + Object.keys(layers).length + '层架构');
