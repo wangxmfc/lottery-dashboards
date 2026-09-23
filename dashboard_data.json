@@ -5,7 +5,7 @@
     "lottery_count": 7,
     "model_usage_rate": 100,
     "system_status": "正常运行",
-    "last_update": "2026-09-24 00:17:25"
+    "last_update": "2026-09-24 00:28:23"
   },
   "hit_rates": [
     {
@@ -213,7 +213,17 @@
         "lone_hit_sub": 0,
         "lone_hit_total": 0,
         "lone_hit_main_nums": [],
-        "lone_hit_sub_nums": []
+        "lone_hit_sub_nums": [],
+        "prize_main": {
+          "level": "未中奖",
+          "prize": "",
+          "won": false
+        },
+        "prize_lone": {
+          "level": "未中奖",
+          "prize": "",
+          "won": false
+        }
       },
       "hit_trend": [
         {
@@ -659,7 +669,17 @@
         "lone_hit_sub": 0,
         "lone_hit_total": 0,
         "lone_hit_main_nums": [],
-        "lone_hit_sub_nums": []
+        "lone_hit_sub_nums": [],
+        "prize_main": {
+          "level": "未中奖",
+          "prize": "",
+          "won": false
+        },
+        "prize_lone": {
+          "level": "未中奖",
+          "prize": "",
+          "won": false
+        }
       },
       "hit_trend": [
         {
@@ -1281,7 +1301,17 @@
         "lone_hit_main_nums": [
           "02"
         ],
-        "lone_hit_sub_nums": []
+        "lone_hit_sub_nums": [],
+        "prize_main": {
+          "level": "十等奖",
+          "prize": "1元",
+          "won": true
+        },
+        "prize_lone": {
+          "level": "十等奖",
+          "prize": "1元",
+          "won": true
+        }
       },
       "hit_trend": [
         {
@@ -1998,7 +2028,17 @@
         "lone_hit_main_nums": [
           "05"
         ],
-        "lone_hit_sub_nums": []
+        "lone_hit_sub_nums": [],
+        "prize_main": {
+          "level": "未中奖",
+          "prize": "",
+          "won": false
+        },
+        "prize_lone": {
+          "level": "未中奖",
+          "prize": "",
+          "won": false
+        }
       },
       "hit_trend": [
         {
@@ -2390,9 +2430,19 @@
         "lone_hit_total": 2,
         "lone_hit_main_nums": [],
         "lone_hit_sub_nums": [
-          "03",
-          "06"
-        ]
+          "06",
+          "03"
+        ],
+        "prize_main": {
+          "level": "未中奖",
+          "prize": "",
+          "won": false
+        },
+        "prize_lone": {
+          "level": "未中奖",
+          "prize": "",
+          "won": false
+        }
       },
       "hit_trend": [
         {
@@ -2888,7 +2938,17 @@
           "09",
           "05"
         ],
-        "lone_hit_sub_nums": []
+        "lone_hit_sub_nums": [],
+        "prize_main": {
+          "level": "六等奖",
+          "prize": "5元",
+          "won": true
+        },
+        "prize_lone": {
+          "level": "六等奖",
+          "prize": "5元",
+          "won": true
+        }
       },
       "hit_trend": [
         {
@@ -3250,7 +3310,17 @@
           "26",
           "08"
         ],
-        "lone_hit_sub_nums": []
+        "lone_hit_sub_nums": [],
+        "prize_main": {
+          "level": "未中奖",
+          "prize": "",
+          "won": false
+        },
+        "prize_lone": {
+          "level": "未中奖",
+          "prize": "",
+          "won": false
+        }
       },
       "hit_trend": [
         {
@@ -3534,7 +3604,7 @@
         "desc": "基于历史出现频率的加权预测",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "omission_of",
@@ -3543,7 +3613,7 @@
         "desc": "分析号码遗漏周期和回补概率",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "pattern_analysis",
@@ -3552,7 +3622,7 @@
         "desc": "识别历史开奖中的重复模式",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "markov_transition",
@@ -3561,7 +3631,7 @@
         "desc": "基于状态转移概率的预测",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "cooccurrence_analysis",
@@ -3570,7 +3640,7 @@
         "desc": "分析号码共同出现的概率",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "hot_cold_trend",
@@ -3579,7 +3649,7 @@
         "desc": "分析号码冷热转换趋势",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "omission_cycle_analysis",
@@ -3588,7 +3658,7 @@
         "desc": "分析号码遗漏的周期性规律",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "tail_analysis",
@@ -3597,7 +3667,7 @@
         "desc": "分析号码尾数的分布规律",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "road_012_analysis",
@@ -3606,7 +3676,7 @@
         "desc": "分析号码除3余数的分布",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "mutex_pair_analysis",
@@ -3615,7 +3685,7 @@
         "desc": "分析 rarely 同时出现的号码对",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "poisson_omission",
@@ -3624,7 +3694,7 @@
         "desc": "基于泊松分布的遗漏概率计算",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "repeat_probability",
@@ -3633,7 +3703,7 @@
         "desc": "计算号码重复出现的概率",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "cold_to_warm_signal",
@@ -3642,7 +3712,7 @@
         "desc": "检测冷号转热号的拐点信号",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "time_series_ma",
@@ -3651,7 +3721,7 @@
         "desc": "移动平均时间序列分析",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "grey_gm11",
@@ -3660,7 +3730,7 @@
         "desc": "灰色系统理论预测模型",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "linear_trend",
@@ -3669,7 +3739,7 @@
         "desc": "线性回归趋势外推预测",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "variance_analysis",
@@ -3678,7 +3748,7 @@
         "desc": "基于方差的波动性分析",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "apriori_rules",
@@ -3687,7 +3757,7 @@
         "desc": "Apriori算法挖掘号码关联规则",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "kmeans_cluster",
@@ -3696,7 +3766,7 @@
         "desc": "K-means聚类分析号码分组",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "monte_carlo_filter",
@@ -3705,7 +3775,7 @@
         "desc": "蒙特卡洛模拟筛选组合",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "random_forest_prediction",
@@ -3714,7 +3784,7 @@
         "desc": "随机森林集成学习预测",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "gradient_boosting_predict",
@@ -3723,7 +3793,7 @@
         "desc": "梯度提升树GBDT预测",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "lstm_style_predict",
@@ -3732,7 +3802,7 @@
         "desc": "LSTM长短期记忆网络预测",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "logistic_regression_predict",
@@ -3741,7 +3811,7 @@
         "desc": "逻辑回归分类预测",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "mlp_neural_network",
@@ -3750,7 +3820,7 @@
         "desc": "多层感知机神经网络",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "lstm_time_series",
@@ -3759,7 +3829,7 @@
         "desc": "完整LSTM时间序列模型",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "entropy_weight_adjust",
@@ -3768,7 +3838,7 @@
         "desc": "基于信息熵的权重调整",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "bayesian_update_weights",
@@ -3777,7 +3847,7 @@
         "desc": "贝叶斯方法动态更新权重",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "genetic_optimize_weights",
@@ -3786,7 +3856,7 @@
         "desc": "遗传算法优化模型权重",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "time_decay_optimization",
@@ -3795,7 +3865,7 @@
         "desc": "基于时间衰减的权重优化",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "auto_tune_weights",
@@ -3804,7 +3874,7 @@
         "desc": "自动调整各模型权重",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "auto_weight_search",
@@ -3813,7 +3883,7 @@
         "desc": "网格搜索最优权重组合",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "optimized_weight_search",
@@ -3822,7 +3892,7 @@
         "desc": "优化算法搜索最优权重",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "get_dynamic_weights",
@@ -3831,7 +3901,7 @@
         "desc": "获取动态计算的模型权重",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "cross_lottery_correlation",
@@ -3840,7 +3910,7 @@
         "desc": "跨彩种数据关联分析",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "cross_lottery_vote",
@@ -3849,7 +3919,7 @@
         "desc": "跨彩种模型投票融合",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "model_blending",
@@ -3858,7 +3928,7 @@
         "desc": "多模型结果混合融合",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "stacking_predict",
@@ -3867,7 +3937,7 @@
         "desc": "Stacking集成学习预测",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "attention_weighting",
@@ -3876,7 +3946,7 @@
         "desc": "注意力机制加权融合",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "transfer_learning",
@@ -3885,7 +3955,7 @@
         "desc": "跨领域迁移学习",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "per_model_weight_learning",
@@ -3894,7 +3964,7 @@
         "desc": "每个模型独立学习权重",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "k_fold_cross_validation",
@@ -3903,7 +3973,7 @@
         "desc": "K折交叉验证评估模型",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "hyperparameter_tuning",
@@ -3912,7 +3982,7 @@
         "desc": "自动调优模型超参数",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "online_learning_update",
@@ -3921,7 +3991,7 @@
         "desc": "在线学习实时更新模型",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "get_active_weights",
@@ -3930,7 +4000,7 @@
         "desc": "获取当前激活的模型权重",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "get_online_weights",
@@ -3939,7 +4009,7 @@
         "desc": "获取在线学习的权重",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "calc_dimension_correlation",
@@ -3948,7 +4018,7 @@
         "desc": "计算各维度间的相关性",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "diversity_check",
@@ -3957,7 +4027,7 @@
         "desc": "检查预测结果的多样性",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       },
       {
         "id": "calc_confidence",
@@ -3966,7 +4036,7 @@
         "desc": "计算预测结果的置信度",
         "status": "正常",
         "exists": true,
-        "last_run": "2026-09-24 00:17:24"
+        "last_run": "2026-09-24 00:28:22"
       }
     ]
   },
@@ -8192,11 +8262,11 @@
         "warning": 0
       }
     },
-    "last_update": "2026-09-24 00:17:25"
+    "last_update": "2026-09-24 00:28:23"
   },
-  "last_update": "2026-09-24 00:17:25",
+  "last_update": "2026-09-24 00:28:23",
   "consistency_check": {
-    "checked_at": "2026-09-24 00:17:25",
+    "checked_at": "2026-09-24 00:28:23",
     "issues_found": 0,
     "issues": [],
     "status": "PASS"
