@@ -503,6 +503,22 @@
             color: rgba(26, 26, 46, 0.45);
             border-top-color: rgba(201, 162, 39, 0.2);
         }
+        
+        /* 彩种详情标签页按钮 */
+        .lottery-tab-btn {
+            transition: all 0.2s ease;
+        }
+        .lottery-tab-btn:hover {
+            background: rgba(201, 162, 39, 0.15) !important;
+            color: #C9A227 !important;
+            border-color: rgba(201, 162, 39, 0.5) !important;
+        }
+        .lottery-tab-btn.active {
+            background: linear-gradient(135deg, #C9A227, #b8941f) !important;
+            color: #fff !important;
+            border-color: #C9A227 !important;
+            box-shadow: 0 2px 10px rgba(201, 162, 39, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -877,14 +893,41 @@
             container.innerHTML = html;
         }
         
-        // 渲染各彩种详情
+        // 彩种详情标签页切换
+        function switchLotteryTab(lotteryId, tabName) {
+            const section = document.getElementById(lotteryId);
+            if (!section) return;
+            section.querySelectorAll('.lottery-tab-btn').forEach(b => b.classList.remove('active'));
+            section.querySelectorAll('.lottery-tab-content').forEach(c => c.style.display = 'none');
+            const btn = section.querySelector(`[data-tab="${tabName}"]`);
+            const content = section.querySelector(`#${lotteryId}-tab-${tabName}`);
+            if (btn) btn.classList.add('active');
+            if (content) content.style.display = 'block';
+        }
+        
+        // 渲染号码球
+        function renderBalls(nums, color, size) {
+            if (!nums || !nums.length) return '<span style="color:#9AA3AF;">暂无数据</span>';
+            const s = size || 36;
+            return nums.map(n => {
+                const num = String(n).padStart(2, '0');
+                return `<span style="display:inline-flex;align-items:center;justify-content:center;width:${s}px;height:${s}px;border-radius:50%;background:radial-gradient(circle at 32% 28%,${color}CC,${color} 65%);color:#fff;font-weight:bold;font-size:${s*0.4}px;box-shadow:0 2px 6px rgba(0,0,0,0.2);margin:3px;">${num}</span>`;
+            }).join('');
+        }
+        
+        // 渲染各彩种详情（标签页布局：概览/核验/分析/思路/固定号）
         function renderLotteryDetails(data) {
             if (!data || !data.details) return;
             
             const lotteryIds = ['ssq', 'dlt', 'kl8', 'fc3d', 'pl35', 'qxc', 'qlc'];
-            const lotteryEmojis = {
-                'ssq': '🔴', 'dlt': '🔵', 'kl8': '🟢', 
-                'fc3d': '🟡', 'pl35': '🟠', 'qxc': '🟣', 'qlc': '⚪'
+            const lotteryConfig = {
+                'ssq': {emoji: '🔴', name: '双色球', mainColor: '#E53935', subColor: '#1E88E5', mainLabel: '红球(6个)', subLabel: '蓝球(1个)'},
+                'dlt': {emoji: '🔵', name: '大乐透', mainColor: '#7B5BD6', subColor: '#B39DDB', mainLabel: '前区(5个)', subLabel: '后区(2个)'},
+                'kl8': {emoji: '🟢', name: '快乐8', mainColor: '#43A047', subColor: null, mainLabel: '开奖号码(20个)', subLabel: null},
+                'fc3d': {emoji: '🟡', name: '福彩3D', mainColor: '#F9A825', subColor: null, mainLabel: '开奖号码(3个)', subLabel: null},
+                'pl35': {emoji: '🟠', name: '排列3/5', mainColor: '#FB8C00', subColor: '#E65100', mainLabel: '排列3', subLabel: '排列5'},
+                'qxc': {emoji: '🟣', name: '七星彩', mainColor: '#8E24AA', subColor: '#BA68C8', mainLabel: '基本号(6个)', subLabel: '特别号(1个)'},
+                'qlc': {emoji: '⚪', name: '七乐彩', mainColor: '#546E7A', subColor: '#90A4AE', mainLabel: '基本号(7个)', subLabel: '特别号(1个)'},
             };
             
             lotteryIds.forEach(lotteryId => {
@@ -894,48 +937,236 @@
                 const section = document.getElementById(lotteryId);
                 if (!section) return;
                 
-                const emoji = lotteryEmojis[lotteryId] || '';
+                const cfg = lotteryConfig[lotteryId] || {};
+                const emoji = cfg.emoji || '';
                 const gradeCls = gradeClass[detail.grade] || 'badge-warning';
-                const dateStr = detail.latest_date || '';
-                const dateDisplay = dateStr ? ' · ' + dateStr + '开奖' : '';
-                const cardImg = detail.card_image || '';
+                
+                // 标签页列表
+                let tabs = [
+                    {id: 'overview', name: '📊 概览'},
+                    {id: 'check', name: '✅ 核验'},
+                    {id: 'analysis', name: '🔍 分析'},
+                    {id: 'strategy', name: '💡 思路'},
+                ];
+                if (lotteryId === 'dlt') {
+                    tabs.push({id: 'fixed', name: '🎯 固定号'});
+                }
+                
+                // ========== 概览标签内容 ==========
+                const latestDraw = detail.latest_draw || {};
+                const prediction = detail.prediction || {};
+                let overviewHtml = `
+                <div class="lottery-tab-content" id="${lotteryId}-tab-overview" style="display:block;">
+                    <div class="hit-rate" style="margin-bottom:15px;">命中率提升 ${formatImprovement(detail.improvement)}</div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;">
+                        <div class="stat" style="margin:0;"><span class="stat-label">平均命中</span><span class="stat-value">${detail.avg_hit}个</span></div>
+                        <div class="stat" style="margin:0;"><span class="stat-label">对比随机基准</span><span class="stat-value">${formatImprovement(detail.improvement)}</span></div>
+                        <div class="stat" style="margin:0;"><span class="stat-label">样本期数</span><span class="stat-value">${detail.total_periods}期</span></div>
+                        <div class="stat" style="margin:0;"><span class="stat-label">命中率</span><span class="stat-value">${detail.hit_rate}%</span></div>
+                    </div>
+                    <div class="stat" style="margin-bottom:20px;"><span class="stat-label">状态等级</span><span class="badge ${gradeCls}">${detail.grade}</span></div>
+                `;
+                
+                // 最新开奖
+                if (latestDraw.period) {
+                    overviewHtml += `
+                    <div style="margin-bottom:20px;padding:15px;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid rgba(201,162,39,0.2);">
+                        <div style="font-size:0.9em;color:#C9A227;margin-bottom:10px;font-weight:600;">🎲 最新开奖（第${latestDraw.period}期 · ${latestDraw.date || ''}）</div>
+                        <div style="font-size:0.8em;color:#9AA3AF;margin-bottom:6px;">${cfg.mainLabel || '开奖号码'}</div>
+                        <div>${renderBalls(latestDraw[Object.keys(latestDraw).find(k => k !== 'period' && k !== 'date')] || [], cfg.mainColor || '#C9A227', 32)}</div>
+                    `;
+                    if (cfg.subLabel && latestDraw[Object.keys(latestDraw).find(k => k !== 'period' && k !== 'date' && latestDraw[k] !== latestDraw[Object.keys(latestDraw).find(k => k !== 'period' && k !== 'date')])]) {
+                        const subKey = Object.keys(latestDraw).find(k => k !== 'period' && k !== 'date' && k !== Object.keys(latestDraw).find(k2 => k2 !== 'period' && k2 !== 'date'));
+                        overviewHtml += `<div style="font-size:0.8em;color:#9AA3AF;margin:10px 0 6px;">${cfg.subLabel}</div><div>${renderBalls(latestDraw[subKey] || [], cfg.subColor || '#9AA3AF', 32)}</div>`;
+                    }
+                    overviewHtml += `</div>`;
+                }
+                
+                // 本期预测
+                if (prediction.next_period || (prediction.main_nums && prediction.main_nums.length)) {
+                    overviewHtml += `
+                    <div style="padding:15px;background:rgba(201,162,39,0.05);border-radius:12px;border:1px solid rgba(201,162,39,0.3);">
+                        <div style="font-size:0.9em;color:#C9A227;margin-bottom:10px;font-weight:600;">🎯 本期预测参考（第${prediction.next_period || '最新'}期）</div>
+                        <div style="font-size:0.8em;color:#9AA3AF;margin-bottom:6px;">主推${cfg.mainLabel || '号码'}</div>
+                        <div>${renderBalls(prediction.main_nums || [], cfg.mainColor || '#C9A227', 34)}</div>
+                    `;
+                    if (cfg.subLabel && prediction.sub_nums && prediction.sub_nums.length) {
+                        overviewHtml += `<div style="font-size:0.8em;color:#9AA3AF;margin:10px 0 6px;">主推${cfg.subLabel}</div><div>${renderBalls(prediction.sub_nums || [], cfg.subColor || '#9AA3AF', 34)}</div>`;
+                    }
+                    overviewHtml += `</div>`;
+                }
+                overviewHtml += `</div>`;
+                
+                // ========== 核验标签内容 ==========
+                const prevCheck = detail.prev_check || {};
+                const backtestDetail = detail.backtest_detail || [];
+                const hitTrend = detail.hit_trend || [];
+                let checkHtml = `<div class="lottery-tab-content" id="${lotteryId}-tab-check" style="display:none;">`;
+                
+                // 上期预测核验
+                if (prevCheck.period) {
+                    checkHtml += `
+                    <div style="margin-bottom:20px;padding:15px;background:rgba(40,167,69,0.05);border-radius:12px;border:1px solid rgba(40,167,69,0.3);">
+                        <div style="font-size:0.9em;color:#28a745;margin-bottom:10px;font-weight:600;">📋 上期预测核验（第${prevCheck.period}期）</div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center;">
+                            <div><div style="font-size:1.5em;font-weight:bold;color:#C9A227;">${prevCheck.hit_main ?? prevCheck.hit_total ?? '-'}</div><div style="font-size:0.75em;color:#9AA3AF;">${cfg.subLabel ? '主区命中' : '命中个数'}</div></div>
+                            ${cfg.subLabel ? `<div><div style="font-size:1.5em;font-weight:bold;color:#28a745;">${prevCheck.hit_sub ?? '-'}</div><div style="font-size:0.75em;color:#9AA3AF;">副区命中</div></div>` : ''}
+                            <div><div style="font-size:1.5em;font-weight:bold;color:${(prevCheck.hit_total ?? 0) > 0 ? '#28a745' : '#dc3545'};">${prevCheck.hit_total ?? '-'}</div><div style="font-size:0.75em;color:#9AA3AF;">总命中</div></div>
+                        </div>
+                    </div>`;
+                }
+                
+                // 命中趋势
+                if (hitTrend.length > 0) {
+                    checkHtml += `<div style="margin-bottom:20px;"><div style="font-size:0.9em;color:#C9A227;margin-bottom:8px;font-weight:600;">📈 最近${hitTrend.length}期命中趋势</div><div style="display:flex;align-items:flex-end;gap:4px;height:80px;padding:10px;background:rgba(255,255,255,0.02);border-radius:8px;">`;
+                    const maxHit = Math.max(...hitTrend.map(t => t.hit || 0), 1);
+                    hitTrend.forEach(t => {
+                        const h = Math.max(4, (t.hit || 0) / maxHit * 60);
+                        const color = (t.hit || 0) > 0 ? '#C9A227' : '#555';
+                        checkHtml += `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;"><div style="font-size:0.65em;color:#9AA3AF;">${t.hit || 0}</div><div style="width:100%;height:${h}px;background:${color};border-radius:3px 3px 0 0;"></div><div style="font-size:0.6em;color:#666;">${(t.period || '').slice(-3)}</div></div>`;
+                    });
+                    checkHtml += `</div></div>`;
+                }
+                
+                // 回测详情
+                if (backtestDetail.length > 0) {
+                    checkHtml += `<div style="font-size:0.9em;color:#C9A227;margin-bottom:8px;font-weight:600;">📊 回测详情（最近${backtestDetail.length}期）</div><div style="max-height:300px;overflow-y:auto;">`;
+                    backtestDetail.forEach(r => {
+                        const hitColor = (r.hit || 0) > 0 ? '#28a745' : '#dc3545';
+                        // 处理prediction/actual可能是对象或数组的情况
+                        const fmtObj = (v) => {
+                            if (!v) return '-';
+                            if (Array.isArray(v)) return v.join(' ');
+                            if (typeof v === 'object') return Object.entries(v).map(([k, val]) => `${k}:${Array.isArray(val) ? val.join('') : val}`).join(' | ');
+                            return String(v);
+                        };
+                        checkHtml += `
+                        <div style="padding:8px 10px;margin-bottom:6px;background:rgba(255,255,255,0.02);border-radius:8px;border-left:3px solid ${hitColor};">
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                                <span style="font-size:0.8em;color:#C9A227;font-weight:500;">第${r.period || '-'}期</span>
+                                <span style="font-size:0.8em;color:${hitColor};font-weight:600;">命中${r.hit || 0}个</span>
+                            </div>
+                            <div style="font-size:0.75em;color:#9AA3AF;">预测: ${fmtObj(r.prediction)}</div>
+                            <div style="font-size:0.75em;color:#9AA3AF;">开奖: ${fmtObj(r.actual)}</div>
+                        </div>`;
+                    });
+                    checkHtml += `</div>`;
+                }
+                checkHtml += `</div>`;
+                
+                // ========== 分析标签内容 ==========
+                const omission = detail.omission || {};
+                const hotCold = detail.hot_cold || {};
+                let analysisHtml = `<div class="lottery-tab-content" id="${lotteryId}-tab-analysis" style="display:none;">`;
+                
+                // 遗漏分析
+                if (omission.top10 && omission.top10.length > 0) {
+                    analysisHtml += `
+                    <div style="margin-bottom:20px;padding:15px;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid rgba(201,162,39,0.2);">
+                        <div style="font-size:0.9em;color:#C9A227;margin-bottom:10px;font-weight:600;">🔍 遗漏分析（最大遗漏${omission.max || '-'}期 · 平均${omission.avg || '-'}期）</div>
+                        <div style="font-size:0.8em;color:#9AA3AF;margin-bottom:8px;">当前遗漏Top10（冷号候选）</div>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;">`;
+                    omission.top10.forEach(item => {
+                        analysisHtml += `<div style="display:flex;flex-direction:column;align-items:center;padding:6px 8px;background:rgba(220,53,69,0.1);border-radius:8px;border:1px solid rgba(220,53,69,0.3);"><span style="font-weight:bold;color:#fff;font-size:0.9em;">${item.num}</span><span style="font-size:0.7em;color:#dc3545;">${item.omit}期</span></div>`;
+                    });
+                    analysisHtml += `</div></div>`;
+                }
+                
+                // 冷热分布
+                if (hotCold.top10 && hotCold.top10.length > 0) {
+                    analysisHtml += `
+                    <div style="margin-bottom:20px;padding:15px;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid rgba(40,167,69,0.2);">
+                        <div style="font-size:0.9em;color:#28a745;margin-bottom:10px;font-weight:600;">🌡️ 冷热分布（近10期 · 平均出现${hotCold.avg || '-'}次）</div>
+                        <div style="font-size:0.8em;color:#9AA3AF;margin-bottom:8px;">热号Top10（出现次数最多）</div>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:15px;">`;
+                    hotCold.top10.forEach(item => {
+                        analysisHtml += `<div style="display:flex;flex-direction:column;align-items:center;padding:6px 8px;background:rgba(40,167,69,0.1);border-radius:8px;border:1px solid rgba(40,167,69,0.3);"><span style="font-weight:bold;color:#fff;font-size:0.9em;">${item.num}</span><span style="font-size:0.7em;color:#28a745;">${item.count}次</span></div>`;
+                    });
+                    analysisHtml += `</div>`;
+                    if (hotCold.hot && hotCold.hot.length) {
+                        analysisHtml += `<div style="font-size:0.8em;color:#9AA3AF;margin-bottom:6px;">热号区(${hotCold.hot.length}个): <span style="color:#28a745;">${hotCold.hot.join(' ')}</span></div>`;
+                    }
+                    if (hotCold.cold && hotCold.cold.length) {
+                        analysisHtml += `<div style="font-size:0.8em;color:#9AA3AF;margin-top:6px;">冷号区(${hotCold.cold.length}个): <span style="color:#dc3545;">${hotCold.cold.join(' ')}</span></div>`;
+                    }
+                    analysisHtml += `</div>`;
+                }
+                analysisHtml += `</div>`;
+                
+                // ========== 思路标签内容 ==========
+                let strategyHtml = `
+                <div class="lottery-tab-content" id="${lotteryId}-tab-strategy" style="display:none;">
+                    <div style="padding:15px;background:rgba(201,162,39,0.05);border-radius:12px;border:1px solid rgba(201,162,39,0.3);margin-bottom:15px;">
+                        <div style="font-size:0.9em;color:#C9A227;margin-bottom:10px;font-weight:600;">💡 选号思路</div>
+                        <div style="font-size:0.85em;line-height:1.8;color:#ccc;">${detail.strategy || '暂无选号思路'}</div>
+                    </div>
+                    <div style="padding:12px;background:rgba(220,53,69,0.05);border-radius:10px;border:1px solid rgba(220,53,69,0.2);">
+                        <div style="font-size:0.85em;color:#dc3545;font-weight:600;margin-bottom:6px;">⚠️ 温馨提示</div>
+                        <div style="font-size:0.8em;line-height:1.6;color:#9AA3AF;">彩票开奖号码完全随机、无规律可循，以上预测仅为统计启发式参考，每期独立随机，请理性购彩、量力而行，勿大额投入、勿追号倍投。</div>
+                    </div>
+                </div>`;
+                
+                // ========== 大乐透固定号标签内容 ==========
+                let fixedHtml = '';
+                if (lotteryId === 'dlt' && detail.fixed_number) {
+                    const fn = detail.fixed_number;
+                    const fixed = fn.fixed || {};
+                    const cc = fn.current_check || {};
+                    const stats = fn.stats || {};
+                    fixedHtml = `
+                    <div class="lottery-tab-content" id="${lotteryId}-tab-fixed" style="display:none;">
+                        <div style="padding:15px;background:rgba(123,91,214,0.08);border-radius:12px;border:1px solid rgba(123,91,214,0.3);margin-bottom:15px;">
+                            <div style="font-size:0.9em;color:#B39DDB;margin-bottom:10px;font-weight:600;">🎯 你的固定号码</div>
+                            <div style="font-size:0.8em;color:#9AA3AF;margin-bottom:6px;">前区</div>
+                            <div style="margin-bottom:10px;">${renderBalls(fixed.front || [], '#7B5BD6', 34)}</div>
+                            <div style="font-size:0.8em;color:#9AA3AF;margin-bottom:6px;">后区</div>
+                            <div>${renderBalls(fixed.back || [], '#B39DDB', 34)}</div>
+                        </div>
+                        <div style="padding:15px;background:rgba(40,167,69,0.05);border-radius:12px;border:1px solid rgba(40,167,69,0.3);margin-bottom:15px;">
+                            <div style="font-size:0.9em;color:#28a745;margin-bottom:10px;font-weight:600;">📋 本期比对（第${cc.period || '-'}期 · ${cc.date || ''}）</div>
+                            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center;margin-bottom:10px;">
+                                <div><div style="font-size:1.5em;font-weight:bold;color:#7B5BD6;">${cc.hit_front ?? '-'}</div><div style="font-size:0.75em;color:#9AA3AF;">前区命中</div></div>
+                                <div><div style="font-size:1.5em;font-weight:bold;color:#B39DDB;">${cc.hit_back ?? '-'}</div><div style="font-size:0.75em;color:#9AA3AF;">后区命中</div></div>
+                                <div><div style="font-size:1.5em;font-weight:bold;color:${(cc.hit_total ?? 0) >= 3 ? '#28a745' : '#C9A227'};">${cc.hit_total ?? '-'}</div><div style="font-size:0.75em;color:#9AA3AF;">合计命中</div></div>
+                            </div>
+                            ${cc.hit_front_nums && cc.hit_front_nums.length ? `<div style="font-size:0.8em;color:#9AA3AF;">命中前区: <span style="color:#28a745;">${cc.hit_front_nums.join(' ')}</span></div>` : ''}
+                            <div style="font-size:0.85em;color:${(cc.hit_total ?? 0) >= 3 ? '#28a745' : '#9AA3AF'};margin-top:8px;font-weight:500;">${(cc.hit_total ?? 0) >= 3 ? '🎉 恭喜中奖！' : '未中奖，下期继续加油'}</div>
+                        </div>
+                        <div style="padding:15px;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid rgba(201,162,39,0.2);">
+                            <div style="font-size:0.9em;color:#C9A227;margin-bottom:10px;font-weight:600;">📊 累计统计（近${stats.total_periods || '-'}期）</div>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                                <div class="stat" style="margin:0;"><span class="stat-label">命中≥3个期数</span><span class="stat-value">${stats.hit_periods || 0}期</span></div>
+                                <div class="stat" style="margin:0;"><span class="stat-label">命中率</span><span class="stat-value">${stats.total_periods ? ((stats.hit_periods || 0) / stats.total_periods * 100).toFixed(1) : 0}%</span></div>
+                                <div class="stat" style="margin:0;"><span class="stat-label">平均前区命中</span><span class="stat-value">${stats.avg_hit_f || 0}个</span></div>
+                                <div class="stat" style="margin:0;"><span class="stat-label">平均后区命中</span><span class="stat-value">${stats.avg_hit_b || 0}个</span></div>
+                                <div class="stat" style="margin:0;"><span class="stat-label">最高前区命中</span><span class="stat-value">${stats.max_hit_f || 0}个</span></div>
+                                <div class="stat" style="margin:0;"><span class="stat-label">最高后区命中</span><span class="stat-value">${stats.max_hit_b || 0}个</span></div>
+                            </div>
+                            ${stats.total_prize ? `<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.1);font-size:0.85em;color:#C9A227;">累计中奖金额约: <span style="font-weight:bold;font-size:1.1em;">${stats.total_prize}元</span></div>` : ''}
+                        </div>
+                    </div>`;
+                }
+                
+                // 组装完整HTML
+                let tabButtons = tabs.map((t, i) => 
+                    `<button class="lottery-tab-btn ${i === 0 ? 'active' : ''}" data-tab="${t.id}" onclick="switchLotteryTab('${lotteryId}', '${t.id}')" style="flex:1;padding:8px 4px;font-size:0.78em;border:1px solid rgba(201,162,39,0.3);background:${i === 0 ? 'linear-gradient(135deg,#C9A227,#b8941f)' : 'rgba(255,255,255,0.03)'};color:${i === 0 ? '#fff' : '#9AA3AF'};border-radius:8px;cursor:pointer;transition:all 0.2s;">${t.name}</button>`
+                ).join('');
                 
                 section.innerHTML = `
                 <div class="card">
                     <h2>${emoji} ${detail.name}详情</h2>
-                    <div class="hit-rate">命中率提升 ${formatImprovement(detail.improvement)}</div>
-                    <div class="stat">
-                        <span class="stat-label">平均命中</span>
-                        <span class="stat-value">${detail.avg_hit}个</span>
+                    <div style="display:flex;gap:6px;margin-bottom:15px;padding:6px;background:rgba(255,255,255,0.02);border-radius:10px;">
+                        ${tabButtons}
                     </div>
-                    <div class="stat">
-                        <span class="stat-label">对比随机基准</span>
-                        <span class="stat-value">${formatImprovement(detail.improvement)}</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-label">样本期数</span>
-                        <span class="stat-value">${detail.total_periods}期</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-label">命中率</span>
-                        <span class="stat-value">${detail.hit_rate}%</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-label">状态</span>
-                        <span class="badge ${gradeCls}">${detail.grade}</span>
-                    </div>
-                    ${detail.latest_period ? `
-                    <div style="margin-top: 30px; text-align: center;">
-                        <h3 style="color: #C9A227; margin-bottom: 20px; font-size: 1.2em; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: rgba(201, 162, 39, 0.15); border-radius: 25px; border: 1px solid #C9A227; box-shadow: 0 4px 15px rgba(201, 162, 39, 0.2);">${emoji} ${detail.name} 第${detail.latest_period}期${dateDisplay}</h3>
-                        ${cardImg ? `
-                        <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 20px; border: 1px solid rgba(201, 162, 39, 0.2);">
-                            <img src="${cardImg}" alt="${detail.name}预测卡片" style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.4); transition: transform 0.3s ease; display: block; margin: 0 auto;" onerror="this.style.display='none';">
-                        </div>` : ''}
-                    </div>` : ''}
+                    ${overviewHtml}
+                    ${checkHtml}
+                    ${analysisHtml}
+                    ${strategyHtml}
+                    ${fixedHtml}
                 </div>`;
             });
             
-            console.log('✅ 各彩种详情数据已动态更新');
+            console.log('✅ 各彩种详情数据已动态更新（标签页布局）');
         }
         
         // 渲染模型监控
