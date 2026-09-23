@@ -989,10 +989,15 @@
             const modelTotal = models.total || 49;
             const modelOk = modelActive >= modelTotal;
             
-            // 更新主行
+            // 更新主行 - 显示当前时间
             const timeEl = document.getElementById('status-time');
             const modelsEl = document.getElementById('status-models');
-            if (timeEl) timeEl.textContent = '🕐 ' + updateTime;
+            if (timeEl) {
+                const now = new Date();
+                const pad = n => String(n).padStart(2, '0');
+                const currentTime = now.getFullYear() + '-' + pad(now.getMonth()+1) + '-' + pad(now.getDate()) + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+                timeEl.textContent = '🕐 ' + currentTime;
+            }
             if (modelsEl) {
                 modelsEl.textContent = '🤖 ' + modelActive + '/' + modelTotal + ' 模型' + (modelOk ? '✓' : '!');
                 modelsEl.className = 'status-item status-models' + (modelOk ? '' : ' warning');
@@ -1015,7 +1020,10 @@
             }
             
             const detailEl = document.getElementById('status-detail');
-            if (detailEl) detailEl.innerHTML = lotteryTags;
+            if (detailEl) {
+                detailEl.innerHTML = lotteryTags + 
+                    '<div style="margin-top:10px;padding-top:8px;border-top:1px solid rgba(201,162,39,0.15);font-size:0.75em;color:rgba(255,255,255,0.4);text-align:center;">📊 数据更新时间：' + updateTime + '</div>';
+            }
         }
         
         // 渲染系统总览
