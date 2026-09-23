@@ -825,28 +825,26 @@
             const stats = data.system_overview;
             const fmm = data.full_model_monitoring || {};
             const statusClass = stats.system_status === '正常运行' ? 'badge-good' : 'badge-warning';
+            const totalModels = fmm.total || stats.model_count;
+            const activeModels = fmm.active || totalModels;
             
             container.innerHTML = `
                 <h2>📊 系统总览</h2>
+                <div class="stat" style="background:rgba(201,162,39,0.08);border-radius:8px;padding:12px 15px;margin-bottom:8px;">
+                    <span class="stat-label" style="font-weight:500;">全量模型/函数</span>
+                    <span class="stat-value" style="font-size:1.4em;">${totalModels}个</span>
+                </div>
                 <div class="stat">
-                    <span class="stat-label">核心预测模型</span>
+                    <span class="stat-label">其中核心预测</span>
                     <span class="stat-value">${stats.model_count}个</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-label">全量模型/函数</span>
-                    <span class="stat-value">${fmm.total || stats.model_count}个</span>
-                </div>
-                <div class="stat">
                     <span class="stat-label">全部启用</span>
-                    <span class="stat-value" style="color:#28a745;">${fmm.active || stats.model_count}个 ✅</span>
+                    <span class="stat-value" style="color:#28a745;font-weight:600;">${activeModels}个 ✅</span>
                 </div>
                 <div class="stat">
                     <span class="stat-label">支持彩种</span>
                     <span class="stat-value">${stats.lottery_count}种</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-label">模型启用率</span>
-                    <span class="stat-value">${stats.model_usage_rate}%</span>
                 </div>
                 <div class="stat">
                     <span class="stat-label">系统状态</span>
