@@ -520,10 +520,88 @@
             box-shadow: 0 2px 10px rgba(201, 162, 39, 0.3);
         }
         
+        /* 系统状态条 */
+        .status-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px 14px;
+            padding: 10px 18px;
+            background: linear-gradient(135deg, rgba(201,162,39,0.08) 0%, rgba(15,42,67,0.6) 100%);
+            border-radius: 12px;
+            border: 1px solid rgba(201,162,39,0.25);
+            margin-bottom: 14px;
+            font-size: 0.78em;
+            backdrop-filter: blur(10px);
+        }
+        .status-bar .status-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+        }
+        .status-bar .status-time {
+            color: #C9A227;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        .status-bar .status-models {
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: rgba(46,204,113,0.12);
+            border: 1px solid rgba(46,204,113,0.3);
+            color: #2ecc71;
+            font-weight: 600;
+        }
+        .status-bar .status-models.warning {
+            background: rgba(231,76,60,0.12);
+            border-color: rgba(231,76,60,0.3);
+            color: #e74c3c;
+        }
+        .status-bar .status-divider {
+            width: 1px;
+            height: 18px;
+            background: linear-gradient(to bottom, transparent, rgba(201,162,39,0.3), transparent);
+        }
+        .status-bar .lottery-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .status-bar .lottery-tag:hover {
+            transform: translateY(-1px);
+        }
+        .status-bar .status-loading {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #9AA3AF;
+        }
+        .status-bar .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #C9A227;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+        
         /* 手机端响应式：核验对比卡片左右变上下 */
         @media (max-width: 600px) {
             .responsive-split {
                 grid-template-columns: 1fr !important;
+            }
+            .status-bar {
+                padding: 8px 12px;
+                gap: 5px 10px;
+                font-size: 0.72em;
             }
         }
     </style>
@@ -536,6 +614,14 @@
             <div class="subtitle">49个模型智能预测系统 · 数据驱动 · 理性参考</div>
             <div class="model-badge">
                 🤖 49个核心预测模型已全部启用
+            </div>
+        </div>
+        
+        <!-- 系统状态条 -->
+        <div id="system-status-bar" class="status-bar">
+            <div class="status-loading">
+                <span class="status-dot"></span>
+                <span>状态加载中...</span>
             </div>
         </div>
         
@@ -838,6 +924,47 @@
             } else {
                 return value + '%';
             }
+        }
+        
+        // 渲染系统状态条
+        function renderSystemStatus(data) {
+            const bar = document.getElementById('system-status-bar');
+            if (!bar) return;
+            
+            const ss = data.system_status || {};
+            const models = ss.models || {};
+            const lotteries = ss.lotteries || {};
+            const updateTime = ss.update_time || data.last_update || '未知';
+            
+            // 模型状态
+            const modelActive = models.active || 49;
+            const modelTotal = models.total || 49;
+            const modelOk = modelActive >= modelTotal;
+            
+            // 各彩种状态标签
+            const lotteryColors = {
+                ssq: '#e74c3c', dlt: '#3498db', kl8: '#2ecc71',
+                fc3d: '#f1c40f', pl35: '#e67e22', qxc: '#9b59b6', qlc: '#95a5a6'
+            };
+            let lotteryTags = '';
+            for (const [code, item] of Object.entries(lotteries)) {
+                const color = lotteryColors[code] || '#888';
+                const hasPred = item.has_prediction;
+                const period = item.next_period || item.latest_period || '-';
+                const periodShort = String(period).slice(-6);
+                lotteryTags += `<span class="lottery-tag" style="background:${color}15;border:1px solid ${color}40;color:${color};">
+                    ${hasPred ? '🎯' : '⏳'}${item.name}·${periodShort}
+                </span>`;
+            }
+            
+            bar.innerHTML = `
+                <span class="status-item status-time">🕐 ${updateTime}</span>
+                <span class="status-item status-models ${modelOk ? '' : 'warning'}">
+                    🤖 ${modelActive}/${modelTotal} 模型${modelOk ? '✓' : '!'}
+                </span>
+                <span class="status-divider"></span>
+                ${lotteryTags}
+            `;
         }
         
         // 渲染系统总览
@@ -1722,6 +1849,7 @@
                 console.log('✅ 管理看板数据加载成功:', data.last_update);
                 
                 // 渲染数据
+                renderSystemStatus(data);
                 renderSystemOverview(data);
                 renderHitRates(data);
                 renderLotteryDetails(data);
