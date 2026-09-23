@@ -527,15 +527,17 @@ def generate_lottery_full_details(hit_rates, latest_periods):
                 'numbers': pred_data,
                 'main_nums': pred_data.get(config.get('pred_main', ''), []),
                 'sub_nums': pred_data.get(config.get('pred_sub', ''), []) if config.get('pred_sub') else [],
+                'lone_main': pred_data.get(config.get('pred_lone_main', ''), []),
+                'lone_sub': pred_data.get(config.get('pred_lone_sub', ''), []) if config.get('pred_lone_sub') else [],
             }
         
-        # 3. 上期预测核验
+        # 3. 上期预测核验（含主推+孤注一掷）
         if code in pred_history and len(pred_history[code]) > 0 and len(hist) > 1:
             prev_pred = pred_history[code][0]
             prev_draw = hist[1] if len(hist) > 1 else hist[0]
             pred_nums = prev_pred.get('prediction', {})
             
-            # 计算命中（使用预测字段名和开奖字段名）
+            # 计算主推命中（使用预测字段名和开奖字段名）
             hit_main = 0
             hit_sub = 0
             pred_main_key = config.get('pred_main', '')
@@ -552,6 +554,25 @@ def generate_lottery_full_details(hit_rates, latest_periods):
                 actual_sub = [str(n).zfill(2) if len(str(n)) < 2 else str(n) for n in prev_draw.get(draw_sub_key, [])]
                 hit_sub = len(set(pred_sub) & set(actual_sub))
             
+            # 计算孤注一掷命中
+            lone_hit_main = 0
+            lone_hit_sub = 0
+            lone_hit_main_nums = []
+            lone_hit_sub_nums = []
+            lone_main_key = config.get('pred_lone_main', '')
+            lone_sub_key = config.get('pred_lone_sub', '')
+            
+            if lone_main_key and draw_main_key:
+                lone_main = [str(n).zfill(2) if len(str(n)) < 2 else str(n) for n in pred_nums.get(lone_main_key, [])]
+                actual_main = [str(n).zfill(2) if len(str(n)) < 2 else str(n) for n in prev_draw.get(draw_main_key, [])]
+                lone_hit_main_nums = list(set(lone_main) & set(actual_main))
+                lone_hit_main = len(lone_hit_main_nums)
+            if lone_sub_key and draw_sub_key:
+                lone_sub = [str(n).zfill(2) if len(str(n)) < 2 else str(n) for n in pred_nums.get(lone_sub_key, [])]
+                actual_sub = [str(n).zfill(2) if len(str(n)) < 2 else str(n) for n in prev_draw.get(draw_sub_key, [])]
+                lone_hit_sub_nums = list(set(lone_sub) & set(actual_sub))
+                lone_hit_sub = len(lone_hit_sub_nums)
+            
             detail['prev_check'] = {
                 'period': prev_pred.get('period', ''),
                 'prediction': pred_nums,
@@ -559,6 +580,13 @@ def generate_lottery_full_details(hit_rates, latest_periods):
                 'hit_main': hit_main,
                 'hit_sub': hit_sub,
                 'hit_total': hit_main + hit_sub,
+                'lone_main': pred_nums.get(lone_main_key, []),
+                'lone_sub': pred_nums.get(lone_sub_key, []) if lone_sub_key else [],
+                'lone_hit_main': lone_hit_main,
+                'lone_hit_sub': lone_hit_sub,
+                'lone_hit_total': lone_hit_main + lone_hit_sub,
+                'lone_hit_main_nums': lone_hit_main_nums,
+                'lone_hit_sub_nums': lone_hit_sub_nums,
             }
         
         # 4. 命中趋势（最近10期）
