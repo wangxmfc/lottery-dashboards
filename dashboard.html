@@ -1185,7 +1185,7 @@
                     const isCore = layerKey === 'layer1_core';
                     const coreInfo = isCore && coreModelMap[func.id || func.name] ? coreModelMap[func.id || func.name] : null;
                     const displayName = coreInfo ? coreInfo.name : func.name;
-                    const displayDesc = coreInfo ? coreInfo.desc : (isCore ? '核心预测模型' : (func.category || '函数'));
+                    const displayDesc = coreInfo ? coreInfo.desc : '工具函数';
                     const displayCategory = coreInfo ? coreInfo.category : (func.category || '函数');
                     
                     detailHtml += `
