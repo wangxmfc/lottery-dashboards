@@ -1292,7 +1292,7 @@
                                 if (isHit) hitHighlighted = true;
                                 return `<span style="display:inline-flex;align-items:center;justify-content:center;width:${s}px;height:${s}px;border-radius:50%;background:radial-gradient(circle at 32% 28%,${color}CC,${color} 65%);color:#fff;font-weight:bold;font-size:${s*0.38}px;margin:1.5px;border:${isHit ? '2.5px solid #4CAF50' : 'none'};box-shadow:${isHit ? '0 0 8px rgba(76,175,80,0.6)' : '0 1px 4px rgba(0,0,0,0.2)'};">${num}</span>`;
                             }).join('');
-                            return `<div style="text-align:center;flex:1;min-width:30%;"><div style="font-size:0.68em;color:#8B95A5;margin-bottom:3px;font-weight:600;">${label}</div><div>${balls}</div></div>`;
+                            return `<div style="text-align:center;flex:1;min-width:30%;"><div style="font-size:0.68em;color:#8B95A5;margin-bottom:3px;font-weight:600;">${label}</div><div style="white-space:nowrap;">${balls}</div></div>`;
                         }).join('');
                         return `<div style="display:flex;flex-wrap:wrap;gap:12px 8px;">${items}</div>`;
                     };
