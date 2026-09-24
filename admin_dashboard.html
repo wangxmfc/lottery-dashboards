@@ -1292,7 +1292,7 @@
                                 if (isHit) hitHighlighted = true;
                                 return `<span style="display:inline-flex;align-items:center;justify-content:center;width:${s}px;height:${s}px;border-radius:50%;background:radial-gradient(circle at 32% 28%,${color}CC,${color} 65%);color:#fff;font-weight:bold;font-size:${s*0.38}px;margin:1.5px;border:${isHit ? '2.5px solid #4CAF50' : 'none'};box-shadow:${isHit ? '0 0 8px rgba(76,175,80,0.6)' : '0 1px 4px rgba(0,0,0,0.2)'};">${num}</span>`;
                             }).join('');
-                            const itemStyle = positions.length === 1 ? 'display:flex;align-items:center;gap:6px;' : 'flex:1;min-width:45%;display:flex;align-items:center;justify-content:center;gap:6px;';
+                            const itemStyle = 'display:flex;align-items:center;gap:6px;';
                             return `<div style="${itemStyle}"><span style="font-size:0.72em;color:#8B95A5;font-weight:600;white-space:nowrap;">${label}</span><span style="white-space:nowrap;">${balls}</span></div>`;
                         }).join('');
                         return `<div style="display:flex;flex-wrap:wrap;gap:10px 6px;padding:4px 0;">${items}</div>`;
