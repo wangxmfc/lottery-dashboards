@@ -1262,8 +1262,11 @@
                     };
                     
                     // 辅助：渲染排列型彩票的位选参考（按位分组，命中高亮）
-                    const renderPositionRef = (refNums, actualNums, color, size, labels) => {
+                    const renderPositionRef = (refNums, actualNums, color, size, labels, expectedCount) => {
                         if (!refNums || !refNums.length) return '<span style="color:#9AA3AF;">暂无</span>';
+                        // 校验：长度必须是3的倍数，且达到预期位数×3
+                        if (refNums.length % 3 !== 0) return '<span style="color:#9AA3AF;">暂无</span>';
+                        if (expectedCount && refNums.length < expectedCount * 3) return '<span style="color:#9AA3AF;">暂无</span>';
                         const s = size || 26;
                         const positions = [];
                         const groupSize = 3;
@@ -1346,8 +1349,8 @@
                                     ${prevCheck.ref_coverage.sub ? `<span style="font-size:0.78em;color:#A5D6A7;margin-left:8px;">${cfg.subHitLabel || '副区'} ${prevCheck.ref_coverage.sub.hit}/${prevCheck.ref_coverage.sub.total}位</span>` : ''}
                                 </div>` : ''}
                                 <div style="font-size:0.75em;color:#9AA3AF;margin-bottom:4px;">主推${cfg.mainLabel || '号码'}${cfg.allowDuplicate ? '（位选参考）' : ''}</div>
-                                <div style="margin-bottom:8px;">${cfg.allowDuplicate ? renderPositionRef(prevCheck.prediction ? (prevCheck.prediction[cfg.predMain + '_ref'] || prevCheck.prediction[cfg.predMain || 'hot_nums'] || []) : [], actualMain, cfg.mainColor || '#C9A227', 26, cfg.mainCount === 3 ? ['百位','十位','个位'] : null) : renderBallsHighlight(cleanNums(prevCheck.prediction ? (prevCheck.prediction[cfg.predMain || 'hot_front'] || prevCheck.prediction[cfg.predMain || 'red'] || prevCheck.prediction['hot_nums'] || []) : [], cfg.mainCount || 99, !cfg.allowDuplicate), actualMain, cfg.mainColor || '#C9A227', 28, cfg.allowDuplicate)}</div>
-                                ${cfg.hasSub ? `<div style="font-size:0.75em;color:#9AA3AF;margin-bottom:4px;">主推${cfg.subLabel}${cfg.allowDuplicate ? '（位选参考）' : ''}</div><div>${cfg.allowDuplicate ? renderPositionRef(prevCheck.prediction ? (prevCheck.prediction[cfg.predSub + '_ref'] || prevCheck.prediction[cfg.predSub] || []) : [], actualSub, cfg.subColor || '#9AA3AF', 26, null) : renderBallsHighlight(cleanNums(prevCheck.prediction ? (prevCheck.prediction[cfg.predSub || 'hot_back'] || prevCheck.prediction[cfg.predSub || 'blue'] || []) : [], cfg.subCount || 99, !cfg.allowDuplicate), actualSub, cfg.subColor || '#9AA3AF', 28, cfg.allowDuplicate)}</div>` : ''}
+                                <div style="margin-bottom:8px;">${cfg.allowDuplicate ? renderPositionRef(prevCheck.prediction ? (prevCheck.prediction[cfg.predMain + '_ref'] || prevCheck.prediction[cfg.predMain || 'hot_nums'] || []) : [], actualMain, cfg.mainColor || '#C9A227', 26, cfg.mainCount === 3 ? ['百位','十位','个位'] : null, cfg.mainCount) : renderBallsHighlight(cleanNums(prevCheck.prediction ? (prevCheck.prediction[cfg.predMain || 'hot_front'] || prevCheck.prediction[cfg.predMain || 'red'] || prevCheck.prediction['hot_nums'] || []) : [], cfg.mainCount || 99, !cfg.allowDuplicate), actualMain, cfg.mainColor || '#C9A227', 28, cfg.allowDuplicate)}</div>
+                                ${cfg.hasSub ? `<div style="font-size:0.75em;color:#9AA3AF;margin-bottom:4px;">主推${cfg.subLabel}${cfg.allowDuplicate ? '（位选参考）' : ''}</div><div>${cfg.allowDuplicate ? renderPositionRef(prevCheck.prediction ? (prevCheck.prediction[cfg.predSub + '_ref'] || prevCheck.prediction[cfg.predSub] || []) : [], actualSub, cfg.subColor || '#9AA3AF', 26, null, cfg.subCount) : renderBallsHighlight(cleanNums(prevCheck.prediction ? (prevCheck.prediction[cfg.predSub || 'hot_back'] || prevCheck.prediction[cfg.predSub || 'blue'] || []) : [], cfg.subCount || 99, !cfg.allowDuplicate), actualSub, cfg.subColor || '#9AA3AF', 28, cfg.allowDuplicate)}</div>` : ''}
                             </div>
                             <!-- 孤注一掷 -->
                             ${hasLone ? `
