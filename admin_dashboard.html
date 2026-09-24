@@ -1280,21 +1280,21 @@
                         for (let i = 0; i < refNums.length; i += groupSize) {
                             positions.push(refNums.slice(i, i + groupSize));
                         }
-                        // 横排布局：每排3位，位标签在上，号码在下
+                        // 纯文本横排布局：每排3位，位标签+号码同行，命中号码绿色高亮
                         const items = positions.map((group, gi) => {
                             const actualNum = actualNums && actualNums[gi] != null ? String(actualNums[gi]).padStart(2, '0') : '';
                             const label = labels && labels[gi] ? labels[gi] : `第${gi+1}位`;
                             // 同一位只高亮第一个匹配的号码（不去重，保留原始数据）
                             let hitHighlighted = false;
-                            const balls = group.map(n => {
+                            const numsText = group.map(n => {
                                 const num = String(n).padStart(2, '0');
                                 const isHit = actualNum !== '' && num === actualNum && !hitHighlighted;
                                 if (isHit) hitHighlighted = true;
-                                return `<span style="display:inline-flex;align-items:center;justify-content:center;width:${s}px;height:${s}px;border-radius:50%;background:radial-gradient(circle at 32% 28%,${color}CC,${color} 65%);color:#fff;font-weight:bold;font-size:${s*0.38}px;margin:1.5px;border:${isHit ? '2.5px solid #4CAF50' : 'none'};box-shadow:${isHit ? '0 0 8px rgba(76,175,80,0.6)' : '0 1px 4px rgba(0,0,0,0.2)'};">${num}</span>`;
-                            }).join('');
-                            return `<div style="text-align:center;flex:1;min-width:30%;"><div style="font-size:0.68em;color:#8B95A5;margin-bottom:3px;font-weight:600;">${label}</div><div style="white-space:nowrap;">${balls}</div></div>`;
+                                return `<span style="${isHit ? 'color:#4CAF50;font-weight:bold;' : 'color:#E0E0E0;'}">${num}</span>`;
+                            }).join(' ');
+                            return `<div style="flex:1;min-width:30%;text-align:center;font-size:0.85em;line-height:1.8;"><span style="color:#8B95A5;font-size:0.85em;">${label}</span><span style="margin-left:5px;letter-spacing:1px;">${numsText}</span></div>`;
                         }).join('');
-                        return `<div style="display:flex;flex-wrap:wrap;gap:12px 8px;">${items}</div>`;
+                        return `<div style="display:flex;flex-wrap:wrap;gap:8px 4px;padding:4px 0;">${items}</div>`;
                     };
                     
                     const mainHit = prevCheck.hit_main ?? 0;
