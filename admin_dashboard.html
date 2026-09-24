@@ -1322,6 +1322,13 @@
                         mainHitNums = Array.isArray(actualMain) ? actualMain.filter(n => predMainSet.has(String(n).padStart(2,'0'))) : [];
                         subHitNums = cfg.subLabel && Array.isArray(actualSub) ? actualSub.filter(n => predSubSet.has(String(n).padStart(2,'0'))) : [];
                     }
+                    // 位选参考标注：每组>1个候选标注"位选参考"，每组1个标注"精选号码"
+                    const mainRefNumsForLabel = prevCheck.prediction ? (prevCheck.prediction[cfg.predMain + '_ref'] || prevCheck.prediction[cfg.predMain || 'hot_nums'] || []) : [];
+                    const mainRefGroupSize = cfg.mainCount && mainRefNumsForLabel.length >= cfg.mainCount ? mainRefNumsForLabel.length / cfg.mainCount : 0;
+                    const mainRefLabelText = mainRefGroupSize > 1 ? '（位选参考）' : (mainRefGroupSize === 1 ? '（精选号码）' : '');
+                    const subRefNumsForLabel = prevCheck.prediction ? (prevCheck.prediction[cfg.predSub + '_ref'] || prevCheck.prediction[cfg.predSub] || []) : [];
+                    const subRefGroupSize = cfg.subCount && subRefNumsForLabel.length >= cfg.subCount ? subRefNumsForLabel.length / cfg.subCount : 0;
+                    const subRefLabelText = subRefGroupSize > 1 ? '（位选参考）' : (subRefGroupSize === 1 ? '（精选号码）' : '');
                     const allMainHitNums = [...mainHitNums, ...subHitNums].map(n => String(n).padStart(2,'0')).join(' ');
                     const loneAllHitNums = [...(prevCheck.lone_hit_main_nums || []), ...(prevCheck.lone_hit_sub_nums || [])].join(' ');
                     
@@ -1358,9 +1365,9 @@
                                     ${prevCheck.ref_coverage.main ? `<span style="font-size:0.78em;color:#A5D6A7;">${cfg.mainHitLabel || '主区'} ${prevCheck.ref_coverage.main.hit}/${prevCheck.ref_coverage.main.total}位</span>` : ''}
                                     ${prevCheck.ref_coverage.sub ? `<span style="font-size:0.78em;color:#A5D6A7;margin-left:8px;">${cfg.subHitLabel || '副区'} ${prevCheck.ref_coverage.sub.hit}/${prevCheck.ref_coverage.sub.total}位</span>` : ''}
                                 </div>` : ''}
-                                <div style="font-size:0.75em;color:#9AA3AF;margin-bottom:4px;">主推${cfg.mainLabel || '号码'}${cfg.allowDuplicate ? '（位选参考）' : ''}</div>
+                                <div style="font-size:0.75em;color:#9AA3AF;margin-bottom:4px;">主推${cfg.mainLabel || '号码'}${cfg.allowDuplicate ? mainRefLabelText : ''}</div>
                                 <div style="margin-bottom:8px;">${cfg.allowDuplicate ? renderPositionRef(prevCheck.prediction ? (prevCheck.prediction[cfg.predMain + '_ref'] || prevCheck.prediction[cfg.predMain || 'hot_nums'] || []) : [], actualMain, cfg.mainColor || '#C9A227', 26, cfg.mainCount === 3 ? ['百位','十位','个位'] : null, cfg.mainCount) : renderBallsHighlight(cleanNums(prevCheck.prediction ? (prevCheck.prediction[cfg.predMain || 'hot_front'] || prevCheck.prediction[cfg.predMain || 'red'] || prevCheck.prediction['hot_nums'] || []) : [], cfg.mainCount || 99, !cfg.allowDuplicate), actualMain, cfg.mainColor || '#C9A227', 28, cfg.allowDuplicate)}</div>
-                                ${cfg.hasSub ? `<div style="font-size:0.75em;color:#9AA3AF;margin-bottom:4px;">主推${cfg.subLabel}${cfg.allowDuplicate ? '（位选参考）' : ''}</div><div>${cfg.allowDuplicate ? renderPositionRef(prevCheck.prediction ? (prevCheck.prediction[cfg.predSub + '_ref'] || prevCheck.prediction[cfg.predSub] || []) : [], actualSub, cfg.subColor || '#9AA3AF', 26, null, cfg.subCount) : renderBallsHighlight(cleanNums(prevCheck.prediction ? (prevCheck.prediction[cfg.predSub || 'hot_back'] || prevCheck.prediction[cfg.predSub || 'blue'] || []) : [], cfg.subCount || 99, !cfg.allowDuplicate), actualSub, cfg.subColor || '#9AA3AF', 28, cfg.allowDuplicate)}</div>` : ''}
+                                ${cfg.hasSub ? `<div style="font-size:0.75em;color:#9AA3AF;margin-bottom:4px;">主推${cfg.subLabel}${cfg.allowDuplicate ? subRefLabelText : ''}</div><div>${cfg.allowDuplicate ? renderPositionRef(prevCheck.prediction ? (prevCheck.prediction[cfg.predSub + '_ref'] || prevCheck.prediction[cfg.predSub] || []) : [], actualSub, cfg.subColor || '#9AA3AF', 26, null, cfg.subCount) : renderBallsHighlight(cleanNums(prevCheck.prediction ? (prevCheck.prediction[cfg.predSub || 'hot_back'] || prevCheck.prediction[cfg.predSub || 'blue'] || []) : [], cfg.subCount || 99, !cfg.allowDuplicate), actualSub, cfg.subColor || '#9AA3AF', 28, cfg.allowDuplicate)}</div>` : ''}
                             </div>
                             <!-- 孤注一掷 -->
                             ${hasLone ? `
