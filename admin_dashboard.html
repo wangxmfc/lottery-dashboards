@@ -1273,9 +1273,12 @@
                         for (let i = 0; i < refNums.length; i += groupSize) {
                             positions.push(refNums.slice(i, i + groupSize));
                         }
-                        return positions.map((group, gi) => {
-                            const actualNum = actualNums && actualNums[gi] != null ? String(actualNums[gi]).padStart(2, '0') : '';
-                            const label = labels && labels[gi] ? labels[gi] : `第${gi+1}位`;
+                        // 倒序展示：个位在最上面，百位在最下面
+                        const reversed = positions.slice().reverse();
+                        return reversed.map((group, ri) => {
+                            const origIdx = positions.length - 1 - ri;  // 原始位索引（0=百位，最后=个位）
+                            const actualNum = actualNums && actualNums[origIdx] != null ? String(actualNums[origIdx]).padStart(2, '0') : '';
+                            const label = labels && labels[origIdx] ? labels[origIdx] : `第${origIdx+1}位`;
                             const balls = group.map(n => {
                                 const num = String(n).padStart(2, '0');
                                 const isHit = actualNum !== '' && num === actualNum;
