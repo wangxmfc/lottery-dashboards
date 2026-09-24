@@ -1281,7 +1281,7 @@
                                 const isHit = actualNum !== '' && num === actualNum;
                                 return `<span style="display:inline-flex;align-items:center;justify-content:center;width:${s}px;height:${s}px;border-radius:50%;background:radial-gradient(circle at 32% 28%,${color}CC,${color} 65%);color:#fff;font-weight:bold;font-size:${s*0.38}px;margin:1.5px;border:${isHit ? '2.5px solid #4CAF50' : 'none'};box-shadow:${isHit ? '0 0 8px rgba(76,175,80,0.6)' : '0 1px 4px rgba(0,0,0,0.2)'};">${num}</span>`;
                             }).join('');
-                            return `<div style="margin-bottom:6px;"><span style="font-size:0.68em;color:#8B95A5;margin-right:6px;">${label}</span>${balls}</div>`;
+                            return `<div style="margin-bottom:8px;"><div style="font-size:0.68em;color:#8B95A5;margin-bottom:3px;font-weight:600;">${label}</div>${balls}</div>`;
                         }).join('');
                     };
                     
