@@ -1318,6 +1318,12 @@
                                     <span style="font-size:0.85em;font-weight:700;margin-left:4px;${prevCheck.prize_main.won ? 'color:#FFD700;' : 'color:#9AA3AF;'}">${prevCheck.prize_main.level}</span>
                                     ${prevCheck.prize_main.prize ? `<span style="font-size:0.75em;color:${prevCheck.prize_main.won ? '#FFC107' : '#9AA3AF'};margin-left:6px;">${prevCheck.prize_main.prize}</span>` : ''}
                                 </div>` : ''}
+                                ${prevCheck.ref_coverage && (prevCheck.ref_coverage.main || prevCheck.ref_coverage.sub) ? `
+                                <div style="margin-bottom:10px;padding:6px 10px;border-radius:8px;background:rgba(76,175,80,0.08);border:1px solid rgba(76,175,80,0.25);text-align:center;">
+                                    <span style="font-size:0.75em;color:#81C784;font-weight:600;">🎯 位选覆盖：</span>
+                                    ${prevCheck.ref_coverage.main ? `<span style="font-size:0.78em;color:#A5D6A7;">${cfg.mainHitLabel || '主区'} ${prevCheck.ref_coverage.main.hit}/${prevCheck.ref_coverage.main.total}位</span>` : ''}
+                                    ${prevCheck.ref_coverage.sub ? `<span style="font-size:0.78em;color:#A5D6A7;margin-left:8px;">${cfg.subHitLabel || '副区'} ${prevCheck.ref_coverage.sub.hit}/${prevCheck.ref_coverage.sub.total}位</span>` : ''}
+                                </div>` : ''}
                                 <div style="font-size:0.75em;color:#9AA3AF;margin-bottom:4px;">主推${cfg.mainLabel || '号码'}</div>
                                 <div style="margin-bottom:8px;">${renderBallsHighlight(cleanNums(prevCheck.prediction ? (prevCheck.prediction[cfg.predMain || 'hot_front'] || prevCheck.prediction[cfg.predMain || 'red'] || prevCheck.prediction['hot_nums'] || []) : [], cfg.mainCount || 99, !cfg.allowDuplicate), actualMain, cfg.mainColor || '#C9A227', 28, cfg.allowDuplicate)}</div>
                                 ${cfg.hasSub ? `<div style="font-size:0.75em;color:#9AA3AF;margin-bottom:4px;">主推${cfg.subLabel}</div><div>${renderBallsHighlight(cleanNums(prevCheck.prediction ? (prevCheck.prediction[cfg.predSub || 'hot_back'] || prevCheck.prediction[cfg.predSub || 'blue'] || []) : [], cfg.subCount || 99, !cfg.allowDuplicate), actualSub, cfg.subColor || '#9AA3AF', 28, cfg.allowDuplicate)}</div>` : ''}
