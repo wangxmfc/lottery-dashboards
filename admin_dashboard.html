@@ -185,6 +185,24 @@
             transform: translateY(-1px);
         }
         
+        .nav button.nav-ops {
+            border-color: rgba(123, 91, 214, 0.4);
+            color: rgba(167, 139, 250, 0.9);
+        }
+        
+        .nav button.nav-ops:hover {
+            background: rgba(123, 91, 214, 0.12);
+            border-color: rgba(123, 91, 214, 0.6);
+            color: #a78bfa;
+        }
+        
+        .nav button.nav-ops.active {
+            background: linear-gradient(135deg, #7b5bd6, #6d4cd0);
+            color: #fff;
+            border-color: #7b5bd6;
+            box-shadow: 0 4px 15px rgba(123, 91, 214, 0.4);
+        }
+        
         /* 彩种子菜单 */
         .lottery-subnav {
             display: grid;
@@ -636,6 +654,17 @@
         body.dark .nav button.active {
             background: linear-gradient(135deg, #C9A227, #b8941f);
             color: #fff;
+        }
+        
+        body.dark .nav button.nav-ops {
+            border-color: rgba(123, 91, 214, 0.35);
+            color: rgba(109, 76, 208, 0.85);
+        }
+        
+        body.dark .nav button.nav-ops.active {
+            background: linear-gradient(135deg, #7b5bd6, #6d4cd0);
+            color: #fff;
+            border-color: #7b5bd6;
         }
         
         body.dark .lottery-subnav {
@@ -1368,8 +1397,8 @@
         </div>
         
         <div class="nav">
-            <button onclick="showSection('ops', this)" style="border-color:rgba(123,91,214,0.4);color:rgba(167,139,250,0.9);">⚙️ 运维</button>
-            <button class="active" onclick="showSection('overview', this)">📊 总览</button>
+            <button class="active nav-ops" onclick="showSection('ops', this)">⚙️ 运维</button>
+            <button onclick="showSection('overview', this)">📊 总览</button>
             <button id="lottery-menu-btn" onclick="toggleLotteryMenu()">🎯 彩票 <span id="lottery-menu-arrow">▼</span></button>
         </div>
 
@@ -1384,7 +1413,7 @@
             <button onclick="showSection('qlc', this)">⚪ 七乐彩</button>
         </div>
 
-        <div id="overview" class="section active">
+        <div id="overview" class="section">
             <div class="grid">
                 <div class="card" id="system-overview">
                     <h2>📊 系统总览</h2>
@@ -1497,7 +1526,7 @@
         </div>
 
         <!-- 运维监控 -->
-        <div id="ops" class="section">
+        <div id="ops" class="section active">
             <div class="grid">
                 <!-- 系统健康度 -->
                 <div class="card" id="ops-health">
