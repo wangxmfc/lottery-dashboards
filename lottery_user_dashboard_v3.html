@@ -1,0 +1,2597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>王者GP · 彩票分析看板（7彩种切换版）</title>
+<style>
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+  width: 100%; 
+  max-width: 750px; 
+  margin: 0 auto; 
+  background: linear-gradient(180deg, #FFF9F0 0%, #F5F0E8 100%); 
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; 
+  padding-bottom: 40px; 
+}
+
+/* 顶部导航 */
+.nav { 
+  background: linear-gradient(135deg, #C8102E 0%, #E6452E 50%, #FF6B6B 100%); 
+  padding: 20px 20px 16px; 
+  position: sticky; 
+  top: 0; 
+  z-index: 100; 
+  box-shadow: 0 4px 20px rgba(200,16,46,0.25); 
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.nav-title { 
+  color: #fff; 
+  font-size: 22px; 
+  font-weight: 800; 
+  text-align: center; 
+  letter-spacing: 2px; 
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.nav-sub { 
+  color: rgba(255,255,255,0.9); 
+  font-size: 13px; 
+  text-align: center; 
+  margin-top: 8px; 
+  letter-spacing: 1px;
+}
+
+/* 彩种切换按钮 */
+.lottery-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #fff;
+  margin: 0 16px;
+  border-radius: 12px;
+  margin-top: -10px;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(200,16,46,0.1);
+}
+.lottery-tab {
+  flex: 1;
+  min-width: 80px;
+  padding: 8px 4px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  background: #F5F0E8;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.lottery-tab.active {
+  background: linear-gradient(135deg, #C8102E, #E6452E);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(200,16,46,0.3);
+}
+
+/* 开奖日历 */
+.calendar { 
+  background: linear-gradient(135deg, #FFF5F5 0%, #FFE8E8 100%); 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  box-shadow: 0 4px 16px rgba(200,16,46,0.08); 
+  border: 1px solid #FFD6D6;
+}
+.calendar-title { 
+  font-size: 15px; 
+  font-weight: 800; 
+  color: #C8102E; 
+  padding-left: 10px; 
+  border-left: 4px solid #C8102E; 
+  margin-bottom: 16px; 
+}
+.calendar-info { 
+  text-align: center; 
+  padding: 16px; 
+  background: rgba(255,255,255,0.8); 
+  border-radius: 12px; 
+}
+.calendar-period { 
+  font-size: 24px; 
+  font-weight: 800; 
+  color: #C8102E; 
+  letter-spacing: 1px;
+}
+.calendar-date { 
+  font-size: 14px; 
+  color: #888; 
+  margin-top: 8px; 
+}
+.calendar-next { 
+  font-size: 15px; 
+  color: #8A6D3B; 
+  margin-top: 12px; 
+  padding-top: 12px; 
+  border-top: 1px dashed #E8DCC8; 
+  font-weight: 600;
+}
+
+/* 核心卡片 */
+.card-section { 
+  margin: 12px 16px; 
+}
+.card-placeholder { 
+  background: #fff; 
+  border-radius: 14px; 
+  overflow: hidden; 
+  box-shadow: 0 4px 16px rgba(138,109,59,0.12); 
+}
+
+/* 上期命中回顾 */
+.review { 
+  background: #fff; 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08); 
+}
+.review-title { 
+  font-size: 15px; 
+  font-weight: 800; 
+  color: #C8102E; 
+  padding-left: 10px; 
+  border-left: 4px solid #C8102E; 
+  margin-bottom: 12px; 
+}
+.review-stats { 
+  display: flex; 
+  gap: 12px; 
+  margin-bottom: 12px; 
+}
+.review-stat { 
+  flex: 1; 
+  text-align: center; 
+  padding: 12px 8px; 
+  background: linear-gradient(135deg, #FFF8E1, #FFF3D6); 
+  border-radius: 10px; 
+  border: 1px solid #F2C9B8; 
+}
+.review-stat .num { 
+  font-size: 24px; 
+  font-weight: 800; 
+  color: #C8102E; 
+}
+.review-stat .label { 
+  font-size: 12px; 
+  color: #8A6D3B; 
+  margin-top: 4px; 
+}
+
+/* 冷热号排行榜 */
+.hotcold { 
+  background: #fff; 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08); 
+}
+.hotcold-title { 
+  font-size: 15px; 
+  font-weight: 800; 
+  color: #C8102E; 
+  padding-left: 10px; 
+  border-left: 4px solid #C8102E; 
+  margin-bottom: 16px; 
+}
+.hotcold-list { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 12px; 
+  justify-content: center; 
+}
+.hotcold-item { 
+  width: 48px; 
+  height: 48px; 
+  border-radius: 50%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 18px; 
+  font-weight: 800; 
+  color: #fff; 
+}
+.hotcold-item.hot { 
+  background: linear-gradient(135deg, #F05A4E, #C8102E); 
+  box-shadow: 0 3px 8px rgba(200,16,46,0.3); 
+}
+.hotcold-item.cold { 
+  background: linear-gradient(135deg, #4A90E2, #1F5FB4); 
+  box-shadow: 0 3px 8px rgba(31,95,180,0.3); 
+}
+
+/* 遗漏号排行榜 */
+.missing { 
+  background: #fff; 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08); 
+}
+.missing-title { 
+  font-size: 15px; 
+  font-weight: 800; 
+  color: #C8102E; 
+  padding-left: 10px; 
+  border-left: 4px solid #C8102E; 
+  margin-bottom: 16px; 
+}
+.missing-list { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 12px; 
+  justify-content: center; 
+}
+.missing-item { 
+  background: linear-gradient(135deg, #E8F4FD, #D6EAF8); 
+  border: 1px solid #AED6F1; 
+  border-radius: 12px; 
+  padding: 10px 14px; 
+  text-align: center; 
+  min-width: 75px; 
+  box-shadow: 0 2px 8px rgba(31,95,180,0.1); 
+}
+.missing-item .num { 
+  font-size: 20px; 
+  font-weight: 800; 
+  color: #1F5FB4; 
+}
+.missing-item .days { 
+  font-size: 12px; 
+  color: #5D6D7E; 
+  margin-top: 4px; 
+  font-weight: 600;
+}
+
+/* 区间分布 */
+.zone { 
+  background: #fff; 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08); 
+}
+.zone-title { 
+  font-size: 15px; 
+  font-weight: 800; 
+  color: #C8102E; 
+  padding-left: 10px; 
+  border-left: 4px solid #C8102E; 
+  margin-bottom: 16px; 
+}
+.zone-grid { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr; 
+  gap: 12px; 
+}
+.zone-item { 
+  background: linear-gradient(135deg, #F9F5EE, #F0E8D8); 
+  border-radius: 12px; 
+  padding: 14px; 
+  text-align: center; 
+  box-shadow: 0 2px 8px rgba(138,109,59,0.1); 
+}
+.zone-item .name { 
+  font-size: 13px; 
+  color: #8A6D3B; 
+  margin-bottom: 10px; 
+  font-weight: 600;
+}
+.zone-item .bar { 
+  height: 10px; 
+  background: #E8DCC8; 
+  border-radius: 5px; 
+  overflow: hidden; 
+  margin-bottom: 8px; 
+}
+.zone-item .bar-fill { 
+  height: 100%; 
+  background: linear-gradient(90deg, #C8102E, #E6452E); 
+  border-radius: 5px; 
+}
+.zone-item .pct { 
+  font-size: 16px; 
+  font-weight: 800; 
+  color: #C8102E; 
+}
+
+/* 本期重点关注 */
+.focus { 
+  background: linear-gradient(135deg, #FFF5F5, #FFE8E8); 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  border: 2px solid #F2C9B8; 
+  box-shadow: 0 4px 16px rgba(200,16,46,0.08); 
+}
+.focus-title { 
+  font-size: 15px; 
+  font-weight: 800; 
+  color: #C8102E; 
+  padding-left: 10px; 
+  border-left: 4px solid #C8102E; 
+  margin-bottom: 16px; 
+}
+.focus-section {
+  margin-bottom: 16px;
+}
+.focus-label {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  padding-left: 4px;
+}
+.red-label {
+  color: #C62828;
+}
+.blue-label {
+  color: #1565C0;
+}
+.focus-list { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 12px; 
+  justify-content: flex-start; 
+}
+.focus-ball { 
+  width: 48px; 
+  height: 48px; 
+  border-radius: 50%; 
+  background: linear-gradient(135deg, #F05A4E, #C8102E); 
+  color: #fff; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 18px; 
+  font-weight: 800; 
+  box-shadow: 0 3px 8px rgba(200,16,46,0.3); 
+}
+.focus-ball.blue { 
+  background: linear-gradient(135deg, #4A90E2, #1F5FB4); 
+  box-shadow: 0 3px 8px rgba(31,95,180,0.3); 
+}
+.focus-reason { 
+  font-size: 13px; 
+  color: #5C4A28; 
+  line-height: 1.9; 
+  background: rgba(255,255,255,0.8); 
+  padding: 14px; 
+  border-radius: 12px; 
+  margin-top: 8px;
+}
+
+/* 历史开奖记录 */
+.history { 
+  background: #fff; 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08); 
+}
+.history-title { 
+  font-size: 15px; 
+  font-weight: 800; 
+  color: #C8102E; 
+  padding-left: 10px; 
+  border-left: 4px solid #C8102E; 
+  margin-bottom: 16px; 
+}
+.history-item { 
+  padding: 12px 0; 
+  border-bottom: 1px dashed #E8DCC8; 
+}
+.history-item:last-child { 
+  border-bottom: none; 
+}
+.history-period { 
+  font-size: 14px; 
+  color: #888; 
+  margin-bottom: 8px; 
+  font-weight: 600;
+}
+.history-balls { 
+  display: flex; 
+  gap: 8px; 
+  flex-wrap: wrap; 
+  align-items: center; 
+}
+.history-ball { 
+  width: 32px; 
+  height: 32px; 
+  border-radius: 50%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 14px; 
+  font-weight: 800; 
+  color: #fff; 
+}
+.history-ball.red { 
+  background: linear-gradient(135deg, #F05A4E, #C8102E); 
+  box-shadow: 0 2px 6px rgba(200,16,46,0.25); 
+}
+.history-ball.blue { 
+  background: linear-gradient(135deg, #4A90E2, #1F5FB4); 
+  box-shadow: 0 2px 6px rgba(31,95,180,0.25); 
+}
+.history-sep { 
+  color: #C8102E; 
+  font-weight: 800; 
+  margin: 0 6px; 
+  font-size: 16px;
+}
+
+/* 玩法介绍 */
+.playguide {
+  background: #fff;
+  margin: 16px 16px;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08);
+}
+.playguide-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #C8102E;
+  padding-left: 10px;
+  border-left: 4px solid #C8102E;
+  margin-bottom: 12px;
+}
+.playguide-content p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+/* 中奖规则 */
+.rules {
+  background: #fff;
+  margin: 16px 16px;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08);
+}
+.rules-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #C8102E;
+  padding-left: 10px;
+  border-left: 4px solid #C8102E;
+  margin-bottom: 12px;
+}
+.rules-content p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+/* 术语解释 */
+.glossary {
+  background: #fff;
+  margin: 16px 16px;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08);
+}
+.glossary-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #C8102E;
+  padding-left: 10px;
+  border-left: 4px solid #C8102E;
+  margin-bottom: 12px;
+}
+.glossary-content p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+/* 选号思路 */
+.picking {
+  background: #fff;
+  margin: 16px 16px;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08);
+}
+.picking-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #C8102E;
+  padding-left: 10px;
+  border-left: 4px solid #C8102E;
+  margin-bottom: 12px;
+}
+.picking-content p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+/* 数据说明 */
+.datanote { 
+  background: #F9F5EE; 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  border: 1px solid #E8DCC8; 
+  box-shadow: 0 4px 16px rgba(138,109,59,0.06); 
+}
+.datanote-title { 
+  font-size: 14px; 
+  font-weight: 800; 
+  color: #8A6D3B; 
+  margin-bottom: 8px; 
+}
+.datanote-content { 
+  font-size: 12px; 
+  color: #666; 
+  line-height: 1.8; 
+}
+
+/* 动态尾文（与百家号完全一致） */
+.closing-text { 
+  background: linear-gradient(135deg, #FBF7EC 0%, #F5EFE0 100%); 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  border: 1px solid #E8DCC8; 
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08); 
+}
+.closing-text p { 
+  font-size: 13px; 
+  color: #555; 
+  line-height: 1.9; 
+  margin-bottom: 12px; 
+}
+.closing-text p:last-child { 
+  margin-bottom: 0; 
+}
+
+/* 理性购彩提示 */
+.disclaimer { 
+  background: #F9F5EE; 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  border: 1px solid #E8DCC8; 
+  box-shadow: 0 4px 16px rgba(138,109,59,0.06); 
+}
+.disclaimer-title { 
+  font-size: 14px; 
+  font-weight: 700; 
+  color: #666; 
+  margin-bottom: 8px; 
+}
+.disclaimer-content { 
+  font-size: 12px; 
+  color: #999; 
+  line-height: 1.8; 
+}
+
+
+/* 单页面切换的额外样式 */
+.lottery-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #fff;
+  margin: 0 16px;
+  border-radius: 12px;
+  margin-top: -10px;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(200,16,46,0.1);
+}
+.lottery-tab {
+  flex: 1;
+  min-width: 80px;
+  padding: 8px 4px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  background: #F5F0E8;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.lottery-tab.active {
+  background: linear-gradient(135deg, #C8102E, #E6452E);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(200,16,46,0.3);
+}
+</style>
+<script>
+function switchLottery(ltype) {
+  // 隐藏所有内容
+  document.querySelectorAll('[id^="content-"]').forEach(el => {
+    el.style.display = 'none';
+  });
+  // 显示选中的内容
+  document.getElementById('content-' + ltype).style.display = 'block';
+  // 更新按钮状态
+  document.querySelectorAll('.lottery-tab').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  event.target.classList.add('active');
+  // 滚动到顶部
+  window.scrollTo(0, 0);
+}
+</script>
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<div class="nav">
+  <div class="nav-title">🎯 王者GP · 彩票分析</div>
+  <div class="nav-sub">7彩种一键切换 · 数据仅供统计参考 · 理性购彩</div>
+</div>
+
+<!-- 彩种切换按钮 -->
+<div class="lottery-tabs">
+  <button class="lottery-tab active" onclick="switchLottery('ssq')">双色球</button>
+  <button class="lottery-tab " onclick="switchLottery('kl8')">快乐8</button>
+  <button class="lottery-tab " onclick="switchLottery('fc3d')">福彩3D</button>
+  <button class="lottery-tab " onclick="switchLottery('pl35')">排列3/5</button>
+  <button class="lottery-tab " onclick="switchLottery('qxc')">七星彩</button>
+  <button class="lottery-tab " onclick="switchLottery('qlc')">七乐彩</button>
+  <button class="lottery-tab " onclick="switchLottery('dlt')">大乐透</button>
+
+</div>
+
+<!-- 7个彩种的内容 -->
+<div id="content-ssq" style="display:block;">
+<!-- 开奖日历 -->
+<div class="calendar">
+  <div class="calendar-title">📅 最新开奖信息</div>
+  <div class="calendar-info">
+    <div class="calendar-period">第2026111期</div>
+    <div class="calendar-date">开奖日期：2026-09-24</div>
+    <div class="calendar-next">下期：第2026112期</div>
+  </div>
+</div>
+
+<!-- 核心卡片区域（直接用百家号推的那张卡片图） -->
+<div class="card-section">
+  <div class="card-placeholder" style="padding:0;">
+    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/ssq_card_v2_20260925.png" alt="双色球开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
+    <div id="card-error" style="display:none;padding:40px;text-align:center;color:#999;">📊 开奖卡片加载中...</div>
+  </div>
+</div>
+
+<!-- 上期命中回顾 -->
+<div class="review">
+  <div class="review-title">📊 上期推荐命中回顾</div>
+  <div class="review-stats">
+    <div class="review-stat">
+      <div class="num">3</div>
+      <div class="label">命中红球</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">0</div>
+      <div class="label">命中蓝球</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">50.0%</div>
+      <div class="label">命中率</div>
+    </div>
+  </div>
+</div>
+
+<!-- 冷热号排行榜（最近30期） -->
+<div class="hotcold">
+  <div class="hotcold-title">🔥 最热号码 TOP10（近30期）</div>
+  <div class="hotcold-list">
+    <div class="hotcold-item hot">05</div>
+    <div class="hotcold-item hot">14</div>
+    <div class="hotcold-item hot">04</div>
+    <div class="hotcold-item hot">06</div>
+    <div class="hotcold-item hot">16</div>
+    <div class="hotcold-item hot">13</div>
+    <div class="hotcold-item hot">09</div>
+    <div class="hotcold-item hot">15</div>
+    <div class="hotcold-item hot">30</div>
+    <div class="hotcold-item hot">11</div>
+  </div>
+</div>
+
+<!-- 遗漏号排行榜 -->
+<div class="missing">
+  <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
+  <div class="missing-list">
+    <div class="missing-item"><div class="num">23</div><div class="days">遗漏21期</div></div>
+    <div class="missing-item"><div class="num">21</div><div class="days">遗漏16期</div></div>
+    <div class="missing-item"><div class="num">29</div><div class="days">遗漏14期</div></div>
+    <div class="missing-item"><div class="num">18</div><div class="days">遗漏12期</div></div>
+    <div class="missing-item"><div class="num">10</div><div class="days">遗漏9期</div></div>
+    <div class="missing-item"><div class="num">25</div><div class="days">遗漏9期</div></div>
+</div>
+</div>
+
+<!-- 区间分布 -->
+<div class="zone">
+  <div class="zone-title">📊 区间分布（近30期）</div>
+  <div class="zone-grid">
+    <div class="zone-item">
+      <div class="name">一区 1-11</div>
+      <div class="bar"><div class="bar-fill" style="width:40.0%;"></div></div>
+      <div class="pct">40.0%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">二区 12-22</div>
+      <div class="bar"><div class="bar-fill" style="width:32.9%;"></div></div>
+      <div class="pct">32.9%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">三区 23-33</div>
+      <div class="bar"><div class="bar-fill" style="width:27.1%;"></div></div>
+      <div class="pct">27.1%</div>
+    </div>
+  </div>
+</div>
+
+<!-- 本期重点关注 -->
+<div class="focus">
+  <div class="focus-title">🎯 本期重点关注</div>
+  
+  <div class="focus-section">
+    <div class="focus-label red-label">🔴 红球推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball">05</div>
+      <div class="focus-ball">14</div>
+      <div class="focus-ball">04</div>
+      <div class="focus-ball">06</div>
+      <div class="focus-ball">16</div>
+      <div class="focus-ball">13</div>
+    </div>
+  </div>
+  <div class="focus-section">
+    <div class="focus-label blue-label">🔵 蓝球推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball blue">09</div>
+      <div class="focus-ball blue">15</div>
+      <div class="focus-ball blue">30</div>
+      <div class="focus-ball blue">11</div>
+    </div>
+  </div>
+  <div class="focus-reason">
+    💡 综合多模型评分，重点关注以上号码。数据仅供参考，不保证中奖。
+  </div>
+</div>
+
+<!-- 历史开奖记录 -->
+<div class="history">
+  <div class="history-title">📜 最近5期开奖记录</div>
+  <div class="history-item">
+    <div class="history-period">第2026111期 · 2026-09-24</div>
+    <div class="history-balls">
+      <div class="history-ball red">06</div>
+      <div class="history-ball red">07</div>
+      <div class="history-ball red">14</div>
+      <div class="history-ball red">22</div>
+      <div class="history-ball red">31</div>
+      <div class="history-ball red">32</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">05</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026110期 · 2026-09-22</div>
+    <div class="history-balls">
+      <div class="history-ball red">02</div>
+      <div class="history-ball red">05</div>
+      <div class="history-ball red">16</div>
+      <div class="history-ball red">19</div>
+      <div class="history-ball red">26</div>
+      <div class="history-ball red">32</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">14</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026109期 · 2026-09-20</div>
+    <div class="history-balls">
+      <div class="history-ball red">09</div>
+      <div class="history-ball red">12</div>
+      <div class="history-ball red">15</div>
+      <div class="history-ball red">26</div>
+      <div class="history-ball red">30</div>
+      <div class="history-ball red">33</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">06</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026108期 · 2026-09-17</div>
+    <div class="history-balls">
+      <div class="history-ball red">06</div>
+      <div class="history-ball red">11</div>
+      <div class="history-ball red">13</div>
+      <div class="history-ball red">14</div>
+      <div class="history-ball red">20</div>
+      <div class="history-ball red">28</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">16</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026107期 · 2026-09-15</div>
+    <div class="history-balls">
+      <div class="history-ball red">01</div>
+      <div class="history-ball red">05</div>
+      <div class="history-ball red">09</div>
+      <div class="history-ball red">17</div>
+      <div class="history-ball red">24</div>
+      <div class="history-ball red">33</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">04</div>
+    </div>
+  </div>
+</div>
+
+<!-- 玩法介绍 -->
+<div class="playguide">
+  <div class="playguide-title">📖 双色球玩法介绍</div>
+  <div class="playguide-content">
+    
+        <p><strong>双色球</strong>是中国福利彩票发行的一种乐透型彩票。</p>
+        <p>🎱 <strong>红球区</strong>：从1-33个号码中选择6个</p>
+        <p>🔵 <strong>蓝球区</strong>：从1-16个号码中选择1个</p>
+        <p>💡 开奖时间：每周二、四、日晚上21:15</p>
+        
+  </div>
+</div>
+
+<!-- 中奖规则 -->
+<div class="rules">
+  <div class="rules-title">🏆 中奖规则</div>
+  <div class="rules-content">
+    
+        <p>🏆 <strong>一等奖</strong>：6红+1蓝，浮动奖金（最高1000万）</p>
+        <p>🥈 <strong>二等奖</strong>：6红+0蓝，浮动奖金</p>
+        <p>🥉 <strong>三等奖</strong>：5红+1蓝，固定奖金3000元</p>
+        <p>🎖️ <strong>四等奖</strong>：5红+0蓝 或 4红+1蓝，固定奖金200元</p>
+        <p>🎖️ <strong>五等奖</strong>：4红+0蓝 或 3红+1蓝，固定奖金10元</p>
+        <p>🎖️ <strong>六等奖</strong>：2红+1蓝 或 1红+1蓝 或 0红+1蓝，固定奖金5元</p>
+        
+  </div>
+</div>
+
+<!-- 术语解释 -->
+<div class="glossary">
+  <div class="glossary-title">📝 术语解释</div>
+  <div class="glossary-content">
+    
+    <p>🔥 <strong>热号</strong>：最近30期出现频率最高的号码</p>
+    <p>❄️ <strong>冷号</strong>：最近30期出现频率最低的号码</p>
+    <p>⏳ <strong>遗漏</strong>：某号码距离上次开出已经过了多少期</p>
+    <p>⚖️ <strong>奇偶比</strong>：开奖号码中奇数和偶数的比例</p>
+    <p>📏 <strong>大小比</strong>：开奖号码中大数和小数的比例</p>
+    <p>📊 <strong>和值</strong>：所有开奖号码相加的总和</p>
+    <p>📐 <strong>跨度</strong>：最大号码和最小号码的差值</p>
+    
+  </div>
+</div>
+
+<!-- 选号思路 -->
+<div class="picking">
+  <div class="picking-title">🎯 选号思路分享</div>
+  <div class="picking-content">
+    
+    <p>我们的预测系统基于150+个统计模型和机器学习算法，从8大维度综合评分：</p>
+    <p>· 基础统计：频率、冷热、遗漏、奇偶、大小、跨度、AC值、质合、012路</p>
+    <p>· 进阶统计：马尔可夫链、贝叶斯分析、蒙特卡洛模拟、共现关联</p>
+    <p>· 机器学习：随机森林、梯度提升、逻辑回归</p>
+    <p>· 时间序列：LSTM神经网络、ARIMA模型</p>
+    <p>· 集成学习：Blending融合、Stacking集成、A/B测试框架</p>
+    <p>· 深度学习：注意力机制、迁移学习、强化学习</p>
+    <p>· 训练优化：数据增强、早停机制、K折交叉验证、超参数自动调优</p>
+    <p>· 评估监控：随机基准对照、详细回测、可解释性分析、置信度估计</p>
+    <br>
+    <p>💡 <strong>选号建议：</strong></p>
+    <p>第一，不要盲目追热。热号虽然近期出现频繁，但每一期开奖都是独立事件，历史结果不影响未来概率。</p>
+    <p>第二，不要执着于冷号。冷号虽然"该出了"，但可能继续遗漏多期，这是彩票随机性的体现。</p>
+    <p>第三，均衡配置更稳妥。在大小、奇偶、区间等维度上保持相对均衡的配置，从概率角度看更符合长期分布。</p>
+    <p>第四，量力而行。彩票本质上是一种娱乐方式，不是投资手段。每期投入应该控制在可承受的范围内。</p>
+    
+  </div>
+</div>
+
+<!-- 数据更新说明 -->
+<div class="datanote">
+  <div class="datanote-title">ℹ️ 数据更新说明</div>
+  <div class="datanote-content">
+    <p>🕒 数据更新时间：2026-09-24 开奖后</p>
+    <p>📊 数据来源：官方开奖数据 + 150+统计模型</p>
+    <p>🔄 更新频率：每日开奖后自动更新</p>
+    <p>✅ 与推荐卡片使用同一套数据和计算逻辑</p>
+  </div>
+</div>
+
+<!-- 动态尾文（与百家号完全一致） -->
+<div class="closing-text"><p>📊 双色球第2026111期 vs 历史平均：本期数据有哪些异常？我们一起来对比看看。</p><p>📅 本期开奖日期：2026-09-24，期号：第2026111期。红球开出：06 07 14 22 31 32。蓝球开出：05。</p><p>🔗 连号观察：本期出现了连号组合，这在双色球中出现的概率约为5%。连号的出现往往具有一定的聚集效应，连续两期出现连号的概率相对较低。</p><p>⚖️ 奇偶分布：本期红球奇偶比为2:4。偶数偏多，下期奇数可能会有所增加。</p><p>🧊 冷号盘点：21已经连续22期没有出现了，08也遗漏了14期。这些"冷到极致"的号码，往往会在某个时点集中回补，这是概率统计中的常见现象。</p><p>🎲 选号方法论：我们坚持"数据驱动+理性对待"的原则。下期选号时，建议先看近30期的热号和冷号分布，再结合本期的奇偶比和大小比进行调整。同时，不要忽视随机因素的影响，任何选号方法都不能保证中奖，只是从统计角度提高参考价值。</p><p>🎯 理性看待：我们的预测系统虽然使用了150+统计模型和机器学习算法，但本质上还是基于历史数据的统计推断。彩票的随机性决定了任何方法都无法准确预测结果。请理性看待我们的分析，把它当作一种参考，而不是"中奖秘籍"。</p><p>🔬 统计方法说明：我们的热号统计基于近30期数据，冷号统计基于全部历史数据的遗漏期数，奇偶比和大小比基于本期开奖结果。不同的统计周期会得出不同的结论，建议结合多个维度综合判断。</p><p>🤖 关于我们的预测系统：我们使用了150+个统计模型，包括基础统计、进阶统计、机器学习、时间序列、集成学习、深度学习、训练优化、评估监控8大维度。每个彩种都有定制的权重配置，并且会根据历史回测数据自动调整权重。当然，再强大的模型也无法改变彩票的随机性。</p><p>📌 以上就是双色球第2026111期的全部分析内容，第2026112期开奖后我们会继续为您带来复盘分析，敬请期待！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+
+<!-- 理性购彩提示 -->
+<div class="disclaimer">
+  <div class="disclaimer-title">⚠️ 理性购彩提示</div>
+  <div class="disclaimer-content">
+    彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
+  </div>
+</div>
+
+
+</div>
+<div id="content-kl8" style="display:none;">
+<!-- 开奖日历 -->
+<div class="calendar">
+  <div class="calendar-title">📅 最新开奖信息</div>
+  <div class="calendar-info">
+    <div class="calendar-period">第2026257期</div>
+    <div class="calendar-date">开奖日期：2026-09-24</div>
+    <div class="calendar-next">下期：第2026258期</div>
+  </div>
+</div>
+
+<!-- 核心卡片区域（直接用百家号推的那张卡片图） -->
+<div class="card-section">
+  <div class="card-placeholder" style="padding:0;">
+    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/kl8_card_v2_20260925.png" alt="快乐8开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
+    <div id="card-error" style="display:none;padding:40px;text-align:center;color:#999;">📊 开奖卡片加载中...</div>
+  </div>
+</div>
+
+<!-- 上期命中回顾 -->
+<div class="review">
+  <div class="review-title">📊 上期推荐命中回顾</div>
+  <div class="review-stats">
+    <div class="review-stat">
+      <div class="num">1</div>
+      <div class="label">命中个数</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">10.0%</div>
+      <div class="label">命中率</div>
+    </div>
+  </div>
+</div>
+
+<!-- 冷热号排行榜（最近30期） -->
+<div class="hotcold">
+  <div class="hotcold-title">🔥 最热号码 TOP10（近30期）</div>
+  <div class="hotcold-list">
+    <div class="hotcold-item hot">55</div>
+    <div class="hotcold-item hot">65</div>
+    <div class="hotcold-item hot">08</div>
+    <div class="hotcold-item hot">31</div>
+    <div class="hotcold-item hot">68</div>
+    <div class="hotcold-item hot">52</div>
+    <div class="hotcold-item hot">53</div>
+    <div class="hotcold-item hot">61</div>
+    <div class="hotcold-item hot">66</div>
+    <div class="hotcold-item hot">50</div>
+  </div>
+</div>
+
+<!-- 遗漏号排行榜 -->
+<div class="missing">
+  <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
+  <div class="missing-list">
+    <div class="missing-item"><div class="num">45</div><div class="days">遗漏18期</div></div>
+    <div class="missing-item"><div class="num">64</div><div class="days">遗漏14期</div></div>
+    <div class="missing-item"><div class="num">25</div><div class="days">遗漏12期</div></div>
+    <div class="missing-item"><div class="num">27</div><div class="days">遗漏12期</div></div>
+    <div class="missing-item"><div class="num">30</div><div class="days">遗漏12期</div></div>
+    <div class="missing-item"><div class="num">75</div><div class="days">遗漏11期</div></div>
+</div>
+</div>
+
+<!-- 区间分布 -->
+<div class="zone">
+  <div class="zone-title">📊 区间分布（近30期）</div>
+  <div class="zone-grid">
+    <div class="zone-item">
+      <div class="name">一区 1-20</div>
+      <div class="bar"><div class="bar-fill" style="width:23.5%;"></div></div>
+      <div class="pct">23.5%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">二区 21-40</div>
+      <div class="bar"><div class="bar-fill" style="width:23.2%;"></div></div>
+      <div class="pct">23.2%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">三区 41-60</div>
+      <div class="bar"><div class="bar-fill" style="width:25.8%;"></div></div>
+      <div class="pct">25.8%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">四区 61-80</div>
+      <div class="bar"><div class="bar-fill" style="width:27.5%;"></div></div>
+      <div class="pct">27.5%</div>
+    </div>
+  </div>
+</div>
+
+<!-- 本期重点关注 -->
+<div class="focus">
+  <div class="focus-title">🎯 本期重点关注</div>
+  
+  <div class="focus-section">
+    <div class="focus-label red-label">🔥 热号推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball">55</div>
+      <div class="focus-ball">65</div>
+      <div class="focus-ball">08</div>
+      <div class="focus-ball">31</div>
+      <div class="focus-ball">52</div>
+      <div class="focus-ball">53</div>
+      <div class="focus-ball">68</div>
+      <div class="focus-ball">50</div>
+      <div class="focus-ball">51</div>
+      <div class="focus-ball">61</div>
+    </div>
+  </div>
+  <div class="focus-section">
+    <div class="focus-label blue-label">⭐ 精选推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball blue">55</div>
+      <div class="focus-ball blue">02</div>
+      <div class="focus-ball blue">12</div>
+      <div class="focus-ball blue">33</div>
+      <div class="focus-ball blue">53</div>
+    </div>
+  </div>
+  <div class="focus-reason">
+    💡 综合多模型评分，重点关注以上号码。数据仅供参考，不保证中奖。
+  </div>
+</div>
+
+<!-- 历史开奖记录 -->
+<div class="history">
+  <div class="history-title">📜 最近5期开奖记录</div>
+  <div class="history-item">
+    <div class="history-period">第2026257期 · 2026-09-24</div>
+    <div class="history-balls">
+      <div class="history-ball red">01</div>
+      <div class="history-ball red">04</div>
+      <div class="history-ball red">07</div>
+      <div class="history-ball red">08</div>
+      <div class="history-ball red">10</div>
+      <div class="history-ball red">13</div>
+      <div class="history-ball red">23</div>
+      <div class="history-ball red">24</div>
+      <div class="history-ball red">31</div>
+      <div class="history-ball red">33</div>
+      <div class="history-ball red">39</div>
+      <div class="history-ball red">40</div>
+      <div class="history-ball red">47</div>
+      <div class="history-ball red">48</div>
+      <div class="history-ball red">58</div>
+      <div class="history-ball red">61</div>
+      <div class="history-ball red">65</div>
+      <div class="history-ball red">74</div>
+      <div class="history-ball red">76</div>
+      <div class="history-ball red">79</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026256期 · 2026-09-23</div>
+    <div class="history-balls">
+      <div class="history-ball red">01</div>
+      <div class="history-ball red">02</div>
+      <div class="history-ball red">06</div>
+      <div class="history-ball red">11</div>
+      <div class="history-ball red">12</div>
+      <div class="history-ball red">14</div>
+      <div class="history-ball red">15</div>
+      <div class="history-ball red">22</div>
+      <div class="history-ball red">24</div>
+      <div class="history-ball red">32</div>
+      <div class="history-ball red">33</div>
+      <div class="history-ball red">35</div>
+      <div class="history-ball red">38</div>
+      <div class="history-ball red">46</div>
+      <div class="history-ball red">67</div>
+      <div class="history-ball red">68</div>
+      <div class="history-ball red">71</div>
+      <div class="history-ball red">73</div>
+      <div class="history-ball red">74</div>
+      <div class="history-ball red">76</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026255期 · 2026-09-22</div>
+    <div class="history-balls">
+      <div class="history-ball red">02</div>
+      <div class="history-ball red">09</div>
+      <div class="history-ball red">12</div>
+      <div class="history-ball red">16</div>
+      <div class="history-ball red">18</div>
+      <div class="history-ball red">23</div>
+      <div class="history-ball red">26</div>
+      <div class="history-ball red">31</div>
+      <div class="history-ball red">36</div>
+      <div class="history-ball red">44</div>
+      <div class="history-ball red">47</div>
+      <div class="history-ball red">52</div>
+      <div class="history-ball red">54</div>
+      <div class="history-ball red">55</div>
+      <div class="history-ball red">59</div>
+      <div class="history-ball red">60</div>
+      <div class="history-ball red">61</div>
+      <div class="history-ball red">66</div>
+      <div class="history-ball red">72</div>
+      <div class="history-ball red">77</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026254期 · 2026-09-21</div>
+    <div class="history-balls">
+      <div class="history-ball red">02</div>
+      <div class="history-ball red">04</div>
+      <div class="history-ball red">10</div>
+      <div class="history-ball red">13</div>
+      <div class="history-ball red">18</div>
+      <div class="history-ball red">20</div>
+      <div class="history-ball red">21</div>
+      <div class="history-ball red">26</div>
+      <div class="history-ball red">32</div>
+      <div class="history-ball red">37</div>
+      <div class="history-ball red">43</div>
+      <div class="history-ball red">49</div>
+      <div class="history-ball red">50</div>
+      <div class="history-ball red">57</div>
+      <div class="history-ball red">62</div>
+      <div class="history-ball red">66</div>
+      <div class="history-ball red">69</div>
+      <div class="history-ball red">73</div>
+      <div class="history-ball red">78</div>
+      <div class="history-ball red">80</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026253期 · 2026-09-20</div>
+    <div class="history-balls">
+      <div class="history-ball red">01</div>
+      <div class="history-ball red">02</div>
+      <div class="history-ball red">08</div>
+      <div class="history-ball red">17</div>
+      <div class="history-ball red">23</div>
+      <div class="history-ball red">24</div>
+      <div class="history-ball red">29</div>
+      <div class="history-ball red">31</div>
+      <div class="history-ball red">40</div>
+      <div class="history-ball red">41</div>
+      <div class="history-ball red">46</div>
+      <div class="history-ball red">47</div>
+      <div class="history-ball red">51</div>
+      <div class="history-ball red">54</div>
+      <div class="history-ball red">59</div>
+      <div class="history-ball red">62</div>
+      <div class="history-ball red">65</div>
+      <div class="history-ball red">72</div>
+      <div class="history-ball red">74</div>
+      <div class="history-ball red">79</div>
+    </div>
+  </div>
+</div>
+
+<!-- 玩法介绍 -->
+<div class="playguide">
+  <div class="playguide-title">📖 快乐8玩法介绍</div>
+  <div class="playguide-content">
+    
+  </div>
+</div>
+
+<!-- 中奖规则 -->
+<div class="rules">
+  <div class="rules-title">🏆 中奖规则</div>
+  <div class="rules-content">
+    
+  </div>
+</div>
+
+<!-- 术语解释 -->
+<div class="glossary">
+  <div class="glossary-title">📝 术语解释</div>
+  <div class="glossary-content">
+    
+    <p>🔥 <strong>热号</strong>：最近30期出现频率最高的号码</p>
+    <p>❄️ <strong>冷号</strong>：最近30期出现频率最低的号码</p>
+    <p>⏳ <strong>遗漏</strong>：某号码距离上次开出已经过了多少期</p>
+    <p>⚖️ <strong>奇偶比</strong>：开奖号码中奇数和偶数的比例</p>
+    <p>📏 <strong>大小比</strong>：开奖号码中大数和小数的比例</p>
+    <p>📊 <strong>和值</strong>：所有开奖号码相加的总和</p>
+    <p>📐 <strong>跨度</strong>：最大号码和最小号码的差值</p>
+    
+  </div>
+</div>
+
+<!-- 选号思路 -->
+<div class="picking">
+  <div class="picking-title">🎯 选号思路分享</div>
+  <div class="picking-content">
+    
+    <p>我们的预测系统基于150+个统计模型和机器学习算法，从8大维度综合评分：</p>
+    <p>· 基础统计：频率、冷热、遗漏、奇偶、大小、跨度、AC值、质合、012路</p>
+    <p>· 进阶统计：马尔可夫链、贝叶斯分析、蒙特卡洛模拟、共现关联</p>
+    <p>· 机器学习：随机森林、梯度提升、逻辑回归</p>
+    <p>· 时间序列：LSTM神经网络、ARIMA模型</p>
+    <p>· 集成学习：Blending融合、Stacking集成、A/B测试框架</p>
+    <p>· 深度学习：注意力机制、迁移学习、强化学习</p>
+    <p>· 训练优化：数据增强、早停机制、K折交叉验证、超参数自动调优</p>
+    <p>· 评估监控：随机基准对照、详细回测、可解释性分析、置信度估计</p>
+    <br>
+    <p>💡 <strong>选号建议：</strong></p>
+    <p>第一，不要盲目追热。热号虽然近期出现频繁，但每一期开奖都是独立事件，历史结果不影响未来概率。</p>
+    <p>第二，不要执着于冷号。冷号虽然"该出了"，但可能继续遗漏多期，这是彩票随机性的体现。</p>
+    <p>第三，均衡配置更稳妥。在大小、奇偶、区间等维度上保持相对均衡的配置，从概率角度看更符合长期分布。</p>
+    <p>第四，量力而行。彩票本质上是一种娱乐方式，不是投资手段。每期投入应该控制在可承受的范围内。</p>
+    
+  </div>
+</div>
+
+<!-- 数据更新说明 -->
+<div class="datanote">
+  <div class="datanote-title">ℹ️ 数据更新说明</div>
+  <div class="datanote-content">
+    <p>🕒 数据更新时间：2026-09-24 开奖后</p>
+    <p>📊 数据来源：官方开奖数据 + 150+统计模型</p>
+    <p>🔄 更新频率：每日开奖后自动更新</p>
+    <p>✅ 与推荐卡片使用同一套数据和计算逻辑</p>
+  </div>
+</div>
+
+<!-- 动态尾文（与百家号完全一致） -->
+<div class="closing-text"><p>📋 快乐8第2026257期复盘清单：5个关键点带你看懂本期开奖。</p><p>📅 本期开奖日期：2026-09-24，期号：第2026257期。号码开出：01 04 07 08 10 13 23 24 31 33 39 40 47 48 58 61 65 74 76 79。</p><p>🔁 重复号码：本期号码与上期对比，有5个号码重复出现。从统计角度看，每期出现1-2个重号是比较常见的情况，不必过度解读。</p><p>🔗 连号观察：本期出现了连号组合，这在快乐8中出现的概率约为7%。连号的出现往往具有一定的聚集效应，连续两期出现连号的概率相对较低。</p><p>📊 大小统计：本期和值为741，平均每个号码约37。近30期平均和值约为810左右，本期偏低，下期和值有望回升。</p><p>🔬 统计方法说明：我们的热号统计基于近30期数据，冷号统计基于全部历史数据的遗漏期数，奇偶比和大小比基于本期开奖结果。不同的统计周期会得出不同的结论，建议结合多个维度综合判断。</p><p>💪 理性购彩者的五个特征：①每期投入固定，不随意加码；②不追热不守冷，保持平常心；③把购彩当娱乐，不影响生活；④中奖不骄傲，不中奖不气馁；⑤坚持做公益，快乐每一天。你中了几条？</p><p>📊 模型选号逻辑：我们的系统使用了在线学习权重校准，每个彩种都有定制的权重配置。以快乐8为例，当前权重配置为全史频次+近因加权+遗漏回补为主，辅以形态分析和冷热转换。下期预测号码就是基于这些权重综合计算得出的。</p><p>💡 购彩心态：很多彩民朋友容易陷入"追热"或"守冷"的极端，其实从概率角度看，每一期开奖都是独立的。建议把购彩当作一种娱乐方式，每期投入控制在可承受范围内，不要因为购彩影响正常生活。如果觉得购彩已经成为负担，请及时寻求帮助。</p><p>📊 以上就是本期的全部统计分析，仅供参考。第2026258期开奖后见！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+
+<!-- 理性购彩提示 -->
+<div class="disclaimer">
+  <div class="disclaimer-title">⚠️ 理性购彩提示</div>
+  <div class="disclaimer-content">
+    彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
+  </div>
+</div>
+
+
+</div>
+<div id="content-fc3d" style="display:none;">
+<!-- 开奖日历 -->
+<div class="calendar">
+  <div class="calendar-title">📅 最新开奖信息</div>
+  <div class="calendar-info">
+    <div class="calendar-period">第2026257期</div>
+    <div class="calendar-date">开奖日期：2026-09-24</div>
+    <div class="calendar-next">下期：第2026258期</div>
+  </div>
+</div>
+
+<!-- 核心卡片区域（直接用百家号推的那张卡片图） -->
+<div class="card-section">
+  <div class="card-placeholder" style="padding:0;">
+    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/fc3d_card_v2_20260925.png" alt="福彩3D开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
+    <div id="card-error" style="display:none;padding:40px;text-align:center;color:#999;">📊 开奖卡片加载中...</div>
+  </div>
+</div>
+
+<!-- 上期命中回顾 -->
+<div class="review">
+  <div class="review-title">📊 上期推荐命中回顾</div>
+  <div class="review-stats">
+    <div class="review-stat">
+      <div class="num">1</div>
+      <div class="label">命中个数</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">33.3%</div>
+      <div class="label">命中率</div>
+    </div>
+  </div>
+</div>
+
+<!-- 冷热号排行榜（最近30期） -->
+<div class="hotcold">
+  <div class="hotcold-title">🔥 最热号码 TOP10（近30期）</div>
+  <div class="hotcold-list">
+    <div class="hotcold-item hot">09</div>
+    <div class="hotcold-item hot">00</div>
+    <div class="hotcold-item hot">08</div>
+    <div class="hotcold-item hot">05</div>
+    <div class="hotcold-item hot">06</div>
+    <div class="hotcold-item hot">04</div>
+    <div class="hotcold-item hot">02</div>
+    <div class="hotcold-item hot">07</div>
+    <div class="hotcold-item hot">01</div>
+    <div class="hotcold-item hot">03</div>
+  </div>
+</div>
+
+<!-- 遗漏号排行榜 -->
+<div class="missing">
+  <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
+  <div class="missing-list">
+    <div class="missing-item"><div class="num">07</div><div class="days">遗漏6期</div></div>
+    <div class="missing-item"><div class="num">02</div><div class="days">遗漏5期</div></div>
+    <div class="missing-item"><div class="num">03</div><div class="days">遗漏4期</div></div>
+    <div class="missing-item"><div class="num">09</div><div class="days">遗漏2期</div></div>
+    <div class="missing-item"><div class="num">00</div><div class="days">遗漏1期</div></div>
+    <div class="missing-item"><div class="num">01</div><div class="days">遗漏1期</div></div>
+</div>
+</div>
+
+<!-- 区间分布 -->
+<div class="zone">
+  <div class="zone-title">📊 区间分布（近30期）</div>
+  <div class="zone-grid">
+    <div class="zone-item">
+      <div class="name">小数 0-3</div>
+      <div class="bar"><div class="bar-fill" style="width:30.0%;"></div></div>
+      <div class="pct">30.0%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">中数 4-6</div>
+      <div class="bar"><div class="bar-fill" style="width:31.1%;"></div></div>
+      <div class="pct">31.1%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">大数 7-9</div>
+      <div class="bar"><div class="bar-fill" style="width:38.9%;"></div></div>
+      <div class="pct">38.9%</div>
+    </div>
+  </div>
+</div>
+
+<!-- 本期重点关注 -->
+<div class="focus">
+  <div class="focus-title">🎯 本期重点关注</div>
+  
+  <div class="focus-section">
+    <div class="focus-label red-label">🔥 热号推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball">06</div>
+      <div class="focus-ball">08</div>
+      <div class="focus-ball">09</div>
+    </div>
+  </div>
+  <div class="focus-section">
+    <div class="focus-label blue-label">⭐ 孤码推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball blue">09</div>
+      <div class="focus-ball blue">05</div>
+      <div class="focus-ball blue">06</div>
+    </div>
+  </div>
+  <div class="focus-reason">
+    💡 综合多模型评分，重点关注以上号码。数据仅供参考，不保证中奖。
+  </div>
+</div>
+
+<!-- 历史开奖记录 -->
+<div class="history">
+  <div class="history-title">📜 最近5期开奖记录</div>
+  <div class="history-item">
+    <div class="history-period">第2026257期 · 2026-09-24</div>
+    <div class="history-balls">
+      <div class="history-ball red">4</div>
+      <div class="history-ball red">8</div>
+      <div class="history-ball red">6</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026256期 · 2026-09-23</div>
+    <div class="history-balls">
+      <div class="history-ball red">0</div>
+      <div class="history-ball red">5</div>
+      <div class="history-ball red">1</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026255期 · 2026-09-22</div>
+    <div class="history-balls">
+      <div class="history-ball red">6</div>
+      <div class="history-ball red">9</div>
+      <div class="history-ball red">9</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026254期 · 2026-09-21</div>
+    <div class="history-balls">
+      <div class="history-ball red">8</div>
+      <div class="history-ball red">5</div>
+      <div class="history-ball red">0</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026253期 · 2026-09-20</div>
+    <div class="history-balls">
+      <div class="history-ball red">0</div>
+      <div class="history-ball red">3</div>
+      <div class="history-ball red">4</div>
+    </div>
+  </div>
+</div>
+
+<!-- 玩法介绍 -->
+<div class="playguide">
+  <div class="playguide-title">📖 福彩3D玩法介绍</div>
+  <div class="playguide-content">
+    
+  </div>
+</div>
+
+<!-- 中奖规则 -->
+<div class="rules">
+  <div class="rules-title">🏆 中奖规则</div>
+  <div class="rules-content">
+    
+  </div>
+</div>
+
+<!-- 术语解释 -->
+<div class="glossary">
+  <div class="glossary-title">📝 术语解释</div>
+  <div class="glossary-content">
+    
+    <p>🔥 <strong>热号</strong>：最近30期出现频率最高的号码</p>
+    <p>❄️ <strong>冷号</strong>：最近30期出现频率最低的号码</p>
+    <p>⏳ <strong>遗漏</strong>：某号码距离上次开出已经过了多少期</p>
+    <p>⚖️ <strong>奇偶比</strong>：开奖号码中奇数和偶数的比例</p>
+    <p>📏 <strong>大小比</strong>：开奖号码中大数和小数的比例</p>
+    <p>📊 <strong>和值</strong>：所有开奖号码相加的总和</p>
+    <p>📐 <strong>跨度</strong>：最大号码和最小号码的差值</p>
+    
+  </div>
+</div>
+
+<!-- 选号思路 -->
+<div class="picking">
+  <div class="picking-title">🎯 选号思路分享</div>
+  <div class="picking-content">
+    
+    <p>我们的预测系统基于150+个统计模型和机器学习算法，从8大维度综合评分：</p>
+    <p>· 基础统计：频率、冷热、遗漏、奇偶、大小、跨度、AC值、质合、012路</p>
+    <p>· 进阶统计：马尔可夫链、贝叶斯分析、蒙特卡洛模拟、共现关联</p>
+    <p>· 机器学习：随机森林、梯度提升、逻辑回归</p>
+    <p>· 时间序列：LSTM神经网络、ARIMA模型</p>
+    <p>· 集成学习：Blending融合、Stacking集成、A/B测试框架</p>
+    <p>· 深度学习：注意力机制、迁移学习、强化学习</p>
+    <p>· 训练优化：数据增强、早停机制、K折交叉验证、超参数自动调优</p>
+    <p>· 评估监控：随机基准对照、详细回测、可解释性分析、置信度估计</p>
+    <br>
+    <p>💡 <strong>选号建议：</strong></p>
+    <p>第一，不要盲目追热。热号虽然近期出现频繁，但每一期开奖都是独立事件，历史结果不影响未来概率。</p>
+    <p>第二，不要执着于冷号。冷号虽然"该出了"，但可能继续遗漏多期，这是彩票随机性的体现。</p>
+    <p>第三，均衡配置更稳妥。在大小、奇偶、区间等维度上保持相对均衡的配置，从概率角度看更符合长期分布。</p>
+    <p>第四，量力而行。彩票本质上是一种娱乐方式，不是投资手段。每期投入应该控制在可承受的范围内。</p>
+    
+  </div>
+</div>
+
+<!-- 数据更新说明 -->
+<div class="datanote">
+  <div class="datanote-title">ℹ️ 数据更新说明</div>
+  <div class="datanote-content">
+    <p>🕒 数据更新时间：2026-09-24 开奖后</p>
+    <p>📊 数据来源：官方开奖数据 + 150+统计模型</p>
+    <p>🔄 更新频率：每日开奖后自动更新</p>
+    <p>✅ 与推荐卡片使用同一套数据和计算逻辑</p>
+  </div>
+</div>
+
+<!-- 动态尾文（与百家号完全一致） -->
+<div class="closing-text"><p>📋 福彩3D第2026257期分析报告：本期开奖结果、数据统计、下期参考，一文看懂。</p><p>🎲 选号方法论：我们坚持"数据驱动+理性对待"的原则。下期选号时，建议先看近30期的热号和冷号分布，再结合本期的奇偶比和大小比进行调整。同时，不要忽视随机因素的影响，任何选号方法都不能保证中奖，只是从统计角度提高参考价值。</p><p>📚 趣味统计：从福彩3D的历史数据来看，最常见的奇偶比是1:2，出现概率约为30%左右。而全奇或全偶的情况相对较少，出现概率不到5%。这也是为什么选号时建议保持奇偶均衡的原因。</p><p>🎯 名人与彩票：据说很多名人也喜欢买彩票，不过他们大多是把购彩当作一种慈善和娱乐，而不是为了中奖。其实购彩的本质就是这样——花小钱，做公益，买希望。</p><p>🔄 重号分析：本期与上期相比，有0个重复号码。重号的出现是彩票随机性的体现，连续多期出现相同号码的概率虽然低，但确实会发生。</p><p>🔢 奇偶比分析：本期开出0个奇数、3个偶数，比例为0:3。从近30期数据来看，奇偶比最常见的分布是1:2左右，本期偏离了均衡状态，下期回归均衡的概率较大。</p><p>📢 重要提示：福彩3D作为一种彩票游戏，其本质是随机性的。历史数据只能提供统计参考，不能作为中奖保证。我们坚持"统计参考、理性对待"的理念，不做"必中"承诺，不诱导过度投入。购彩有风险，投入需谨慎。</p><p>📅 本期开奖日期：2026-09-24，期号：第2026257期。号码开出：4 8 6。</p><p>🎲 开奖是随机的，但分析是认真的。第2026258期我们继续为您带来专业的数据复盘，不见不散！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+
+<!-- 理性购彩提示 -->
+<div class="disclaimer">
+  <div class="disclaimer-title">⚠️ 理性购彩提示</div>
+  <div class="disclaimer-content">
+    彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
+  </div>
+</div>
+
+
+</div>
+<div id="content-pl35" style="display:none;">
+<!-- 开奖日历 -->
+<div class="calendar">
+  <div class="calendar-title">📅 最新开奖信息</div>
+  <div class="calendar-info">
+    <div class="calendar-period">第26257期</div>
+    <div class="calendar-date">开奖日期：2026-09-24</div>
+    <div class="calendar-next">下期：第26258期</div>
+  </div>
+</div>
+
+<!-- 核心卡片区域（直接用百家号推的那张卡片图） -->
+<div class="card-section">
+  <div class="card-placeholder" style="padding:0;">
+    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/pl35_card_v2_20260925.png" alt="排列3/5开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
+    <div id="card-error" style="display:none;padding:40px;text-align:center;color:#999;">📊 开奖卡片加载中...</div>
+  </div>
+</div>
+
+<!-- 上期命中回顾 -->
+<div class="review">
+  <div class="review-title">📊 上期推荐命中回顾</div>
+  <div class="review-stats">
+    <div class="review-stat">
+      <div class="num">0</div>
+      <div class="label">排3命中</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">0</div>
+      <div class="label">排5命中</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">0.0%</div>
+      <div class="label">命中率</div>
+    </div>
+  </div>
+</div>
+
+<!-- 冷热号排行榜（最近30期） -->
+<div class="hotcold">
+  <div class="hotcold-title">🔥 最热号码 TOP10（近30期）</div>
+  <div class="hotcold-list">
+    <div class="hotcold-item hot">00</div>
+    <div class="hotcold-item hot">09</div>
+    <div class="hotcold-item hot">02</div>
+    <div class="hotcold-item hot">01</div>
+    <div class="hotcold-item hot">06</div>
+    <div class="hotcold-item hot">03</div>
+    <div class="hotcold-item hot">05</div>
+    <div class="hotcold-item hot">07</div>
+    <div class="hotcold-item hot">08</div>
+    <div class="hotcold-item hot">04</div>
+  </div>
+</div>
+
+<!-- 遗漏号排行榜 -->
+<div class="missing">
+  <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
+  <div class="missing-list">
+    <div class="missing-item"><div class="num">01</div><div class="days">遗漏4期</div></div>
+    <div class="missing-item"><div class="num">08</div><div class="days">遗漏4期</div></div>
+    <div class="missing-item"><div class="num">02</div><div class="days">遗漏2期</div></div>
+    <div class="missing-item"><div class="num">05</div><div class="days">遗漏2期</div></div>
+    <div class="missing-item"><div class="num">07</div><div class="days">遗漏2期</div></div>
+    <div class="missing-item"><div class="num">06</div><div class="days">遗漏1期</div></div>
+</div>
+</div>
+
+<!-- 区间分布 -->
+<div class="zone">
+  <div class="zone-title">📊 区间分布（近30期）</div>
+  <div class="zone-grid">
+    <div class="zone-item">
+      <div class="name">小数 0-3</div>
+      <div class="bar"><div class="bar-fill" style="width:44.2%;"></div></div>
+      <div class="pct">44.2%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">中数 4-6</div>
+      <div class="bar"><div class="bar-fill" style="width:27.5%;"></div></div>
+      <div class="pct">27.5%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">大数 7-9</div>
+      <div class="bar"><div class="bar-fill" style="width:28.3%;"></div></div>
+      <div class="pct">28.3%</div>
+    </div>
+  </div>
+</div>
+
+<!-- 本期重点关注 -->
+<div class="focus">
+  <div class="focus-title">🎯 本期重点关注</div>
+  
+  <div class="focus-section">
+    <div class="focus-label red-label">🔢 排列3推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball">01</div>
+      <div class="focus-ball">02</div>
+      <div class="focus-ball">09</div>
+    </div>
+  </div>
+  <div class="focus-section">
+    <div class="focus-label blue-label">🔢 排列5推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball blue">05</div>
+      <div class="focus-ball blue">07</div>
+      <div class="focus-ball blue">01</div>
+      <div class="focus-ball blue">04</div>
+      <div class="focus-ball blue">03</div>
+    </div>
+  </div>
+  <div class="focus-reason">
+    💡 综合多模型评分，重点关注以上号码。数据仅供参考，不保证中奖。
+  </div>
+</div>
+
+<!-- 历史开奖记录 -->
+<div class="history">
+  <div class="history-title">📜 最近5期开奖记录</div>
+  <div class="history-item">
+    <div class="history-period">第26257期 · 2026-09-24</div>
+    <div class="history-balls">
+      <div class="history-ball red">4</div>
+      <div class="history-ball red">9</div>
+      <div class="history-ball red">3</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">3</div>
+      <div class="history-ball blue">0</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26256期 · 2026-09-23</div>
+    <div class="history-balls">
+      <div class="history-ball red">6</div>
+      <div class="history-ball red">9</div>
+      <div class="history-ball red">0</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">4</div>
+      <div class="history-ball blue">3</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26255期 · 2026-09-22</div>
+    <div class="history-balls">
+      <div class="history-ball red">7</div>
+      <div class="history-ball red">6</div>
+      <div class="history-ball red">4</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">2</div>
+      <div class="history-ball blue">5</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26254期 · 2026-09-21</div>
+    <div class="history-balls">
+      <div class="history-ball red">0</div>
+      <div class="history-ball red">6</div>
+      <div class="history-ball red">9</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">4</div>
+      <div class="history-ball blue">0</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26253期 · 2026-09-20</div>
+    <div class="history-balls">
+      <div class="history-ball red">8</div>
+      <div class="history-ball red">9</div>
+      <div class="history-ball red">3</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">5</div>
+      <div class="history-ball blue">1</div>
+    </div>
+  </div>
+</div>
+
+<!-- 玩法介绍 -->
+<div class="playguide">
+  <div class="playguide-title">📖 排列3/5玩法介绍</div>
+  <div class="playguide-content">
+    
+  </div>
+</div>
+
+<!-- 中奖规则 -->
+<div class="rules">
+  <div class="rules-title">🏆 中奖规则</div>
+  <div class="rules-content">
+    
+  </div>
+</div>
+
+<!-- 术语解释 -->
+<div class="glossary">
+  <div class="glossary-title">📝 术语解释</div>
+  <div class="glossary-content">
+    
+    <p>🔥 <strong>热号</strong>：最近30期出现频率最高的号码</p>
+    <p>❄️ <strong>冷号</strong>：最近30期出现频率最低的号码</p>
+    <p>⏳ <strong>遗漏</strong>：某号码距离上次开出已经过了多少期</p>
+    <p>⚖️ <strong>奇偶比</strong>：开奖号码中奇数和偶数的比例</p>
+    <p>📏 <strong>大小比</strong>：开奖号码中大数和小数的比例</p>
+    <p>📊 <strong>和值</strong>：所有开奖号码相加的总和</p>
+    <p>📐 <strong>跨度</strong>：最大号码和最小号码的差值</p>
+    
+  </div>
+</div>
+
+<!-- 选号思路 -->
+<div class="picking">
+  <div class="picking-title">🎯 选号思路分享</div>
+  <div class="picking-content">
+    
+    <p>我们的预测系统基于150+个统计模型和机器学习算法，从8大维度综合评分：</p>
+    <p>· 基础统计：频率、冷热、遗漏、奇偶、大小、跨度、AC值、质合、012路</p>
+    <p>· 进阶统计：马尔可夫链、贝叶斯分析、蒙特卡洛模拟、共现关联</p>
+    <p>· 机器学习：随机森林、梯度提升、逻辑回归</p>
+    <p>· 时间序列：LSTM神经网络、ARIMA模型</p>
+    <p>· 集成学习：Blending融合、Stacking集成、A/B测试框架</p>
+    <p>· 深度学习：注意力机制、迁移学习、强化学习</p>
+    <p>· 训练优化：数据增强、早停机制、K折交叉验证、超参数自动调优</p>
+    <p>· 评估监控：随机基准对照、详细回测、可解释性分析、置信度估计</p>
+    <br>
+    <p>💡 <strong>选号建议：</strong></p>
+    <p>第一，不要盲目追热。热号虽然近期出现频繁，但每一期开奖都是独立事件，历史结果不影响未来概率。</p>
+    <p>第二，不要执着于冷号。冷号虽然"该出了"，但可能继续遗漏多期，这是彩票随机性的体现。</p>
+    <p>第三，均衡配置更稳妥。在大小、奇偶、区间等维度上保持相对均衡的配置，从概率角度看更符合长期分布。</p>
+    <p>第四，量力而行。彩票本质上是一种娱乐方式，不是投资手段。每期投入应该控制在可承受的范围内。</p>
+    
+  </div>
+</div>
+
+<!-- 数据更新说明 -->
+<div class="datanote">
+  <div class="datanote-title">ℹ️ 数据更新说明</div>
+  <div class="datanote-content">
+    <p>🕒 数据更新时间：2026-09-24 开奖后</p>
+    <p>📊 数据来源：官方开奖数据 + 150+统计模型</p>
+    <p>🔄 更新频率：每日开奖后自动更新</p>
+    <p>✅ 与推荐卡片使用同一套数据和计算逻辑</p>
+  </div>
+</div>
+
+<!-- 动态尾文（与百家号完全一致） -->
+<div class="closing-text"><p>📈 排列3/5第26257期数据复盘：从历史统计的角度，看看本期号码呈现出怎样的特征。</p><p>🎯 第26257期（2026-09-24）开奖：排列3为4 9 3，排列5为4 9 3 3 0。</p><p>📎 连号统计：本期开奖号码中包含连号，这是一个值得关注的信号。从历史数据来看，连号出现后，下期连号出现的概率会略有下降。</p><p>❄️ 冷号关注：当前遗漏最久的5个号码是3(漏6期)、8(漏5期)、9(漏3期)、4(漏2期)、6(漏1期)。尤其是3已经遗漏了6期，从历史分布来看，这个遗漏时长已经超过了平均遗漏周期的1.5倍，回补概率在逐步增加。</p><p>🌡️ 热度排行：本期统计显示，0、9、6位列近30期出现次数前三。高频号码往往具有一定的惯性，但也要注意"物极必反"的规律。</p><p>🎯 下期选号思路：基于150+统计模型和机器学习算法的综合评分，我们建议下期关注以下几点：一是热号延续与冷号回补的平衡，不要只追热也不要只守冷；二是奇偶、大小的均衡配置，从概率角度更符合长期分布；三是排列3的区间覆盖，尽量不要让号码过度集中在某一区间。</p><p>📈 数据来源说明：本文所有统计数据均来自排列3/5官方开奖记录的自动分析，数据真实可靠。我们的系统每天会自动抓取最新开奖数据，更新统计模型，并生成下期预测参考。所有数据仅供学习交流，不构成投注建议。</p><p>🎯 理性看待：我们的预测系统虽然使用了150+统计模型和机器学习算法，但本质上还是基于历史数据的统计推断。彩票的随机性决定了任何方法都无法准确预测结果。请理性看待我们的分析，把它当作一种参考，而不是"中奖秘籍"。</p><p>✨ 感谢您阅读本期分析，祝您生活愉快，购彩开心！第26258期我们再见！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+
+<!-- 理性购彩提示 -->
+<div class="disclaimer">
+  <div class="disclaimer-title">⚠️ 理性购彩提示</div>
+  <div class="disclaimer-content">
+    彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
+  </div>
+</div>
+
+
+</div>
+<div id="content-qxc" style="display:none;">
+<!-- 开奖日历 -->
+<div class="calendar">
+  <div class="calendar-title">📅 最新开奖信息</div>
+  <div class="calendar-info">
+    <div class="calendar-period">第26110期</div>
+    <div class="calendar-date">开奖日期：2026-09-22</div>
+    <div class="calendar-next">下期：第26111期</div>
+  </div>
+</div>
+
+<!-- 核心卡片区域（直接用百家号推的那张卡片图） -->
+<div class="card-section">
+  <div class="card-placeholder" style="padding:0;">
+    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/qxc_card_v2_20260925.png" alt="七星彩开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
+    <div id="card-error" style="display:none;padding:40px;text-align:center;color:#999;">📊 开奖卡片加载中...</div>
+  </div>
+</div>
+
+<!-- 上期命中回顾 -->
+<div class="review">
+  <div class="review-title">📊 上期推荐命中回顾</div>
+  <div class="review-stats">
+    <div class="review-stat">
+      <div class="num">0</div>
+      <div class="label">命中基本号</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">0</div>
+      <div class="label">命中特别号</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">0.0%</div>
+      <div class="label">命中率</div>
+    </div>
+  </div>
+</div>
+
+<!-- 冷热号排行榜（最近30期） -->
+<div class="hotcold">
+  <div class="hotcold-title">🔥 最热号码 TOP10（近30期）</div>
+  <div class="hotcold-list">
+    <div class="hotcold-item hot">05</div>
+    <div class="hotcold-item hot">09</div>
+    <div class="hotcold-item hot">06</div>
+    <div class="hotcold-item hot">00</div>
+    <div class="hotcold-item hot">08</div>
+    <div class="hotcold-item hot">03</div>
+    <div class="hotcold-item hot">04</div>
+    <div class="hotcold-item hot">01</div>
+    <div class="hotcold-item hot">02</div>
+    <div class="hotcold-item hot">07</div>
+  </div>
+</div>
+
+<!-- 遗漏号排行榜 -->
+<div class="missing">
+  <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
+  <div class="missing-list">
+    <div class="missing-item"><div class="num">07</div><div class="days">遗漏6期</div></div>
+    <div class="missing-item"><div class="num">01</div><div class="days">遗漏4期</div></div>
+    <div class="missing-item"><div class="num">04</div><div class="days">遗漏3期</div></div>
+    <div class="missing-item"><div class="num">08</div><div class="days">遗漏2期</div></div>
+    <div class="missing-item"><div class="num">00</div><div class="days">遗漏1期</div></div>
+    <div class="missing-item"><div class="num">03</div><div class="days">遗漏1期</div></div>
+</div>
+</div>
+
+<!-- 区间分布 -->
+<div class="zone">
+  <div class="zone-title">📊 区间分布（近30期）</div>
+  <div class="zone-grid">
+    <div class="zone-item">
+      <div class="name">小数 0-3</div>
+      <div class="bar"><div class="bar-fill" style="width:36.7%;"></div></div>
+      <div class="pct">36.7%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">中数 4-6</div>
+      <div class="bar"><div class="bar-fill" style="width:33.9%;"></div></div>
+      <div class="pct">33.9%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">大数 7-9</div>
+      <div class="bar"><div class="bar-fill" style="width:29.4%;"></div></div>
+      <div class="pct">29.4%</div>
+    </div>
+  </div>
+</div>
+
+<!-- 本期重点关注 -->
+<div class="focus">
+  <div class="focus-title">🎯 本期重点关注</div>
+  
+  <div class="focus-section">
+    <div class="focus-label red-label">🔴 基本号推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball">07</div>
+      <div class="focus-ball">09</div>
+      <div class="focus-ball">09</div>
+      <div class="focus-ball">02</div>
+      <div class="focus-ball">01</div>
+      <div class="focus-ball">03</div>
+    </div>
+  </div>
+  <div class="focus-section">
+    <div class="focus-label blue-label">🔵 特别号推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball blue">07</div>
+    </div>
+  </div>
+  <div class="focus-reason">
+    💡 综合多模型评分，重点关注以上号码。数据仅供参考，不保证中奖。
+  </div>
+</div>
+
+<!-- 历史开奖记录 -->
+<div class="history">
+  <div class="history-title">📜 最近5期开奖记录</div>
+  <div class="history-item">
+    <div class="history-period">第26110期 · 2026-09-22</div>
+    <div class="history-balls">
+      <div class="history-ball red">6</div>
+      <div class="history-ball red">2</div>
+      <div class="history-ball red">5</div>
+      <div class="history-ball red">9</div>
+      <div class="history-ball red">6</div>
+      <div class="history-ball red">9</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">13</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26109期 · 2026-09-20</div>
+    <div class="history-balls">
+      <div class="history-ball red">2</div>
+      <div class="history-ball red">9</div>
+      <div class="history-ball red">0</div>
+      <div class="history-ball red">5</div>
+      <div class="history-ball red">0</div>
+      <div class="history-ball red">3</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">9</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26108期 · 2026-09-18</div>
+    <div class="history-balls">
+      <div class="history-ball red">9</div>
+      <div class="history-ball red">5</div>
+      <div class="history-ball red">2</div>
+      <div class="history-ball red">0</div>
+      <div class="history-ball red">8</div>
+      <div class="history-ball red">6</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">9</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26107期 · 2026-09-15</div>
+    <div class="history-balls">
+      <div class="history-ball red">2</div>
+      <div class="history-ball red">8</div>
+      <div class="history-ball red">3</div>
+      <div class="history-ball red">4</div>
+      <div class="history-ball red">5</div>
+      <div class="history-ball red">6</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">4</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26106期 · 2026-09-13</div>
+    <div class="history-balls">
+      <div class="history-ball red">5</div>
+      <div class="history-ball red">1</div>
+      <div class="history-ball red">9</div>
+      <div class="history-ball red">5</div>
+      <div class="history-ball red">8</div>
+      <div class="history-ball red">5</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">11</div>
+    </div>
+  </div>
+</div>
+
+<!-- 玩法介绍 -->
+<div class="playguide">
+  <div class="playguide-title">📖 七星彩玩法介绍</div>
+  <div class="playguide-content">
+    
+  </div>
+</div>
+
+<!-- 中奖规则 -->
+<div class="rules">
+  <div class="rules-title">🏆 中奖规则</div>
+  <div class="rules-content">
+    
+  </div>
+</div>
+
+<!-- 术语解释 -->
+<div class="glossary">
+  <div class="glossary-title">📝 术语解释</div>
+  <div class="glossary-content">
+    
+    <p>🔥 <strong>热号</strong>：最近30期出现频率最高的号码</p>
+    <p>❄️ <strong>冷号</strong>：最近30期出现频率最低的号码</p>
+    <p>⏳ <strong>遗漏</strong>：某号码距离上次开出已经过了多少期</p>
+    <p>⚖️ <strong>奇偶比</strong>：开奖号码中奇数和偶数的比例</p>
+    <p>📏 <strong>大小比</strong>：开奖号码中大数和小数的比例</p>
+    <p>📊 <strong>和值</strong>：所有开奖号码相加的总和</p>
+    <p>📐 <strong>跨度</strong>：最大号码和最小号码的差值</p>
+    
+  </div>
+</div>
+
+<!-- 选号思路 -->
+<div class="picking">
+  <div class="picking-title">🎯 选号思路分享</div>
+  <div class="picking-content">
+    
+    <p>我们的预测系统基于150+个统计模型和机器学习算法，从8大维度综合评分：</p>
+    <p>· 基础统计：频率、冷热、遗漏、奇偶、大小、跨度、AC值、质合、012路</p>
+    <p>· 进阶统计：马尔可夫链、贝叶斯分析、蒙特卡洛模拟、共现关联</p>
+    <p>· 机器学习：随机森林、梯度提升、逻辑回归</p>
+    <p>· 时间序列：LSTM神经网络、ARIMA模型</p>
+    <p>· 集成学习：Blending融合、Stacking集成、A/B测试框架</p>
+    <p>· 深度学习：注意力机制、迁移学习、强化学习</p>
+    <p>· 训练优化：数据增强、早停机制、K折交叉验证、超参数自动调优</p>
+    <p>· 评估监控：随机基准对照、详细回测、可解释性分析、置信度估计</p>
+    <br>
+    <p>💡 <strong>选号建议：</strong></p>
+    <p>第一，不要盲目追热。热号虽然近期出现频繁，但每一期开奖都是独立事件，历史结果不影响未来概率。</p>
+    <p>第二，不要执着于冷号。冷号虽然"该出了"，但可能继续遗漏多期，这是彩票随机性的体现。</p>
+    <p>第三，均衡配置更稳妥。在大小、奇偶、区间等维度上保持相对均衡的配置，从概率角度看更符合长期分布。</p>
+    <p>第四，量力而行。彩票本质上是一种娱乐方式，不是投资手段。每期投入应该控制在可承受的范围内。</p>
+    
+  </div>
+</div>
+
+<!-- 数据更新说明 -->
+<div class="datanote">
+  <div class="datanote-title">ℹ️ 数据更新说明</div>
+  <div class="datanote-content">
+    <p>🕒 数据更新时间：2026-09-22 开奖后</p>
+    <p>📊 数据来源：官方开奖数据 + 150+统计模型</p>
+    <p>🔄 更新频率：每日开奖后自动更新</p>
+    <p>✅ 与推荐卡片使用同一套数据和计算逻辑</p>
+  </div>
+</div>
+
+<!-- 动态尾文（与百家号完全一致） -->
+<div class="closing-text"><p>🎯 七星彩第26110期开奖结果已经出炉，让我们一起用数据来复盘一下本期的走势。</p><p>🎲 概率小课堂：很多人以为"连续多期没出的号码下期必出"，其实这是典型的"赌徒谬误"。从概率角度看，每一期开奖都是独立事件，之前的结果不会影响未来的概率。一个号码遗漏了50期，它下期出现的概率和其他号码是完全一样的。</p><p>⚠️ 风险提示：彩票不是投资，不能指望通过购彩致富。我们的所有分析都是基于历史数据的统计规律，仅供参考。请理性看待彩票，享受分析的过程，而不是执着于结果。量力而行，快乐购彩。</p><p>📊 热号追踪：近30期出现最多的号码是5（24次），其次是9（21次）。这些热门号码下期是否会继续出现？从概率角度看，每期都是独立事件，但统计上确实存在一定的聚集效应。</p><p>📍 区间分析：从号码分布来看，本期号码覆盖了多个区间，分布较为分散。区间分布的均衡性是选号时需要考虑的重要因素。</p><p>➕ 和值分析：本期号码和值为37。近30期平均和值约为30，本期接近平均值，处于正常波动范围。</p><p>🎯 选号思路总结：下期选号记住三个"平衡"——冷热平衡、奇偶平衡、大小平衡。在这个基础上，可以适当加入1-2个个人看好的"心水码"。记住，彩票本质是娱乐，不要过度投入，享受过程最重要。</p><p>📋 七星彩第26110期开奖结果速览：6 2 5 9 6 9 | 13（2026-09-22开奖）。</p><p>📅 下期分析将于开奖后更新，记得来看哦！祝大家都能收获自己的幸运号码！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+
+<!-- 理性购彩提示 -->
+<div class="disclaimer">
+  <div class="disclaimer-title">⚠️ 理性购彩提示</div>
+  <div class="disclaimer-content">
+    彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
+  </div>
+</div>
+
+
+</div>
+<div id="content-qlc" style="display:none;">
+<!-- 开奖日历 -->
+<div class="calendar">
+  <div class="calendar-title">📅 最新开奖信息</div>
+  <div class="calendar-info">
+    <div class="calendar-period">第2026110期</div>
+    <div class="calendar-date">开奖日期：2026-09-23</div>
+    <div class="calendar-next">下期：第2026111期</div>
+  </div>
+</div>
+
+<!-- 核心卡片区域（直接用百家号推的那张卡片图） -->
+<div class="card-section">
+  <div class="card-placeholder" style="padding:0;">
+    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/qlc_card_v2_20260925.png" alt="七乐彩开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
+    <div id="card-error" style="display:none;padding:40px;text-align:center;color:#999;">📊 开奖卡片加载中...</div>
+  </div>
+</div>
+
+<!-- 上期命中回顾 -->
+<div class="review">
+  <div class="review-title">📊 上期推荐命中回顾</div>
+  <div class="review-stats">
+    <div class="review-stat">
+      <div class="num">3</div>
+      <div class="label">命中基本号</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">0</div>
+      <div class="label">命中特别号</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">42.9%</div>
+      <div class="label">命中率</div>
+    </div>
+  </div>
+</div>
+
+<!-- 冷热号排行榜（最近30期） -->
+<div class="hotcold">
+  <div class="hotcold-title">🔥 最热号码 TOP10（近30期）</div>
+  <div class="hotcold-list">
+    <div class="hotcold-item hot">21</div>
+    <div class="hotcold-item hot">06</div>
+    <div class="hotcold-item hot">07</div>
+    <div class="hotcold-item hot">08</div>
+    <div class="hotcold-item hot">23</div>
+    <div class="hotcold-item hot">26</div>
+    <div class="hotcold-item hot">29</div>
+    <div class="hotcold-item hot">22</div>
+    <div class="hotcold-item hot">13</div>
+    <div class="hotcold-item hot">24</div>
+  </div>
+</div>
+
+<!-- 遗漏号排行榜 -->
+<div class="missing">
+  <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
+  <div class="missing-list">
+    <div class="missing-item"><div class="num">15</div><div class="days">遗漏15期</div></div>
+    <div class="missing-item"><div class="num">12</div><div class="days">遗漏9期</div></div>
+    <div class="missing-item"><div class="num">14</div><div class="days">遗漏8期</div></div>
+    <div class="missing-item"><div class="num">30</div><div class="days">遗漏5期</div></div>
+    <div class="missing-item"><div class="num">03</div><div class="days">遗漏4期</div></div>
+    <div class="missing-item"><div class="num">09</div><div class="days">遗漏4期</div></div>
+</div>
+</div>
+
+<!-- 区间分布 -->
+<div class="zone">
+  <div class="zone-title">📊 区间分布（近30期）</div>
+  <div class="zone-grid">
+    <div class="zone-item">
+      <div class="name">一区 1-10</div>
+      <div class="bar"><div class="bar-fill" style="width:32.5%;"></div></div>
+      <div class="pct">32.5%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">二区 11-20</div>
+      <div class="bar"><div class="bar-fill" style="width:29.2%;"></div></div>
+      <div class="pct">29.2%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">三区 21-30</div>
+      <div class="bar"><div class="bar-fill" style="width:38.3%;"></div></div>
+      <div class="pct">38.3%</div>
+    </div>
+  </div>
+</div>
+
+<!-- 本期重点关注 -->
+<div class="focus">
+  <div class="focus-title">🎯 本期重点关注</div>
+  
+  <div class="focus-section">
+    <div class="focus-label red-label">🔴 基本号推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball">06</div>
+      <div class="focus-ball">21</div>
+      <div class="focus-ball">08</div>
+      <div class="focus-ball">01</div>
+      <div class="focus-ball">22</div>
+      <div class="focus-ball">23</div>
+      <div class="focus-ball">26</div>
+    </div>
+  </div>
+  <div class="focus-section">
+    <div class="focus-label blue-label">🔵 特别号推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball blue">11</div>
+    </div>
+  </div>
+  <div class="focus-reason">
+    💡 综合多模型评分，重点关注以上号码。数据仅供参考，不保证中奖。
+  </div>
+</div>
+
+<!-- 历史开奖记录 -->
+<div class="history">
+  <div class="history-title">📜 最近5期开奖记录</div>
+  <div class="history-item">
+    <div class="history-period">第2026110期 · 2026-09-23</div>
+    <div class="history-balls">
+      <div class="history-ball red">06</div>
+      <div class="history-ball red">07</div>
+      <div class="history-ball red">08</div>
+      <div class="history-ball red">11</div>
+      <div class="history-ball red">23</div>
+      <div class="history-ball red">26</div>
+      <div class="history-ball red">27</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">17</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026109期 · 2026-09-21</div>
+    <div class="history-balls">
+      <div class="history-ball red">05</div>
+      <div class="history-ball red">07</div>
+      <div class="history-ball red">13</div>
+      <div class="history-ball red">16</div>
+      <div class="history-ball red">17</div>
+      <div class="history-ball red">24</div>
+      <div class="history-ball red">29</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">19</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026108期 · 2026-09-18</div>
+    <div class="history-balls">
+      <div class="history-ball red">11</div>
+      <div class="history-ball red">13</div>
+      <div class="history-ball red">19</div>
+      <div class="history-ball red">20</div>
+      <div class="history-ball red">25</div>
+      <div class="history-ball red">28</div>
+      <div class="history-ball red">29</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">26</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026107期 · 2026-09-16</div>
+    <div class="history-balls">
+      <div class="history-ball red">01</div>
+      <div class="history-ball red">04</div>
+      <div class="history-ball red">06</div>
+      <div class="history-ball red">18</div>
+      <div class="history-ball red">19</div>
+      <div class="history-ball red">21</div>
+      <div class="history-ball red">22</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">02</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026106期 · 2026-09-14</div>
+    <div class="history-balls">
+      <div class="history-ball red">03</div>
+      <div class="history-ball red">09</div>
+      <div class="history-ball red">10</div>
+      <div class="history-ball red">13</div>
+      <div class="history-ball red">24</div>
+      <div class="history-ball red">26</div>
+      <div class="history-ball red">28</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">07</div>
+    </div>
+  </div>
+</div>
+
+<!-- 玩法介绍 -->
+<div class="playguide">
+  <div class="playguide-title">📖 七乐彩玩法介绍</div>
+  <div class="playguide-content">
+    
+  </div>
+</div>
+
+<!-- 中奖规则 -->
+<div class="rules">
+  <div class="rules-title">🏆 中奖规则</div>
+  <div class="rules-content">
+    
+  </div>
+</div>
+
+<!-- 术语解释 -->
+<div class="glossary">
+  <div class="glossary-title">📝 术语解释</div>
+  <div class="glossary-content">
+    
+    <p>🔥 <strong>热号</strong>：最近30期出现频率最高的号码</p>
+    <p>❄️ <strong>冷号</strong>：最近30期出现频率最低的号码</p>
+    <p>⏳ <strong>遗漏</strong>：某号码距离上次开出已经过了多少期</p>
+    <p>⚖️ <strong>奇偶比</strong>：开奖号码中奇数和偶数的比例</p>
+    <p>📏 <strong>大小比</strong>：开奖号码中大数和小数的比例</p>
+    <p>📊 <strong>和值</strong>：所有开奖号码相加的总和</p>
+    <p>📐 <strong>跨度</strong>：最大号码和最小号码的差值</p>
+    
+  </div>
+</div>
+
+<!-- 选号思路 -->
+<div class="picking">
+  <div class="picking-title">🎯 选号思路分享</div>
+  <div class="picking-content">
+    
+    <p>我们的预测系统基于150+个统计模型和机器学习算法，从8大维度综合评分：</p>
+    <p>· 基础统计：频率、冷热、遗漏、奇偶、大小、跨度、AC值、质合、012路</p>
+    <p>· 进阶统计：马尔可夫链、贝叶斯分析、蒙特卡洛模拟、共现关联</p>
+    <p>· 机器学习：随机森林、梯度提升、逻辑回归</p>
+    <p>· 时间序列：LSTM神经网络、ARIMA模型</p>
+    <p>· 集成学习：Blending融合、Stacking集成、A/B测试框架</p>
+    <p>· 深度学习：注意力机制、迁移学习、强化学习</p>
+    <p>· 训练优化：数据增强、早停机制、K折交叉验证、超参数自动调优</p>
+    <p>· 评估监控：随机基准对照、详细回测、可解释性分析、置信度估计</p>
+    <br>
+    <p>💡 <strong>选号建议：</strong></p>
+    <p>第一，不要盲目追热。热号虽然近期出现频繁，但每一期开奖都是独立事件，历史结果不影响未来概率。</p>
+    <p>第二，不要执着于冷号。冷号虽然"该出了"，但可能继续遗漏多期，这是彩票随机性的体现。</p>
+    <p>第三，均衡配置更稳妥。在大小、奇偶、区间等维度上保持相对均衡的配置，从概率角度看更符合长期分布。</p>
+    <p>第四，量力而行。彩票本质上是一种娱乐方式，不是投资手段。每期投入应该控制在可承受的范围内。</p>
+    
+  </div>
+</div>
+
+<!-- 数据更新说明 -->
+<div class="datanote">
+  <div class="datanote-title">ℹ️ 数据更新说明</div>
+  <div class="datanote-content">
+    <p>🕒 数据更新时间：2026-09-23 开奖后</p>
+    <p>📊 数据来源：官方开奖数据 + 150+统计模型</p>
+    <p>🔄 更新频率：每日开奖后自动更新</p>
+    <p>✅ 与推荐卡片使用同一套数据和计算逻辑</p>
+  </div>
+</div>
+
+<!-- 动态尾文（与百家号完全一致） -->
+<div class="closing-text"><p>📊 七乐彩第2026110期 vs 历史平均：本期数据有哪些异常？我们一起来对比看看。</p><p>🎰 第2026110期开奖结果：基本号06 07 08 11 23 26 27，特别号17。开奖日期2026-09-23。</p><p>🗺️ 区间分布：将30个号码分为3个区间，本期号码在各区间的分布呈现出相对分散的特征，这种分散分布往往更符合长期概率。</p><p>📐 大小比分析：本期开出4个小号、3个大号，比例为4:3。从区间分布的角度看，号码在大小区间的波动往往呈现"钟摆效应"，即偏态之后往往会向均衡回归。</p><p>🎯 选号思路总结：下期选号记住三个"平衡"——冷热平衡、奇偶平衡、大小平衡。在这个基础上，可以适当加入1-2个个人看好的"心水码"。记住，彩票本质是娱乐，不要过度投入，享受过程最重要。</p><p>⚠️ 理性购彩提醒：彩票每期开奖都是独立随机事件，任何号码组合的理论概率都是相同的。我们的分析只是基于历史数据的统计规律，不能保证未来一定会发生。请量力而行，理性参与，未成年人禁止购彩。</p><p>🧠 彩票冷知识：你知道吗？七乐彩的所有号码组合共有海量种可能（不考虑顺序）。如果每期买一注，需要很多很多年才能覆盖所有组合。这也从侧面说明了彩票的随机性——任何组合出现的概率都是一样的。</p><p>📋 本期七乐彩分析报告到此结束，第2026111期我们继续。感谢您的支持与关注！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+
+<!-- 理性购彩提示 -->
+<div class="disclaimer">
+  <div class="disclaimer-title">⚠️ 理性购彩提示</div>
+  <div class="disclaimer-content">
+    彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
+  </div>
+</div>
+
+
+</div>
+<div id="content-dlt" style="display:none;">
+<!-- 开奖日历 -->
+<div class="calendar">
+  <div class="calendar-title">📅 最新开奖信息</div>
+  <div class="calendar-info">
+    <div class="calendar-period">第26109期</div>
+    <div class="calendar-date">开奖日期：2026-09-23</div>
+    <div class="calendar-next">下期：第26110期</div>
+  </div>
+</div>
+
+<!-- 核心卡片区域（直接用百家号推的那张卡片图） -->
+<div class="card-section">
+  <div class="card-placeholder" style="padding:0;">
+    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/dlt_card_v2_20260925.png" alt="大乐透开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
+    <div id="card-error" style="display:none;padding:40px;text-align:center;color:#999;">📊 开奖卡片加载中...</div>
+  </div>
+</div>
+
+<!-- 上期命中回顾 -->
+<div class="review">
+  <div class="review-title">📊 上期推荐命中回顾</div>
+  <div class="review-stats">
+    <div class="review-stat">
+      <div class="num">0</div>
+      <div class="label">命中前区</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">0</div>
+      <div class="label">命中后区</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">0.0%</div>
+      <div class="label">命中率</div>
+    </div>
+  </div>
+</div>
+
+<!-- 冷热号排行榜（最近30期） -->
+<div class="hotcold">
+  <div class="hotcold-title">🔥 最热号码 TOP10（近30期）</div>
+  <div class="hotcold-list">
+    <div class="hotcold-item hot">09</div>
+    <div class="hotcold-item hot">07</div>
+    <div class="hotcold-item hot">14</div>
+    <div class="hotcold-item hot">04</div>
+    <div class="hotcold-item hot">10</div>
+    <div class="hotcold-item hot">12</div>
+    <div class="hotcold-item hot">05</div>
+    <div class="hotcold-item hot">08</div>
+    <div class="hotcold-item hot">02</div>
+    <div class="hotcold-item hot">03</div>
+  </div>
+</div>
+
+<!-- 遗漏号排行榜 -->
+<div class="missing">
+  <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
+  <div class="missing-list">
+    <div class="missing-item"><div class="num">23</div><div class="days">遗漏26期</div></div>
+    <div class="missing-item"><div class="num">13</div><div class="days">遗漏25期</div></div>
+    <div class="missing-item"><div class="num">24</div><div class="days">遗漏19期</div></div>
+    <div class="missing-item"><div class="num">19</div><div class="days">遗漏11期</div></div>
+    <div class="missing-item"><div class="num">20</div><div class="days">遗漏10期</div></div>
+    <div class="missing-item"><div class="num">29</div><div class="days">遗漏10期</div></div>
+</div>
+</div>
+
+<!-- 区间分布 -->
+<div class="zone">
+  <div class="zone-title">📊 区间分布（近30期）</div>
+  <div class="zone-grid">
+    <div class="zone-item">
+      <div class="name">一区 1-12</div>
+      <div class="bar"><div class="bar-fill" style="width:55.7%;"></div></div>
+      <div class="pct">55.7%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">二区 13-24</div>
+      <div class="bar"><div class="bar-fill" style="width:24.3%;"></div></div>
+      <div class="pct">24.3%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">三区 25-35</div>
+      <div class="bar"><div class="bar-fill" style="width:20.0%;"></div></div>
+      <div class="pct">20.0%</div>
+    </div>
+  </div>
+</div>
+
+<!-- 本期重点关注 -->
+<div class="focus">
+  <div class="focus-title">🎯 本期重点关注</div>
+  
+  <div class="focus-section">
+    <div class="focus-label red-label">🔴 前区推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball">09</div>
+      <div class="focus-ball">07</div>
+      <div class="focus-ball">14</div>
+      <div class="focus-ball">04</div>
+      <div class="focus-ball">10</div>
+      <div class="focus-ball">12</div>
+    </div>
+  </div>
+  <div class="focus-section">
+    <div class="focus-label blue-label">🔵 后区推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball blue">05</div>
+      <div class="focus-ball blue">08</div>
+      <div class="focus-ball blue">02</div>
+      <div class="focus-ball blue">03</div>
+    </div>
+  </div>
+  <div class="focus-reason">
+    💡 综合多模型评分，重点关注以上号码。数据仅供参考，不保证中奖。
+  </div>
+</div>
+
+<!-- 历史开奖记录 -->
+<div class="history">
+  <div class="history-title">📜 最近5期开奖记录</div>
+  <div class="history-item">
+    <div class="history-period">第26109期 · 2026-09-23</div>
+    <div class="history-balls">
+      <div class="history-ball red">12</div>
+      <div class="history-ball red">14</div>
+      <div class="history-ball red">16</div>
+      <div class="history-ball red">27</div>
+      <div class="history-ball red">34</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">04</div>
+      <div class="history-ball blue">08</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26108期 · 2026-09-21</div>
+    <div class="history-balls">
+      <div class="history-ball red">01</div>
+      <div class="history-ball red">05</div>
+      <div class="history-ball red">07</div>
+      <div class="history-ball red">21</div>
+      <div class="history-ball red">35</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">01</div>
+      <div class="history-ball blue">04</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26107期 · 2026-09-19</div>
+    <div class="history-balls">
+      <div class="history-ball red">02</div>
+      <div class="history-ball red">05</div>
+      <div class="history-ball red">07</div>
+      <div class="history-ball red">14</div>
+      <div class="history-ball red">22</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">04</div>
+      <div class="history-ball blue">10</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26106期 · 2026-09-16</div>
+    <div class="history-balls">
+      <div class="history-ball red">14</div>
+      <div class="history-ball red">17</div>
+      <div class="history-ball red">21</div>
+      <div class="history-ball red">25</div>
+      <div class="history-ball red">28</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">04</div>
+      <div class="history-ball blue">06</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26105期 · 2026-09-14</div>
+    <div class="history-balls">
+      <div class="history-ball red">10</div>
+      <div class="history-ball red">14</div>
+      <div class="history-ball red">30</div>
+      <div class="history-ball red">33</div>
+      <div class="history-ball red">34</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">09</div>
+      <div class="history-ball blue">12</div>
+    </div>
+  </div>
+</div>
+
+<!-- 玩法介绍 -->
+<div class="playguide">
+  <div class="playguide-title">📖 大乐透玩法介绍</div>
+  <div class="playguide-content">
+    
+        <p><strong>大乐透</strong>是中国体育彩票发行的一种乐透型彩票。</p>
+        <p>🎱 <strong>前区</strong>：从1-35个号码中选择5个</p>
+        <p>🔵 <strong>后区</strong>：从1-12个号码中选择2个</p>
+        <p>💡 开奖时间：每周一、三、六晚上21:25</p>
+        
+  </div>
+</div>
+
+<!-- 中奖规则 -->
+<div class="rules">
+  <div class="rules-title">🏆 中奖规则</div>
+  <div class="rules-content">
+    
+        <p>🏆 <strong>一等奖</strong>：5前+2后，浮动奖金（最高1000万）</p>
+        <p>🥈 <strong>二等奖</strong>：5前+1后，浮动奖金</p>
+        <p>🥉 <strong>三等奖</strong>：5前+0后，固定奖金10000元</p>
+        <p>🎖️ <strong>四等奖</strong>：4前+2后，固定奖金3000元</p>
+        <p>🎖️ <strong>五等奖</strong>：4前+1后，固定奖金300元</p>
+        <p>🎖️ <strong>六等奖</strong>：3前+2后，固定奖金200元</p>
+        <p>🎖️ <strong>七等奖</strong>：4前+0后，固定奖金100元</p>
+        <p>🎖️ <strong>八等奖</strong>：3前+1后 或 2前+2后，固定奖金15元</p>
+        <p>🎖️ <strong>九等奖</strong>：3前+0后 或 1前+2后 或 2前+1后 或 0前+2后，固定奖金5元</p>
+        
+  </div>
+</div>
+
+<!-- 术语解释 -->
+<div class="glossary">
+  <div class="glossary-title">📝 术语解释</div>
+  <div class="glossary-content">
+    
+    <p>🔥 <strong>热号</strong>：最近30期出现频率最高的号码</p>
+    <p>❄️ <strong>冷号</strong>：最近30期出现频率最低的号码</p>
+    <p>⏳ <strong>遗漏</strong>：某号码距离上次开出已经过了多少期</p>
+    <p>⚖️ <strong>奇偶比</strong>：开奖号码中奇数和偶数的比例</p>
+    <p>📏 <strong>大小比</strong>：开奖号码中大数和小数的比例</p>
+    <p>📊 <strong>和值</strong>：所有开奖号码相加的总和</p>
+    <p>📐 <strong>跨度</strong>：最大号码和最小号码的差值</p>
+    
+  </div>
+</div>
+
+<!-- 选号思路 -->
+<div class="picking">
+  <div class="picking-title">🎯 选号思路分享</div>
+  <div class="picking-content">
+    
+    <p>我们的预测系统基于150+个统计模型和机器学习算法，从8大维度综合评分：</p>
+    <p>· 基础统计：频率、冷热、遗漏、奇偶、大小、跨度、AC值、质合、012路</p>
+    <p>· 进阶统计：马尔可夫链、贝叶斯分析、蒙特卡洛模拟、共现关联</p>
+    <p>· 机器学习：随机森林、梯度提升、逻辑回归</p>
+    <p>· 时间序列：LSTM神经网络、ARIMA模型</p>
+    <p>· 集成学习：Blending融合、Stacking集成、A/B测试框架</p>
+    <p>· 深度学习：注意力机制、迁移学习、强化学习</p>
+    <p>· 训练优化：数据增强、早停机制、K折交叉验证、超参数自动调优</p>
+    <p>· 评估监控：随机基准对照、详细回测、可解释性分析、置信度估计</p>
+    <br>
+    <p>💡 <strong>选号建议：</strong></p>
+    <p>第一，不要盲目追热。热号虽然近期出现频繁，但每一期开奖都是独立事件，历史结果不影响未来概率。</p>
+    <p>第二，不要执着于冷号。冷号虽然"该出了"，但可能继续遗漏多期，这是彩票随机性的体现。</p>
+    <p>第三，均衡配置更稳妥。在大小、奇偶、区间等维度上保持相对均衡的配置，从概率角度看更符合长期分布。</p>
+    <p>第四，量力而行。彩票本质上是一种娱乐方式，不是投资手段。每期投入应该控制在可承受的范围内。</p>
+    
+  </div>
+</div>
+
+<!-- 数据更新说明 -->
+<div class="datanote">
+  <div class="datanote-title">ℹ️ 数据更新说明</div>
+  <div class="datanote-content">
+    <p>🕒 数据更新时间：2026-09-23 开奖后</p>
+    <p>📊 数据来源：官方开奖数据 + 150+统计模型</p>
+    <p>🔄 更新频率：每日开奖后自动更新</p>
+    <p>✅ 与推荐卡片使用同一套数据和计算逻辑</p>
+  </div>
+</div>
+
+<!-- 动态尾文（与百家号完全一致） -->
+<div class="closing-text"><p>📊 大乐透第26109期 vs 历史平均：本期数据有哪些异常？我们一起来对比看看。</p><p>❄️ 冷号关注：当前遗漏最久的5个号码是19(漏25期)、01(漏18期)、17(漏13期)、23(漏13期)、07(漏13期)。尤其是19已经遗漏了25期，从历史分布来看，这个遗漏时长已经超过了平均遗漏周期的1.5倍，回补概率在逐步增加。</p><p>🔁 重复号码：本期号码与上期对比，有0个号码重复出现。从统计角度看，每期出现1-2个重号是比较常见的情况，不必过度解读。</p><p>📊 和值统计：本期和值103，跨度22。和值和跨度是描述号码分布的两个重要指标，结合使用效果更好。</p><p>🎯 理性看待：我们的预测系统虽然使用了150+统计模型和机器学习算法，但本质上还是基于历史数据的统计推断。彩票的随机性决定了任何方法都无法准确预测结果。请理性看待我们的分析，把它当作一种参考，而不是"中奖秘籍"。</p><p>📚 趣味统计：从大乐透的历史数据来看，最常见的奇偶比是2:3，出现概率约为30%左右。而全奇或全偶的情况相对较少，出现概率不到5%。这也是为什么选号时建议保持奇偶均衡的原因。</p><p>🎯 选号思路总结：下期选号记住三个"平衡"——冷热平衡、奇偶平衡、大小平衡。在这个基础上，可以适当加入1-2个个人看好的"心水码"。记住，彩票本质是娱乐，不要过度投入，享受过程最重要。</p><p>📋 大乐透第26109期开奖结果速览：12 14 16 27 34 | 04 08（2026-09-23开奖）。</p><p>✨ 感谢您阅读本期分析，祝您生活愉快，购彩开心！第26110期我们再见！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+
+<!-- 理性购彩提示 -->
+<div class="disclaimer">
+  <div class="disclaimer-title">⚠️ 理性购彩提示</div>
+  <div class="disclaimer-content">
+    彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
+  </div>
+</div>
+
+
+</div>
+
+
+</body>
+</html>
