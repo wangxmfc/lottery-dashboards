@@ -787,6 +787,27 @@
             height: 2px;
             background: linear-gradient(90deg, transparent, rgba(201,162,39,0.5), transparent);
         }
+
+        /* 运维模块 */
+        .ops-full-width {
+            grid-column: 1 / -1;
+        }
+        .ops-sub {
+            margin-bottom: 4px;
+        }
+        .ops-sub-title {
+            font-size: 0.88em;
+            color: #C9A227;
+            font-weight: 600;
+            margin-bottom: 10px;
+            padding-left: 8px;
+            border-left: 2px solid rgba(201,162,39,0.5);
+        }
+        .ops-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            margin: 14px 0;
+        }
         
         /* 系统状态指标横排 */
         .sys-status-row {
@@ -1267,6 +1288,14 @@
             .hit-rate {
                 font-size: 1.8em;
                 margin: 20px 0;
+            }
+            
+            #model-overview, #full-model-overview {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 8px !important;
+            }
+            #category-list {
+                grid-template-columns: 1fr !important;
             }
             
             .stat {
@@ -2374,51 +2403,8 @@
         <!-- 运维监控 -->
         <div id="ops" class="section active">
             <div class="grid">
-                <!-- 系统健康度 -->
-                <div class="card" id="ops-health">
-                    <h2>💚 系统健康度</h2>
-                    <div id="ops-health-content">加载中...</div>
-                </div>
-
-                <!-- 定时任务心跳 -->
-                <div class="card" id="ops-tasks">
-                    <h2>⏰ 定时任务心跳</h2>
-                    <div id="ops-tasks-content">加载中...</div>
-                </div>
-
-                <!-- 核心模型监控 -->
-                <div class="card" id="model-monitoring">
-                    <h2>🤖 核心模型监控 <span style="font-size:0.6em;color:#9AA3AF;font-weight:normal;">49个核心模型</span></h2>
-                    <div id="model-overview" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px;">
-                        <div style="text-align:center;padding:10px;background:rgba(201,162,39,0.1);border-radius:10px;">
-                            <div style="font-size:1.5em;font-weight:bold;color:#C9A227;" id="model-total">-</div>
-                            <div style="font-size:0.8em;color:#9AA3AF;">模型总数</div>
-                        </div>
-                        <div style="text-align:center;padding:10px;background:rgba(40,167,69,0.1);border-radius:10px;">
-                            <div style="font-size:1.5em;font-weight:bold;color:#28a745;" id="model-active">-</div>
-                            <div style="font-size:0.8em;color:#9AA3AF;">启用模型</div>
-                        </div>
-                        <div style="text-align:center;padding:10px;background:rgba(40,167,69,0.1);border-radius:10px;">
-                            <div style="font-size:1.5em;font-weight:bold;color:#28a745;" id="model-normal">-</div>
-                            <div style="font-size:0.8em;color:#9AA3AF;">运行正常</div>
-                        </div>
-                        <div style="text-align:center;padding:10px;background:rgba(220,53,69,0.1);border-radius:10px;">
-                            <div style="font-size:1.5em;font-weight:bold;color:#dc3545;" id="model-warning">-</div>
-                            <div style="font-size:0.8em;color:#9AA3AF;">异常模型</div>
-                        </div>
-                    </div>
-                    <div id="model-categories" style="margin-bottom:15px;">
-                        <div style="font-size:0.9em;color:#C9A227;margin-bottom:8px;">📊 模型分类统计</div>
-                        <div id="category-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;"></div>
-                    </div>
-                    <div id="model-alerts" style="display:none;border-top:1px solid rgba(255,255,255,0.1);padding-top:10px;">
-                        <div style="font-size:0.9em;color:#dc3545;margin-bottom:8px;">⚠️ 异常模型</div>
-                        <div id="alert-list"></div>
-                    </div>
-                </div>
-
-                <!-- 全量模型监控 -->
-                <div class="card" id="full-model-monitoring">
+                <!-- 全量模型监控（不动） -->
+                <div class="card ops-full-width" id="full-model-monitoring">
                     <h2>📦 全量模型监控 <span style="font-size:0.6em;color:#9AA3AF;font-weight:normal;">639个模型</span></h2>
                     <div id="full-model-overview" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px;">
                         <div style="text-align:center;padding:10px;background:rgba(201,162,39,0.1);border-radius:10px;">
@@ -2453,40 +2439,91 @@
                     </div>
                 </div>
 
-                <!-- 错误日志 -->
-                <div class="card" id="ops-errors">
-                    <h2>⚠️ 错误日志</h2>
-                    <div id="ops-errors-content">加载中...</div>
+                <!-- 核心模型监控（不动） -->
+                <div class="card ops-full-width" id="model-monitoring">
+                    <h2>🤖 核心模型监控 <span style="font-size:0.6em;color:#9AA3AF;font-weight:normal;">49个核心模型</span></h2>
+                    <div id="model-overview" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px;">
+                        <div style="text-align:center;padding:10px;background:rgba(201,162,39,0.1);border-radius:10px;">
+                            <div style="font-size:1.5em;font-weight:bold;color:#C9A227;" id="model-total">-</div>
+                            <div style="font-size:0.8em;color:#9AA3AF;">模型总数</div>
+                        </div>
+                        <div style="text-align:center;padding:10px;background:rgba(40,167,69,0.1);border-radius:10px;">
+                            <div style="font-size:1.5em;font-weight:bold;color:#28a745;" id="model-active">-</div>
+                            <div style="font-size:0.8em;color:#9AA3AF;">启用模型</div>
+                        </div>
+                        <div style="text-align:center;padding:10px;background:rgba(40,167,69,0.1);border-radius:10px;">
+                            <div style="font-size:1.5em;font-weight:bold;color:#28a745;" id="model-normal">-</div>
+                            <div style="font-size:0.8em;color:#9AA3AF;">运行正常</div>
+                        </div>
+                        <div style="text-align:center;padding:10px;background:rgba(220,53,69,0.1);border-radius:10px;">
+                            <div style="font-size:1.5em;font-weight:bold;color:#dc3545;" id="model-warning">-</div>
+                            <div style="font-size:0.8em;color:#9AA3AF;">异常模型</div>
+                        </div>
+                    </div>
+                    <div id="model-categories" style="margin-bottom:15px;">
+                        <div style="font-size:0.9em;color:#C9A227;margin-bottom:8px;">📊 模型分类统计</div>
+                        <div id="category-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;"></div>
+                    </div>
+                    <div id="model-alerts" style="display:none;border-top:1px solid rgba(255,255,255,0.1);padding-top:10px;">
+                        <div style="font-size:0.9em;color:#dc3545;margin-bottom:8px;">⚠️ 异常模型</div>
+                        <div id="alert-list"></div>
+                    </div>
                 </div>
 
-                <!-- 外部接口 -->
-                <div class="card" id="ops-apis">
-                    <h2>🌐 外部接口</h2>
-                    <div id="ops-apis-content">加载中...</div>
+                <!-- 系统状态（健康度+任务心跳融合） -->
+                <div class="card" id="ops-system">
+                    <h2>💚 系统状态</h2>
+                    <div class="ops-sub">
+                        <div class="ops-sub-title">健康度</div>
+                        <div id="ops-health-content">加载中...</div>
+                    </div>
+                    <div class="ops-divider"></div>
+                    <div class="ops-sub">
+                        <div class="ops-sub-title">定时任务心跳</div>
+                        <div id="ops-tasks-content">加载中...</div>
+                    </div>
                 </div>
 
-                <!-- 运行耗时 -->
-                <div class="card" id="ops-runtime">
-                    <h2>⏱️ 运行耗时</h2>
-                    <div id="ops-runtime-content">加载中...</div>
+                <!-- 问题与告警（错误日志+已知问题融合） -->
+                <div class="card" id="ops-alerts">
+                    <h2>⚠️ 问题与告警</h2>
+                    <div class="ops-sub">
+                        <div class="ops-sub-title">错误日志</div>
+                        <div id="ops-errors-content">加载中...</div>
+                    </div>
+                    <div class="ops-divider"></div>
+                    <div class="ops-sub">
+                        <div class="ops-sub-title">已知问题</div>
+                        <div id="ops-issues-content">加载中...</div>
+                    </div>
                 </div>
 
-                <!-- 磁盘与备份 -->
-                <div class="card" id="ops-storage">
-                    <h2>💾 磁盘与备份</h2>
-                    <div id="ops-storage-content">加载中...</div>
+                <!-- 接口与性能（外部接口+运行耗时融合） -->
+                <div class="card" id="ops-perf">
+                    <h2>🌐 接口与性能</h2>
+                    <div class="ops-sub">
+                        <div class="ops-sub-title">外部接口</div>
+                        <div id="ops-apis-content">加载中...</div>
+                    </div>
+                    <div class="ops-divider"></div>
+                    <div class="ops-sub">
+                        <div class="ops-sub-title">运行耗时</div>
+                        <div id="ops-runtime-content">加载中...</div>
+                    </div>
                 </div>
 
-                <!-- 最近变更 -->
-                <div class="card" id="ops-changes">
-                    <h2>📝 最近变更</h2>
-                    <div id="ops-changes-content">加载中...</div>
-                </div>
-
-                <!-- 已知问题 -->
-                <div class="card" id="ops-issues">
-                    <h2>🔧 已知问题</h2>
-                    <div id="ops-issues-content">加载中...</div>
+                <!-- 存储与变更（磁盘备份+最近变更融合） -->
+                <div class="card" id="ops-storage-changes">
+                    <h2>💾 存储与变更</h2>
+                    <div class="ops-sub">
+                        <div class="ops-sub-title">磁盘与备份</div>
+                        <div id="ops-storage-content">加载中...</div>
+                    </div>
+                    <div class="ops-divider"></div>
+                    <div class="ops-sub">
+                        <div class="ops-sub-title">最近变更</div>
+                        <div id="ops-changes-content">加载中...</div>
+                    </div>
                 </div>
             </div>
         </div>
