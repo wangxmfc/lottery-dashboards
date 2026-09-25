@@ -143,9 +143,9 @@
         
         .nav {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
-            margin-bottom: 28px;
+            margin-bottom: 12px;
             padding: 16px;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 16px;
@@ -183,6 +183,61 @@
             box-shadow: 0 4px 15px rgba(201, 162, 39, 0.35);
             font-weight: 600;
             transform: translateY(-1px);
+        }
+        
+        /* 彩种子菜单 */
+        .lottery-subnav {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin-bottom: 28px;
+            padding: 12px 16px;
+            background: rgba(201, 162, 39, 0.04);
+            border-radius: 12px;
+            border: 1px solid rgba(201, 162, 39, 0.12);
+            overflow: hidden;
+            max-height: 200px;
+            transition: max-height 0.3s ease, padding 0.3s ease, margin-bottom 0.3s ease, opacity 0.3s ease;
+            opacity: 1;
+        }
+        
+        .lottery-subnav.collapsed {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-bottom: 0;
+            opacity: 0;
+            border: none;
+        }
+        
+        .lottery-subnav button {
+            padding: 10px 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            font-size: 0.82em;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+        
+        .lottery-subnav button:hover {
+            background: rgba(201, 162, 39, 0.12);
+            border-color: rgba(201, 162, 39, 0.4);
+            color: #C9A227;
+        }
+        
+        .lottery-subnav button.active {
+            background: linear-gradient(135deg, #C9A227, #b8941f);
+            color: #0F2A43;
+            border-color: #C9A227;
+            font-weight: 600;
         }
         
         .grid {
@@ -438,6 +493,19 @@
                 border-radius: 10px;
             }
             
+            .lottery-subnav {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 6px;
+                padding: 10px 12px;
+                margin-bottom: 20px;
+            }
+            
+            .lottery-subnav button {
+                padding: 8px 4px;
+                font-size: 0.75em;
+                border-radius: 8px;
+            }
+            
             .grid {
                 grid-template-columns: 1fr;
                 gap: 16px;
@@ -472,7 +540,7 @@
             }
             
             .nav {
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(3, 1fr);
                 gap: 6px;
                 padding: 10px;
             }
@@ -482,6 +550,17 @@
                 font-size: 0.72em;
                 border-radius: 8px;
                 gap: 4px;
+            }
+            
+            .lottery-subnav {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 5px;
+                padding: 8px 10px;
+            }
+            
+            .lottery-subnav button {
+                padding: 7px 3px;
+                font-size: 0.7em;
             }
             
             .card {
@@ -555,6 +634,27 @@
         }
         
         body.dark .nav button.active {
+            background: linear-gradient(135deg, #C9A227, #b8941f);
+            color: #fff;
+        }
+        
+        body.dark .lottery-subnav {
+            background: rgba(201, 162, 39, 0.06);
+            border-color: rgba(201, 162, 39, 0.15);
+        }
+        
+        body.dark .lottery-subnav button {
+            background: rgba(255, 255, 255, 0.5);
+            border-color: rgba(0, 0, 0, 0.08);
+            color: rgba(26, 26, 46, 0.65);
+        }
+        
+        body.dark .lottery-subnav button:hover {
+            background: rgba(201, 162, 39, 0.12);
+            color: #b8860b;
+        }
+        
+        body.dark .lottery-subnav button.active {
             background: linear-gradient(135deg, #C9A227, #b8941f);
             color: #fff;
         }
@@ -1268,7 +1368,13 @@
         </div>
         
         <div class="nav">
+            <button onclick="showSection('ops', this)" style="border-color:rgba(123,91,214,0.4);color:rgba(167,139,250,0.9);">⚙️ 运维</button>
             <button class="active" onclick="showSection('overview', this)">📊 总览</button>
+            <button id="lottery-menu-btn" onclick="toggleLotteryMenu()">🎯 彩票 <span id="lottery-menu-arrow">▲</span></button>
+        </div>
+
+        <!-- 彩种子菜单（可展开/收起） -->
+        <div class="lottery-subnav" id="lottery-subnav">
             <button onclick="showSection('ssq', this)">🔴 双色球</button>
             <button onclick="showSection('dlt', this)">🔵 大乐透</button>
             <button onclick="showSection('kl8', this)">🟢 快乐8</button>
@@ -1276,7 +1382,6 @@
             <button onclick="showSection('pl35', this)">🟠 排列3/5</button>
             <button onclick="showSection('qxc', this)">🟣 七星彩</button>
             <button onclick="showSection('qlc', this)">⚪ 七乐彩</button>
-            <button onclick="showSection('ops', this)" style="border-color:rgba(123,91,214,0.4);color:rgba(167,139,250,0.9);">⚙️ 运维</button>
         </div>
 
         <div id="overview" class="section active">
@@ -1529,10 +1634,37 @@
             // 显示选中的section
             document.getElementById(id).classList.add('active');
             
-            // 更新按钮状态
-            document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
-            if (btn) {
-                btn.classList.add('active');
+            // 清除所有按钮激活状态（主导航+子菜单）
+            document.querySelectorAll('.nav button, .lottery-subnav button').forEach(b => b.classList.remove('active'));
+            
+            const lotteryCodes = ['ssq', 'dlt', 'kl8', 'fc3d', 'pl35', 'qxc', 'qlc'];
+            if (lotteryCodes.includes(id)) {
+                // 彩种页面：高亮"彩票"主按钮 + 对应彩种按钮
+                const lotteryBtn = document.getElementById('lottery-menu-btn');
+                if (lotteryBtn) lotteryBtn.classList.add('active');
+                if (btn) btn.classList.add('active');
+            } else {
+                // 总览/运维：高亮对应主按钮
+                if (btn) btn.classList.add('active');
+            }
+        }
+        
+        // 展开/收起彩种子菜单
+        function toggleLotteryMenu() {
+            const subnav = document.getElementById('lottery-subnav');
+            const arrow = document.getElementById('lottery-menu-arrow');
+            const btn = document.getElementById('lottery-menu-btn');
+            if (subnav.classList.contains('collapsed')) {
+                subnav.classList.remove('collapsed');
+                arrow.textContent = '▲';
+            } else {
+                subnav.classList.add('collapsed');
+                arrow.textContent = '▼';
+                // 收起时如果当前在彩种页面，切换到总览
+                const activeSection = document.querySelector('.section.active');
+                if (activeSection && ['ssq','dlt','kl8','fc3d','pl35','qxc','qlc'].includes(activeSection.id)) {
+                    showSection('overview', document.querySelector('.nav button:nth-child(2)'));
+                }
             }
         }
         
