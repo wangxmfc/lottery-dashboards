@@ -676,7 +676,11 @@
         .strategy-item .st-text {
             font-size: 0.78em;
             color: #b0b8c4;
-            line-height: 1.5;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
         
         /* 总览模块统一排版 */
@@ -3219,23 +3223,28 @@
                 { code: 'qlc', name: '七乐彩' },
             ];
             
-            function extractOneLine(strategy) {
+            function extractSummary(strategy) {
                 if (!strategy || typeof strategy !== 'string') return '暂无思路';
-                // 去掉emoji和标题行，取第一个有意义的句子
-                const lines = strategy.split('\n').filter(l => l.trim().length > 10);
+                // 去掉emoji开头和空行，取前3个有意义的句子
+                const lines = strategy.split('\n').filter(l => l.trim().length > 8);
+                const meaningful = [];
                 for (const line of lines) {
-                    const clean = line.replace(/^[📊🔢🌡️📋💡🎯⚡🔒]+/, '').trim();
-                    if (clean.length > 15 && clean.length < 80 && !clean.includes('分析报告') && !clean.includes('开奖号码')) {
-                        return clean.substring(0, 60) + (clean.length > 60 ? '...' : '');
+                    const clean = line.replace(/^[📊🔢🌡️📋💡🎯⚡🔒◆◇■□●○★☆]+/, '').trim();
+                    if (clean.length > 10 && !clean.includes('分析报告') && !clean.includes('开奖号码：') && !clean.includes('=')) {
+                        meaningful.push(clean);
                     }
+                    if (meaningful.length >= 3) break;
                 }
-                return strategy.substring(0, 60) + '...';
+                if (meaningful.length > 0) {
+                    return meaningful.join(' ');
+                }
+                return strategy.substring(0, 150);
             }
             
             let html = '<div class="strategy-grid">';
             for (const info of lotteryInfo) {
                 const detail = data.details && data.details[info.code] ? data.details[info.code] : {};
-                const summary = extractOneLine(detail.strategy);
+                const summary = extractSummary(detail.strategy);
                 
                 html += `
                     <div class="strategy-item">
