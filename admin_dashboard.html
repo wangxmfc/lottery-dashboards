@@ -258,6 +258,177 @@
             font-weight: 600;
         }
         
+        /* 今日开奖预告横幅 */
+        .draw-banner-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding: 10px 0;
+        }
+        .draw-banner-item {
+            text-align: center;
+            padding: 12px 20px;
+            background: rgba(201, 162, 39, 0.08);
+            border-radius: 12px;
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            min-width: 120px;
+        }
+        .draw-banner-item .db-name {
+            font-size: 1em;
+            font-weight: 600;
+            color: #C9A227;
+            margin-bottom: 4px;
+        }
+        .draw-banner-item .db-period {
+            font-size: 0.85em;
+            color: #e0e0e0;
+        }
+        .draw-banner-item .db-time {
+            font-size: 0.78em;
+            color: #9AA3AF;
+            margin-top: 2px;
+        }
+        .draw-banner-countdown {
+            text-align: center;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, rgba(201,162,39,0.15), rgba(201,162,39,0.05));
+            border-radius: 12px;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+        }
+        .draw-banner-countdown .cd-label {
+            font-size: 0.78em;
+            color: #9AA3AF;
+        }
+        .draw-banner-countdown .cd-value {
+            font-size: 1.6em;
+            font-weight: bold;
+            color: #C9A227;
+            font-family: monospace;
+        }
+        
+        /* 彩种快速导航 */
+        .quick-nav-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        .quick-nav-item {
+            padding: 14px 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.02);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+        .quick-nav-item:hover {
+            transform: translateY(-2px);
+            border-color: rgba(201, 162, 39, 0.4);
+            background: rgba(201, 162, 39, 0.06);
+        }
+        .quick-nav-item .qn-icon {
+            font-size: 1.4em;
+            margin-bottom: 4px;
+        }
+        .quick-nav-item .qn-name {
+            font-size: 0.88em;
+            font-weight: 600;
+            color: #e0e0e0;
+            margin-bottom: 2px;
+        }
+        .quick-nav-item .qn-period {
+            font-size: 0.72em;
+            color: #9AA3AF;
+        }
+        .quick-nav-item .qn-status {
+            font-size: 0.68em;
+            margin-top: 4px;
+            display: inline-block;
+            padding: 1px 8px;
+            border-radius: 10px;
+        }
+        .qn-status.fresh { background: rgba(40,167,69,0.15); color: #28a745; }
+        .qn-status.stale { background: rgba(243,156,18,0.15); color: #f39c12; }
+        
+        /* 最新开奖速览 */
+        .latest-draws-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        .latest-draw-item {
+            padding: 12px 8px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: center;
+        }
+        .latest-draw-item .ld-name {
+            font-size: 0.8em;
+            color: #C9A227;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .latest-draw-item .ld-balls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3px;
+            margin-bottom: 4px;
+        }
+        .latest-draw-item .ld-ball {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65em;
+            font-weight: bold;
+            color: #fff;
+        }
+        .latest-draw-item .ld-date {
+            font-size: 0.68em;
+            color: #9AA3AF;
+        }
+        
+        /* 运行状态简表 */
+        .status-mini-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .status-mini-item:last-child { border-bottom: none; }
+        .status-mini-label { font-size: 0.85em; color: #9AA3AF; }
+        .status-mini-value { font-size: 0.85em; font-weight: 600; }
+        
+        /* 回测vs随机 */
+        .br-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .br-item:last-child { border-bottom: none; }
+        .br-name { width: 60px; font-size: 0.8em; color: #e0e0e0; flex-shrink: 0; }
+        .br-bar-wrap { flex: 1; display: flex; gap: 4px; align-items: center; }
+        .br-bar {
+            height: 14px;
+            border-radius: 3px;
+            min-width: 2px;
+            transition: width 0.5s ease;
+        }
+        .br-bar.model { background: linear-gradient(90deg, #C9A227, #e0c060); }
+        .br-bar.random { background: rgba(255,255,255,0.15); }
+        .br-val { font-size: 0.72em; color: #9AA3AF; min-width: 35px; text-align: right; }
+        
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -524,6 +695,22 @@
                 border-radius: 8px;
             }
             
+            .quick-nav-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 8px;
+            }
+            .latest-draws-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 8px;
+            }
+            .draw-banner-inner {
+                gap: 12px;
+            }
+            .draw-banner-item {
+                min-width: 90px;
+                padding: 10px 12px;
+            }
+            
             .grid {
                 grid-template-columns: 1fr;
                 gap: 16px;
@@ -579,6 +766,22 @@
             .lottery-subnav button {
                 padding: 7px 3px;
                 font-size: 0.7em;
+            }
+            
+            .quick-nav-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
+            .latest-draws-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
+            .draw-banner-item {
+                min-width: 75px;
+                padding: 8px 10px;
+            }
+            .draw-banner-countdown .cd-value {
+                font-size: 1.3em;
             }
             
             .card {
@@ -1415,6 +1618,16 @@
 
         <div id="overview" class="section">
             <div class="grid">
+
+                <!-- 今日开奖预告（横幅） -->
+                <div class="card" id="today-draw-banner" style="grid-column:1/-1;">
+                    <h2>🎯 今日开奖预告</h2>
+                    <div id="today-draw-content">
+                        <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
+                    </div>
+                </div>
+
+                <!-- 系统总览 -->
                 <div class="card" id="system-overview">
                     <h2>📊 系统总览</h2>
                     <div style="text-align:center;padding:40px 20px;color:#9AA3AF;">
@@ -1423,11 +1636,44 @@
                     </div>
                 </div>
 
+                <!-- 系统状态简表 -->
+                <div class="card" id="overview-status">
+                    <h2>⚡ 运行状态</h2>
+                    <div id="overview-status-content">
+                        <div style="text-align:center;padding:40px 20px;color:#9AA3AF;">数据加载中...</div>
+                    </div>
+                </div>
+
+                <!-- 7彩种快速导航 -->
+                <div class="card" id="lottery-quick-nav" style="grid-column:1/-1;">
+                    <h2>📋 彩种快速导航</h2>
+                    <div id="quick-nav-content">
+                        <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
+                    </div>
+                </div>
+
+                <!-- 最新开奖速览 -->
+                <div class="card" id="latest-draws" style="grid-column:1/-1;">
+                    <h2>🔢 最新开奖速览</h2>
+                    <div id="latest-draws-content">
+                        <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
+                    </div>
+                </div>
+
+                <!-- 命中率概览（增强） -->
                 <div class="card" id="hit-rates">
                     <h2>🎯 命中率概览</h2>
                     <div style="text-align:center;padding:40px 20px;color:#9AA3AF;">
                         <div style="font-size:2em;margin-bottom:10px;">⏳</div>
                         <div>数据加载中...</div>
+                    </div>
+                </div>
+
+                <!-- 回测vs随机基准 -->
+                <div class="card" id="backtest-vs-random">
+                    <h2>📈 回测 vs 随机基准</h2>
+                    <div id="backtest-random-content">
+                        <div style="text-align:center;padding:40px 20px;color:#9AA3AF;">数据加载中...</div>
                     </div>
                 </div>
 
@@ -1911,15 +2157,294 @@
             
             data.hit_rates.forEach(item => {
                 const cls = gradeClass[item.grade] || 'badge-warning';
+                const barColor = item.hit_rate >= 75 ? '#28a745' : item.hit_rate >= 60 ? '#f39c12' : '#dc3545';
                 html += `
-                    <div class="stat">
-                        <span class="stat-label">${item.name}</span>
-                        <span class="badge ${cls}">${item.grade} ${formatImprovement(item.improvement)}</span>
+                    <div style="margin-bottom:12px;">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                            <span style="font-size:0.85em;color:#e0e0e0;font-weight:500;">${item.name}</span>
+                            <span style="font-size:0.82em;color:${barColor};font-weight:600;">${item.hit_rate}%</span>
+                        </div>
+                        <div style="height:8px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden;">
+                            <div style="width:${item.hit_rate}%;height:100%;background:linear-gradient(90deg,${barColor},${barColor}cc);border-radius:4px;transition:width 0.5s ease;"></div>
+                        </div>
+                        <div style="display:flex;justify-content:space-between;margin-top:3px;">
+                            <span style="font-size:0.7em;color:#9AA3AF;">均命中${item.avg_hit}个 · ${item.total_periods}期</span>
+                            <span class="badge ${cls}" style="font-size:0.68em;padding:1px 6px;">${item.grade} ${formatImprovement(item.improvement)}</span>
+                        </div>
                     </div>
                 `;
             });
             
             container.innerHTML = html;
+        }
+        
+        // 渲染今日开奖预告
+        function renderTodayDrawBanner(data) {
+            const el = document.getElementById('today-draw-content');
+            if (!el) return;
+            
+            const drawDays = {
+                ssq: [0, 2, 4], dlt: [1, 3, 6], kl8: [0,1,2,3,4,5,6],
+                fc3d: [0,1,2,3,4,5,6], pl35: [0,1,2,3,4,5,6], qxc: [0, 2, 5], qlc: [1, 3, 5]
+            };
+            const drawTime = {
+                ssq: '21:15', dlt: '20:30', kl8: '21:10',
+                fc3d: '20:30', pl35: '20:30', qxc: '20:30', qlc: '20:30'
+            };
+            const lotteryNames = {
+                ssq: '双色球', dlt: '大乐透', kl8: '快乐8',
+                fc3d: '福彩3D', pl35: '排列3/5', qxc: '七星彩', qlc: '七乐彩'
+            };
+            const lotteryIcons = {
+                ssq: '🔴', dlt: '🔵', kl8: '🟢', fc3d: '🟡', pl35: '🟠', qxc: '🟣', qlc: '⚪'
+            };
+            
+            const today = new Date();
+            const todayDay = today.getDay();
+            const todayLotteries = Object.keys(drawDays).filter(code => drawDays[code].includes(todayDay));
+            
+            if (todayLotteries.length === 0) {
+                el.innerHTML = '<div style="text-align:center;padding:20px;color:#9AA3AF;">今日无开奖</div>';
+                return;
+            }
+            
+            // 找最近的开奖时间做倒计时
+            const nowMin = today.getHours() * 60 + today.getMinutes();
+            let nextDraw = null;
+            let nextCode = null;
+            for (const code of todayLotteries) {
+                const [h, m] = drawTime[code].split(':').map(Number);
+                const drawMin = h * 60 + m;
+                if (drawMin > nowMin && (!nextDraw || drawMin < nextDraw)) {
+                    nextDraw = drawMin;
+                    nextCode = code;
+                }
+            }
+            
+            let itemsHtml = '';
+            for (const code of todayLotteries) {
+                const detail = data.details && data.details[code] ? data.details[code] : {};
+                const latestPeriod = detail.latest_period || '-';
+                const nextPeriod = detail.prediction ? (detail.prediction.period || '-') : '-';
+                itemsHtml += `
+                    <div class="draw-banner-item">
+                        <div class="db-name">${lotteryIcons[code]} ${lotteryNames[code]}</div>
+                        <div class="db-period">第${nextPeriod}期</div>
+                        <div class="db-time">${drawTime[code]} 开奖</div>
+                    </div>
+                `;
+            }
+            
+            let countdownHtml = '';
+            if (nextDraw && nextCode) {
+                const diffMin = nextDraw - nowMin;
+                const h = Math.floor(diffMin / 60);
+                const m = diffMin % 60;
+                countdownHtml = `
+                    <div class="draw-banner-countdown">
+                        <div class="cd-label">距 ${lotteryNames[nextCode]} 开奖</div>
+                        <div class="cd-value">${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}</div>
+                    </div>
+                `;
+            } else {
+                countdownHtml = `
+                    <div class="draw-banner-countdown">
+                        <div class="cd-label">今日开奖</div>
+                        <div class="cd-value" style="font-size:1.2em;">已全部结束</div>
+                    </div>
+                `;
+            }
+            
+            el.innerHTML = `<div class="draw-banner-inner">${itemsHtml}${countdownHtml}</div>`;
+        }
+        
+        // 渲染运行状态简表
+        function renderOverviewStatus(data) {
+            const el = document.getElementById('overview-status-content');
+            if (!el) return;
+            
+            const ops = data.ops_monitoring || {};
+            const health = ops.system_health || {};
+            const tasks = ops.task_heartbeat || [];
+            
+            // 最近成功任务
+            const successTasks = tasks.filter(t => t.status === 'success');
+            const lastTask = successTasks.length > 0 ? successTasks[successTasks.length - 1] : null;
+            
+            // 数据新鲜度
+            const details = data.details || {};
+            const today = new Date();
+            const todayStr = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
+            let freshCount = 0;
+            let totalCount = 0;
+            for (const code of ['ssq','dlt','kl8','fc3d','pl35','qxc','qlc']) {
+                const d = details[code];
+                if (d && d.latest_draw && d.latest_draw.date) {
+                    totalCount++;
+                    if (d.latest_draw.date === todayStr) freshCount++;
+                }
+            }
+            
+            const healthColor = health.score >= 90 ? '#28a745' : health.score >= 70 ? '#f39c12' : '#dc3545';
+            
+            el.innerHTML = `
+                <div class="status-mini-item">
+                    <span class="status-mini-label">健康度</span>
+                    <span class="status-mini-value" style="color:${healthColor};">${health.score || '-'}分 ${health.level || ''}</span>
+                </div>
+                <div class="status-mini-item">
+                    <span class="status-mini-label">数据新鲜度</span>
+                    <span class="status-mini-value" style="color:${freshCount === totalCount ? '#28a745' : '#f39c12'};">${freshCount}/${totalCount} 已更新</span>
+                </div>
+                <div class="status-mini-item">
+                    <span class="status-mini-label">最近任务</span>
+                    <span class="status-mini-value" style="color:#28a745;font-size:0.78em;">${lastTask ? lastTask.name + ' ✓' : '-'}</span>
+                </div>
+                <div class="status-mini-item">
+                    <span class="status-mini-label">错误日志</span>
+                    <span class="status-mini-value" style="color:${(ops.error_logs || []).length > 0 ? '#f39c12' : '#28a745'};">${(ops.error_logs || []).length} 条</span>
+                </div>
+                <div class="status-mini-item">
+                    <span class="status-mini-label">数据更新</span>
+                    <span class="status-mini-value" style="font-size:0.78em;color:#9AA3AF;">${data.last_update || '-'}</span>
+                </div>
+            `;
+        }
+        
+        // 渲染彩种快速导航
+        function renderQuickNav(data) {
+            const el = document.getElementById('quick-nav-content');
+            if (!el) return;
+            
+            const lotteryInfo = [
+                { code: 'ssq', name: '双色球', icon: '🔴', color: '#e74c3c' },
+                { code: 'dlt', name: '大乐透', icon: '🔵', color: '#3498db' },
+                { code: 'kl8', name: '快乐8', icon: '🟢', color: '#2ecc71' },
+                { code: 'fc3d', name: '福彩3D', icon: '🟡', color: '#f1c40f' },
+                { code: 'pl35', name: '排列3/5', icon: '🟠', color: '#e67e22' },
+                { code: 'qxc', name: '七星彩', icon: '🟣', color: '#9b59b6' },
+                { code: 'qlc', name: '七乐彩', icon: '⚪', color: '#95a5a6' },
+            ];
+            
+            const today = new Date();
+            const todayStr = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
+            
+            let html = '<div class="quick-nav-grid">';
+            for (const info of lotteryInfo) {
+                const detail = data.details && data.details[info.code] ? data.details[info.code] : {};
+                const latestPeriod = detail.latest_period || '-';
+                const latestDate = detail.latest_draw ? detail.latest_draw.date : '';
+                const isFresh = latestDate === todayStr;
+                const statusClass = isFresh ? 'fresh' : 'stale';
+                const statusText = isFresh ? '✓ 最新' : '待更新';
+                
+                html += `
+                    <a class="quick-nav-item" onclick="showSection('${info.code}', this);return false;" href="javascript:void(0)">
+                        <div class="qn-icon">${info.icon}</div>
+                        <div class="qn-name">${info.name}</div>
+                        <div class="qn-period">第${latestPeriod}期</div>
+                        <div class="qn-status ${statusClass}">${statusText}</div>
+                    </a>
+                `;
+            }
+            html += '</div>';
+            el.innerHTML = html;
+        }
+        
+        // 渲染最新开奖速览
+        function renderLatestDraws(data) {
+            const el = document.getElementById('latest-draws-content');
+            if (!el) return;
+            
+            const lotteryInfo = [
+                { code: 'ssq', name: '双色球', frontColor: '#e74c3c', backColor: '#3498db' },
+                { code: 'dlt', name: '大乐透', frontColor: '#e74c3c', backColor: '#2ecc71' },
+                { code: 'kl8', name: '快乐8', frontColor: '#2ecc71', backColor: null },
+                { code: 'fc3d', name: '福彩3D', frontColor: '#f1c40f', backColor: null },
+                { code: 'pl35', name: '排列3/5', frontColor: '#e67e22', backColor: null },
+                { code: 'qxc', name: '七星彩', frontColor: '#9b59b6', backColor: '#e74c3c' },
+                { code: 'qlc', name: '七乐彩', frontColor: '#95a5a6', backColor: '#e74c3c' },
+            ];
+            
+            let html = '<div class="latest-draws-grid">';
+            for (const info of lotteryInfo) {
+                const detail = data.details && data.details[info.code] ? data.details[info.code] : {};
+                const draw = detail.latest_draw || {};
+                const period = draw.period || detail.latest_period || '-';
+                const date = draw.date || '-';
+                const front = draw.front || draw.red || draw.basic || [];
+                const back = draw.back || draw.blue || draw.special || [];
+                
+                let ballsHtml = '';
+                front.forEach(n => {
+                    ballsHtml += `<span class="ld-ball" style="background:${info.frontColor};">${n}</span>`;
+                });
+                if (back && back.length > 0) {
+                    back.forEach(n => {
+                        ballsHtml += `<span class="ld-ball" style="background:${info.backColor || '#666'};">${n}</span>`;
+                    });
+                }
+                if (!front || front.length === 0) {
+                    ballsHtml = '<span style="color:#9AA3AF;font-size:0.75em;">暂无</span>';
+                }
+                
+                html += `
+                    <div class="latest-draw-item">
+                        <div class="ld-name">${info.name}</div>
+                        <div class="ld-balls">${ballsHtml}</div>
+                        <div class="ld-date">${period}期 · ${date}</div>
+                    </div>
+                `;
+            }
+            html += '</div>';
+            el.innerHTML = html;
+        }
+        
+        // 渲染回测vs随机基准
+        function renderBacktestVsRandom(data) {
+            const el = document.getElementById('backtest-random-content');
+            if (!el || !data.hit_rates) return;
+            
+            // 找最大avg_hit用于比例
+            const maxHit = Math.max(...data.hit_rates.map(h => h.avg_hit || 0), 0.1);
+            
+            let html = '';
+            data.hit_rates.forEach(item => {
+                const modelHit = item.avg_hit || 0;
+                // 从improvement反推random: improvement = (model-random)/random*100
+                const randomHit = item.improvement !== undefined && item.improvement !== null ? 
+                    modelHit / (1 + item.improvement / 100) : modelHit * 0.9;
+                const modelPct = (modelHit / maxHit * 100).toFixed(1);
+                const randomPct = (randomHit / maxHit * 100).toFixed(1);
+                const impColor = item.improvement >= 0 ? '#28a745' : '#dc3545';
+                const impSign = item.improvement >= 0 ? '+' : '';
+                
+                html += `
+                    <div class="br-item">
+                        <span class="br-name">${item.name}</span>
+                        <div class="br-bar-wrap">
+                            <div class="br-bar model" style="width:${modelPct}%;" title="模型均命中${modelHit}"></div>
+                            <div class="br-bar random" style="width:${randomPct}%;" title="随机均命中${randomHit.toFixed(2)}"></div>
+                        </div>
+                        <span class="br-val" style="color:${impColor};">${impSign}${item.improvement}%</span>
+                    </div>
+                `;
+            });
+            
+            html += `
+                <div style="display:flex;gap:16px;margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.06);">
+                    <span style="font-size:0.72em;color:#9AA3AF;display:flex;align-items:center;gap:5px;">
+                        <span style="width:12px;height:8px;background:linear-gradient(90deg,#C9A227,#e0c060);border-radius:2px;display:inline-block;"></span>
+                        模型
+                    </span>
+                    <span style="font-size:0.72em;color:#9AA3AF;display:flex;align-items:center;gap:5px;">
+                        <span style="width:12px;height:8px;background:rgba(255,255,255,0.15);border-radius:2px;display:inline-block;"></span>
+                        随机基准
+                    </span>
+                </div>
+            `;
+            
+            el.innerHTML = html;
         }
         
         // 彩种详情标签页切换
@@ -3097,6 +3622,11 @@
                 renderSystemStatus(data);
                 renderSystemOverview(data);
                 renderHitRates(data);
+                renderTodayDrawBanner(data);
+                renderOverviewStatus(data);
+                renderQuickNav(data);
+                renderLatestDraws(data);
+                renderBacktestVsRandom(data);
                 renderLotteryDetails(data);
                 renderModelMonitoring(data);
                 renderFullModelMonitoring(data);
