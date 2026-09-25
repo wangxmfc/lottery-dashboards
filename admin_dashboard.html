@@ -4992,21 +4992,24 @@
                     html += '</div></div>';
                 }
                 
-                // 改进建议
+                // 改进建议（自动状态）
                 if (ml.recommendations && ml.recommendations.length > 0) {
-                    html += '<div><div class="ops-sub-title">🔧 改进建议</div><div style="display:flex;flex-direction:column;gap:6px;">';
-                    ml.recommendations.forEach((r, idx) => {
-                        const status = localStorage.getItem('rec_status_' + idx) || 'pending';
+                    html += '<div><div class="ops-sub-title">🔧 改进建议 <span style="font-size:0.65em;color:#9AA3AF;font-weight:normal;">（系统自动评估）</span></div><div style="display:flex;flex-direction:column;gap:6px;">';
+                    ml.recommendations.forEach((item, idx) => {
+                        const text = typeof item === 'string' ? item : item.text;
+                        const status = typeof item === 'string' ? '待处理' : (item.status || '待处理');
                         const statusMap = {
-                            pending: { label: '待处理', color: '#f39c12', bg: 'rgba(243,156,18,0.12)', border: 'rgba(243,156,18,0.3)' },
-                            adopted: { label: '已采纳', color: '#28a745', bg: 'rgba(40,167,69,0.12)', border: 'rgba(40,167,69,0.3)' },
-                            ignored: { label: '已忽略', color: '#8892a0', bg: 'rgba(136,146,160,0.12)', border: 'rgba(136,146,160,0.3)' }
+                            '已自动调整': { color: '#28a745', bg: 'rgba(40,167,69,0.12)', border: 'rgba(40,167,69,0.3)' },
+                            '已评估-无需调整': { color: '#3498db', bg: 'rgba(52,152,219,0.10)', border: 'rgba(52,152,219,0.25)' },
+                            '待人工评估': { color: '#f39c12', bg: 'rgba(243,156,18,0.12)', border: 'rgba(243,156,18,0.3)' },
+                            '正常': { color: '#28a745', bg: 'rgba(40,167,69,0.08)', border: 'rgba(40,167,69,0.2)' },
+                            '待处理': { color: '#f39c12', bg: 'rgba(243,156,18,0.12)', border: 'rgba(243,156,18,0.3)' }
                         };
-                        const s = statusMap[status];
+                        const s = statusMap[status] || statusMap['待处理'];
                         html += `<div style="display:flex;gap:8px;padding:8px 10px;background:${s.bg};border-radius:8px;border-left:2px solid ${s.border};align-items:flex-start;">
                             <span style="font-size:0.75em;color:${s.color};flex-shrink:0;margin-top:1px;">⚠️</span>
-                            <span style="font-size:0.78em;color:#b0a890;line-height:1.5;flex:1;">${r}</span>
-                            <button onclick="toggleRecStatus(${idx})" style="font-size:0.65em;color:${s.color};background:${s.bg};border:1px solid ${s.border};padding:2px 8px;border-radius:10px;cursor:pointer;flex-shrink:0;white-space:nowrap;margin-top:1px;">${s.label}</button>
+                            <span style="font-size:0.78em;color:#b0a890;line-height:1.5;flex:1;">${text}</span>
+                            <span style="font-size:0.62em;color:${s.color};background:${s.bg};border:1px solid ${s.border};padding:2px 8px;border-radius:10px;flex-shrink:0;white-space:nowrap;margin-top:1px;">${status}</span>
                         </div>`;
                     });
                     html += '</div></div>';
