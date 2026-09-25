@@ -2466,6 +2466,13 @@
                         <div style="font-size:0.9em;color:#dc3545;margin-bottom:8px;">⚠️ 异常模型</div>
                         <div id="alert-list"></div>
                     </div>
+                    <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:10px;margin-top:8px;">
+                        <div onclick="toggleModelList()" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;">
+                            <span style="font-size:0.9em;color:#C9A227;">📋 49个核心模型运行状况</span>
+                            <span id="toggle-icon" style="font-size:0.8em;color:#9AA3AF;">▼</span>
+                        </div>
+                        <div id="model-list" style="display:none;margin-top:10px;max-height:400px;overflow-y:auto;"></div>
+                    </div>
                 </div>
 
                 <!-- 系统状态（健康度+任务心跳融合） -->
