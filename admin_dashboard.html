@@ -1249,8 +1249,8 @@
         <div class="header">
             <h1>🎯 王者GP - 彩票预测数据看板</h1>
             <div class="subtitle">49个模型智能预测系统 · 数据驱动 · 理性参考</div>
-            <div class="model-badge">
-                🤖 49个核心预测模型已全部启用
+            <div class="model-badge" id="header-model-badge">
+                🤖 模型加载中...
             </div>
         </div>
         
@@ -1466,9 +1466,9 @@
                     <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;margin-top:8px;">
                         <div style="font-size:0.85em;color:#C9A227;margin-bottom:10px;">🔧 模型管理功能</div>
                         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
-                            <div class="stat"><span class="stat-label">模型自动评估</span><span class="badge badge-good">已开启</span></div>
-                            <div class="stat"><span class="stat-label">模型启用核查</span><span class="badge badge-good">已开启</span></div>
-                            <div class="stat"><span class="stat-label">用户偏好学习</span><span class="badge badge-good">已开启</span></div>
+                            <div class="stat"><span class="stat-label">模型自动评估</span><span class="badge badge-good" id="feat-auto-eval">已开启</span></div>
+                            <div class="stat"><span class="stat-label">模型启用核查</span><span class="badge badge-good" id="feat-enable-check">已开启</span></div>
+                            <div class="stat"><span class="stat-label">用户偏好学习</span><span class="badge badge-good" id="feat-pref-learn">已开启</span></div>
                         </div>
                     </div>
                 </div>
@@ -1620,6 +1620,11 @@
             if (modelsEl) {
                 modelsEl.textContent = '🤖 ' + modelActive + '/' + modelTotal + ' 模型' + (modelOk ? '✓' : '!');
                 modelsEl.className = 'status-item status-models' + (modelOk ? '' : ' warning');
+            }
+            // 更新头部模型badge
+            const headerBadge = document.getElementById('header-model-badge');
+            if (headerBadge) {
+                headerBadge.textContent = '🤖 ' + modelActive + '个核心预测模型' + (modelOk ? '已全部启用' : '（' + (modelTotal - modelActive) + '个未启用）');
             }
             
             // 各彩种数据新鲜度状态（展开区域）
