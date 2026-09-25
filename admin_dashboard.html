@@ -808,6 +808,12 @@
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
             margin: 14px 0;
         }
+        .card h2.no-bar::before {
+            display: none;
+        }
+        .card h2.no-bar {
+            padding-left: 0;
+        }
         
         /* 系统状态指标横排 */
         .sys-status-row {
@@ -1288,14 +1294,6 @@
             .hit-rate {
                 font-size: 1.8em;
                 margin: 20px 0;
-            }
-            
-            #model-overview, #full-model-overview {
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 8px !important;
-            }
-            #category-list {
-                grid-template-columns: 1fr !important;
             }
             
             .stat {
@@ -2404,8 +2402,8 @@
         <div id="ops" class="section">
             <div class="grid">
                 <!-- 全量模型监控（不动） -->
-                <div class="card ops-full-width" id="full-model-monitoring">
-                    <h2>📦 全量模型监控 <span style="font-size:0.6em;color:#9AA3AF;font-weight:normal;">639个模型</span></h2>
+                <div class="card" id="full-model-monitoring">
+                    <h2 class="no-bar">📦 全量模型监控 <span style="font-size:0.6em;color:#9AA3AF;font-weight:normal;">639个模型</span></h2>
                     <div id="full-model-overview" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px;">
                         <div style="text-align:center;padding:10px;background:rgba(201,162,39,0.1);border-radius:10px;">
                             <div style="font-size:1.5em;font-weight:bold;color:#C9A227;" id="full-model-total">-</div>
@@ -2440,8 +2438,8 @@
                 </div>
 
                 <!-- 核心模型监控（不动） -->
-                <div class="card ops-full-width" id="model-monitoring">
-                    <h2>🤖 核心模型监控 <span style="font-size:0.6em;color:#9AA3AF;font-weight:normal;">49个核心模型</span></h2>
+                <div class="card" id="model-monitoring">
+                    <h2 class="no-bar">🤖 核心模型监控 <span style="font-size:0.6em;color:#9AA3AF;font-weight:normal;">49个核心模型</span></h2>
                     <div id="model-overview" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px;">
                         <div style="text-align:center;padding:10px;background:rgba(201,162,39,0.1);border-radius:10px;">
                             <div style="font-size:1.5em;font-weight:bold;color:#C9A227;" id="model-total">-</div>
