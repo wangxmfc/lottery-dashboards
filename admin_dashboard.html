@@ -747,6 +747,175 @@
             opacity: 0.9;
         }
         
+        /* ========== 统一面板框 ========== */
+        .panel-box {
+            margin-bottom: 16px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid var(--gold-border);
+            transition: border-color 0.2s ease;
+        }
+        .panel-box:hover {
+            border-color: var(--gold-border-strong);
+        }
+        .panel-box.gold { border-color: var(--gold-border); }
+        .panel-box.green { border-color: rgba(40, 167, 69, 0.25); }
+        .panel-box.red { border-color: rgba(220, 53, 69, 0.25); }
+        .panel-box.purple { border-color: rgba(123, 91, 214, 0.3); }
+        
+        .panel-title {
+            font-size: 0.9em;
+            color: var(--gold);
+            margin-bottom: 10px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .panel-title.green { color: var(--success); }
+        .panel-title.red { color: var(--danger-light); }
+        
+        .panel-subtitle {
+            font-size: 0.78em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        
+        /* ========== 号码标签（遗漏/冷热用） ========== */
+        .num-tag {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            min-width: 40px;
+        }
+        .num-tag:hover {
+            transform: translateY(-2px);
+        }
+        .num-tag.red {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+        .num-tag.red:hover {
+            background: rgba(220, 53, 69, 0.18);
+            box-shadow: 0 3px 10px rgba(220, 53, 69, 0.2);
+        }
+        .num-tag.green {
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+        .num-tag.green:hover {
+            background: rgba(40, 167, 69, 0.18);
+            box-shadow: 0 3px 10px rgba(40, 167, 69, 0.2);
+        }
+        .num-tag .num {
+            font-weight: bold;
+            color: #fff;
+            font-size: 0.9em;
+        }
+        .num-tag .meta {
+            font-size: 0.68em;
+            margin-top: 2px;
+        }
+        .num-tag.red .meta { color: var(--danger-light); }
+        .num-tag.green .meta { color: var(--success-light); }
+        
+        /* ========== 回测详情行 ========== */
+        .backtest-row {
+            padding: 10px 12px;
+            margin-bottom: 6px;
+            background: rgba(255, 255, 255, 0.025);
+            border-radius: 8px;
+            border-left: 3px solid var(--success);
+            transition: all 0.2s ease;
+        }
+        .backtest-row.miss {
+            border-left-color: var(--danger);
+        }
+        .backtest-row:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .backtest-row .row-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .backtest-row .period {
+            font-size: 0.8em;
+            color: var(--gold);
+            font-weight: 500;
+        }
+        .backtest-row .hit-count {
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        .backtest-row .hit-count.hit { color: var(--success-light); }
+        .backtest-row .hit-count.miss { color: var(--danger-light); }
+        .backtest-row .row-detail {
+            font-size: 0.75em;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .backtest-row .row-detail .label {
+            color: var(--text-secondary);
+            display: inline-block;
+            min-width: 3em;
+        }
+        
+        /* ========== 命中趋势图 ========== */
+        .hit-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            height: 110px;
+            padding: 12px 10px 6px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .hit-bar-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 2px;
+            height: 100%;
+        }
+        .hit-bar-value {
+            font-size: 0.6em;
+            color: var(--text-muted);
+            line-height: 1;
+        }
+        .hit-bar {
+            width: 100%;
+            border-radius: 3px 3px 0 0;
+            transition: all 0.3s ease;
+            min-height: 4px;
+        }
+        .hit-bar.hit {
+            background: linear-gradient(180deg, var(--gold-light), var(--gold));
+            box-shadow: 0 0 8px rgba(201, 162, 39, 0.3);
+        }
+        .hit-bar.miss {
+            background: rgba(255, 255, 255, 0.12);
+        }
+        .hit-bar-wrap:hover .hit-bar {
+            filter: brightness(1.2);
+        }
+        .hit-bar-period {
+            font-size: 0.5em;
+            color: var(--text-muted);
+            line-height: 1;
+            margin-top: 3px;
+            white-space: nowrap;
+            opacity: 0.7;
+        }
+        
         /* 系统状态条（可折叠） */
         .status-bar {
             padding: 8px 16px;
@@ -1402,14 +1571,14 @@
                 // 最新开奖
                 if (latestDraw.period) {
                     overviewHtml += `
-                    <div style="margin-bottom:20px;padding:15px;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid rgba(201,162,39,0.2);">
-                        <div style="font-size:0.9em;color:#C9A227;margin-bottom:10px;font-weight:600;">🎲 最新开奖（第${latestDraw.period}期 · ${latestDraw.date || ''}）</div>
-                        <div style="font-size:0.8em;color:#9AA3AF;margin-bottom:6px;">${cfg.mainLabel || '开奖号码'}</div>
+                    <div class="panel-box">
+                        <div class="panel-title">🎲 最新开奖（第${latestDraw.period}期 · ${latestDraw.date || ''}）</div>
+                        <div class="panel-subtitle">${cfg.mainLabel || '开奖号码'}</div>
                         <div>${renderBalls(latestDraw[Object.keys(latestDraw).find(k => k !== 'period' && k !== 'date')] || [], cfg.mainColor || '#C9A227', 32)}</div>
                     `;
                     if (cfg.subLabel && latestDraw[Object.keys(latestDraw).find(k => k !== 'period' && k !== 'date' && latestDraw[k] !== latestDraw[Object.keys(latestDraw).find(k => k !== 'period' && k !== 'date')])]) {
                         const subKey = Object.keys(latestDraw).find(k => k !== 'period' && k !== 'date' && k !== Object.keys(latestDraw).find(k2 => k2 !== 'period' && k2 !== 'date'));
-                        overviewHtml += `<div style="font-size:0.8em;color:#9AA3AF;margin:10px 0 6px;">${cfg.subLabel}</div><div>${renderBalls(latestDraw[subKey] || [], cfg.subColor || '#9AA3AF', 32)}</div>`;
+                        overviewHtml += `<div class="panel-subtitle" style="margin-top:10px;">${cfg.subLabel}</div><div>${renderBalls(latestDraw[subKey] || [], cfg.subColor || '#9AA3AF', 32)}</div>`;
                     }
                     overviewHtml += `</div>`;
                 }
@@ -1417,13 +1586,13 @@
                 // 本期预测
                 if (prediction.next_period || (prediction.main_nums && prediction.main_nums.length)) {
                     overviewHtml += `
-                    <div style="padding:15px;background:rgba(201,162,39,0.05);border-radius:12px;border:1px solid rgba(201,162,39,0.3);">
-                        <div style="font-size:0.9em;color:#C9A227;margin-bottom:10px;font-weight:600;">🎯 本期预测参考（第${prediction.next_period || '最新'}期）</div>
-                        <div style="font-size:0.8em;color:#9AA3AF;margin-bottom:6px;">主推${cfg.mainLabel || '号码'}</div>
+                    <div class="panel-box" style="background:rgba(201,162,39,0.04);border-color:rgba(201,162,39,0.3);">
+                        <div class="panel-title">🎯 本期预测参考（第${prediction.next_period || '最新'}期）</div>
+                        <div class="panel-subtitle">主推${cfg.mainLabel || '号码'}</div>
                         <div>${renderBalls(prediction.main_nums || [], cfg.mainColor || '#C9A227', 34)}</div>
                     `;
                     if (cfg.subLabel && prediction.sub_nums && prediction.sub_nums.length) {
-                        overviewHtml += `<div style="font-size:0.8em;color:#9AA3AF;margin:10px 0 6px;">主推${cfg.subLabel}</div><div>${renderBalls(prediction.sub_nums || [], cfg.subColor || '#9AA3AF', 34)}</div>`;
+                        overviewHtml += `<div class="panel-subtitle" style="margin-top:10px;">主推${cfg.subLabel}</div><div>${renderBalls(prediction.sub_nums || [], cfg.subColor || '#9AA3AF', 34)}</div>`;
                     }
                     overviewHtml += `</div>`;
                 }
@@ -1641,14 +1810,13 @@
                 
                 // 命中趋势
                 if (hitTrend.length > 0) {
-                    checkHtml += `<div style="margin-bottom:20px;"><div style="font-size:0.9em;color:#C9A227;margin-bottom:8px;font-weight:600;">📈 最近${hitTrend.length}期命中趋势</div><div style="display:flex;align-items:flex-end;gap:3px;height:100px;padding:10px 8px 4px;background:rgba(255,255,255,0.02);border-radius:8px;">`;
+                    checkHtml += `<div style="margin-bottom:20px;"><div class="panel-title">📈 最近${hitTrend.length}期命中趋势</div><div class="hit-chart">`;
                     const maxHit = Math.max(...hitTrend.map(t => t.hit || 0), 1);
                     hitTrend.forEach((t, idx) => {
-                        const h = Math.max(4, (t.hit || 0) / maxHit * 55);
-                        const color = (t.hit || 0) > 0 ? '#C9A227' : '#555';
-                        // 所有期号都显示，取后2位，字体缩小避免拥挤
+                        const h = Math.max(4, (t.hit || 0) / maxHit * 60);
+                        const isHit = (t.hit || 0) > 0;
                         const periodLabel = (t.period || '').slice(-2);
-                        checkHtml += `<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:1px;height:100%;"><div style="font-size:0.55em;color:#9AA3AF;line-height:1;">${t.hit || 0}</div><div style="width:100%;height:${h}px;background:${color};border-radius:3px 3px 0 0;"></div><div style="font-size:0.45em;color:#666;line-height:1;margin-top:2px;white-space:nowrap;">${periodLabel}</div></div>`;
+                        checkHtml += `<div class="hit-bar-wrap"><div class="hit-bar-value">${t.hit || 0}</div><div class="hit-bar ${isHit ? 'hit' : 'miss'}" style="height:${h}px;"></div><div class="hit-bar-period">${periodLabel}</div></div>`;
                     });
                     checkHtml += `</div></div>`;
                 }
@@ -1688,14 +1856,15 @@
                             }
                             return String(v);
                         };
+                        const isHit = (r.hit || 0) > 0;
                         checkHtml += `
-                        <div style="padding:8px 10px;margin-bottom:6px;background:rgba(255,255,255,0.02);border-radius:8px;border-left:3px solid ${hitColor};">
-                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
-                                <span style="font-size:0.8em;color:#C9A227;font-weight:500;">第${r.period || '-'}期</span>
-                                <span style="font-size:0.8em;color:${hitColor};font-weight:600;">命中${r.hit || 0}个</span>
+                        <div class="backtest-row ${isHit ? '' : 'miss'}">
+                            <div class="row-header">
+                                <span class="period">第${r.period || '-'}期</span>
+                                <span class="hit-count ${isHit ? 'hit' : 'miss'}">命中${r.hit || 0}个</span>
                             </div>
-                            <div style="font-size:0.75em;color:#9AA3AF;">预测: ${fmtObj(r.prediction)}</div>
-                            <div style="font-size:0.75em;color:#9AA3AF;">开奖: ${fmtObj(r.actual)}</div>
+                            <div class="row-detail"><span class="label">预测</span>${fmtObj(r.prediction)}</div>
+                            <div class="row-detail"><span class="label">开奖</span>${fmtObj(r.actual)}</div>
                         </div>`;
                     });
                     checkHtml += `</div>`;
@@ -1710,12 +1879,12 @@
                 // 遗漏分析
                 if (omission.top10 && omission.top10.length > 0) {
                     analysisHtml += `
-                    <div style="margin-bottom:20px;padding:15px;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid rgba(201,162,39,0.2);">
-                        <div style="font-size:0.9em;color:#C9A227;margin-bottom:10px;font-weight:600;">🔍 遗漏分析（最大遗漏${omission.max || '-'}期 · 平均${omission.avg || '-'}期）</div>
-                        <div style="font-size:0.8em;color:#9AA3AF;margin-bottom:8px;">当前遗漏Top10（冷号候选）</div>
+                    <div class="panel-box red">
+                        <div class="panel-title red">🔍 遗漏分析（最大遗漏${omission.max || '-'}期 · 平均${omission.avg || '-'}期）</div>
+                        <div class="panel-subtitle">当前遗漏Top10（冷号候选）</div>
                         <div style="display:flex;flex-wrap:wrap;gap:6px;">`;
                     omission.top10.forEach(item => {
-                        analysisHtml += `<div style="display:flex;flex-direction:column;align-items:center;padding:6px 8px;background:rgba(220,53,69,0.1);border-radius:8px;border:1px solid rgba(220,53,69,0.3);"><span style="font-weight:bold;color:#fff;font-size:0.9em;">${item.num}</span><span style="font-size:0.7em;color:#dc3545;">${item.omit}期</span></div>`;
+                        analysisHtml += `<div class="num-tag red"><span class="num">${item.num}</span><span class="meta">${item.omit}期</span></div>`;
                     });
                     analysisHtml += `</div></div>`;
                 }
@@ -1723,12 +1892,12 @@
                 // 冷热分布
                 if (hotCold.top10 && hotCold.top10.length > 0) {
                     analysisHtml += `
-                    <div style="margin-bottom:20px;padding:15px;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid rgba(40,167,69,0.2);">
-                        <div style="font-size:0.9em;color:#28a745;margin-bottom:10px;font-weight:600;">🌡️ 冷热分布（近10期 · 平均出现${hotCold.avg || '-'}次）</div>
-                        <div style="font-size:0.8em;color:#9AA3AF;margin-bottom:8px;">热号Top10（出现次数最多）</div>
+                    <div class="panel-box green">
+                        <div class="panel-title green">🌡️ 冷热分布（近10期 · 平均出现${hotCold.avg || '-'}次）</div>
+                        <div class="panel-subtitle">热号Top10（出现次数最多）</div>
                         <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:15px;">`;
                     hotCold.top10.forEach(item => {
-                        analysisHtml += `<div style="display:flex;flex-direction:column;align-items:center;padding:6px 8px;background:rgba(40,167,69,0.1);border-radius:8px;border:1px solid rgba(40,167,69,0.3);"><span style="font-weight:bold;color:#fff;font-size:0.9em;">${item.num}</span><span style="font-size:0.7em;color:#28a745;">${item.count}次</span></div>`;
+                        analysisHtml += `<div class="num-tag green"><span class="num">${item.num}</span><span class="meta">${item.count}次</span></div>`;
                     });
                     analysisHtml += `</div>`;
                     if (hotCold.hot && hotCold.hot.length) {
