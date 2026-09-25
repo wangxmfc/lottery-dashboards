@@ -4995,16 +4995,36 @@
                 // 改进建议
                 if (ml.recommendations && ml.recommendations.length > 0) {
                     html += '<div><div class="ops-sub-title">🔧 改进建议</div><div style="display:flex;flex-direction:column;gap:6px;">';
-                    ml.recommendations.forEach(r => {
-                        html += `<div style="display:flex;gap:8px;padding:8px 10px;background:rgba(243,156,18,0.05);border-radius:6px;border-left:2px solid rgba(243,156,18,0.3);">
-                            <span style="font-size:0.75em;color:#f39c12;flex-shrink:0;">⚠️</span>
-                            <span style="font-size:0.78em;color:#b0a890;line-height:1.5;">${r}</span>
+                    ml.recommendations.forEach((r, idx) => {
+                        const status = localStorage.getItem('rec_status_' + idx) || 'pending';
+                        const statusMap = {
+                            pending: { label: '待处理', color: '#f39c12', bg: 'rgba(243,156,18,0.12)', border: 'rgba(243,156,18,0.3)' },
+                            adopted: { label: '已采纳', color: '#28a745', bg: 'rgba(40,167,69,0.12)', border: 'rgba(40,167,69,0.3)' },
+                            ignored: { label: '已忽略', color: '#8892a0', bg: 'rgba(136,146,160,0.12)', border: 'rgba(136,146,160,0.3)' }
+                        };
+                        const s = statusMap[status];
+                        html += `<div style="display:flex;gap:8px;padding:8px 10px;background:${s.bg};border-radius:8px;border-left:2px solid ${s.border};align-items:flex-start;">
+                            <span style="font-size:0.75em;color:${s.color};flex-shrink:0;margin-top:1px;">⚠️</span>
+                            <span style="font-size:0.78em;color:#b0a890;line-height:1.5;flex:1;">${r}</span>
+                            <button onclick="toggleRecStatus(${idx})" style="font-size:0.65em;color:${s.color};background:${s.bg};border:1px solid ${s.border};padding:2px 8px;border-radius:10px;cursor:pointer;flex-shrink:0;white-space:nowrap;margin-top:1px;">${s.label}</button>
                         </div>`;
                     });
                     html += '</div></div>';
                 }
                 
                 learnEl.innerHTML = html;
+            }
+        }
+        
+        // 切换改进建议状态
+        function toggleRecStatus(idx) {
+            const current = localStorage.getItem('rec_status_' + idx) || 'pending';
+            const next = current === 'pending' ? 'adopted' : current === 'adopted' ? 'ignored' : 'pending';
+            localStorage.setItem('rec_status_' + idx, next);
+            // 重新渲染自主学习模块
+            const dataEl = document.getElementById('latest-draws-content');
+            if (window._dashboardData) {
+                renderOps(window._dashboardData);
             }
         }
         
@@ -5016,6 +5036,7 @@
                     throw new Error('HTTP ' + response.status);
                 }
                 const data = await response.json();
+                window._dashboardData = data;
                 
                 console.log('✅ 管理看板数据加载成功:', data.last_update);
                 
