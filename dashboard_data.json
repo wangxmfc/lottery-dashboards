@@ -10114,7 +10114,7 @@
   },
   "ops_monitoring": {
     "system_health": {
-      "score": 96,
+      "score": 93,
       "level": "优",
       "dimensions": [
         {
@@ -10125,7 +10125,7 @@
         {
           "name": "数据新鲜度",
           "score": 85,
-          "status": "关注"
+          "status": "正常"
         },
         {
           "name": "模型启用率",
@@ -10139,8 +10139,8 @@
         },
         {
           "name": "错误日志",
-          "score": 90,
-          "status": "正常"
+          "score": 80,
+          "status": "关注"
         }
       ]
     },
@@ -10149,35 +10149,35 @@
         "name": "盘前必读",
         "schedule": "工作日 08:00",
         "status": "success",
-        "last_run": "2026-09-25 08:03",
-        "next_run": "2026-09-28 08:00"
+        "last_run": "2026-09-24 08:28",
+        "next_run": "2026-09-25 08:00"
       },
       {
         "name": "午间评盘",
         "schedule": "工作日 11:35",
-        "status": "success",
-        "last_run": "2026-09-24 12:14",
+        "status": "pending",
+        "last_run": "-",
         "next_run": "2026-09-25 11:35"
       },
       {
         "name": "盘后复盘",
         "schedule": "工作日 15:10",
-        "status": "success",
-        "last_run": "2026-09-24 15:42",
+        "status": "pending",
+        "last_run": "-",
         "next_run": "2026-09-25 15:10"
       },
       {
         "name": "彩票开奖",
         "schedule": "每天 20:10",
-        "status": "success",
-        "last_run": "2026-09-24 20:07",
+        "status": "pending",
+        "last_run": "-",
         "next_run": "2026-09-25 20:10"
       },
       {
         "name": "Excel周六合集",
         "schedule": "周六 10:00",
-        "status": "success",
-        "last_run": "2026-09-19 10:28",
+        "status": "pending",
+        "last_run": "-",
         "next_run": "2026-09-26 10:00"
       },
       {
@@ -10190,11 +10190,18 @@
     ],
     "error_logs": [
       {
-        "file": "publish_wechat.log",
-        "level": "warning",
-        "message": "公众号登录态即将过期",
-        "time": "2026-09-25 10:30",
+        "file": "baijiahao_20260925.log",
+        "level": "error",
+        "message": "[2026-09-25 08:06:35] 警告：封面上传失败，继续尝试",
+        "time": "2026-09-25 13:08",
         "count": 2
+      },
+      {
+        "file": "baijiahao_20260922.log",
+        "level": "error",
+        "message": "[2026-09-22 22:46:09] 动态收尾文字失败，使用固定模板: 数据不足",
+        "time": "2026-09-22 23:57",
+        "count": 3
       }
     ],
     "external_apis": [
@@ -10202,98 +10209,112 @@
         "name": "彩票数据源",
         "status": "ok",
         "latency": "156ms",
-        "last_check": "2026-09-25 14:17"
+        "last_check": "2026-09-25 15:58"
       },
       {
         "name": "图床服务",
         "status": "ok",
         "latency": "89ms",
-        "last_check": "2026-09-25 14:17"
+        "last_check": "2026-09-25 15:58"
       },
       {
         "name": "GitHub Pages",
         "status": "ok",
         "latency": "234ms",
-        "last_check": "2026-09-25 14:17"
+        "last_check": "2026-09-25 15:58"
       }
     ],
     "run_times": [
       {
-        "script": "lottery_pipeline.py",
-        "duration": "45秒",
-        "time": "2026-09-24 20:05"
-      },
-      {
-        "script": "gen_cards_v2.py",
-        "duration": "2分10秒",
-        "time": "2026-09-24 20:08"
+        "script": "盘前必读",
+        "duration": "约35分钟",
+        "time": "2026-09-24 08:28"
       },
       {
         "script": "update_dashboard.py",
         "duration": "12秒",
-        "time": "2026-09-25 14:17"
+        "time": "2026-09-25 15:58"
       },
       {
         "script": "sync_dashboards.py",
         "duration": "8秒",
-        "time": "2026-09-25 14:17"
+        "time": "2026-09-25 15:58"
       }
     ],
     "disk_usage": [
       {
         "name": "彩票历史数据",
-        "size": "28.5 MB"
+        "size": "6.8M"
       },
       {
         "name": "预测卡片图片",
-        "size": "45.2 MB"
+        "size": "2.9M"
+      },
+      {
+        "name": "公众号素材",
+        "size": "67M"
       },
       {
         "name": "运行日志",
-        "size": "3.8 MB"
+        "size": "348K"
       },
       {
         "name": "备份包",
-        "size": "156 MB"
+        "size": "444K"
       }
     ],
     "backups": [
       {
-        "name": "v12备份",
-        "size": "28.5 MB",
-        "time": "09-25 14:20"
+        "name": "dashboard-v3.html",
+        "size": "148K",
+        "time": "09-25 15:20"
       },
       {
-        "name": "v11备份",
-        "size": "28.3 MB",
-        "time": "09-24 18:30"
+        "name": "dashboard-v2.html",
+        "size": "148K",
+        "time": "09-25 15:19"
       },
       {
-        "name": "v10备份",
-        "size": "28.1 MB",
-        "time": "09-23 18:30"
+        "name": "dashboard-v1.html",
+        "size": "144K",
+        "time": "09-25 15:10"
+      },
+      {
+        "name": "full_backup_20260916_2300/",
+        "size": "952K",
+        "time": "09-16 23:27"
+      },
+      {
+        "name": "系统备份清单-20260916.md",
+        "size": "4.0K",
+        "time": "09-16 10:13"
       }
     ],
     "recent_changes": [
       {
-        "time": "10分钟前",
+        "time": "7分钟前",
         "module": "看板优化",
-        "desc": "玩法奖金改为卡片式可视化"
+        "desc": "dashboard.html 更新"
       },
       {
-        "time": "30分钟前",
-        "module": "状态栏",
-        "desc": "彩种数据新鲜度加入开奖时间判断"
+        "time": "1分钟前",
+        "module": "数据更新",
+        "desc": "dashboard_data.json 更新"
       },
       {
         "time": "2小时前",
-        "module": "数据校验",
-        "desc": "一致性校验机制建立"
+        "module": "数据脚本",
+        "desc": "scripts/update_dashboard_data.py 更新"
       },
       {
-        "time": "昨天",
-        "module": "回测系统",
-        "desc": "200期回测数据生成完成"
+        "time": "1小时前",
+        "module": "一致性校验",
+        "desc": "scripts/verify_consistency.py 更新"
+      },
+      {
+        "time": "2小时前",
+        "module": "预测卡片",
+        "desc": "scripts/gen_cards_v2.py 更新"
       }
     ],
     "known_issues": [
@@ -10305,6 +10326,7 @@
         "level": "warning",
         "desc": "部分彩种历史数据不足200期，回测样本待积累"
       }
-    ]
+    ],
+    "collected_at": "2026-09-25 15:58:11"
   }
 }
