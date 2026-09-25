@@ -982,56 +982,81 @@
             line-height: 1.7;
             flex: 1;
         }
-        .prize-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0;
+        /* ========== 奖金卡片式展示 ========== */
+        .prize-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 12px 14px 14px;
+        }
+        .prize-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+        .prize-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(201, 162, 39, 0.2);
+            transform: translateX(2px);
+        }
+        .prize-card-top {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.12), rgba(201, 162, 39, 0.04));
+            border: 1px solid rgba(201, 162, 39, 0.4);
+            box-shadow: 0 2px 12px rgba(201, 162, 39, 0.15);
+        }
+        .prize-card-top:hover {
+            border-color: rgba(201, 162, 39, 0.6);
+            box-shadow: 0 4px 16px rgba(201, 162, 39, 0.25);
+        }
+        .prize-badge {
+            font-size: 0.78em;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 8px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            min-width: 3.5em;
+            text-align: center;
+        }
+        .prize-badge-gold {
+            background: linear-gradient(135deg, #C9A227, #E8C547);
+            color: #1a1a2e;
+            box-shadow: 0 2px 8px rgba(201, 162, 39, 0.4);
+        }
+        .prize-badge-silver {
+            background: linear-gradient(135deg, #B8C4CE, #D4DDE5);
+            color: #2c3e50;
+            box-shadow: 0 2px 8px rgba(184, 196, 206, 0.3);
+        }
+        .prize-badge-normal {
+            background: rgba(201, 162, 39, 0.12);
+            color: var(--gold);
+            border: 1px solid rgba(201, 162, 39, 0.25);
+        }
+        .prize-card-cond {
+            flex: 1;
             font-size: 0.8em;
-            table-layout: fixed;
-        }
-        .prize-table th {
-            color: var(--gold);
-            font-weight: 600;
-            text-align: left;
-            padding: 12px 18px;
-            border-bottom: 1px solid var(--gold-border);
-            background: rgba(201, 162, 39, 0.06);
-            white-space: nowrap;
-            font-size: 0.85em;
-        }
-        .prize-table th:nth-child(1) { width: 18%; }
-        .prize-table th:nth-child(2) { width: 42%; }
-        .prize-table th:nth-child(3) { width: 40%; }
-        .prize-table td {
-            padding: 10px 18px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             color: var(--text-secondary);
-            line-height: 1.6;
-        }
-        .prize-table tr:nth-child(even) td {
-            background: rgba(255, 255, 255, 0.015);
-        }
-        .prize-table tr:last-child td {
-            border-bottom: none;
-        }
-        .prize-table tr:hover td {
-            background: rgba(201, 162, 39, 0.04);
-        }
-        .prize-level {
-            color: var(--gold);
-            font-weight: 600;
-            white-space: nowrap;
-        }
-        .prize-cond {
-            color: var(--text-secondary);
-            word-break: break-all;
-        }
-        .prize-amount {
-            color: var(--success-light);
-            font-weight: 600;
-            text-align: right;
-            word-break: break-all;
             line-height: 1.5;
+            word-break: break-all;
+        }
+        .prize-card-amount {
+            font-size: 0.88em;
+            font-weight: 700;
+            color: var(--success-light);
+            white-space: nowrap;
+            flex-shrink: 0;
+            text-align: right;
+            text-shadow: 0 0 10px rgba(74, 222, 128, 0.2);
+        }
+        .prize-card-top .prize-card-amount {
+            color: #FFD700;
+            text-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
         }
         
         /* 系统状态条（可折叠） */
@@ -2207,9 +2232,20 @@
                 // ========== 玩法与奖金规则（折叠区） ==========
                 const info = LOTTERY_INFO[lotteryId] || {};
                 if (info.prizes && info.prizes.length) {
-                    let prizeRows = info.prizes.map(p => 
-                        `<tr><td class="prize-level">${p[0]}</td><td class="prize-cond">${p[1]}</td><td class="prize-amount">${p[2]}</td></tr>`
-                    ).join('');                    checkHtml += `
+                    let prizeCards = info.prizes.map((p, idx) => {
+                        const isTop = idx === 0;
+                        const isSecond = idx === 1;
+                        const badgeClass = isTop ? 'prize-badge prize-badge-gold' : 
+                                           isSecond ? 'prize-badge prize-badge-silver' : 
+                                           'prize-badge prize-badge-normal';
+                        return `
+                        <div class="prize-card ${isTop ? 'prize-card-top' : ''}">
+                            <span class="${badgeClass}">${p[0]}</span>
+                            <span class="prize-card-cond">${p[1]}</span>
+                            <span class="prize-card-amount">${p[2]}</span>
+                        </div>`;
+                    }).join('');
+                    checkHtml += `
                     <div class="prize-collapse">
                         <div class="prize-collapse-header" onclick="this.parentElement.classList.toggle('expanded')">
                             <span>📋 玩法与奖金规则</span>
@@ -2224,10 +2260,9 @@
                                 <span class="prize-info-label">🕐 开奖</span>
                                 <span class="prize-info-value">${info.time || '-'}</span>
                             </div>
-                            <table class="prize-table">
-                                <thead><tr><th>奖级</th><th>命中条件</th><th>奖金</th></tr></thead>
-                                <tbody>${prizeRows}</tbody>
-                            </table>
+                            <div class="prize-cards">
+                                ${prizeCards}
+                            </div>
                         </div>
                     </div>`;
                 }
