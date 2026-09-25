@@ -10208,20 +10208,20 @@
       {
         "name": "彩票数据源",
         "status": "ok",
-        "latency": "156ms",
-        "last_check": "2026-09-25 15:58"
+        "latency": "240ms",
+        "last_check": "2026-09-25 16:04"
       },
       {
         "name": "图床服务",
         "status": "ok",
-        "latency": "89ms",
-        "last_check": "2026-09-25 15:58"
+        "latency": "1274ms",
+        "last_check": "2026-09-25 16:04"
       },
       {
         "name": "GitHub Pages",
         "status": "ok",
-        "latency": "234ms",
-        "last_check": "2026-09-25 15:58"
+        "latency": "1005ms",
+        "last_check": "2026-09-25 16:04"
       }
     ],
     "run_times": [
@@ -10229,16 +10229,6 @@
         "script": "盘前必读",
         "duration": "约35分钟",
         "time": "2026-09-24 08:28"
-      },
-      {
-        "script": "update_dashboard.py",
-        "duration": "12秒",
-        "time": "2026-09-25 15:58"
-      },
-      {
-        "script": "sync_dashboards.py",
-        "duration": "8秒",
-        "time": "2026-09-25 15:58"
       }
     ],
     "disk_usage": [
@@ -10292,12 +10282,12 @@
     ],
     "recent_changes": [
       {
-        "time": "7分钟前",
+        "time": "0分钟前",
         "module": "看板优化",
         "desc": "dashboard.html 更新"
       },
       {
-        "time": "1分钟前",
+        "time": "6分钟前",
         "module": "数据更新",
         "desc": "dashboard_data.json 更新"
       },
@@ -10307,7 +10297,7 @@
         "desc": "scripts/update_dashboard_data.py 更新"
       },
       {
-        "time": "1小时前",
+        "time": "2小时前",
         "module": "一致性校验",
         "desc": "scripts/verify_consistency.py 更新"
       },
@@ -10327,6 +10317,6 @@
         "desc": "部分彩种历史数据不足200期，回测样本待积累"
       }
     ],
-    "collected_at": "2026-09-25 15:58:11"
+    "collected_at": "2026-09-25 16:04:37"
   }
 }
