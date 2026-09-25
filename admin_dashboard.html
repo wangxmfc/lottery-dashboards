@@ -1120,14 +1120,15 @@
         .footer {
             text-align: center;
             margin-top: 36px;
-            padding: 28px 20px 60px;
-            background: linear-gradient(180deg, rgba(201,162,39,0.04) 0%, rgba(15,42,67,0.6) 100%);
+            padding: 32px 20px 48px;
+            background: linear-gradient(180deg, rgba(201,162,39,0.06) 0%, rgba(15,42,67,0.8) 100%);
             border-radius: 16px;
             border: 1px solid var(--gold-border);
             color: var(--text-secondary);
             font-size: 0.82em;
             position: relative;
             backdrop-filter: blur(8px);
+            overflow: hidden;
         }
         
         .footer::before {
@@ -1136,35 +1137,54 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
+            width: 120px;
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--gold), transparent);
             border-radius: 2px;
+        }
+
+        .footer::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 200px;
+            background: radial-gradient(ellipse, rgba(201,162,39,0.08) 0%, transparent 70%);
+            pointer-events: none;
         }
         
         .footer-content {
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 24px;
+            align-items: stretch;
+            gap: 12px;
             flex-wrap: wrap;
-            margin-bottom: 12px;
+            margin-bottom: 18px;
+            position: relative;
+            z-index: 1;
         }
         
         .footer-item {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             color: var(--text-muted);
             font-size: 0.78em;
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.06);
         }
         
         .footer-item .dot {
-            width: 4px;
-            height: 4px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             background: var(--gold);
-            opacity: 0.6;
+            box-shadow: 0 0 6px var(--gold);
+            flex-shrink: 0;
         }
         
         .footer p {
@@ -1173,10 +1193,17 @@
         }
         .footer .footer-title {
             color: var(--gold);
-            font-weight: 600;
-            margin-bottom: 10px;
-            font-size: 1em;
-            letter-spacing: 1px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            font-size: 1.15em;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #C9A227 0%, #f0d060 50%, #C9A227 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            position: relative;
+            z-index: 1;
         }
         .footer .footer-desc {
             color: var(--text-muted);
@@ -1186,10 +1213,14 @@
             margin: 0 auto;
         }
         .footer .footer-version {
-            color: rgba(201,162,39,0.6);
+            color: rgba(201,162,39,0.7);
             font-size: 0.72em;
-            margin-top: 10px;
+            margin-top: 16px;
             letter-spacing: 0.5px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(201,162,39,0.12);
+            position: relative;
+            z-index: 1;
         }
         
         /* 移动端优化 */
@@ -2629,9 +2660,9 @@
         <div class="footer">
             <p class="footer-title">🎯 王者GP · 彩票预测数据看板</p>
             <div class="footer-content">
-                <span class="footer-item"><span class="dot"></span>数据仅供统计参考</span>
-                <span class="footer-item"><span class="dot"></span>不构成投资建议</span>
-                <span class="footer-item"><span class="dot"></span>理性购彩，量力而行</span>
+                <span class="footer-item"><span class="dot"></span>📊 数据仅供统计参考</span>
+                <span class="footer-item"><span class="dot"></span>⚠️ 不构成投资建议</span>
+                <span class="footer-item"><span class="dot"></span>💡 理性购彩，量力而行</span>
             </div>
             <p class="footer-version" id="footer-version">系统版本：v2.0 · 更新时间：加载中...</p>
         </div>
