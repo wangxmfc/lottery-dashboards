@@ -1111,6 +1111,84 @@
             transform: translateY(-1px);
         }
         
+        /* ========== 彩种数据状态网格 ========== */
+        .lottery-status-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        .lottery-status-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 8px 10px;
+            transition: all 0.2s ease;
+        }
+        .lottery-status-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(201, 162, 39, 0.25);
+        }
+        .lottery-status-top {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+        .lottery-status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 0 6px currentColor;
+        }
+        .lottery-status-name {
+            font-size: 0.78em;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .lottery-status-badge {
+            font-size: 0.62em;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .lottery-status-badge.fresh {
+            background: rgba(40, 167, 69, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+        .lottery-status-badge.stale {
+            background: rgba(220, 53, 69, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+        .lottery-status-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 4px;
+        }
+        .lottery-status-period {
+            font-size: 0.68em;
+            color: var(--gold);
+            font-weight: 500;
+        }
+        .lottery-status-date {
+            font-size: 0.62em;
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        @media (max-width: 600px) {
+            .lottery-status-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
         /* 手机端响应式：核验对比卡片左右变上下 */
         @media (max-width: 600px) {
             .responsive-split {
@@ -1489,26 +1567,66 @@
                 modelsEl.className = 'status-item status-models' + (modelOk ? '' : ' warning');
             }
             
-            // 各彩种状态标签（展开区域）
+            // 各彩种数据新鲜度状态（展开区域）
             const lotteryColors = {
                 ssq: '#e74c3c', dlt: '#3498db', kl8: '#2ecc71',
                 fc3d: '#f1c40f', pl35: '#e67e22', qxc: '#9b59b6', qlc: '#95a5a6'
             };
-            let lotteryTags = '';
-            for (const [code, item] of Object.entries(lotteries)) {
-                const color = lotteryColors[code] || '#888';
-                const hasPred = item.has_prediction;
-                const period = item.next_period || item.latest_period || '-';
-                const periodShort = String(period).slice(-6);
-                lotteryTags += `<span class="lottery-tag" style="background:${color}15;border:1px solid ${color}40;color:${color};">
-                    ${hasPred ? '🎯' : '⏳'}${item.name}·${periodShort}
-                </span>`;
+            const lotteryNames = {
+                ssq: '双色球', dlt: '大乐透', kl8: '快乐8',
+                fc3d: '福彩3D', pl35: '排列3/5', qxc: '七星彩', qlc: '七乐彩'
+            };
+            // 开奖日历：每周几开奖（0=周日,1=周一...6=周六）
+            const drawDays = {
+                ssq: [0, 2, 4], dlt: [1, 3, 6], kl8: [0,1,2,3,4,5,6],
+                fc3d: [0,1,2,3,4,5,6], pl35: [0,1,2,3,4,5,6], qxc: [0, 2, 5], qlc: [1, 3, 5]
+            };
+            const today = new Date();
+            const todayStr = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
+            const todayDay = today.getDay();
+            
+            let lotteryStatusHtml = '<div class="lottery-status-grid">';
+            for (const code of ['ssq','dlt','kl8','fc3d','pl35','qxc','qlc']) {
+                const color = lotteryColors[code];
+                const name = lotteryNames[code];
+                const detail = data.details && data.details[code] ? data.details[code] : {};
+                const latestDraw = detail.latest_draw || {};
+                const period = latestDraw.period || detail.latest_period || '-';
+                const date = latestDraw.date || '-';
+                const periodShort = String(period).slice(-3);
+                
+                // 判断数据是否最新
+                const drawsToday = drawDays[code] && drawDays[code].includes(todayDay);
+                let status, statusClass, statusIcon;
+                if (date === todayStr) {
+                    status = '最新'; statusClass = 'fresh'; statusIcon = '✓';
+                } else if (drawsToday) {
+                    // 今天开奖但数据不是今天 → 待更新
+                    status = '待更新'; statusClass = 'stale'; statusIcon = '!';
+                } else {
+                    // 今天不开奖，数据是最近一期 → 正常
+                    status = '已更新'; statusClass = 'fresh'; statusIcon = '✓';
+                }
+                
+                lotteryStatusHtml += `
+                <div class="lottery-status-item">
+                    <div class="lottery-status-top">
+                        <span class="lottery-status-dot" style="background:${color};"></span>
+                        <span class="lottery-status-name">${name}</span>
+                        <span class="lottery-status-badge ${statusClass}">${statusIcon} ${status}</span>
+                    </div>
+                    <div class="lottery-status-bottom">
+                        <span class="lottery-status-period">第${periodShort}期</span>
+                        <span class="lottery-status-date">${date}</span>
+                    </div>
+                </div>`;
             }
+            lotteryStatusHtml += '</div>';
             
             const detailEl = document.getElementById('status-detail');
             if (detailEl) {
-                detailEl.innerHTML = lotteryTags + 
-                    '<div style="margin-top:10px;padding-top:8px;border-top:1px solid rgba(201,162,39,0.15);font-size:0.75em;color:rgba(255,255,255,0.4);text-align:center;">📊 数据更新时间：' + updateTime + '</div>';
+                detailEl.innerHTML = lotteryStatusHtml + 
+                    '<div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(201,162,39,0.15);font-size:0.72em;color:rgba(255,255,255,0.35);text-align:center;">📊 数据更新时间：' + updateTime + '</div>';
             }
         }
         
