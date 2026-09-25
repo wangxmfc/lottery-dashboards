@@ -143,7 +143,7 @@
         
         .nav {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 10px;
             margin-bottom: 28px;
             padding: 16px;
@@ -426,7 +426,7 @@
             }
             
             .nav {
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(3, 1fr);
                 gap: 8px;
                 padding: 12px;
                 margin-bottom: 22px;
@@ -1276,6 +1276,7 @@
             <button onclick="showSection('pl35', this)">🟠 排列3/5</button>
             <button onclick="showSection('qxc', this)">🟣 七星彩</button>
             <button onclick="showSection('qlc', this)">⚪ 七乐彩</button>
+            <button onclick="showSection('ops', this)" style="border-color:rgba(123,91,214,0.4);color:rgba(167,139,250,0.9);">⚙️ 运维</button>
         </div>
 
         <div id="overview" class="section active">
@@ -1296,115 +1297,6 @@
                     </div>
                 </div>
 
-                <!-- 模型监控模块 -->
-                <div class="card" id="model-monitoring">
-                    <h2>🤖 核心模型监控 <span style="font-size:0.6em;color:#9AA3AF;font-weight:normal;">49个核心模型</span></h2>
-                    
-                    <!-- 模型总览 -->
-                    <div id="model-overview" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px;">
-                        <div style="text-align:center;padding:10px;background:rgba(201,162,39,0.1);border-radius:10px;">
-                            <div style="font-size:1.5em;font-weight:bold;color:#C9A227;" id="model-total">-</div>
-                            <div style="font-size:0.8em;color:#9AA3AF;">模型总数</div>
-                        </div>
-                        <div style="text-align:center;padding:10px;background:rgba(40,167,69,0.1);border-radius:10px;">
-                            <div style="font-size:1.5em;font-weight:bold;color:#28a745;" id="model-active">-</div>
-                            <div style="font-size:0.8em;color:#9AA3AF;">启用模型</div>
-                        </div>
-                        <div style="text-align:center;padding:10px;background:rgba(40,167,69,0.1);border-radius:10px;">
-                            <div style="font-size:1.5em;font-weight:bold;color:#28a745;" id="model-normal">-</div>
-                            <div style="font-size:0.8em;color:#9AA3AF;">运行正常</div>
-                        </div>
-                        <div style="text-align:center;padding:10px;background:rgba(220,53,69,0.1);border-radius:10px;">
-                            <div style="font-size:1.5em;font-weight:bold;color:#dc3545;" id="model-warning">-</div>
-                            <div style="font-size:0.8em;color:#9AA3AF;">异常模型</div>
-                        </div>
-                    </div>
-                    
-                    <!-- 模型分类统计 -->
-                    <div id="model-categories" style="margin-bottom:15px;">
-                        <div style="font-size:0.9em;color:#C9A227;margin-bottom:8px;">📊 模型分类统计</div>
-                        <div id="category-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;">
-                            <!-- 动态生成分类列表 -->
-                        </div>
-                    </div>
-                    
-                    <!-- 模型列表（可折叠） -->
-                    <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:10px;">
-                        <button onclick="toggleModelList()" style="width:100%;padding:8px;background:rgba(201,162,39,0.1);border:1px solid #C9A227;border-radius:8px;color:#C9A227;cursor:pointer;font-size:0.9em;">
-                            📋 查看全部49个模型详情 <span id="toggle-icon">▼</span>
-                        </button>
-                        <div id="model-list" style="display:none;margin-top:10px;max-height:400px;overflow-y:auto;">
-                            <!-- 动态生成模型列表 -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 全量模型监控（三层结构：总览→分类→详情） -->
-                <div class="card" id="full-model-monitoring">
-                    <h2>🌐 全量模型监控 <span style="font-size:0.6em;color:#9AA3AF;font-weight:normal;">5层架构·总览→分类→详情</span></h2>
-                    
-                    <!-- 第一层：总览卡片 -->
-                    <div id="full-model-overview" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px;">
-                        <div style="text-align:center;padding:10px;background:rgba(201,162,39,0.1);border-radius:10px;">
-                            <div style="font-size:1.5em;font-weight:bold;color:#C9A227;" id="full-model-total">-</div>
-                            <div style="font-size:0.8em;color:#9AA3AF;">模型总数</div>
-                        </div>
-                        <div style="text-align:center;padding:10px;background:rgba(40,167,69,0.1);border-radius:10px;">
-                            <div style="font-size:1.5em;font-weight:bold;color:#28a745;" id="full-model-layers">-</div>
-                            <div style="font-size:0.8em;color:#9AA3AF;">全部启用</div>
-                        </div>
-                        <div style="text-align:center;padding:10px;background:rgba(40,167,69,0.1);border-radius:10px;">
-                            <div style="font-size:1.5em;font-weight:bold;color:#28a745;" id="full-model-normal">-</div>
-                            <div style="font-size:0.8em;color:#9AA3AF;">运行正常</div>
-                        </div>
-                        <div style="text-align:center;padding:10px;background:rgba(220,53,69,0.1);border-radius:10px;">
-                            <div style="font-size:1.5em;font-weight:bold;color:#dc3545;" id="full-model-warning">-</div>
-                            <div style="font-size:0.8em;color:#9AA3AF;">异常模型</div>
-                        </div>
-                    </div>
-                    
-                    <!-- 第二层：5层分类（单列卡片，每层可折叠看详情） -->
-                    <div id="full-model-layers-list" style="margin-bottom:15px;">
-                        <div style="font-size:0.9em;color:#C9A227;margin-bottom:10px;">📊 5层架构分类（点击展开查看详情）</div>
-                        <!-- 动态生成5层分类列表 -->
-                    </div>
-                    
-                    <!-- 第三层：异常告警（只展示有问题的模型） -->
-                    <div id="full-model-alerts" style="display:none;border-top:1px solid rgba(255,255,255,0.1);padding-top:10px;">
-                        <div style="font-size:0.9em;color:#dc3545;margin-bottom:8px;">⚠️ 异常模型告警</div>
-                        <div id="alert-list">
-                            <!-- 动态生成异常模型列表 -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>⚙️ 系统功能</h2>
-                    <div class="stat">
-                        <span class="stat-label">自动运行</span>
-                        <span class="badge badge-good">已开启</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-label">自动备份</span>
-                        <span class="badge badge-good">已开启</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-label">命中率监控</span>
-                        <span class="badge badge-good">已开启</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-label">模型自动评估</span>
-                        <span class="badge badge-good">已开启</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-label">模型启用核查</span>
-                        <span class="badge badge-good">已开启</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-label">用户偏好学习</span>
-                        <span class="badge badge-good">已开启</span>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -1496,6 +1388,126 @@
                     </div>
                 </div>
             </div>
+            </div>
+        </div>
+
+        <!-- 运维监控 -->
+        <div id="ops" class="section">
+            <div class="grid">
+                <!-- 系统健康度 -->
+                <div class="card" id="ops-health">
+                    <h2>💚 系统健康度</h2>
+                    <div id="ops-health-content">加载中...</div>
+                </div>
+
+                <!-- 定时任务心跳 -->
+                <div class="card" id="ops-tasks">
+                    <h2>⏰ 定时任务心跳</h2>
+                    <div id="ops-tasks-content">加载中...</div>
+                </div>
+
+                <!-- 核心模型监控 -->
+                <div class="card" id="model-monitoring">
+                    <h2>🤖 核心模型监控 <span style="font-size:0.6em;color:#9AA3AF;font-weight:normal;">49个核心模型</span></h2>
+                    <div id="model-overview" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px;">
+                        <div style="text-align:center;padding:10px;background:rgba(201,162,39,0.1);border-radius:10px;">
+                            <div style="font-size:1.5em;font-weight:bold;color:#C9A227;" id="model-total">-</div>
+                            <div style="font-size:0.8em;color:#9AA3AF;">模型总数</div>
+                        </div>
+                        <div style="text-align:center;padding:10px;background:rgba(40,167,69,0.1);border-radius:10px;">
+                            <div style="font-size:1.5em;font-weight:bold;color:#28a745;" id="model-active">-</div>
+                            <div style="font-size:0.8em;color:#9AA3AF;">启用模型</div>
+                        </div>
+                        <div style="text-align:center;padding:10px;background:rgba(40,167,69,0.1);border-radius:10px;">
+                            <div style="font-size:1.5em;font-weight:bold;color:#28a745;" id="model-normal">-</div>
+                            <div style="font-size:0.8em;color:#9AA3AF;">运行正常</div>
+                        </div>
+                        <div style="text-align:center;padding:10px;background:rgba(220,53,69,0.1);border-radius:10px;">
+                            <div style="font-size:1.5em;font-weight:bold;color:#dc3545;" id="model-warning">-</div>
+                            <div style="font-size:0.8em;color:#9AA3AF;">异常模型</div>
+                        </div>
+                    </div>
+                    <div id="model-categories" style="margin-bottom:15px;">
+                        <div style="font-size:0.9em;color:#C9A227;margin-bottom:8px;">📊 模型分类统计</div>
+                        <div id="category-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;"></div>
+                    </div>
+                    <div id="model-alerts" style="display:none;border-top:1px solid rgba(255,255,255,0.1);padding-top:10px;">
+                        <div style="font-size:0.9em;color:#dc3545;margin-bottom:8px;">⚠️ 异常模型</div>
+                        <div id="alert-list"></div>
+                    </div>
+                </div>
+
+                <!-- 全量模型监控 -->
+                <div class="card" id="full-model-monitoring">
+                    <h2>📦 全量模型监控 <span style="font-size:0.6em;color:#9AA3AF;font-weight:normal;">639个模型</span></h2>
+                    <div id="full-model-overview" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px;">
+                        <div style="text-align:center;padding:10px;background:rgba(201,162,39,0.1);border-radius:10px;">
+                            <div style="font-size:1.5em;font-weight:bold;color:#C9A227;" id="full-model-total">-</div>
+                            <div style="font-size:0.8em;color:#9AA3AF;">模型总数</div>
+                        </div>
+                        <div style="text-align:center;padding:10px;background:rgba(40,167,69,0.1);border-radius:10px;">
+                            <div style="font-size:1.5em;font-weight:bold;color:#28a745;" id="full-model-layers">-</div>
+                            <div style="font-size:0.8em;color:#9AA3AF;">模型层数</div>
+                        </div>
+                        <div style="text-align:center;padding:10px;background:rgba(40,167,69,0.1);border-radius:10px;">
+                            <div style="font-size:1.5em;font-weight:bold;color:#28a745;" id="full-model-normal">-</div>
+                            <div style="font-size:0.8em;color:#9AA3AF;">运行正常</div>
+                        </div>
+                        <div style="text-align:center;padding:10px;background:rgba(220,53,69,0.1);border-radius:10px;">
+                            <div style="font-size:1.5em;font-weight:bold;color:#dc3545;" id="full-model-warning">-</div>
+                            <div style="font-size:0.8em;color:#9AA3AF;">异常/告警</div>
+                        </div>
+                    </div>
+                    <div id="full-model-layers-list" style="margin-bottom:15px;"></div>
+                    <div id="full-model-alerts" style="display:none;border-top:1px solid rgba(255,255,255,0.1);padding-top:10px;">
+                        <div style="font-size:0.9em;color:#dc3545;margin-bottom:8px;">⚠️ 模型告警</div>
+                        <div id="full-alert-list"></div>
+                    </div>
+                    <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;margin-top:8px;">
+                        <div style="font-size:0.85em;color:#C9A227;margin-bottom:10px;">🔧 模型管理功能</div>
+                        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+                            <div class="stat"><span class="stat-label">模型自动评估</span><span class="badge badge-good">已开启</span></div>
+                            <div class="stat"><span class="stat-label">模型启用核查</span><span class="badge badge-good">已开启</span></div>
+                            <div class="stat"><span class="stat-label">用户偏好学习</span><span class="badge badge-good">已开启</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 错误日志 -->
+                <div class="card" id="ops-errors">
+                    <h2>⚠️ 错误日志</h2>
+                    <div id="ops-errors-content">加载中...</div>
+                </div>
+
+                <!-- 外部接口 -->
+                <div class="card" id="ops-apis">
+                    <h2>🌐 外部接口</h2>
+                    <div id="ops-apis-content">加载中...</div>
+                </div>
+
+                <!-- 运行耗时 -->
+                <div class="card" id="ops-runtime">
+                    <h2>⏱️ 运行耗时</h2>
+                    <div id="ops-runtime-content">加载中...</div>
+                </div>
+
+                <!-- 磁盘与备份 -->
+                <div class="card" id="ops-storage">
+                    <h2>💾 磁盘与备份</h2>
+                    <div id="ops-storage-content">加载中...</div>
+                </div>
+
+                <!-- 最近变更 -->
+                <div class="card" id="ops-changes">
+                    <h2>📝 最近变更</h2>
+                    <div id="ops-changes-content">加载中...</div>
+                </div>
+
+                <!-- 已知问题 -->
+                <div class="card" id="ops-issues">
+                    <h2>🔧 已知问题</h2>
+                    <div id="ops-issues-content">加载中...</div>
+                </div>
             </div>
         </div>
 
@@ -2770,6 +2782,140 @@
         }
         
         // 加载动态数据
+        // 渲染运维监控
+        function renderOps(data) {
+            const ops = data.ops_monitoring;
+            if (!ops) return;
+            
+            // 1. 系统健康度
+            const health = ops.system_health || {};
+            const dims = (health.dimensions || []).map(d => {
+                const color = d.status === '正常' ? '#28a745' : d.status === '关注' ? '#f39c12' : '#dc3545';
+                return `<div style="display:flex;align-items:center;gap:8px;padding:6px 0;">
+                    <span style="font-size:0.85em;color:#9AA3AF;min-width:80px;">${d.name}</span>
+                    <div style="flex:1;height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;">
+                        <div style="width:${d.score}%;height:100%;background:${color};border-radius:3px;"></div>
+                    </div>
+                    <span style="font-size:0.8em;color:${color};font-weight:600;min-width:35px;text-align:right;">${d.score}</span>
+                </div>`;
+            }).join('');
+            const healthColor = health.score >= 90 ? '#28a745' : health.score >= 70 ? '#f39c12' : '#dc3545';
+            document.getElementById('ops-health-content').innerHTML = `
+                <div style="text-align:center;margin-bottom:15px;">
+                    <div style="font-size:2.5em;font-weight:bold;color:${healthColor};">${health.score || '-'}</div>
+                    <div style="font-size:0.9em;color:${healthColor};font-weight:600;">${health.level || '-'}</div>
+                </div>
+                ${dims}
+            `;
+            
+            // 2. 定时任务心跳
+            const tasks = ops.task_heartbeat || [];
+            const taskHtml = tasks.map(t => {
+                const statusColor = t.status === 'success' ? '#28a745' : t.status === 'pending' ? '#f39c12' : '#dc3545';
+                const statusIcon = t.status === 'success' ? '✓' : t.status === 'pending' ? '⏳' : '✗';
+                return `<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <span style="width:22px;height:22px;border-radius:50%;background:${statusColor}20;color:${statusColor};display:flex;align-items:center;justify-content:center;font-size:0.7em;font-weight:bold;flex-shrink:0;">${statusIcon}</span>
+                    <div style="flex:1;min-width:0;">
+                        <div style="font-size:0.88em;color:#e0e0e0;font-weight:500;">${t.name}</div>
+                        <div style="font-size:0.75em;color:#9AA3AF;margin-top:2px;">${t.schedule}</div>
+                    </div>
+                    <div style="text-align:right;flex-shrink:0;">
+                        <div style="font-size:0.75em;color:#9AA3AF;">上次: ${t.last_run}</div>
+                        <div style="font-size:0.75em;color:#C9A227;">下次: ${t.next_run}</div>
+                    </div>
+                </div>`;
+            }).join('');
+            document.getElementById('ops-tasks-content').innerHTML = taskHtml || '<div style="color:#9AA3AF;text-align:center;padding:20px;">暂无任务</div>';
+            
+            // 3. 错误日志
+            const errors = ops.error_logs || [];
+            const errHtml = errors.map(e => {
+                const color = e.level === 'error' ? '#dc3545' : e.level === 'warning' ? '#f39c12' : '#17a2b8';
+                return `<div style="padding:10px;background:${color}10;border-left:3px solid ${color};border-radius:0 8px 8px 0;margin-bottom:8px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <span style="font-size:0.85em;color:${color};font-weight:600;">${e.file}</span>
+                        <span style="font-size:0.72em;color:#9AA3AF;">${e.time}</span>
+                    </div>
+                    <div style="font-size:0.82em;color:#e0e0e0;margin-top:4px;">${e.message}</div>
+                    ${e.count ? `<div style="font-size:0.72em;color:#9AA3AF;margin-top:3px;">共${e.count}条</div>` : ''}
+                </div>`;
+            }).join('');
+            document.getElementById('ops-errors-content').innerHTML = errHtml || '<div style="color:#28a745;text-align:center;padding:20px;">✓ 暂无错误日志</div>';
+            
+            // 4. 外部接口
+            const apis = ops.external_apis || [];
+            const apiHtml = apis.map(a => {
+                const color = a.status === 'ok' ? '#28a745' : '#dc3545';
+                return `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <span style="width:8px;height:8px;border-radius:50%;background:${color};box-shadow:0 0 6px ${color};flex-shrink:0;"></span>
+                    <span style="flex:1;font-size:0.88em;color:#e0e0e0;">${a.name}</span>
+                    <span style="font-size:0.78em;color:${color};font-weight:500;">${a.latency}</span>
+                </div>`;
+            }).join('');
+            document.getElementById('ops-apis-content').innerHTML = apiHtml;
+            
+            // 5. 运行耗时
+            const runs = ops.run_times || [];
+            const runHtml = runs.map(r => 
+                `<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+                    <span style="flex:1;font-size:0.82em;color:#e0e0e0;font-family:monospace;">${r.script}</span>
+                    <span style="font-size:0.82em;color:#C9A227;font-weight:600;min-width:70px;text-align:right;">${r.duration}</span>
+                    <span style="font-size:0.7em;color:#9AA3AF;min-width:100px;text-align:right;">${r.time}</span>
+                </div>`
+            ).join('');
+            document.getElementById('ops-runtime-content').innerHTML = runHtml;
+            
+            // 6. 磁盘与备份
+            const disks = ops.disk_usage || [];
+            const backups = ops.backups || [];
+            const diskHtml = disks.map(d => 
+                `<div style="display:flex;justify-content:space-between;padding:5px 0;">
+                    <span style="font-size:0.82em;color:#9AA3AF;">${d.name}</span>
+                    <span style="font-size:0.82em;color:#e0e0e0;font-weight:500;">${d.size}</span>
+                </div>`
+            ).join('');
+            const backupHtml = backups.map(b => 
+                `<div style="display:flex;justify-content:space-between;padding:5px 0;">
+                    <span style="font-size:0.82em;color:#C9A227;">${b.name}</span>
+                    <span style="font-size:0.78em;color:#9AA3AF;">${b.size} · ${b.time}</span>
+                </div>`
+            ).join('');
+            document.getElementById('ops-storage-content').innerHTML = `
+                <div style="margin-bottom:12px;">
+                    <div style="font-size:0.85em;color:#C9A227;margin-bottom:6px;">💾 磁盘占用</div>
+                    ${diskHtml}
+                </div>
+                <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:10px;">
+                    <div style="font-size:0.85em;color:#C9A227;margin-bottom:6px;">📦 最近备份</div>
+                    ${backupHtml}
+                </div>
+            `;
+            
+            // 7. 最近变更
+            const changes = ops.recent_changes || [];
+            const changeHtml = changes.map(c => 
+                `<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <span style="font-size:0.72em;color:#9AA3AF;min-width:60px;flex-shrink:0;padding-top:2px;">${c.time}</span>
+                    <div style="flex:1;min-width:0;">
+                        <span style="font-size:0.72em;color:#C9A227;background:rgba(201,162,39,0.1);padding:1px 6px;border-radius:4px;margin-right:6px;">${c.module}</span>
+                        <span style="font-size:0.82em;color:#e0e0e0;">${c.desc}</span>
+                    </div>
+                </div>`
+            ).join('');
+            document.getElementById('ops-changes-content').innerHTML = changeHtml;
+            
+            // 8. 已知问题
+            const issues = ops.known_issues || [];
+            const issueHtml = issues.map(i => {
+                const color = i.level === 'warning' ? '#f39c12' : i.level === 'error' ? '#dc3545' : '#17a2b8';
+                return `<div style="display:flex;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <span style="font-size:0.8em;color:${color};flex-shrink:0;">●</span>
+                    <span style="font-size:0.82em;color:#e0e0e0;line-height:1.5;">${i.desc}</span>
+                </div>`;
+            }).join('');
+            document.getElementById('ops-issues-content').innerHTML = issueHtml || '<div style="color:#28a745;text-align:center;padding:20px;">✓ 暂无已知问题</div>';
+        }
+        
         async function loadDashboardData() {
             try {
                 // 尝试加载dashboard_data.json（加时间戳防止缓存）
@@ -2788,6 +2934,7 @@
                 renderLotteryDetails(data);
                 renderModelMonitoring(data);
                 renderFullModelMonitoring(data);
+                renderOps(data);
                 
                 // 更新页脚时间
                 const footerVer = document.getElementById('footer-version');
