@@ -2165,8 +2165,8 @@
         </div>
         
         <div class="nav">
-            <button class="active nav-ops" onclick="showSection('ops', this)">⚙️ 运维</button>
-            <button onclick="showSection('overview', this)">📊 总览</button>
+            <button class="active" onclick="showSection('overview', this)">📊 总览</button>
+            <button class="nav-ops" onclick="showSection('ops', this)">⚙️ 运维</button>
             <button id="lottery-menu-btn" onclick="toggleLotteryMenu()">🎯 彩票 <span id="lottery-menu-arrow">▼</span></button>
         </div>
 
@@ -2181,7 +2181,7 @@
             <button onclick="showSection('qlc', this)">⚪ 七乐彩</button>
         </div>
 
-        <div id="overview" class="section">
+        <div id="overview" class="section active">
             <div class="grid">
 
                 <!-- 1. 今日开奖预告 -->
@@ -2401,7 +2401,7 @@
         </div>
 
         <!-- 运维监控 -->
-        <div id="ops" class="section active">
+        <div id="ops" class="section">
             <div class="grid">
                 <!-- 全量模型监控（不动） -->
                 <div class="card ops-full-width" id="full-model-monitoring">
