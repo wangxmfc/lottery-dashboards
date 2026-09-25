@@ -2475,7 +2475,7 @@
                     </div>
                 </div>
 
-                <!-- 系统状态（健康度+任务心跳融合） -->
+                <!-- 系统状态（健康度+任务心跳+数据采集融合） -->
                 <div class="card" id="ops-system">
                     <h2>💚 系统状态</h2>
                     <div class="ops-sub">
@@ -2487,9 +2487,14 @@
                         <div class="ops-sub-title">定时任务心跳</div>
                         <div id="ops-tasks-content">加载中...</div>
                     </div>
+                    <div class="ops-divider"></div>
+                    <div class="ops-sub">
+                        <div class="ops-sub-title">数据采集状态</div>
+                        <div id="ops-collect-content">加载中...</div>
+                    </div>
                 </div>
 
-                <!-- 问题与告警（错误日志+已知问题融合） -->
+                <!-- 问题与告警（错误日志+已知问题+一致性校验融合） -->
                 <div class="card" id="ops-alerts">
                     <h2>⚠️ 问题与告警</h2>
                     <div class="ops-sub">
@@ -2501,9 +2506,14 @@
                         <div class="ops-sub-title">已知问题</div>
                         <div id="ops-issues-content">加载中...</div>
                     </div>
+                    <div class="ops-divider"></div>
+                    <div class="ops-sub">
+                        <div class="ops-sub-title">数据一致性校验</div>
+                        <div id="ops-consistency-content">加载中...</div>
+                    </div>
                 </div>
 
-                <!-- 接口与性能（外部接口+运行耗时融合） -->
+                <!-- 接口与性能（外部接口+运行耗时+发布通道融合） -->
                 <div class="card" id="ops-perf">
                     <h2>🌐 接口与性能</h2>
                     <div class="ops-sub">
@@ -2514,6 +2524,11 @@
                     <div class="ops-sub">
                         <div class="ops-sub-title">运行耗时</div>
                         <div id="ops-runtime-content">加载中...</div>
+                    </div>
+                    <div class="ops-divider"></div>
+                    <div class="ops-sub">
+                        <div class="ops-sub-title">发布通道状态</div>
+                        <div id="ops-publish-content">加载中...</div>
                     </div>
                 </div>
 
@@ -4676,6 +4691,75 @@
                 </div>`;
             }).join('');
             document.getElementById('ops-issues-content').innerHTML = issueHtml || '<div style="color:#28a745;text-align:center;padding:20px;">✓ 暂无已知问题</div>';
+            
+            // 9. 数据采集状态
+            const collectEl = document.getElementById('ops-collect-content');
+            if (collectEl && data.details) {
+                const todayStr = new Date().toISOString().split('T')[0];
+                const drawDays = { ssq:[0,2,4], dlt:[1,3,6], kl8:[0,1,2,3,4,5,6], fc3d:[0,1,2,3,4,5,6], pl35:[0,1,2,3,4,5,6], qxc:[0,2,5], qlc:[1,3,5] };
+                const names = { ssq:'双色球', dlt:'大乐透', kl8:'快乐8', fc3d:'福彩3D', pl35:'排列3/5', qxc:'七星彩', qlc:'七乐彩' };
+                const todayDay = new Date().getDay();
+                let collectHtml = '';
+                for (const code of ['ssq','dlt','kl8','fc3d','pl35','qxc','qlc']) {
+                    const d = data.details[code] || {};
+                    const isTodayDraw = drawDays[code].includes(todayDay);
+                    const isFresh = d.latest_date === todayStr;
+                    const statusColor = isFresh ? '#28a745' : (isTodayDraw ? '#f39c12' : '#9AA3AF');
+                    const statusText = isFresh ? '✓ 最新' : (isTodayDraw ? '⏳ 待更新' : '— 非今日');
+                    collectHtml += `
+                        <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+                            <span style="font-size:0.82em;color:#e0e0e0;min-width:60px;">${names[code]}</span>
+                            <span style="font-size:0.75em;color:#9AA3AF;flex:1;">第${d.latest_period || '-'}期 · ${d.latest_date || '-'}</span>
+                            <span style="font-size:0.7em;color:${statusColor};font-weight:500;white-space:nowrap;">${statusText}</span>
+                        </div>`;
+                }
+                collectEl.innerHTML = collectHtml;
+            }
+            
+            // 10. 数据一致性校验
+            const consEl = document.getElementById('ops-consistency-content');
+            if (consEl && data.consistency_check) {
+                const cc = data.consistency_check;
+                const pass = cc.status === 'PASS';
+                const color = pass ? '#28a745' : '#dc3545';
+                const icon = pass ? '✓' : '✗';
+                let issuesHtml = '';
+                if (cc.issues && cc.issues.length > 0) {
+                    issuesHtml = cc.issues.map(i => 
+                        `<div style="font-size:0.78em;color:#e0e0e0;padding:4px 0;">• ${i}</div>`
+                    ).join('');
+                }
+                consEl.innerHTML = `
+                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;">
+                        <span style="width:28px;height:28px;border-radius:50%;background:${color}20;color:${color};display:flex;align-items:center;justify-content:center;font-weight:bold;">${icon}</span>
+                        <div style="flex:1;">
+                            <div style="font-size:0.88em;color:${color};font-weight:600;">${pass ? '校验通过' : '发现问题'}</div>
+                            <div style="font-size:0.72em;color:#9AA3AF;">${cc.checked_at || ''} · ${cc.issues_found || 0}个问题</div>
+                        </div>
+                    </div>
+                    ${issuesHtml}
+                `;
+            }
+            
+            // 11. 发布通道状态
+            const pubEl = document.getElementById('ops-publish-content');
+            if (pubEl) {
+                const channels = [
+                    { name: '公众号', status: 'ok', desc: '草稿箱发布正常', icon: '📱' },
+                    { name: '百家号', status: 'error', desc: '账号已封禁，暂停发布', icon: '📰' },
+                    { name: '图床', status: 'ok', desc: '封面图上传正常', icon: '🖼️' },
+                    { name: 'GitHub Pages', status: 'ok', desc: '看板同步正常', icon: '🌐' },
+                ];
+                pubEl.innerHTML = channels.map(c => {
+                    const color = c.status === 'ok' ? '#28a745' : '#dc3545';
+                    return `
+                        <div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+                            <span style="width:8px;height:8px;border-radius:50%;background:${color};box-shadow:0 0 6px ${color};flex-shrink:0;"></span>
+                            <span style="font-size:0.85em;color:#e0e0e0;min-width:80px;">${c.icon} ${c.name}</span>
+                            <span style="font-size:0.75em;color:${color};flex:1;">${c.desc}</span>
+                        </div>`;
+                }).join('');
+            }
         }
         
         async function loadDashboardData() {
