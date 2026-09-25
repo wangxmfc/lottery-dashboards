@@ -2226,7 +2226,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎯 王者GP - 彩票预测数据看板</h1>
+            <h1 id="dashboard-title" onclick="manualRefresh()" style="cursor:pointer;user-select:none;" title="点击刷新数据">🎯 王者GP - 彩票预测数据看板 <span id="refresh-icon" style="display:inline-block;transition:transform 0.5s;">⟳</span></h1>
             <div class="subtitle">49个模型智能预测系统 · 数据驱动 · 理性参考</div>
             <div class="model-badge" id="header-model-badge">
                 🤖 模型加载中...
@@ -5129,6 +5129,30 @@
             // 每3分钟自动刷新一次数据
             setInterval(loadDashboardData, 3 * 60 * 1000);
         });
+        
+        // 手动刷新（点击标题触发）
+        let isRefreshing = false;
+        function manualRefresh() {
+            if (isRefreshing) return;
+            isRefreshing = true;
+            const icon = document.getElementById('refresh-icon');
+            if (icon) {
+                icon.style.transform = 'rotate(360deg)';
+                icon.style.color = '#C9A227';
+            }
+            loadDashboardData().then(() => {
+                setTimeout(() => {
+                    if (icon) {
+                        icon.style.transform = 'rotate(0deg)';
+                        icon.style.color = '';
+                    }
+                    isRefreshing = false;
+                }, 500);
+            }).catch(() => {
+                isRefreshing = false;
+                if (icon) icon.style.transform = 'rotate(0deg)';
+            });
+        }
     </script>
 </body>
 </html>
