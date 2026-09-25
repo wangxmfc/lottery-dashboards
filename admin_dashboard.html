@@ -3156,13 +3156,24 @@
                 const draw = detail.latest_draw || {};
                 const period = draw.period || detail.latest_period || '-';
                 const date = draw.date || '-';
-                const front = draw.front || draw.red || draw.basic || [];
+                // 排列3/5用p5（5位），其他用front/red/basic/nums
+                let front = [];
+                if (info.code === 'pl35') {
+                    front = draw.p5 || draw.p3 || draw.nums || draw.front || draw.basic || [];
+                } else {
+                    front = draw.front || draw.red || draw.basic || draw.nums || [];
+                }
                 const back = draw.back || draw.blue || draw.special || [];
                 
                 let ballsHtml = '';
-                front.forEach(n => {
+                // 快乐8只显示前10个（共20个），避免太挤
+                const displayFront = info.code === 'kl8' ? front.slice(0, 10) : front;
+                displayFront.forEach(n => {
                     ballsHtml += `<span class="ld-ball" style="background:${info.frontColor};">${n}</span>`;
                 });
+                if (info.code === 'kl8' && front.length > 10) {
+                    ballsHtml += `<span style="font-size:0.65em;color:#8892a0;margin-left:2px;">+${front.length - 10}</span>`;
+                }
                 if (back && back.length > 0) {
                     back.forEach(n => {
                         ballsHtml += `<span class="ld-ball" style="background:${info.backColor || '#666'};">${n}</span>`;
