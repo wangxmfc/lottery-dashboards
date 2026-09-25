@@ -10318,5 +10318,338 @@
       }
     ],
     "collected_at": "2026-09-25 16:04:37"
+  },
+  "model_learning": {
+    "learned_at": "2026-09-25 17:52:49",
+    "total_records": 1399,
+    "lotteries": {
+      "ssq": {
+        "name": "双色球",
+        "periods": 200,
+        "hit_rate": 75.5,
+        "avg_hit": 1.24,
+        "random_baseline": 1.15,
+        "improvement_vs_random": 7.8,
+        "std": 0.983,
+        "stability": "一般",
+        "max_zero_streak": 6,
+        "windows": {
+          "近50期": {
+            "periods": 50,
+            "hit_rate": 66.0,
+            "avg_hit": 1.04
+          },
+          "近100期": {
+            "periods": 100,
+            "hit_rate": 72.0,
+            "avg_hit": 1.19
+          },
+          "全部": {
+            "periods": 200,
+            "hit_rate": 75.5,
+            "avg_hit": 1.24
+          }
+        },
+        "trend": {
+          "最近10期": 90.0,
+          "最近20期": 75.0,
+          "最近50期": 66.0,
+          "整体": 75.5,
+          "trend": "上升",
+          "trend_icon": "📈"
+        }
+      },
+      "dlt": {
+        "name": "大乐透",
+        "periods": 200,
+        "hit_rate": 70.0,
+        "avg_hit": 1.03,
+        "random_baseline": 1.05,
+        "improvement_vs_random": -1.9,
+        "std": 0.885,
+        "stability": "一般",
+        "max_zero_streak": 3,
+        "windows": {
+          "近50期": {
+            "periods": 50,
+            "hit_rate": 76.0,
+            "avg_hit": 1.1
+          },
+          "近100期": {
+            "periods": 100,
+            "hit_rate": 74.0,
+            "avg_hit": 1.08
+          },
+          "全部": {
+            "periods": 200,
+            "hit_rate": 70.0,
+            "avg_hit": 1.03
+          }
+        },
+        "trend": {
+          "最近10期": 70.0,
+          "最近20期": 80.0,
+          "最近50期": 76.0,
+          "整体": 70.0,
+          "trend": "平稳",
+          "trend_icon": "➡️"
+        }
+      },
+      "kl8": {
+        "name": "快乐8",
+        "periods": 199,
+        "hit_rate": 94.0,
+        "avg_hit": 2.42,
+        "random_baseline": 2.5,
+        "improvement_vs_random": -3.2,
+        "std": 1.357,
+        "stability": "待提升",
+        "max_zero_streak": 2,
+        "windows": {
+          "近50期": {
+            "periods": 50,
+            "hit_rate": 98.0,
+            "avg_hit": 2.34
+          },
+          "近100期": {
+            "periods": 100,
+            "hit_rate": 97.0,
+            "avg_hit": 2.42
+          },
+          "全部": {
+            "periods": 199,
+            "hit_rate": 94.0,
+            "avg_hit": 2.42
+          }
+        },
+        "trend": {
+          "最近10期": 100.0,
+          "最近20期": 100.0,
+          "最近50期": 98.0,
+          "整体": 94.0,
+          "trend": "上升",
+          "trend_icon": "📈"
+        }
+      },
+      "fc3d": {
+        "name": "福彩3D",
+        "periods": 200,
+        "hit_rate": 30.5,
+        "avg_hit": 0.34,
+        "random_baseline": 0.29,
+        "improvement_vs_random": 17.2,
+        "std": 0.533,
+        "stability": "良好",
+        "max_zero_streak": 15,
+        "windows": {
+          "近50期": {
+            "periods": 50,
+            "hit_rate": 36.0,
+            "avg_hit": 0.38
+          },
+          "近100期": {
+            "periods": 100,
+            "hit_rate": 34.0,
+            "avg_hit": 0.36
+          },
+          "全部": {
+            "periods": 200,
+            "hit_rate": 30.5,
+            "avg_hit": 0.34
+          }
+        },
+        "trend": {
+          "最近10期": 50.0,
+          "最近20期": 40.0,
+          "最近50期": 36.0,
+          "整体": 30.5,
+          "trend": "上升",
+          "trend_icon": "📈"
+        }
+      },
+      "pl35": {
+        "name": "排列3/5",
+        "periods": 200,
+        "hit_rate": 45.0,
+        "avg_hit": 0.84,
+        "random_baseline": 0.8,
+        "improvement_vs_random": 5.0,
+        "std": 1.121,
+        "stability": "一般",
+        "max_zero_streak": 11,
+        "windows": {
+          "近50期": {
+            "periods": 50,
+            "hit_rate": 44.0,
+            "avg_hit": 0.86
+          },
+          "近100期": {
+            "periods": 100,
+            "hit_rate": 48.0,
+            "avg_hit": 0.89
+          },
+          "全部": {
+            "periods": 200,
+            "hit_rate": 45.0,
+            "avg_hit": 0.84
+          }
+        },
+        "trend": {
+          "最近10期": 30.0,
+          "最近20期": 40.0,
+          "最近50期": 44.0,
+          "整体": 45.0,
+          "trend": "下降",
+          "trend_icon": "📉"
+        }
+      },
+      "qxc": {
+        "name": "七星彩",
+        "periods": 200,
+        "hit_rate": 53.5,
+        "avg_hit": 0.72,
+        "random_baseline": 0.6,
+        "improvement_vs_random": 20.0,
+        "std": 0.844,
+        "stability": "一般",
+        "max_zero_streak": 6,
+        "windows": {
+          "近50期": {
+            "periods": 50,
+            "hit_rate": 50.0,
+            "avg_hit": 0.62
+          },
+          "近100期": {
+            "periods": 100,
+            "hit_rate": 56.0,
+            "avg_hit": 0.76
+          },
+          "全部": {
+            "periods": 200,
+            "hit_rate": 53.5,
+            "avg_hit": 0.72
+          }
+        },
+        "trend": {
+          "最近10期": 50.0,
+          "最近20期": 55.0,
+          "最近50期": 50.0,
+          "整体": 53.5,
+          "trend": "平稳",
+          "trend_icon": "➡️"
+        }
+      },
+      "qlc": {
+        "name": "七乐彩",
+        "periods": 200,
+        "hit_rate": 84.5,
+        "avg_hit": 1.67,
+        "random_baseline": 1.66,
+        "improvement_vs_random": 0.6,
+        "std": 1.104,
+        "stability": "一般",
+        "max_zero_streak": 2,
+        "windows": {
+          "近50期": {
+            "periods": 50,
+            "hit_rate": 82.0,
+            "avg_hit": 1.64
+          },
+          "近100期": {
+            "periods": 100,
+            "hit_rate": 85.0,
+            "avg_hit": 1.58
+          },
+          "全部": {
+            "periods": 200,
+            "hit_rate": 84.5,
+            "avg_hit": 1.67
+          }
+        },
+        "trend": {
+          "最近10期": 60.0,
+          "最近20期": 75.0,
+          "最近50期": 82.0,
+          "整体": 84.5,
+          "trend": "下降",
+          "trend_icon": "📉"
+        }
+      }
+    },
+    "overall": {
+      "avg_hit_rate": 64.7,
+      "max_hit_rate": 94.0,
+      "min_hit_rate": 30.5,
+      "avg_std": 0.975,
+      "lottery_count": 7
+    },
+    "conclusions": [
+      "表现最佳：快乐8（命中率94.0%，待提升）",
+      "需重点改进：福彩3D（命中率30.5%，良好）",
+      "近期趋势：3个彩种上升，2个下降，其余平稳",
+      "模型有效性：5/7个彩种优于随机基准"
+    ],
+    "recommendations": [
+      "双色球：最大连续未中6期，建议关注遗漏回补逻辑",
+      "大乐透：模型表现低于随机基准，建议重新评估指标有效性",
+      "快乐8：稳定性不足（标准差1.357），建议增加平滑处理",
+      "快乐8：模型表现低于随机基准，建议重新评估指标有效性",
+      "福彩3D：最大连续未中15期，建议关注遗漏回补逻辑",
+      "排列3/5：近期命中率下降，建议检查指标权重是否需要调整",
+      "排列3/5：最大连续未中11期，建议关注遗漏回补逻辑",
+      "七星彩：最大连续未中6期，建议关注遗漏回补逻辑",
+      "七乐彩：近期命中率下降，建议检查指标权重是否需要调整"
+    ],
+    "ranking": [
+      {
+        "code": "kl8",
+        "name": "快乐8",
+        "hit_rate": 94.0,
+        "stability": "待提升",
+        "trend": "上升"
+      },
+      {
+        "code": "qlc",
+        "name": "七乐彩",
+        "hit_rate": 84.5,
+        "stability": "一般",
+        "trend": "下降"
+      },
+      {
+        "code": "ssq",
+        "name": "双色球",
+        "hit_rate": 75.5,
+        "stability": "一般",
+        "trend": "上升"
+      },
+      {
+        "code": "dlt",
+        "name": "大乐透",
+        "hit_rate": 70.0,
+        "stability": "一般",
+        "trend": "平稳"
+      },
+      {
+        "code": "qxc",
+        "name": "七星彩",
+        "hit_rate": 53.5,
+        "stability": "一般",
+        "trend": "平稳"
+      },
+      {
+        "code": "pl35",
+        "name": "排列3/5",
+        "hit_rate": 45.0,
+        "stability": "一般",
+        "trend": "下降"
+      },
+      {
+        "code": "fc3d",
+        "name": "福彩3D",
+        "hit_rate": 30.5,
+        "stability": "良好",
+        "trend": "上升"
+      }
+    ]
   }
 }
