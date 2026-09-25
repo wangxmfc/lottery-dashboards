@@ -10707,5 +10707,212 @@
       }
     ],
     "auto_adjustments": []
+  },
+  "ops_monitoring": {
+    "system_health": {
+      "score": 93,
+      "level": "优",
+      "dimensions": [
+        {
+          "name": "定时任务",
+          "score": 100,
+          "status": "正常"
+        },
+        {
+          "name": "数据新鲜度",
+          "score": 85,
+          "status": "正常"
+        },
+        {
+          "name": "模型启用率",
+          "score": 100,
+          "status": "正常"
+        },
+        {
+          "name": "外部接口",
+          "score": 100,
+          "status": "正常"
+        },
+        {
+          "name": "错误日志",
+          "score": 80,
+          "status": "关注"
+        }
+      ]
+    },
+    "task_heartbeat": [
+      {
+        "name": "盘前必读",
+        "schedule": "工作日 08:00",
+        "status": "success",
+        "last_run": "2026-09-24 08:28",
+        "next_run": "2026-09-25 08:00"
+      },
+      {
+        "name": "午间评盘",
+        "schedule": "工作日 11:35",
+        "status": "pending",
+        "last_run": "-",
+        "next_run": "2026-09-25 11:35"
+      },
+      {
+        "name": "盘后复盘",
+        "schedule": "工作日 15:10",
+        "status": "pending",
+        "last_run": "-",
+        "next_run": "2026-09-25 15:10"
+      },
+      {
+        "name": "彩票开奖",
+        "schedule": "每天 20:10",
+        "status": "pending",
+        "last_run": "-",
+        "next_run": "2026-09-25 20:10"
+      },
+      {
+        "name": "Excel周六合集",
+        "schedule": "周六 10:00",
+        "status": "pending",
+        "last_run": "-",
+        "next_run": "2026-09-26 10:00"
+      },
+      {
+        "name": "月末综合",
+        "schedule": "每月28-31日 22:00",
+        "status": "pending",
+        "last_run": "-",
+        "next_run": "2026-09-28 22:00"
+      }
+    ],
+    "error_logs": [
+      {
+        "file": "baijiahao_20260925.log",
+        "level": "error",
+        "message": "[2026-09-25 08:06:35] 警告：封面上传失败，继续尝试",
+        "time": "2026-09-25 13:08",
+        "count": 2
+      },
+      {
+        "file": "baijiahao_20260922.log",
+        "level": "error",
+        "message": "[2026-09-22 22:46:09] 动态收尾文字失败，使用固定模板: 数据不足",
+        "time": "2026-09-22 23:57",
+        "count": 3
+      }
+    ],
+    "external_apis": [
+      {
+        "name": "彩票数据源",
+        "status": "ok",
+        "latency": "233ms",
+        "last_check": "2026-09-25 20:07"
+      },
+      {
+        "name": "图床服务",
+        "status": "ok",
+        "latency": "1250ms",
+        "last_check": "2026-09-25 20:07"
+      },
+      {
+        "name": "GitHub Pages",
+        "status": "ok",
+        "latency": "2015ms",
+        "last_check": "2026-09-25 20:07"
+      }
+    ],
+    "run_times": [
+      {
+        "script": "盘前必读",
+        "duration": "约35分钟",
+        "time": "2026-09-24 08:28"
+      }
+    ],
+    "disk_usage": [
+      {
+        "name": "彩票历史数据",
+        "size": "6.8M"
+      },
+      {
+        "name": "预测卡片图片",
+        "size": "2.9M"
+      },
+      {
+        "name": "公众号素材",
+        "size": "67M"
+      },
+      {
+        "name": "运行日志",
+        "size": "348K"
+      },
+      {
+        "name": "备份包",
+        "size": "444K"
+      }
+    ],
+    "backups": [
+      {
+        "name": "dashboard-v3.html",
+        "size": "148K",
+        "time": "09-25 15:20"
+      },
+      {
+        "name": "dashboard-v2.html",
+        "size": "148K",
+        "time": "09-25 15:19"
+      },
+      {
+        "name": "dashboard-v1.html",
+        "size": "144K",
+        "time": "09-25 15:10"
+      },
+      {
+        "name": "full_backup_20260916_2300/",
+        "size": "952K",
+        "time": "09-16 23:27"
+      },
+      {
+        "name": "系统备份清单-20260916.md",
+        "size": "4.0K",
+        "time": "09-16 10:13"
+      }
+    ],
+    "recent_changes": [
+      {
+        "time": "8分钟前",
+        "module": "看板优化",
+        "desc": "dashboard.html 更新"
+      },
+      {
+        "time": "4分钟前",
+        "module": "数据更新",
+        "desc": "dashboard_data.json 更新"
+      },
+      {
+        "time": "4分钟前",
+        "module": "数据脚本",
+        "desc": "scripts/update_dashboard_data.py 更新"
+      },
+      {
+        "time": "6小时前",
+        "module": "一致性校验",
+        "desc": "scripts/verify_consistency.py 更新"
+      },
+      {
+        "time": "6小时前",
+        "module": "预测卡片",
+        "desc": "scripts/gen_cards_v2.py 更新"
+      }
+    ],
+    "known_issues": [
+      {
+        "level": "info",
+        "desc": "百家号账号被封，暂停百家号发布"
+      },
+      {
+        "level": "warning",
+        "desc": "部分彩种历史数据不足200期，回测样本待积累"
+      }
+    ],
+    "collected_at": "2026-09-25 20:07:51"
   }
 }
