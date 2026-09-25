@@ -654,7 +654,60 @@
             line-height: 1.5;
         }
         
-        /* 遗漏值速览 */
+        /* 总览模块统一排版 */
+        .ov-banner {
+            background: linear-gradient(135deg, rgba(201,162,39,0.1), rgba(201,162,39,0.02));
+            border-color: rgba(201,162,39,0.2);
+        }
+        .ov-banner h2 { display: none; }
+        
+        .ov-split {
+            display: flex;
+            gap: 0;
+            align-items: stretch;
+        }
+        .ov-split-left, .ov-split-right {
+            flex: 1;
+            padding: 0;
+            min-width: 0;
+        }
+        .ov-split-divider {
+            width: 1px;
+            background: rgba(255,255,255,0.08);
+            margin: 0 16px;
+            flex-shrink: 0;
+        }
+        
+        .ov-footer-tip {
+            text-align: center;
+            padding: 18px 24px;
+            background: linear-gradient(135deg, rgba(201,162,39,0.08), rgba(201,162,39,0.02));
+            border-radius: 12px;
+            border: 1px solid rgba(201,162,39,0.15);
+        }
+        
+        /* 系统状态指标横排 */
+        .sys-status-row {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+        }
+        .sys-status-item {
+            text-align: center;
+            padding: 14px 8px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .sys-status-item .ssi-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        .sys-status-item .ssi-label {
+            font-size: 0.75em;
+            color: #9AA3AF;
+        }
         .omission-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -998,6 +1051,18 @@
             }
             .omission-grid {
                 grid-template-columns: repeat(4, 1fr);
+                gap: 8px;
+            }
+            .ov-split {
+                flex-direction: column;
+            }
+            .ov-split-divider {
+                width: 100%;
+                height: 1px;
+                margin: 14px 0;
+            }
+            .sys-status-row {
+                grid-template-columns: repeat(3, 1fr);
                 gap: 8px;
             }
             .draw-banner-inner {
@@ -1916,127 +1981,125 @@
         <div id="overview" class="section">
             <div class="grid">
 
-                <!-- 今日开奖预告（横幅） -->
-                <div class="card" id="today-draw-banner" style="grid-column:1/-1;">
-                    <h2>🎯 今日开奖预告</h2>
+                <!-- 1. 今日开奖预告 -->
+                <div class="card ov-banner" id="today-draw-banner" style="grid-column:1/-1;">
                     <div id="today-draw-content">
                         <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
                     </div>
                 </div>
 
-                <!-- 系统总览 -->
-                <div class="card" id="system-overview">
-                    <h2>📊 系统总览</h2>
-                    <div style="text-align:center;padding:40px 20px;color:#9AA3AF;">
-                        <div style="font-size:2em;margin-bottom:10px;">⏳</div>
-                        <div>数据加载中...</div>
-                    </div>
-                </div>
-
-                <!-- 系统状态简表 -->
-                <div class="card" id="overview-status">
-                    <h2>⚡ 运行状态</h2>
-                    <div id="overview-status-content">
-                        <div style="text-align:center;padding:40px 20px;color:#9AA3AF;">数据加载中...</div>
-                    </div>
-                </div>
-
-                <!-- 7彩种快速导航 -->
-                <div class="card" id="lottery-quick-nav" style="grid-column:1/-1;">
-                    <h2>📋 彩种快速导航</h2>
-                    <div id="quick-nav-content">
+                <!-- 2. 系统状态总览 -->
+                <div class="card" id="system-status-overview" style="grid-column:1/-1;">
+                    <h2>📊 系统状态</h2>
+                    <div id="system-status-overview-content">
                         <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
                     </div>
                 </div>
 
-                <!-- 本周开奖日历 -->
-                <div class="card" id="week-calendar" style="grid-column:1/-1;">
+                <!-- 3. 开奖日历+快速导航 -->
+                <div class="card" style="grid-column:1/-1;">
                     <h2>📅 本周开奖日历</h2>
-                    <div id="week-calendar-content">
-                        <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
+                    <div id="week-calendar-content" style="margin-bottom:16px;">
+                        <div style="text-align:center;padding:20px;color:#9AA3AF;">数据加载中...</div>
+                    </div>
+                    <div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:14px;">
+                        <h2 style="margin-bottom:10px;">📋 彩种快速导航</h2>
+                        <div id="quick-nav-content">
+                            <div style="text-align:center;padding:20px;color:#9AA3AF;">数据加载中...</div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 最新开奖速览 -->
-                <div class="card" id="latest-draws" style="grid-column:1/-1;">
-                    <h2>🔢 最新开奖速览</h2>
-                    <div id="latest-draws-content">
-                        <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
+                <!-- 4. 开奖+命中 -->
+                <div class="card" style="grid-column:1/-1;">
+                    <div class="ov-split">
+                        <div class="ov-split-left">
+                            <h2>🔢 最新开奖</h2>
+                            <div id="latest-draws-content">
+                                <div style="text-align:center;padding:20px;color:#9AA3AF;">数据加载中...</div>
+                            </div>
+                        </div>
+                        <div class="ov-split-divider"></div>
+                        <div class="ov-split-right">
+                            <h2>🎯 上期命中</h2>
+                            <div id="prev-hit-content">
+                                <div style="text-align:center;padding:20px;color:#9AA3AF;">数据加载中...</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 上期命中回顾 -->
-                <div class="card" id="prev-hit-review" style="grid-column:1/-1;">
-                    <h2>🎯 上期命中回顾</h2>
-                    <div id="prev-hit-content">
-                        <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
-                    </div>
-                </div>
-
-                <!-- 孤注一掷速览 -->
-                <div class="card" id="lone-nums-quick" style="grid-column:1/-1;">
+                <!-- 5. 孤注一掷 -->
+                <div class="card" style="grid-column:1/-1;">
                     <h2>⚡ 孤注一掷速览</h2>
                     <div id="lone-nums-content">
-                        <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
+                        <div style="text-align:center;padding:20px;color:#9AA3AF;">数据加载中...</div>
                     </div>
                 </div>
 
-                <!-- 大乐透固定号核对 -->
-                <div class="card" id="dlt-fixed-check">
-                    <h2>🔒 大乐透固定号核对</h2>
-                    <div id="dlt-fixed-content">
-                        <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
+                <!-- 6. 冷热+遗漏 -->
+                <div class="card" style="grid-column:1/-1;">
+                    <div class="ov-split">
+                        <div class="ov-split-left">
+                            <h2>🌡️ 冷热号</h2>
+                            <div id="hot-cold-content">
+                                <div style="text-align:center;padding:20px;color:#9AA3AF;">数据加载中...</div>
+                            </div>
+                        </div>
+                        <div class="ov-split-divider"></div>
+                        <div class="ov-split-right">
+                            <h2>⏳ 遗漏值</h2>
+                            <div id="omission-content">
+                                <div style="text-align:center;padding:20px;color:#9AA3AF;">数据加载中...</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 冷热号速览 -->
-                <div class="card" id="hot-cold-quick">
-                    <h2>🌡️ 冷热号速览</h2>
-                    <div id="hot-cold-content">
-                        <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
+                <!-- 7. 命中率+回测 -->
+                <div class="card" style="grid-column:1/-1;">
+                    <div class="ov-split">
+                        <div class="ov-split-left">
+                            <h2>🎯 命中率</h2>
+                            <div id="hit-rates">
+                                <div style="text-align:center;padding:20px;color:#9AA3AF;">数据加载中...</div>
+                            </div>
+                        </div>
+                        <div class="ov-split-divider"></div>
+                        <div class="ov-split-right">
+                            <h2>📈 回测vs随机</h2>
+                            <div id="backtest-random-content">
+                                <div style="text-align:center;padding:20px;color:#9AA3AF;">数据加载中...</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 遗漏值速览 -->
-                <div class="card" id="omission-quick" style="grid-column:1/-1;">
-                    <h2>⏳ 遗漏值速览</h2>
-                    <div id="omission-content">
-                        <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
+                <!-- 8. 固定号+思路 -->
+                <div class="card" style="grid-column:1/-1;">
+                    <div class="ov-split">
+                        <div class="ov-split-left" style="flex:0.85;">
+                            <h2>🔒 大乐透固定号</h2>
+                            <div id="dlt-fixed-content">
+                                <div style="text-align:center;padding:20px;color:#9AA3AF;">数据加载中...</div>
+                            </div>
+                        </div>
+                        <div class="ov-split-divider"></div>
+                        <div class="ov-split-right" style="flex:1.15;">
+                            <h2>💡 选号思路</h2>
+                            <div id="strategy-summary-content">
+                                <div style="text-align:center;padding:20px;color:#9AA3AF;">数据加载中...</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 选号思路一句话 -->
-                <div class="card" id="strategy-summary" style="grid-column:1/-1;">
-                    <h2>💡 选号思路一句话</h2>
-                    <div id="strategy-summary-content">
-                        <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
-                    </div>
-                </div>
-
-                <!-- 理性购彩提示 -->
-                <div style="grid-column:1/-1;text-align:center;padding:20px;background:linear-gradient(135deg,rgba(201,162,39,0.08),rgba(201,162,39,0.02));border-radius:12px;border:1px solid rgba(201,162,39,0.15);margin-top:4px;">
-                    <div style="font-size:1.1em;color:#C9A227;font-weight:600;margin-bottom:6px;">⚠️ 理性购彩提示</div>
-                    <div style="font-size:0.85em;color:#9AA3AF;line-height:1.8;">
-                        本看板所有数据均为历史统计参考，不构成任何投资建议或中奖承诺。<br>
-                        彩票开奖为随机事件，预测模型仅基于历史数据规律分析，请理性看待、量力而行。<br>
+                <!-- 9. 理性购彩 -->
+                <div class="ov-footer-tip" style="grid-column:1/-1;">
+                    <div style="font-size:1.05em;color:#C9A227;font-weight:600;margin-bottom:6px;">⚠️ 理性购彩提示</div>
+                    <div style="font-size:0.82em;color:#9AA3AF;line-height:1.8;">
+                        本看板所有数据均为历史统计参考，不构成任何投资建议或中奖承诺。彩票开奖为随机事件，预测模型仅基于历史数据规律分析，请理性看待、量力而行。<br>
                         <span style="color:#C9A227;">购彩有风险，投入需谨慎；未满18周岁禁止购买彩票。</span>
-                    </div>
-                </div>
-
-                <!-- 命中率概览（增强） -->
-                <div class="card" id="hit-rates">
-                    <h2>🎯 命中率概览</h2>
-                    <div style="text-align:center;padding:40px 20px;color:#9AA3AF;">
-                        <div style="font-size:2em;margin-bottom:10px;">⏳</div>
-                        <div>数据加载中...</div>
-                    </div>
-                </div>
-
-                <!-- 回测vs随机基准 -->
-                <div class="card" id="backtest-vs-random">
-                    <h2>📈 回测 vs 随机基准</h2>
-                    <div id="backtest-random-content">
-                        <div style="text-align:center;padding:40px 20px;color:#9AA3AF;">数据加载中...</div>
                     </div>
                 </div>
 
@@ -2808,6 +2871,63 @@
             `;
             
             el.innerHTML = html;
+        }
+        
+        // 渲染系统状态总览（融合系统总览+运行状态）
+        function renderSystemStatusOverview(data) {
+            const el = document.getElementById('system-status-overview-content');
+            if (!el) return;
+            
+            const so = data.system_overview || {};
+            const ops = data.ops_monitoring || {};
+            const health = ops.system_health || {};
+            const tasks = ops.task_heartbeat || [];
+            const errors = ops.error_logs || [];
+            
+            const modelCount = so.model_count || 0;
+            const fullCount = so.full_model_count || 0;
+            const lotteryCount = so.lottery_count || 7;
+            const usageRate = so.model_usage_rate !== undefined ? so.model_usage_rate : 0;
+            const healthScore = health.score !== undefined ? health.score : '-';
+            const activeTasks = Array.isArray(tasks) ? tasks.filter(t => t.status === 'ok' || t.status === 'active').length : 0;
+            const totalTasks = Array.isArray(tasks) ? tasks.length : 0;
+            const errorCount = Array.isArray(errors) ? errors.length : 0;
+            
+            function statusColor(val, thresholds) {
+                if (typeof val !== 'number') return '#C9A227';
+                if (val >= thresholds.good) return '#2ecc71';
+                if (val >= thresholds.mid) return '#f1c40f';
+                return '#e74c3c';
+            }
+            
+            el.innerHTML = `
+                <div class="sys-status-row">
+                    <div class="sys-status-item">
+                        <div class="ssi-value" style="color:#C9A227;">${modelCount}</div>
+                        <div class="ssi-label">核心模型</div>
+                    </div>
+                    <div class="sys-status-item">
+                        <div class="ssi-value" style="color:#9b59b6;">${fullCount}</div>
+                        <div class="ssi-label">全量模型</div>
+                    </div>
+                    <div class="sys-status-item">
+                        <div class="ssi-value" style="color:#3498db;">${lotteryCount}</div>
+                        <div class="ssi-label">监控彩种</div>
+                    </div>
+                    <div class="sys-status-item">
+                        <div class="ssi-value" style="color:${statusColor(usageRate,{good:90,mid:70})};">${typeof usageRate === 'number' ? usageRate.toFixed(0) + '%' : '-'}</div>
+                        <div class="ssi-label">模型启用率</div>
+                    </div>
+                    <div class="sys-status-item">
+                        <div class="ssi-value" style="color:${statusColor(healthScore,{good:90,mid:70})};">${healthScore}</div>
+                        <div class="ssi-label">系统健康度</div>
+                    </div>
+                    <div class="sys-status-item">
+                        <div class="ssi-value" style="color:${errorCount > 0 ? '#e74c3c' : '#2ecc71'};">${activeTasks}/${totalTasks}</div>
+                        <div class="ssi-label">任务正常${errorCount > 0 ? ' · ' + errorCount + '错误' : ''}</div>
+                    </div>
+                </div>
+            `;
         }
         
         // 渲染本周开奖日历
@@ -4324,16 +4444,17 @@
                 renderSystemOverview(data);
                 renderHitRates(data);
                 renderTodayDrawBanner(data);
-                renderOverviewStatus(data);
-                renderQuickNav(data);
+                renderSystemStatusOverview(data);
                 renderWeekCalendar(data);
+                renderQuickNav(data);
                 renderLatestDraws(data);
                 renderPrevHitReview(data);
                 renderLoneNumsQuick(data);
-                renderDltFixedCheck(data);
                 renderHotColdQuick(data);
                 renderOmissionQuick(data);
+                renderDltFixedCheck(data);
                 renderStrategySummary(data);
+                renderHitRates(data);
                 renderBacktestVsRandom(data);
                 renderLotteryDetails(data);
                 renderModelMonitoring(data);
