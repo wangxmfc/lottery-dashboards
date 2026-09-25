@@ -730,8 +730,9 @@
             margin-bottom: 4px;
         }
         .sys-status-item .ssi-label {
-            font-size: 0.75em;
+            font-size: 0.7em;
             color: #9AA3AF;
+            white-space: nowrap;
         }
         .omission-grid {
             display: grid;
@@ -1071,7 +1072,7 @@
             .week-cal-day { padding: 8px 4px; }
             .week-cal-day .wc-tag { font-size: 0.58em; padding: 1px 3px; }
             .strategy-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 8px;
             }
             .omission-grid {
@@ -2676,7 +2677,7 @@
             for (const code of todayLotteries) {
                 const detail = data.details && data.details[code] ? data.details[code] : {};
                 const latestPeriod = detail.latest_period || '-';
-                const nextPeriod = detail.prediction ? (detail.prediction.period || '-') : '-';
+                const nextPeriod = detail.prediction ? (detail.prediction.next_period || '-') : '-';
                 itemsHtml += `
                     <div class="draw-banner-item">
                         <div class="db-name">${lotteryIcons[code]} ${lotteryNames[code]}</div>
@@ -2949,7 +2950,7 @@
                     </div>
                     <div class="sys-status-item">
                         <div class="ssi-value" style="color:${errorCount > 0 ? '#e74c3c' : '#2ecc71'};">${activeTasks}/${totalTasks}</div>
-                        <div class="ssi-label">任务正常${errorCount > 0 ? ' · ' + errorCount + '错误' : ''}</div>
+                        <div class="ssi-label">${errorCount > 0 ? errorCount + '个错误' : '任务正常'}</div>
                     </div>
                 </div>
             `;
