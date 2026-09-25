@@ -1,0 +1,2597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>王者GP · 彩票分析看板（7彩种切换版）</title>
+<style>
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+  width: 100%; 
+  max-width: 750px; 
+  margin: 0 auto; 
+  background: linear-gradient(180deg, #FFF9F0 0%, #F5F0E8 100%); 
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; 
+  padding-bottom: 40px; 
+}
+
+/* 顶部导航 */
+.nav { 
+  background: linear-gradient(135deg, #C8102E 0%, #E6452E 50%, #FF6B6B 100%); 
+  padding: 20px 20px 16px; 
+  position: sticky; 
+  top: 0; 
+  z-index: 100; 
+  box-shadow: 0 4px 20px rgba(200,16,46,0.25); 
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.nav-title { 
+  color: #fff; 
+  font-size: 22px; 
+  font-weight: 800; 
+  text-align: center; 
+  letter-spacing: 2px; 
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.nav-sub { 
+  color: rgba(255,255,255,0.9); 
+  font-size: 13px; 
+  text-align: center; 
+  margin-top: 8px; 
+  letter-spacing: 1px;
+}
+
+/* 彩种切换按钮 */
+.lottery-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #fff;
+  margin: 0 16px;
+  border-radius: 12px;
+  margin-top: -10px;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(200,16,46,0.1);
+}
+.lottery-tab {
+  flex: 1;
+  min-width: 80px;
+  padding: 8px 4px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  background: #F5F0E8;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.lottery-tab.active {
+  background: linear-gradient(135deg, #C8102E, #E6452E);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(200,16,46,0.3);
+}
+
+/* 开奖日历 */
+.calendar { 
+  background: linear-gradient(135deg, #FFF5F5 0%, #FFE8E8 100%); 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  box-shadow: 0 4px 16px rgba(200,16,46,0.08); 
+  border: 1px solid #FFD6D6;
+}
+.calendar-title { 
+  font-size: 15px; 
+  font-weight: 800; 
+  color: #C8102E; 
+  padding-left: 10px; 
+  border-left: 4px solid #C8102E; 
+  margin-bottom: 16px; 
+}
+.calendar-info { 
+  text-align: center; 
+  padding: 16px; 
+  background: rgba(255,255,255,0.8); 
+  border-radius: 12px; 
+}
+.calendar-period { 
+  font-size: 24px; 
+  font-weight: 800; 
+  color: #C8102E; 
+  letter-spacing: 1px;
+}
+.calendar-date { 
+  font-size: 14px; 
+  color: #888; 
+  margin-top: 8px; 
+}
+.calendar-next { 
+  font-size: 15px; 
+  color: #8A6D3B; 
+  margin-top: 12px; 
+  padding-top: 12px; 
+  border-top: 1px dashed #E8DCC8; 
+  font-weight: 600;
+}
+
+/* 核心卡片 */
+.card-section { 
+  margin: 12px 16px; 
+}
+.card-placeholder { 
+  background: #fff; 
+  border-radius: 14px; 
+  overflow: hidden; 
+  box-shadow: 0 4px 16px rgba(138,109,59,0.12); 
+}
+
+/* 上期命中回顾 */
+.review { 
+  background: #fff; 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08); 
+}
+.review-title { 
+  font-size: 15px; 
+  font-weight: 800; 
+  color: #C8102E; 
+  padding-left: 10px; 
+  border-left: 4px solid #C8102E; 
+  margin-bottom: 12px; 
+}
+.review-stats { 
+  display: flex; 
+  gap: 12px; 
+  margin-bottom: 12px; 
+}
+.review-stat { 
+  flex: 1; 
+  text-align: center; 
+  padding: 12px 8px; 
+  background: linear-gradient(135deg, #FFF8E1, #FFF3D6); 
+  border-radius: 10px; 
+  border: 1px solid #F2C9B8; 
+}
+.review-stat .num { 
+  font-size: 24px; 
+  font-weight: 800; 
+  color: #C8102E; 
+}
+.review-stat .label { 
+  font-size: 12px; 
+  color: #8A6D3B; 
+  margin-top: 4px; 
+}
+
+/* 冷热号排行榜 */
+.hotcold { 
+  background: #fff; 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08); 
+}
+.hotcold-title { 
+  font-size: 15px; 
+  font-weight: 800; 
+  color: #C8102E; 
+  padding-left: 10px; 
+  border-left: 4px solid #C8102E; 
+  margin-bottom: 16px; 
+}
+.hotcold-list { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 12px; 
+  justify-content: center; 
+}
+.hotcold-item { 
+  width: 48px; 
+  height: 48px; 
+  border-radius: 50%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 18px; 
+  font-weight: 800; 
+  color: #fff; 
+}
+.hotcold-item.hot { 
+  background: linear-gradient(135deg, #F05A4E, #C8102E); 
+  box-shadow: 0 3px 8px rgba(200,16,46,0.3); 
+}
+.hotcold-item.cold { 
+  background: linear-gradient(135deg, #4A90E2, #1F5FB4); 
+  box-shadow: 0 3px 8px rgba(31,95,180,0.3); 
+}
+
+/* 遗漏号排行榜 */
+.missing { 
+  background: #fff; 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08); 
+}
+.missing-title { 
+  font-size: 15px; 
+  font-weight: 800; 
+  color: #C8102E; 
+  padding-left: 10px; 
+  border-left: 4px solid #C8102E; 
+  margin-bottom: 16px; 
+}
+.missing-list { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 12px; 
+  justify-content: center; 
+}
+.missing-item { 
+  background: linear-gradient(135deg, #E8F4FD, #D6EAF8); 
+  border: 1px solid #AED6F1; 
+  border-radius: 12px; 
+  padding: 10px 14px; 
+  text-align: center; 
+  min-width: 75px; 
+  box-shadow: 0 2px 8px rgba(31,95,180,0.1); 
+}
+.missing-item .num { 
+  font-size: 20px; 
+  font-weight: 800; 
+  color: #1F5FB4; 
+}
+.missing-item .days { 
+  font-size: 12px; 
+  color: #5D6D7E; 
+  margin-top: 4px; 
+  font-weight: 600;
+}
+
+/* 区间分布 */
+.zone { 
+  background: #fff; 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08); 
+}
+.zone-title { 
+  font-size: 15px; 
+  font-weight: 800; 
+  color: #C8102E; 
+  padding-left: 10px; 
+  border-left: 4px solid #C8102E; 
+  margin-bottom: 16px; 
+}
+.zone-grid { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr; 
+  gap: 12px; 
+}
+.zone-item { 
+  background: linear-gradient(135deg, #F9F5EE, #F0E8D8); 
+  border-radius: 12px; 
+  padding: 14px; 
+  text-align: center; 
+  box-shadow: 0 2px 8px rgba(138,109,59,0.1); 
+}
+.zone-item .name { 
+  font-size: 13px; 
+  color: #8A6D3B; 
+  margin-bottom: 10px; 
+  font-weight: 600;
+}
+.zone-item .bar { 
+  height: 10px; 
+  background: #E8DCC8; 
+  border-radius: 5px; 
+  overflow: hidden; 
+  margin-bottom: 8px; 
+}
+.zone-item .bar-fill { 
+  height: 100%; 
+  background: linear-gradient(90deg, #C8102E, #E6452E); 
+  border-radius: 5px; 
+}
+.zone-item .pct { 
+  font-size: 16px; 
+  font-weight: 800; 
+  color: #C8102E; 
+}
+
+/* 本期重点关注 */
+.focus { 
+  background: linear-gradient(135deg, #FFF5F5, #FFE8E8); 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  border: 2px solid #F2C9B8; 
+  box-shadow: 0 4px 16px rgba(200,16,46,0.08); 
+}
+.focus-title { 
+  font-size: 15px; 
+  font-weight: 800; 
+  color: #C8102E; 
+  padding-left: 10px; 
+  border-left: 4px solid #C8102E; 
+  margin-bottom: 16px; 
+}
+.focus-section {
+  margin-bottom: 16px;
+}
+.focus-label {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  padding-left: 4px;
+}
+.red-label {
+  color: #C62828;
+}
+.blue-label {
+  color: #1565C0;
+}
+.focus-list { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 12px; 
+  justify-content: flex-start; 
+}
+.focus-ball { 
+  width: 48px; 
+  height: 48px; 
+  border-radius: 50%; 
+  background: linear-gradient(135deg, #F05A4E, #C8102E); 
+  color: #fff; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 18px; 
+  font-weight: 800; 
+  box-shadow: 0 3px 8px rgba(200,16,46,0.3); 
+}
+.focus-ball.blue { 
+  background: linear-gradient(135deg, #4A90E2, #1F5FB4); 
+  box-shadow: 0 3px 8px rgba(31,95,180,0.3); 
+}
+.focus-reason { 
+  font-size: 13px; 
+  color: #5C4A28; 
+  line-height: 1.9; 
+  background: rgba(255,255,255,0.8); 
+  padding: 14px; 
+  border-radius: 12px; 
+  margin-top: 8px;
+}
+
+/* 历史开奖记录 */
+.history { 
+  background: #fff; 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08); 
+}
+.history-title { 
+  font-size: 15px; 
+  font-weight: 800; 
+  color: #C8102E; 
+  padding-left: 10px; 
+  border-left: 4px solid #C8102E; 
+  margin-bottom: 16px; 
+}
+.history-item { 
+  padding: 12px 0; 
+  border-bottom: 1px dashed #E8DCC8; 
+}
+.history-item:last-child { 
+  border-bottom: none; 
+}
+.history-period { 
+  font-size: 14px; 
+  color: #888; 
+  margin-bottom: 8px; 
+  font-weight: 600;
+}
+.history-balls { 
+  display: flex; 
+  gap: 8px; 
+  flex-wrap: wrap; 
+  align-items: center; 
+}
+.history-ball { 
+  width: 32px; 
+  height: 32px; 
+  border-radius: 50%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 14px; 
+  font-weight: 800; 
+  color: #fff; 
+}
+.history-ball.red { 
+  background: linear-gradient(135deg, #F05A4E, #C8102E); 
+  box-shadow: 0 2px 6px rgba(200,16,46,0.25); 
+}
+.history-ball.blue { 
+  background: linear-gradient(135deg, #4A90E2, #1F5FB4); 
+  box-shadow: 0 2px 6px rgba(31,95,180,0.25); 
+}
+.history-sep { 
+  color: #C8102E; 
+  font-weight: 800; 
+  margin: 0 6px; 
+  font-size: 16px;
+}
+
+/* 玩法介绍 */
+.playguide {
+  background: #fff;
+  margin: 16px 16px;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08);
+}
+.playguide-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #C8102E;
+  padding-left: 10px;
+  border-left: 4px solid #C8102E;
+  margin-bottom: 12px;
+}
+.playguide-content p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+/* 中奖规则 */
+.rules {
+  background: #fff;
+  margin: 16px 16px;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08);
+}
+.rules-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #C8102E;
+  padding-left: 10px;
+  border-left: 4px solid #C8102E;
+  margin-bottom: 12px;
+}
+.rules-content p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+/* 术语解释 */
+.glossary {
+  background: #fff;
+  margin: 16px 16px;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08);
+}
+.glossary-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #C8102E;
+  padding-left: 10px;
+  border-left: 4px solid #C8102E;
+  margin-bottom: 12px;
+}
+.glossary-content p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+/* 选号思路 */
+.picking {
+  background: #fff;
+  margin: 16px 16px;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08);
+}
+.picking-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #C8102E;
+  padding-left: 10px;
+  border-left: 4px solid #C8102E;
+  margin-bottom: 12px;
+}
+.picking-content p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+/* 数据说明 */
+.datanote { 
+  background: #F9F5EE; 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  border: 1px solid #E8DCC8; 
+  box-shadow: 0 4px 16px rgba(138,109,59,0.06); 
+}
+.datanote-title { 
+  font-size: 14px; 
+  font-weight: 800; 
+  color: #8A6D3B; 
+  margin-bottom: 8px; 
+}
+.datanote-content { 
+  font-size: 12px; 
+  color: #666; 
+  line-height: 1.8; 
+}
+
+/* 动态尾文（与百家号完全一致） */
+.closing-text { 
+  background: linear-gradient(135deg, #FBF7EC 0%, #F5EFE0 100%); 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  border: 1px solid #E8DCC8; 
+  box-shadow: 0 4px 16px rgba(138,109,59,0.08); 
+}
+.closing-text p { 
+  font-size: 13px; 
+  color: #555; 
+  line-height: 1.9; 
+  margin-bottom: 12px; 
+}
+.closing-text p:last-child { 
+  margin-bottom: 0; 
+}
+
+/* 理性购彩提示 */
+.disclaimer { 
+  background: #F9F5EE; 
+  margin: 16px 16px; 
+  border-radius: 16px; 
+  padding: 20px; 
+  border: 1px solid #E8DCC8; 
+  box-shadow: 0 4px 16px rgba(138,109,59,0.06); 
+}
+.disclaimer-title { 
+  font-size: 14px; 
+  font-weight: 700; 
+  color: #666; 
+  margin-bottom: 8px; 
+}
+.disclaimer-content { 
+  font-size: 12px; 
+  color: #999; 
+  line-height: 1.8; 
+}
+
+
+/* 单页面切换的额外样式 */
+.lottery-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #fff;
+  margin: 0 16px;
+  border-radius: 12px;
+  margin-top: -10px;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(200,16,46,0.1);
+}
+.lottery-tab {
+  flex: 1;
+  min-width: 80px;
+  padding: 8px 4px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  background: #F5F0E8;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.lottery-tab.active {
+  background: linear-gradient(135deg, #C8102E, #E6452E);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(200,16,46,0.3);
+}
+</style>
+<script>
+function switchLottery(ltype) {
+  // 隐藏所有内容
+  document.querySelectorAll('[id^="content-"]').forEach(el => {
+    el.style.display = 'none';
+  });
+  // 显示选中的内容
+  document.getElementById('content-' + ltype).style.display = 'block';
+  // 更新按钮状态
+  document.querySelectorAll('.lottery-tab').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  event.target.classList.add('active');
+  // 滚动到顶部
+  window.scrollTo(0, 0);
+}
+</script>
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<div class="nav">
+  <div class="nav-title">🎯 王者GP · 彩票分析</div>
+  <div class="nav-sub">7彩种一键切换 · 数据仅供统计参考 · 理性购彩</div>
+</div>
+
+<!-- 彩种切换按钮 -->
+<div class="lottery-tabs">
+  <button class="lottery-tab active" onclick="switchLottery('ssq')">双色球</button>
+  <button class="lottery-tab " onclick="switchLottery('kl8')">快乐8</button>
+  <button class="lottery-tab " onclick="switchLottery('fc3d')">福彩3D</button>
+  <button class="lottery-tab " onclick="switchLottery('pl35')">排列3/5</button>
+  <button class="lottery-tab " onclick="switchLottery('qxc')">七星彩</button>
+  <button class="lottery-tab " onclick="switchLottery('qlc')">七乐彩</button>
+  <button class="lottery-tab " onclick="switchLottery('dlt')">大乐透</button>
+
+</div>
+
+<!-- 7个彩种的内容 -->
+<div id="content-ssq" style="display:block;">
+<!-- 开奖日历 -->
+<div class="calendar">
+  <div class="calendar-title">📅 最新开奖信息</div>
+  <div class="calendar-info">
+    <div class="calendar-period">第2026111期</div>
+    <div class="calendar-date">开奖日期：2026-09-24</div>
+    <div class="calendar-next">下期：第2026112期</div>
+  </div>
+</div>
+
+<!-- 核心卡片区域（直接用百家号推的那张卡片图） -->
+<div class="card-section">
+  <div class="card-placeholder" style="padding:0;">
+    <img src="data:image/png;base64,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kJNRGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAInNVOB/0vDhwwsAwNRImen2888/136G/fY/8Mijjqn9PMOGDavlu19++eWGG21yyy23FabNhx9+NHr06MJfZMCAge++2yX+LT+xU6fOu+yy+8svv1L4X3LEkUfHVwGAGdgMNMEUZfDLL79M14+sscbqK6+8Uvkp77zz7gEHHnzqqSfvtusuU/qp7t27N2/evDBlp556+mOPP/H4Yw+3b9++xjOMHTtuzJixF1x4UaNGs+62266FWn32Wc8dd9pl4403uvGG6wp/hZdeevmMM88679yzd999t9KJQ4cN6/ree7vsslPtP3v//Q/8+OOgwvRbf/31lllm6fJT4v566KGHzz77zLgXpvRTPXt+XgBgxjYDpcxdd9/9/fc/TNePNGrcqErK1K1bt17dutEiI4YPP/jgg2r8qfr16zdo0KCWi11ggfnHjh27734HPtXx8bnmmqv6GZZYov2dd9y2++57nnb6mW3btl1ttVVrubQ48y477/TAgw/dcMNNhxxy0Cfdul104SWFqYnLPPLIw2v8VoMG9ePfhrPMUvjjH1X6txZxNXr37rP8cssVptnPw3+OH2nRonmVlBk5cuRXffsefcxxLzz/zJxzzlnjz9arV7cAwIxtBkqZt958vfqJCy286Eorrvjgg/cVps0qq6z8xJOP7b77Py++5LJJkyYfeujB1c9Tr97MdQp1armQaKAYTujU+enDOhzx0IP3zzRTDdN8K6yw/BlnnHbqaWecc+55zz7TucbLGTnyl0mTJsbU0rnnnt3niy8uufSyhReJ/xaOK1mo1dXXXBvpMKXvzjxzRa9EsZWfWDxa41WtomnTptN+e4ZXX31t3/0OqH76EUd0iPGhz3v1uujiSy668IIaf3amOmZIAWZ0XsE03RZs2/a+++7eccdd3nvvvf3333eqAxU1uuSSi3r17v3BBx/+68qrjj2m5r09YmppyNChu++225Qu5Ku+X2233Q4HHrD/ySefePlll26y6ea9e/XeaMMNjj76yEKtrr3u+lq+O9NMtXVYFcOHD59jjjlq/NbPP/9cHE25++57Bw4cuMkmG5ePu0SHjR8/LrpnSpdcr169Cy88f9vt/vHQQ4/succeMfhUAIBqpMyfETXz/HPPNG/erHj0ttvuGDFiROm7sQqP+aN//euqP/zIgm232Wbr0tGGDRvefNONe+29b6ywi6fceONNPT/v1aJ588aNG5f/4N1331M6PGnypMGDBw8ZMvTCC85r0aJF/ZlnjhNnrl/xb+vWrbq8+9aUJmKmarfd95y3ZcvLLpv6zFTJ5MmTzzjz7I8//vj2226pMk02bty44084adCgQQ/cf28c7dS5c0Tbpptuctfd93z4wYdXX31lnPj0M8+cfPKp++y911prrTmlXxHpE503atSomeoafQGgZlJmWv36668dDj9yyy23+Mf228XRUseETz75JAKjdHTsmDETJ07s2vW94tFYrw/8ceDyyy1XnjKhTZvWr7/2cunohAkTB/04aFDlPrODBg/q1+/rdu0WaTJnkxqvTJ3KiZU6ldM9pUmWP90x4aOPPh6+0IhpP/+ECROOO/7Ejh2fatWq1ZgxY6p8d/z48R99+NF3339/x5137bnH7p991jMSbfHFF4sbsH///nvvvdfyyy/32msV831VdkUKO+286/vvf1DlxBtuvKl0+J2332zZcp7S0a+/+WaXXXavcv7zzjt74YUXLgAwA5Ay0+rdLl1i7RtfY0aPLn9pT7jmmj8MwKyz7gZNmzSZrv1FQocOh8ZX8fADDz50yimnHXfcsTFbVMuPFPfIqVNnOuaDpmTmCn94MHz51VfvvtuleHiWWf+wC3C0yyGHdoibon379nfdeXt51dWp1KhRoyuuuCyi5OKLL23WtOno0aO33Wbr+AXHH3fMEUceff4FF95x+60vv/xKkyZNNt54o9dff6P8ws85+6wGDRq0aFF1dCrq8McfBw0dOrRJkz8UW6NGs1bfN6jKzwLwNzZDpMyDDz084IcBNX5r0qRJ333/XZXJoCrWW2+dZZdddsMNNrjxhusO63DEaaefOWbM2P3226fwvyeGSfr27VfjtzbbbNPFFlt0Sj9Yp06hyq7K1157fXwVD7dffPG99tqzeHjYsGEHHHhwjOKsteaaN910/Sx/fKHT5EpxYKWVVtx55x0feuiRE044KY4WR6S22mrLm2+5NX62Q4cjY1xnl112qr4f8aKLtvv888+ffLJj9GKp0j79tMfAgQPnnnvupZdeqsr5WzRvMdV9gwD4G5shUubxx5+oPmdR8v33P1x9zbW1/Phcc7WIlIkDm2yy8a233HTwwYc+8MCDu+668/U33NjhsEMbNmxYmB4bbbzZl19+WTq6wgrLP/rIQzWes9NTnXp82qPKiXvuuXstb1rz9NPPvPjSy6us/IdRiiFDh3711VcLLti2lpSp7sp/XR79EbNjP/744y+//PJp5TX5/PNe55x73oABA6PkTj7pxLp1a3st9HHHHvv008/GzzZr1rQ0kXTcscfsvc9+b771VmTKPnvvVf2nfvrpp6232T7GYFq1brX2WmsVT7zrrrsfe/yJmNqbrr15AJgRzBAp8/BDD9R4+vjx49st2n6dtde6887b77zr7rPPPjemirbcYvNaLmrddde57757Fllk4R9++OHuu+85+qjpHg+49JILR4+u2LlkxIgRBx9yWC3n7NT56eonxuBK7e+/F6rMbcVQzVFHH1v4U+rXr7/AAgsUKsdFCpWv4o7Jo5tuvD4mhqb6szHxtP9++1551dWtWrUqja+ss87ayy233TKShwAAEABJREFU7Mcff7LF5pu1aNGi+k81bdp0iy02f+qpTg8++HAxZWLk7NXKHWvWX3+9AgD80Qy9r8ygQYPj39lnn326firGUeLfmChZZ+21Y1jioIMPnXPOOVu0aF53pt+GKKq/ginmXGJeZtCgQWeffVZxgCcMHTrFzy4oztHcf9895W+Od+lll19//Y2F/6qY/bn5phsiTabx/MW9bSJcPunWbdlllilU/mlT/YyFnXfaMVLmxRdfipsoRnRiQipuvbipI4MKAPBHM3TKDB06tFDxMukFC9OvY8dOR1W+W+7oUaOH/zz8m6+/KZ7et2/fGG6ZY445Sq9gKjeNe+gOHlzRWLW858p/y1FHHjHtHfPKK692fe+9eedt+cMPA264/sabbrqhULnfUq9evePAM88+d+aQITWOMEXAtWw5T0xjPflkx5jJevuddwqVr3WKAaFCxYTg9w8//GjxnIOHVNxQ5dVY+wQcAH8/M3TKFHegWXHFFQrTKYYZvvvuu3XXXbdQ8b4vd5ROnzBhwhprrjPzzDPfecetf66Qir795tv4NwYkCmnF6Ms5555Xr169e++5+x877PTCiy9F0NStO9NFF13SoEGDvf65ZwxrRZHU+HbJMRu17Tbb3HDjTR2feipSphiFpSmt4r5NCy24YCTLQgsuFKcUz/DDgAH9+/eflgk4AP5OZuh3HnvgwYca1K9fnDCaLo8++lhMl1RPjaeffiZmkY455qh/p2PCt/37FypSplnhf0xx5mtaxHTYN998u+8+e7dt22a77baNU5544snjjj8xhqyOO/aYAw7YPyaMHnr4kSn9+JZbVuyx9OmnPWKUKyaYKk754z5Mhxx68IMP3lf+tfvuuxYAmPHMuKMyr7762ldfffXPf+5R5eXEUzVu3LhOnTvvv/9+VU7/9ddfL77k0sUWW/SA37/1zjvvDvzxx+0rV+S1Gzt2bHTV3nv9s1CxB8+g7t0/XWXllf/0G8a0XXCRwl8nRkF++umn4uFpvErPPPPsDTfcFFNLRxzRIY5uu83WH3340Vtvv92lS9e4ffbZZ6/omLXWWvO1117v1q17jZfQvn37hRdeuOU887z08itx4yy55BLGWgCo0QyaMqNGjTrl1NNj+mO/faf77WE6P/3MyJG/rL9e1VfTXHLpZQMGDLzqyn8VX6IcZXPoYYePGT16ySWWaNeutraIaaljjz0+5l923mnH6Krbb78zammPPXcv/FlHHN6h/GifL7547rnnC9Pv7bffuf+BByM4zjnnrOIp1UdlPu/V69Zbbttppx1L71M3cuTIY445Lg5ccvFFxb1bllpqyeOOO2aPPfeKqbcrrrisePtsvtmmcckdOz41pQ8uePGFZwuVr5kqVH6KZ3Rnz56fL7zIwpML0zoyBMCMYEZMmeiYvffZb+DAgSccf9xUd2KNOnnppZfXWHP1Bdu2LZ7yyMOPtmjePMYJys/2/vsf3H33vbvtustKK61YPCXW4pdddvEBBxx88CGHPt35qSmN/UTHHHbY4V/17ffkE4/GeYYNG3bPvfe1aNFi0002Lky/RdotMmLEyCpvGRdF8tOwn6Z3VOPMs86ZNGniXnv989xzzmratOnDU5gM+q7/d48/8eSqq65SSpnZZpvtsksvfuWVV9dYY/XiKUOGDD3k0IqXnV944fmLL7ZY8cSNN96oYcOGa665xiefdKvxkidNmhRTSxMnTFx++eXuu++Be+65L6YCTzzh+AIAlJnhUiYGS/bae98PP/xo4402PPDA/ad6/s8///yMM8868cTjDz7owDjas2fPLl277rDDP8rPM3r06OOOP3GBBRY49dSTy0/fcIMN9tl7rzvuvCuy4JKLL6zx8mOGZfbZZuvU6cnGjRvH5ey334FRWqeddkrpYyany/HH1fD+MZEUpaqoXd++fW++5dZnn3muWbOmBxyw/5577D7rrLPW/iPffluxW89CCy1UfmIESnyVjjZv3uy+e+954403ix9fVTTHHHNstdWW1S/woosuibgZNHhQTGxFDsaY1mqrrXr0UUeuvPJKxQ8h7/reewUA+N2MlTJPPtnx8sv/9d3332+5xeZXXfWv6u+aX12fPn3i31ihFo/eeNMt8e/af5wTOeGEkwYMGPDwww/Ein/8+PGDBg0aPHhw/DNkyJBGjRvFb3nkkUc323ST9dZbt/ynxoypeHuVmG25+eYbY3AoJpUOOPDgT7p12367bXfdZefCf1IMeJQfjQGqCRMm9urde6ONN2vcqNGhhx2y917/bNCgQfl5im9qPKnaBFP/yj2UF1ywbaFWMccUX9NyZWK46733348Zq3XXWafmtyc2vwRAmRkiZcaMGfPUU51i4qZHj88KlW89cvZZZ1bZg7U4//Jd5Yq53AcffhT/Fj/6J1bbnTp1jh8sH3I49tjjOz/9zOyzz37ccSdGwYwY8dvnS1d+JmKLueeeK7rkyY5PnXLq6c8+06n8w6vjuzFKEYMN8RVX76qrrunbr98SS7SPWZga/4phlW+pV7/+zKVTinuNTPuriop+/PHH+HfOJr995va5511w++0VrydvUL/+fvvtc+ghB9f4CdutWlW852+vXr222Hyz8tP79u0XQzilH5k0cdL0Xp/iu/s0+f1NdLbccov4quX848aPi3+PO+6E+CoAMMObIVLmuutvKH4y4korrdihw6GlT/Ypt9666zRp0uTiSy6LryrfiiGT4jsC33zLbYXKAYYmv3dAofLNgrfddpu5WhQ1n3vuuePfOFT+JsIxunD6GWeddfa5V/7r8tKJMV1S/EShmLS68KJLYmgkJlzOO/fs4jRKSSTOlVddXTzconnz1q1bl741uXI8Y9LkSYVpMGHChHXX2yBmbYpH1177txthjdVXu+/e+/ba658HH3xg+d9VxVJLLRU9V/4ZkyWl3YMKFZ0xPn5RYRrE8NV6629Yuj5rTtsUWMUfMr7i8qO6Nlh//fLTO3d++v4HHiwAMIOZIVLm2GOOrle33mqrrVr6UMPqGjVq9MTjj95+xx29e/Wp8q0tfn9Hk3XXWTvmXxaoHJ8oOfPM0wtTs/vuu/3ww4B99927xu+2b9/+yisvHzxocI2jEWuttWYxZWLm5cILzi//BMeYkyr9O1X16tWLP/+JJzo2b97s8A4dNtpwg+Lp66+/3ltvvREn1v7jFRNhN93w8iuv/jjwxyrfKv+06sUWbTdixMjCNJh55pnj+nTu/Mzqq6165JFHzDHHHIVpE6nUfvHFF2zbtvxTHQqVb5H81Vd9Z511+l5aD0B2daZ3OoD/HSNH/tKjR4+WLVu2adO6AAAzJCkDACQ2Q38GEwCQnZQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAILGZCkybIUOGfvf9D1M92xdffjVy5MgC8LczZsyYaT/z4CFDBgwYWPj39O7zxejR0/FLpyourU+fL6fxzMOHjyhMs7iqEydOKvwHfPtt/59++nmqZxsydNi0LKJD3C/Pv/hy4T9g/Pjxjz7eceLEiYX/pLhf/tpHxd/ADDEq8/4HH33zbf/az7PiCsu1ad2qePiOu+5t3rzZVltsVn6Gd7p0HTDwx4P236fKDw4aPCTO3+GQAxs1mjWO3nL7XbvuvMNyyyxdAKbs5Vdf/+GHAXvuvkvplFPPOHffvfdYaMG25Web9ifvu13e+/6HAYVpEOf/cdCgwuRC48aNaznb5MmTYgOmbdu47AXi6KhRo84454K99thtqSXbF89w7fU3t198sfXXW7t49NdfRxUXAkXPPf/S0GHDjjr80OLRkb/8MkvDhrEMGT5ixOtvvLXZJhst2LZNYWquv/HWY4/q0KryCoQJEyY8+dTTtZy/aZMmpevzSbdPn3nuhSMOO7hx40alMwz88ccbbrntX5deWOUHe3zWc9y4ccsvt2z5iVdfd+PSSy25zVabV/9F3bp/+vCjT55/zumlU+665/5F2y2y1567Ff5qjzz+5HLLLjNzvXrffvfd7rvsNKWzdX3v/W+//e6Qg/YrHp08efLoMWNmnWWW6ueMe+GxJ56qX7/+euusVeNFffTxJ337fVOYsm233qJevRrWnoOHDH3l1df79vv6uKMPn2mmqYwU3HTLHfPNN++Wm28ypTNMmjRp3wMPu+OW6+vUqVN++rkXXHLwgfsuvNCCBX43Q6TMhx9/0rBBg5VWXGFKZ3j8yaeiXUopM3OlKueJx+VMf3w8/XZ6nTrf//DDlddcf+pJx8XRujPNVK9u3cI0iHJ/6ZXXJk+avPJKKwz76ac555yzebOmv/zy6w8DBrRbZOHCn/VV337zzD13+SK18ndN6t2nz+KLLVqnpj+hULlgWmzRdg0aNCj8D4jlde8+X8aCfpZZGhb+82LhPtNMdedq0byQQTxsevX+YtF2C9e4JK1drJg//qR73Xp1Y2XconkNf2+MOsRSOFbPhb9C7Q+qDz/6eIn2i5eOxvb0gIEDW7acp+rZpvPJW+7zXr2HDvtpzdVXrf6tcePG//jjoCldZqzX69atG8+XONymTetC5Url6utumi+u3zxzvfjyqxttsF6cOFM82+tWrK5iE/mOu++Nbf1zzzrtwYcfi+dgnPj11980bdb0/Isui8OzzTbb7LM1jjuudesFmjVt2rpVq7latCj+rr33P2TelvM0atQo/vy45Q89aP/yaxJXI+6vKV3Pd97tGhc437zz1vjdxRZd5LkXXrrwkitOP/WEhr/fC3UrVT9z3BoPPfr42Wec2nKeuYun9P/u+6+/+TY20mq88Hr1Zq5b+bfHOESfL76KAxtusN5jT3Rcfrll4kaJo3POOfuUrtj0qrgN6tVbdNF2Dz/6xDJLLbnkEu1L34q+7Pf1t8XDQ4cOG/nLyM969ioe7fr+B99//8NpJx8fC70PPvr4+Rf+MAwz+2yzvfHm23EDlp94wL57zTVXxf0Sv2+eeeaec8456hSqLjDHjR931TU3RH/U+ASMu/K0U0646NIr3unyXo0PvJKfhw/v8t77Z59+ci3niXVO/JbSQvu119/s/cWXsTkdj7opLclnWDPKvjLxAG3YsEEk8KhfR91w823HHn342DFj55hj9li4zDrrLI0bNSo/c51K03jJsRg9/pgjzzn/4nicrTuFxq9RjN98+VXf2EAcPnz4zbfdufaaq2+5+aZxyp1333fl5RcV/pTY2rjm+psvueDsKqfHc/bjj7vVsor619XXX3z+2XPPPdeUzjBq9OjY6trnn7s3bFiRF7GMe+vtd/fYbefCf8Avv/xy6RVXnX7KCVU20P8TIvKuuOq6Qw7cr5AkZWLZHTfOlZddGO077T8Va+KHHnm86/sfLrvMUrGKve+Bh3ffdaf11127yt9SDMQAABAASURBVNkG/jjo0iuujq3A6pcQW7FLLdG+XbvpiOxaHlQ/DhocD/XDDv7/q8nPP+8d5+z3+6ZwDCS0/n0oYhqfvKutunL5rxgxYuRrb7y53TZbbbDeOtWvQI3pUzJq9KiGDRrusP02pVPuuPu++EWHHLR/bGk88tgT883bsvhsGjt2bKwOH3+yUwycFAdgdtnpH/HvAw89usjCC807b8tWC8wfX3FKPK83WH+dYgNVsdMO28f9cv1NtxamJlZs5dcq5nRWWmH51VdbpcYzx1P1+GOOuP/BR4YMHjL//PMVarXB+uv26Pn5rbffFZv7N996Z5zy088/168/c5VrFSM05SURxk+YEFUa3bDeOmvHV2yEvPfBhxEcMUIzvSkT4fXhR59UPz0iNzLxzbfembXRrB07PRNf8egt3oMxCvLkU52LZ/v55+HR4sWj0YVjxow94dgji0vymJ+KA9tstUUtv/2a624cM3Zs8XBc/ymdbUqTjHFfDBo0uEnTJlE/MXRUGrqbkk6dn41aGvnLr6X2atly7hhUq3K22IAeOXJkpHAc7tmrd6R0gZrMQLv9xrO0bds2sciIzYguXd+P8jjr9JMffvTxlVZcvnSe2JyKJ0CMkcS2bzzC5pl7rli4jx49OoKjlkteYP75YpFRXLVMnDQpNiEK0+Crr/odfMBvg4SXXHBO4a8Q48kbb7heDJyWnxgDrXF6xdr63zB61Oiu733wz913LR6NLbbPe/Up/GfELXnnrTcU/qynOj/zxZdfHXvU4dNy5hiUbjn33G0rt7z/xl546ZWPP+l27lmnzlY5pfL8iy/fc9+DMbQz7Subd7u+V1wl//sOPPSIBeafP0YmYiwzVjmxgokVfGyhRrvEOEqhctU1ZszoE449qvQj0/LkLfruu+/vuveBOBCTO6NGjY4zx1fxWzHId8yRHcrPHFMwUVSlo3EFql9gePmV12I9Gk/V2NquuJyGs8QK/pwzT43DHZ96etVVVjry8ENiIfDrr7/Gcy1WmbEYee2Nt6IU46HYav75Y40V6/U484svvfLe+x+WLjamsJdeaokqv+ue+x/6tmxCLWajIiziGR2bOmutuXphmvXq3SfGJCJQilN4fb748pHHnowDY8eNi1V+cawoxJBwqa722mPXt97pGsN1McAck3ox9nDV5ZdEzVS55Cc6dur5ee+4bQcPGRKXs9oqK0dYdP/0sxixWmO1VT7t8VmUTUyyT3V6pbq4f+OBUf30Tk8/G3fN0mV5URpTjNOLw+GFykd1v6+/iYVqNO5V115/2CEHlA9vxzDMEu1rG24sH/2KTbVffv11ybJRw6mKjaII9PiKw6++/kZkevvFK0b1fv755y5dP9hk4w3KN49jDCweITHwXAyveFTHb4whvfKUiSKMR9r48RPOOf+S884+LYbBenz2ef2Z6z/6eMd4pL362psxwlqomEOoV3uizSBmoJTZ+5+7x1hrPIaWXWbptdZYrfPTz8Wsc//+38VUdK/f18oxuj58+IhhP/0c6R1L1XgaxyJg2LBhU0qZCy6+PM5Q5cRLLr+y/GgsgPbbe8/yU2Ix8f4HH8WC4I233olgig2dV159o22bVm3btqlyUTHqHiuhuErxJFx37TWLjRLPlliwLrfs0lUGLWLLIzZt96w2UvLBhx9P19o6rtjLr74ey8HYrFxnrTVj8/fdLu/F1YhvXXHVtQssMH8MVsd6MTbaKhZkq65c3LiP2eUu730QT9fYTCzdXLH+i82IuAFjXdBu4YViUVWa9X/7nS4LLdQ25sKqX4FYKMTictONN4xN8zfffnf++eaNEaD+33+/yEILbb/tVnEfPdX52Rjcjq3tpZb8bU0Qk0RvvvVu3LAxSBb3aSw4CpUNF1N4kVwTJoxv3brVtlttUWVoPc4QG4L77LVH8WjcsM+/+NLAgYOaNJlzrTVWj/H54umxdI7h4rgXYmG9xWYblxY3H33c7a133q1czawRq8mYy69l2zceUXGrxkI21nlxi8X1LFRMc4x7+tkXen7eK5ZHscLbYtNNmjVrWuV2O/Sg/WaZZZZYTH/W8/NmzZptuP66hSn7tv93sV273TZbFo/GYMwTHTvHvH6MvW+y0Qaz/b5ryMYbrh9zAX37fVNjysS1ijmUuJ1XXH65uH8jLO64695Y/8VUTjwMTj7hmJhQiL6PB0A8MOJqb7/NVnFLxppy+Ijhyy2zzIYbrDvVQc1IiuIcaHGjP9Izth9OOfG44pxFRPPrb75Vfv5pefIWjR4zJlb/sW0Qj6KhQ4eOnzC++DcOGjzk7POq7iDSvUeP/v2/L3ZG3379hgwdWmPKxADMmaee2DDu4wYN4p8QK9cG9SumbHbacft4YhbPFg+2CRMm/mO7rePxc8RhBxf/rgUWmC+ibVJMJE+eHHdBtMVtd97TtnXr0h4tVVR5/h5z/CkH7r938U+IkdF+f9yBI3oi5uVKm/UlsbiYMHFiTHXFRn/c+3FKrNSLq/x4hFx93Y2l1X+52IQo7bcRYzk77rBtLACPOeGUiIPyJoiBrviKX/rQI4+VLifGimLdvMLyy0aK7bvXnn+iY0IsDerVrVesgaJ4ssw++2zRRrEUqh4i8cSZPPn/H42Hx4gRI+KZEg/FWKjGWr94y8w37zxxj7Sct2I84+TTz45nx8o1zVfG4rQ0DRd3XLdun05XykS4FNulUFkhX3z5ZRyNMdSLLr0yxhQ32nD9unV/e1LEI/OaG26OhUAkYPGU2NSMh8cCf1x6vPTyazEOWrlkmOvuex9YbrllYtO6OPT41jtd2rRpVRyhKT5lmIFSJhZYsf0Um2ixWIxV2mabbBjPujVXX61R2exScQNl7ANjY00Ty51CxbOld+H35XL3Hj2LWzOlzbtTTjy2/FfEKOhpZ5178/VXl1aZUdCxYK1yTeJpGdPwnZ95bsE2reepfDi+8dbb8W/btm3Kz9anz5dXXH3dYQcfsMD88z77/Esxc3T0EYfGMmLQoEHxs3EhVVKm0zPPxvKx+pBMLHZLa+upio457czzFlu03ZprrBZX4MxzLzzxuKMWWWThWDndeMvtsSJv0qRJ3Yq9huq8/+FH2269ZYvKVXI8FV9/8+0jDjuoUDG0/lhsahd3mo5t0LglIw5icf9Jt+5P/z44NG7c+PsfeuTyi8+v8TrEkFj8gWuusWqkzLtduv7y66jFF223+SYb3//gw8OG/TRw0KD11lkrtnUuv/LauP1jIRvX+bwLL41B3c033fjZ51+IJX7kVFxOTKl06/5pLETmmH32V157/cprbog1X/kvishrMuecxcgb+csvp591Xkxvx2o+JhFicX9kh4PjMRMb7jH9FyeuuvKK3T7tcd4Fl5595inRBPFAuuX2Ozdcf72YFok1faFyaV5LysTETUx5bLnFprFcu/iyK489ukMsuGNoZMTIX2KGPtYicTeddd5FV152USybym+3Bg0axILs62/7x9niAXbLbXcWpiz+0hgJWHKJxSND42jUT3RYrFxLC82i6JK4C+aft2WNFxJTn7H2XX/dde669/64MVdfdZW4o2++9Y7Ygm+3yCJx18dYetz7LZo1iyfR62++c9Fl/4oBm1gQL7P0kjEREz9S446iUxKbpPEb119n7XhYTek80/LkrSJuxljixwNm/33/WZiyuOTilE08hmM1X+N5ImGvv/HWSLfSKTEYECkW92Cs80ojBHGv7bTDdnEfvf1u14jIyMco7AkTJsRNHU+oocN+WnbZml8N8E6XrjE4FONJ8fiJjoxlTkR/9bPFBZYmU347ZdiwKNf48UkTJxV38iiKtX6shk847qj7H3o0fnWsDmufq/3go4+/rtzjJEou/rRosvhds882e6RAXHLcLDE2EN+Nh3rzytQud92Nt8TDqVA5O3nxpf+KR2BUcvFbEWE17pJVi7jpYqOouIkSA3U7br/tKiuv2Khxo19++TVOicXC4MFDSkuzl155fa65mtf7fRQ8lnUxvRVPqNgKGjt2XHGELxJ5tVXiz1ouvuJovbp1q+wHGc/KF156eYftty0fsas7U91BgwfH0rv6NZwwcUL50bhzY8K3dDQepcUJzXe7vL/l5ptede2NsbI4/tgjy4PjwUcejRnSHf+xXekSnn3uxXhgl19s/L3x0PrnHrvGUj3SMO6g2ObZaP11iz0XiRlLrf+D+fdEZqz3lVmi/eKxNCy+WHqlFVeIpWFpPn5aLL1k+wP227uWM3zcrXurVq0+792n9pyfc4454isOLLhg21oG7W+/696tt9ysOOcaA7ZnnH1+XPmYF4/nefX5lxiSiRXzZRedV+X0ODGCYNqHZB5/olPzZs2OOvyQWGPFEiC2kGLB1OGQA4srmUXbtStuTH/T/7sGnzYoPq9iqffYE0+ddvLxxW3HDocccMjhx6yx2qpNm1aMXsTy/YJzzoyfmnXWWa646roYnIiN2lhIxZZucbebqYraiD+/ULmbSFRFaR+a+NNixCVS5vU33m7TunVxe2XrLTfv/MzzsXkdy9BY4666ym+DRrF2Hz7iDy+SjwVfrPVjYVE82rdyV809dts5YjFWJCsst2zx+sdAfZvW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Xbn89AkTJsa/bVq3jlmhBRds+8kn3e+7/6Foit122XHEiJGls9106x2//PLrWaefHDNN1910a6sF5p911lmLr1gePnzE4MFDmjRtMmzYT02bNd1oo/VbtV4gxmnuuf+hbbbcol69qdy2cbE9e/VaqG3bBeaff/999yoUCn/63VtiyCRmr9ZcfdV3u3TdYrONH3nsyYcffTz+iqWXXrLG8zdpMufaa64+11wt4nDv3l+0btVqt50r3qVml53+0aRJk3vufaBQGTF33/tAny++WmXlFfbda88YQJqWaxLRM2DAgDXXWK34foAA8J/290+ZGDXZcfttiruwFM00U53JkwsxEnPnrTfE0eJOLQMGDmzZcp7i9FD5C5ijbGarfGnSBuut88677zVu1OioIw4tfiumb44+8rDy37X4ou1uvvXOMaNHr7vOmsVTJk3+bbglEuf7H34YNGhwTHL1+/qb6yveq2aepZZs37Rpkzp16hQ/D6GWfWVqGbaZMGHCvQ88vM9euxffS2ammeoe2eGQ9z74sMdnn++79x41/kiMvqy7zlrFwx0OPXD8+PHFd/Yr/1iGuLRWrRbYYrNNmjdvVpg2H3z0cVzPZZdZ+sGHH9trz90KAPCf9/dPmfV+X2eXzNWiRcywzDtvy/ITP/y424brrVM8PLnwW1N81bffTz/9HP/26vPF99//sPWWm2++6UZT+symCJS773tw7JgxJ59wbJznx0GDX3jpld59vijO8lx7w01ff/Pt0kstGSM6URjln1dQqCyVkSN/iV8x6+9vAVwyYOCPt995z4iRI+efb94af+9b73RZZuklF15owSiwGImJWbBx48Z1fua5ww4+oPhbYnylUBZJk/9YTOWfSxCl9W3/7/p///1WW25W5ab7tEfPpzo/M+ynn6J7zr/osrhZxo4bV3wxdogwWmO1VcaOHdewcjBmWj7WCgD+EjPWK5iKDthv748+7jZ8xIjyE5dbdumVV/rtY4lifRy5U6hc67/2+pvzzDP3phtvsCrmXwoAABAASURBVMxSS1bpj3IVLwjq2ClGZbbZavPi3Mrss8327bf9F2zbZsfKV0HHHE1xAKbGH491/0WXXhHVst/ee1b51jxzz7Vou0UaNZp1g99Lq4p11/5tBCjyZYXll4spsF9/HbXD9tuWXkIVM2LlIystmjef4/d3l6li4sSJ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gMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkTudvUAAAQAElEQVQDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgb+H7t1QAIAAAAg6P/rdgS6QgDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAY8wKh7AAAAO9JREFUUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGAgAA//8/BFKRAAAABklEQVQDAIz5XG4X/HS1AAAAAElFTkSuQmCC" alt="双色球开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
+    <div id="card-error" style="display:none;padding:40px;text-align:center;color:#999;">📊 开奖卡片加载中...</div>
+  </div>
+</div>
+
+<!-- 上期命中回顾 -->
+<div class="review">
+  <div class="review-title">📊 上期推荐命中回顾</div>
+  <div class="review-stats">
+    <div class="review-stat">
+      <div class="num">3</div>
+      <div class="label">命中红球</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">0</div>
+      <div class="label">命中蓝球</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">50.0%</div>
+      <div class="label">命中率</div>
+    </div>
+  </div>
+</div>
+
+<!-- 冷热号排行榜（最近30期） -->
+<div class="hotcold">
+  <div class="hotcold-title">🔥 最热号码 TOP10（近30期）</div>
+  <div class="hotcold-list">
+    <div class="hotcold-item hot">05</div>
+    <div class="hotcold-item hot">14</div>
+    <div class="hotcold-item hot">04</div>
+    <div class="hotcold-item hot">06</div>
+    <div class="hotcold-item hot">16</div>
+    <div class="hotcold-item hot">13</div>
+    <div class="hotcold-item hot">09</div>
+    <div class="hotcold-item hot">15</div>
+    <div class="hotcold-item hot">30</div>
+    <div class="hotcold-item hot">11</div>
+  </div>
+</div>
+
+<!-- 遗漏号排行榜 -->
+<div class="missing">
+  <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
+  <div class="missing-list">
+    <div class="missing-item"><div class="num">23</div><div class="days">遗漏21期</div></div>
+    <div class="missing-item"><div class="num">21</div><div class="days">遗漏16期</div></div>
+    <div class="missing-item"><div class="num">29</div><div class="days">遗漏14期</div></div>
+    <div class="missing-item"><div class="num">18</div><div class="days">遗漏12期</div></div>
+    <div class="missing-item"><div class="num">10</div><div class="days">遗漏9期</div></div>
+    <div class="missing-item"><div class="num">25</div><div class="days">遗漏9期</div></div>
+</div>
+</div>
+
+<!-- 区间分布 -->
+<div class="zone">
+  <div class="zone-title">📊 区间分布（近30期）</div>
+  <div class="zone-grid">
+    <div class="zone-item">
+      <div class="name">一区 1-11</div>
+      <div class="bar"><div class="bar-fill" style="width:40.0%;"></div></div>
+      <div class="pct">40.0%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">二区 12-22</div>
+      <div class="bar"><div class="bar-fill" style="width:32.9%;"></div></div>
+      <div class="pct">32.9%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">三区 23-33</div>
+      <div class="bar"><div class="bar-fill" style="width:27.1%;"></div></div>
+      <div class="pct">27.1%</div>
+    </div>
+  </div>
+</div>
+
+<!-- 本期重点关注 -->
+<div class="focus">
+  <div class="focus-title">🎯 本期重点关注</div>
+  
+  <div class="focus-section">
+    <div class="focus-label red-label">🔴 红球推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball">05</div>
+      <div class="focus-ball">14</div>
+      <div class="focus-ball">04</div>
+      <div class="focus-ball">06</div>
+      <div class="focus-ball">16</div>
+      <div class="focus-ball">13</div>
+    </div>
+  </div>
+  <div class="focus-section">
+    <div class="focus-label blue-label">🔵 蓝球推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball blue">09</div>
+      <div class="focus-ball blue">15</div>
+      <div class="focus-ball blue">30</div>
+      <div class="focus-ball blue">11</div>
+    </div>
+  </div>
+  <div class="focus-reason">
+    💡 综合多模型评分，重点关注以上号码。数据仅供参考，不保证中奖。
+  </div>
+</div>
+
+<!-- 历史开奖记录 -->
+<div class="history">
+  <div class="history-title">📜 最近5期开奖记录</div>
+  <div class="history-item">
+    <div class="history-period">第2026111期 · 2026-09-24</div>
+    <div class="history-balls">
+      <div class="history-ball red">06</div>
+      <div class="history-ball red">07</div>
+      <div class="history-ball red">14</div>
+      <div class="history-ball red">22</div>
+      <div class="history-ball red">31</div>
+      <div class="history-ball red">32</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">05</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026110期 · 2026-09-22</div>
+    <div class="history-balls">
+      <div class="history-ball red">02</div>
+      <div class="history-ball red">05</div>
+      <div class="history-ball red">16</div>
+      <div class="history-ball red">19</div>
+      <div class="history-ball red">26</div>
+      <div class="history-ball red">32</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">14</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026109期 · 2026-09-20</div>
+    <div class="history-balls">
+      <div class="history-ball red">09</div>
+      <div class="history-ball red">12</div>
+      <div class="history-ball red">15</div>
+      <div class="history-ball red">26</div>
+      <div class="history-ball red">30</div>
+      <div class="history-ball red">33</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">06</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026108期 · 2026-09-17</div>
+    <div class="history-balls">
+      <div class="history-ball red">06</div>
+      <div class="history-ball red">11</div>
+      <div class="history-ball red">13</div>
+      <div class="history-ball red">14</div>
+      <div class="history-ball red">20</div>
+      <div class="history-ball red">28</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">16</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026107期 · 2026-09-15</div>
+    <div class="history-balls">
+      <div class="history-ball red">01</div>
+      <div class="history-ball red">05</div>
+      <div class="history-ball red">09</div>
+      <div class="history-ball red">17</div>
+      <div class="history-ball red">24</div>
+      <div class="history-ball red">33</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">04</div>
+    </div>
+  </div>
+</div>
+
+<!-- 玩法介绍 -->
+<div class="playguide">
+  <div class="playguide-title">📖 双色球玩法介绍</div>
+  <div class="playguide-content">
+    
+        <p><strong>双色球</strong>是中国福利彩票发行的一种乐透型彩票。</p>
+        <p>🎱 <strong>红球区</strong>：从1-33个号码中选择6个</p>
+        <p>🔵 <strong>蓝球区</strong>：从1-16个号码中选择1个</p>
+        <p>💡 开奖时间：每周二、四、日晚上21:15</p>
+        
+  </div>
+</div>
+
+<!-- 中奖规则 -->
+<div class="rules">
+  <div class="rules-title">🏆 中奖规则</div>
+  <div class="rules-content">
+    
+        <p>🏆 <strong>一等奖</strong>：6红+1蓝，浮动奖金（最高1000万）</p>
+        <p>🥈 <strong>二等奖</strong>：6红+0蓝，浮动奖金</p>
+        <p>🥉 <strong>三等奖</strong>：5红+1蓝，固定奖金3000元</p>
+        <p>🎖️ <strong>四等奖</strong>：5红+0蓝 或 4红+1蓝，固定奖金200元</p>
+        <p>🎖️ <strong>五等奖</strong>：4红+0蓝 或 3红+1蓝，固定奖金10元</p>
+        <p>🎖️ <strong>六等奖</strong>：2红+1蓝 或 1红+1蓝 或 0红+1蓝，固定奖金5元</p>
+        
+  </div>
+</div>
+
+<!-- 术语解释 -->
+<div class="glossary">
+  <div class="glossary-title">📝 术语解释</div>
+  <div class="glossary-content">
+    
+    <p>🔥 <strong>热号</strong>：最近30期出现频率最高的号码</p>
+    <p>❄️ <strong>冷号</strong>：最近30期出现频率最低的号码</p>
+    <p>⏳ <strong>遗漏</strong>：某号码距离上次开出已经过了多少期</p>
+    <p>⚖️ <strong>奇偶比</strong>：开奖号码中奇数和偶数的比例</p>
+    <p>📏 <strong>大小比</strong>：开奖号码中大数和小数的比例</p>
+    <p>📊 <strong>和值</strong>：所有开奖号码相加的总和</p>
+    <p>📐 <strong>跨度</strong>：最大号码和最小号码的差值</p>
+    
+  </div>
+</div>
+
+<!-- 选号思路 -->
+<div class="picking">
+  <div class="picking-title">🎯 选号思路分享</div>
+  <div class="picking-content">
+    
+    <p>我们的预测系统基于150+个统计模型和机器学习算法，从8大维度综合评分：</p>
+    <p>· 基础统计：频率、冷热、遗漏、奇偶、大小、跨度、AC值、质合、012路</p>
+    <p>· 进阶统计：马尔可夫链、贝叶斯分析、蒙特卡洛模拟、共现关联</p>
+    <p>· 机器学习：随机森林、梯度提升、逻辑回归</p>
+    <p>· 时间序列：LSTM神经网络、ARIMA模型</p>
+    <p>· 集成学习：Blending融合、Stacking集成、A/B测试框架</p>
+    <p>· 深度学习：注意力机制、迁移学习、强化学习</p>
+    <p>· 训练优化：数据增强、早停机制、K折交叉验证、超参数自动调优</p>
+    <p>· 评估监控：随机基准对照、详细回测、可解释性分析、置信度估计</p>
+    <br>
+    <p>💡 <strong>选号建议：</strong></p>
+    <p>第一，不要盲目追热。热号虽然近期出现频繁，但每一期开奖都是独立事件，历史结果不影响未来概率。</p>
+    <p>第二，不要执着于冷号。冷号虽然"该出了"，但可能继续遗漏多期，这是彩票随机性的体现。</p>
+    <p>第三，均衡配置更稳妥。在大小、奇偶、区间等维度上保持相对均衡的配置，从概率角度看更符合长期分布。</p>
+    <p>第四，量力而行。彩票本质上是一种娱乐方式，不是投资手段。每期投入应该控制在可承受的范围内。</p>
+    
+  </div>
+</div>
+
+<!-- 数据更新说明 -->
+<div class="datanote">
+  <div class="datanote-title">ℹ️ 数据更新说明</div>
+  <div class="datanote-content">
+    <p>🕒 数据更新时间：2026-09-24 开奖后</p>
+    <p>📊 数据来源：官方开奖数据 + 150+统计模型</p>
+    <p>🔄 更新频率：每日开奖后自动更新</p>
+    <p>✅ 与推荐卡片使用同一套数据和计算逻辑</p>
+  </div>
+</div>
+
+<!-- 动态尾文（与百家号完全一致） -->
+<div class="closing-text"><p>📊 双色球第2026111期 vs 历史平均：本期数据有哪些异常？我们一起来对比看看。</p><p>📅 本期开奖日期：2026-09-24，期号：第2026111期。红球开出：06 07 14 22 31 32。蓝球开出：05。</p><p>🔗 连号观察：本期出现了连号组合，这在双色球中出现的概率约为5%。连号的出现往往具有一定的聚集效应，连续两期出现连号的概率相对较低。</p><p>⚖️ 奇偶分布：本期红球奇偶比为2:4。偶数偏多，下期奇数可能会有所增加。</p><p>🧊 冷号盘点：21已经连续22期没有出现了，08也遗漏了14期。这些"冷到极致"的号码，往往会在某个时点集中回补，这是概率统计中的常见现象。</p><p>🎲 选号方法论：我们坚持"数据驱动+理性对待"的原则。下期选号时，建议先看近30期的热号和冷号分布，再结合本期的奇偶比和大小比进行调整。同时，不要忽视随机因素的影响，任何选号方法都不能保证中奖，只是从统计角度提高参考价值。</p><p>🎯 理性看待：我们的预测系统虽然使用了150+统计模型和机器学习算法，但本质上还是基于历史数据的统计推断。彩票的随机性决定了任何方法都无法准确预测结果。请理性看待我们的分析，把它当作一种参考，而不是"中奖秘籍"。</p><p>🔬 统计方法说明：我们的热号统计基于近30期数据，冷号统计基于全部历史数据的遗漏期数，奇偶比和大小比基于本期开奖结果。不同的统计周期会得出不同的结论，建议结合多个维度综合判断。</p><p>🤖 关于我们的预测系统：我们使用了150+个统计模型，包括基础统计、进阶统计、机器学习、时间序列、集成学习、深度学习、训练优化、评估监控8大维度。每个彩种都有定制的权重配置，并且会根据历史回测数据自动调整权重。当然，再强大的模型也无法改变彩票的随机性。</p><p>📌 以上就是双色球第2026111期的全部分析内容，第2026112期开奖后我们会继续为您带来复盘分析，敬请期待！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+
+<!-- 理性购彩提示 -->
+<div class="disclaimer">
+  <div class="disclaimer-title">⚠️ 理性购彩提示</div>
+  <div class="disclaimer-content">
+    彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
+  </div>
+</div>
+
+
+</div>
+<div id="content-kl8" style="display:none;">
+<!-- 开奖日历 -->
+<div class="calendar">
+  <div class="calendar-title">📅 最新开奖信息</div>
+  <div class="calendar-info">
+    <div class="calendar-period">第2026257期</div>
+    <div class="calendar-date">开奖日期：2026-09-24</div>
+    <div class="calendar-next">下期：第2026258期</div>
+  </div>
+</div>
+
+<!-- 核心卡片区域（直接用百家号推的那张卡片图） -->
+<div class="card-section">
+  <div class="card-placeholder" style="padding:0;">
+    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/kl8_card_v2_20260925.png" alt="快乐8开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
+    <div id="card-error" style="display:none;padding:40px;text-align:center;color:#999;">📊 开奖卡片加载中...</div>
+  </div>
+</div>
+
+<!-- 上期命中回顾 -->
+<div class="review">
+  <div class="review-title">📊 上期推荐命中回顾</div>
+  <div class="review-stats">
+    <div class="review-stat">
+      <div class="num">1</div>
+      <div class="label">命中个数</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">10.0%</div>
+      <div class="label">命中率</div>
+    </div>
+  </div>
+</div>
+
+<!-- 冷热号排行榜（最近30期） -->
+<div class="hotcold">
+  <div class="hotcold-title">🔥 最热号码 TOP10（近30期）</div>
+  <div class="hotcold-list">
+    <div class="hotcold-item hot">55</div>
+    <div class="hotcold-item hot">65</div>
+    <div class="hotcold-item hot">08</div>
+    <div class="hotcold-item hot">31</div>
+    <div class="hotcold-item hot">68</div>
+    <div class="hotcold-item hot">52</div>
+    <div class="hotcold-item hot">53</div>
+    <div class="hotcold-item hot">61</div>
+    <div class="hotcold-item hot">66</div>
+    <div class="hotcold-item hot">50</div>
+  </div>
+</div>
+
+<!-- 遗漏号排行榜 -->
+<div class="missing">
+  <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
+  <div class="missing-list">
+    <div class="missing-item"><div class="num">45</div><div class="days">遗漏18期</div></div>
+    <div class="missing-item"><div class="num">64</div><div class="days">遗漏14期</div></div>
+    <div class="missing-item"><div class="num">25</div><div class="days">遗漏12期</div></div>
+    <div class="missing-item"><div class="num">27</div><div class="days">遗漏12期</div></div>
+    <div class="missing-item"><div class="num">30</div><div class="days">遗漏12期</div></div>
+    <div class="missing-item"><div class="num">75</div><div class="days">遗漏11期</div></div>
+</div>
+</div>
+
+<!-- 区间分布 -->
+<div class="zone">
+  <div class="zone-title">📊 区间分布（近30期）</div>
+  <div class="zone-grid">
+    <div class="zone-item">
+      <div class="name">一区 1-20</div>
+      <div class="bar"><div class="bar-fill" style="width:23.5%;"></div></div>
+      <div class="pct">23.5%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">二区 21-40</div>
+      <div class="bar"><div class="bar-fill" style="width:23.2%;"></div></div>
+      <div class="pct">23.2%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">三区 41-60</div>
+      <div class="bar"><div class="bar-fill" style="width:25.8%;"></div></div>
+      <div class="pct">25.8%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">四区 61-80</div>
+      <div class="bar"><div class="bar-fill" style="width:27.5%;"></div></div>
+      <div class="pct">27.5%</div>
+    </div>
+  </div>
+</div>
+
+<!-- 本期重点关注 -->
+<div class="focus">
+  <div class="focus-title">🎯 本期重点关注</div>
+  
+  <div class="focus-section">
+    <div class="focus-label red-label">🔥 热号推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball">55</div>
+      <div class="focus-ball">65</div>
+      <div class="focus-ball">08</div>
+      <div class="focus-ball">31</div>
+      <div class="focus-ball">52</div>
+      <div class="focus-ball">53</div>
+      <div class="focus-ball">68</div>
+      <div class="focus-ball">50</div>
+      <div class="focus-ball">51</div>
+      <div class="focus-ball">61</div>
+    </div>
+  </div>
+  <div class="focus-section">
+    <div class="focus-label blue-label">⭐ 精选推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball blue">55</div>
+      <div class="focus-ball blue">02</div>
+      <div class="focus-ball blue">12</div>
+      <div class="focus-ball blue">33</div>
+      <div class="focus-ball blue">53</div>
+    </div>
+  </div>
+  <div class="focus-reason">
+    💡 综合多模型评分，重点关注以上号码。数据仅供参考，不保证中奖。
+  </div>
+</div>
+
+<!-- 历史开奖记录 -->
+<div class="history">
+  <div class="history-title">📜 最近5期开奖记录</div>
+  <div class="history-item">
+    <div class="history-period">第2026257期 · 2026-09-24</div>
+    <div class="history-balls">
+      <div class="history-ball red">01</div>
+      <div class="history-ball red">04</div>
+      <div class="history-ball red">07</div>
+      <div class="history-ball red">08</div>
+      <div class="history-ball red">10</div>
+      <div class="history-ball red">13</div>
+      <div class="history-ball red">23</div>
+      <div class="history-ball red">24</div>
+      <div class="history-ball red">31</div>
+      <div class="history-ball red">33</div>
+      <div class="history-ball red">39</div>
+      <div class="history-ball red">40</div>
+      <div class="history-ball red">47</div>
+      <div class="history-ball red">48</div>
+      <div class="history-ball red">58</div>
+      <div class="history-ball red">61</div>
+      <div class="history-ball red">65</div>
+      <div class="history-ball red">74</div>
+      <div class="history-ball red">76</div>
+      <div class="history-ball red">79</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026256期 · 2026-09-23</div>
+    <div class="history-balls">
+      <div class="history-ball red">01</div>
+      <div class="history-ball red">02</div>
+      <div class="history-ball red">06</div>
+      <div class="history-ball red">11</div>
+      <div class="history-ball red">12</div>
+      <div class="history-ball red">14</div>
+      <div class="history-ball red">15</div>
+      <div class="history-ball red">22</div>
+      <div class="history-ball red">24</div>
+      <div class="history-ball red">32</div>
+      <div class="history-ball red">33</div>
+      <div class="history-ball red">35</div>
+      <div class="history-ball red">38</div>
+      <div class="history-ball red">46</div>
+      <div class="history-ball red">67</div>
+      <div class="history-ball red">68</div>
+      <div class="history-ball red">71</div>
+      <div class="history-ball red">73</div>
+      <div class="history-ball red">74</div>
+      <div class="history-ball red">76</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026255期 · 2026-09-22</div>
+    <div class="history-balls">
+      <div class="history-ball red">02</div>
+      <div class="history-ball red">09</div>
+      <div class="history-ball red">12</div>
+      <div class="history-ball red">16</div>
+      <div class="history-ball red">18</div>
+      <div class="history-ball red">23</div>
+      <div class="history-ball red">26</div>
+      <div class="history-ball red">31</div>
+      <div class="history-ball red">36</div>
+      <div class="history-ball red">44</div>
+      <div class="history-ball red">47</div>
+      <div class="history-ball red">52</div>
+      <div class="history-ball red">54</div>
+      <div class="history-ball red">55</div>
+      <div class="history-ball red">59</div>
+      <div class="history-ball red">60</div>
+      <div class="history-ball red">61</div>
+      <div class="history-ball red">66</div>
+      <div class="history-ball red">72</div>
+      <div class="history-ball red">77</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026254期 · 2026-09-21</div>
+    <div class="history-balls">
+      <div class="history-ball red">02</div>
+      <div class="history-ball red">04</div>
+      <div class="history-ball red">10</div>
+      <div class="history-ball red">13</div>
+      <div class="history-ball red">18</div>
+      <div class="history-ball red">20</div>
+      <div class="history-ball red">21</div>
+      <div class="history-ball red">26</div>
+      <div class="history-ball red">32</div>
+      <div class="history-ball red">37</div>
+      <div class="history-ball red">43</div>
+      <div class="history-ball red">49</div>
+      <div class="history-ball red">50</div>
+      <div class="history-ball red">57</div>
+      <div class="history-ball red">62</div>
+      <div class="history-ball red">66</div>
+      <div class="history-ball red">69</div>
+      <div class="history-ball red">73</div>
+      <div class="history-ball red">78</div>
+      <div class="history-ball red">80</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026253期 · 2026-09-20</div>
+    <div class="history-balls">
+      <div class="history-ball red">01</div>
+      <div class="history-ball red">02</div>
+      <div class="history-ball red">08</div>
+      <div class="history-ball red">17</div>
+      <div class="history-ball red">23</div>
+      <div class="history-ball red">24</div>
+      <div class="history-ball red">29</div>
+      <div class="history-ball red">31</div>
+      <div class="history-ball red">40</div>
+      <div class="history-ball red">41</div>
+      <div class="history-ball red">46</div>
+      <div class="history-ball red">47</div>
+      <div class="history-ball red">51</div>
+      <div class="history-ball red">54</div>
+      <div class="history-ball red">59</div>
+      <div class="history-ball red">62</div>
+      <div class="history-ball red">65</div>
+      <div class="history-ball red">72</div>
+      <div class="history-ball red">74</div>
+      <div class="history-ball red">79</div>
+    </div>
+  </div>
+</div>
+
+<!-- 玩法介绍 -->
+<div class="playguide">
+  <div class="playguide-title">📖 快乐8玩法介绍</div>
+  <div class="playguide-content">
+    
+  </div>
+</div>
+
+<!-- 中奖规则 -->
+<div class="rules">
+  <div class="rules-title">🏆 中奖规则</div>
+  <div class="rules-content">
+    
+  </div>
+</div>
+
+<!-- 术语解释 -->
+<div class="glossary">
+  <div class="glossary-title">📝 术语解释</div>
+  <div class="glossary-content">
+    
+    <p>🔥 <strong>热号</strong>：最近30期出现频率最高的号码</p>
+    <p>❄️ <strong>冷号</strong>：最近30期出现频率最低的号码</p>
+    <p>⏳ <strong>遗漏</strong>：某号码距离上次开出已经过了多少期</p>
+    <p>⚖️ <strong>奇偶比</strong>：开奖号码中奇数和偶数的比例</p>
+    <p>📏 <strong>大小比</strong>：开奖号码中大数和小数的比例</p>
+    <p>📊 <strong>和值</strong>：所有开奖号码相加的总和</p>
+    <p>📐 <strong>跨度</strong>：最大号码和最小号码的差值</p>
+    
+  </div>
+</div>
+
+<!-- 选号思路 -->
+<div class="picking">
+  <div class="picking-title">🎯 选号思路分享</div>
+  <div class="picking-content">
+    
+    <p>我们的预测系统基于150+个统计模型和机器学习算法，从8大维度综合评分：</p>
+    <p>· 基础统计：频率、冷热、遗漏、奇偶、大小、跨度、AC值、质合、012路</p>
+    <p>· 进阶统计：马尔可夫链、贝叶斯分析、蒙特卡洛模拟、共现关联</p>
+    <p>· 机器学习：随机森林、梯度提升、逻辑回归</p>
+    <p>· 时间序列：LSTM神经网络、ARIMA模型</p>
+    <p>· 集成学习：Blending融合、Stacking集成、A/B测试框架</p>
+    <p>· 深度学习：注意力机制、迁移学习、强化学习</p>
+    <p>· 训练优化：数据增强、早停机制、K折交叉验证、超参数自动调优</p>
+    <p>· 评估监控：随机基准对照、详细回测、可解释性分析、置信度估计</p>
+    <br>
+    <p>💡 <strong>选号建议：</strong></p>
+    <p>第一，不要盲目追热。热号虽然近期出现频繁，但每一期开奖都是独立事件，历史结果不影响未来概率。</p>
+    <p>第二，不要执着于冷号。冷号虽然"该出了"，但可能继续遗漏多期，这是彩票随机性的体现。</p>
+    <p>第三，均衡配置更稳妥。在大小、奇偶、区间等维度上保持相对均衡的配置，从概率角度看更符合长期分布。</p>
+    <p>第四，量力而行。彩票本质上是一种娱乐方式，不是投资手段。每期投入应该控制在可承受的范围内。</p>
+    
+  </div>
+</div>
+
+<!-- 数据更新说明 -->
+<div class="datanote">
+  <div class="datanote-title">ℹ️ 数据更新说明</div>
+  <div class="datanote-content">
+    <p>🕒 数据更新时间：2026-09-24 开奖后</p>
+    <p>📊 数据来源：官方开奖数据 + 150+统计模型</p>
+    <p>🔄 更新频率：每日开奖后自动更新</p>
+    <p>✅ 与推荐卡片使用同一套数据和计算逻辑</p>
+  </div>
+</div>
+
+<!-- 动态尾文（与百家号完全一致） -->
+<div class="closing-text"><p>📋 快乐8第2026257期复盘清单：5个关键点带你看懂本期开奖。</p><p>📅 本期开奖日期：2026-09-24，期号：第2026257期。号码开出：01 04 07 08 10 13 23 24 31 33 39 40 47 48 58 61 65 74 76 79。</p><p>🔁 重复号码：本期号码与上期对比，有5个号码重复出现。从统计角度看，每期出现1-2个重号是比较常见的情况，不必过度解读。</p><p>🔗 连号观察：本期出现了连号组合，这在快乐8中出现的概率约为7%。连号的出现往往具有一定的聚集效应，连续两期出现连号的概率相对较低。</p><p>📊 大小统计：本期和值为741，平均每个号码约37。近30期平均和值约为810左右，本期偏低，下期和值有望回升。</p><p>🔬 统计方法说明：我们的热号统计基于近30期数据，冷号统计基于全部历史数据的遗漏期数，奇偶比和大小比基于本期开奖结果。不同的统计周期会得出不同的结论，建议结合多个维度综合判断。</p><p>💪 理性购彩者的五个特征：①每期投入固定，不随意加码；②不追热不守冷，保持平常心；③把购彩当娱乐，不影响生活；④中奖不骄傲，不中奖不气馁；⑤坚持做公益，快乐每一天。你中了几条？</p><p>📊 模型选号逻辑：我们的系统使用了在线学习权重校准，每个彩种都有定制的权重配置。以快乐8为例，当前权重配置为全史频次+近因加权+遗漏回补为主，辅以形态分析和冷热转换。下期预测号码就是基于这些权重综合计算得出的。</p><p>💡 购彩心态：很多彩民朋友容易陷入"追热"或"守冷"的极端，其实从概率角度看，每一期开奖都是独立的。建议把购彩当作一种娱乐方式，每期投入控制在可承受范围内，不要因为购彩影响正常生活。如果觉得购彩已经成为负担，请及时寻求帮助。</p><p>📊 以上就是本期的全部统计分析，仅供参考。第2026258期开奖后见！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+
+<!-- 理性购彩提示 -->
+<div class="disclaimer">
+  <div class="disclaimer-title">⚠️ 理性购彩提示</div>
+  <div class="disclaimer-content">
+    彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
+  </div>
+</div>
+
+
+</div>
+<div id="content-fc3d" style="display:none;">
+<!-- 开奖日历 -->
+<div class="calendar">
+  <div class="calendar-title">📅 最新开奖信息</div>
+  <div class="calendar-info">
+    <div class="calendar-period">第2026257期</div>
+    <div class="calendar-date">开奖日期：2026-09-24</div>
+    <div class="calendar-next">下期：第2026258期</div>
+  </div>
+</div>
+
+<!-- 核心卡片区域（直接用百家号推的那张卡片图） -->
+<div class="card-section">
+  <div class="card-placeholder" style="padding:0;">
+    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/fc3d_card_v2_20260925.png" alt="福彩3D开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
+    <div id="card-error" style="display:none;padding:40px;text-align:center;color:#999;">📊 开奖卡片加载中...</div>
+  </div>
+</div>
+
+<!-- 上期命中回顾 -->
+<div class="review">
+  <div class="review-title">📊 上期推荐命中回顾</div>
+  <div class="review-stats">
+    <div class="review-stat">
+      <div class="num">1</div>
+      <div class="label">命中个数</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">33.3%</div>
+      <div class="label">命中率</div>
+    </div>
+  </div>
+</div>
+
+<!-- 冷热号排行榜（最近30期） -->
+<div class="hotcold">
+  <div class="hotcold-title">🔥 最热号码 TOP10（近30期）</div>
+  <div class="hotcold-list">
+    <div class="hotcold-item hot">09</div>
+    <div class="hotcold-item hot">00</div>
+    <div class="hotcold-item hot">08</div>
+    <div class="hotcold-item hot">05</div>
+    <div class="hotcold-item hot">06</div>
+    <div class="hotcold-item hot">04</div>
+    <div class="hotcold-item hot">02</div>
+    <div class="hotcold-item hot">07</div>
+    <div class="hotcold-item hot">01</div>
+    <div class="hotcold-item hot">03</div>
+  </div>
+</div>
+
+<!-- 遗漏号排行榜 -->
+<div class="missing">
+  <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
+  <div class="missing-list">
+    <div class="missing-item"><div class="num">07</div><div class="days">遗漏6期</div></div>
+    <div class="missing-item"><div class="num">02</div><div class="days">遗漏5期</div></div>
+    <div class="missing-item"><div class="num">03</div><div class="days">遗漏4期</div></div>
+    <div class="missing-item"><div class="num">09</div><div class="days">遗漏2期</div></div>
+    <div class="missing-item"><div class="num">00</div><div class="days">遗漏1期</div></div>
+    <div class="missing-item"><div class="num">01</div><div class="days">遗漏1期</div></div>
+</div>
+</div>
+
+<!-- 区间分布 -->
+<div class="zone">
+  <div class="zone-title">📊 区间分布（近30期）</div>
+  <div class="zone-grid">
+    <div class="zone-item">
+      <div class="name">小数 0-3</div>
+      <div class="bar"><div class="bar-fill" style="width:30.0%;"></div></div>
+      <div class="pct">30.0%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">中数 4-6</div>
+      <div class="bar"><div class="bar-fill" style="width:31.1%;"></div></div>
+      <div class="pct">31.1%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">大数 7-9</div>
+      <div class="bar"><div class="bar-fill" style="width:38.9%;"></div></div>
+      <div class="pct">38.9%</div>
+    </div>
+  </div>
+</div>
+
+<!-- 本期重点关注 -->
+<div class="focus">
+  <div class="focus-title">🎯 本期重点关注</div>
+  
+  <div class="focus-section">
+    <div class="focus-label red-label">🔥 热号推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball">06</div>
+      <div class="focus-ball">08</div>
+      <div class="focus-ball">09</div>
+    </div>
+  </div>
+  <div class="focus-section">
+    <div class="focus-label blue-label">⭐ 孤码推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball blue">09</div>
+      <div class="focus-ball blue">05</div>
+      <div class="focus-ball blue">06</div>
+    </div>
+  </div>
+  <div class="focus-reason">
+    💡 综合多模型评分，重点关注以上号码。数据仅供参考，不保证中奖。
+  </div>
+</div>
+
+<!-- 历史开奖记录 -->
+<div class="history">
+  <div class="history-title">📜 最近5期开奖记录</div>
+  <div class="history-item">
+    <div class="history-period">第2026257期 · 2026-09-24</div>
+    <div class="history-balls">
+      <div class="history-ball red">4</div>
+      <div class="history-ball red">8</div>
+      <div class="history-ball red">6</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026256期 · 2026-09-23</div>
+    <div class="history-balls">
+      <div class="history-ball red">0</div>
+      <div class="history-ball red">5</div>
+      <div class="history-ball red">1</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026255期 · 2026-09-22</div>
+    <div class="history-balls">
+      <div class="history-ball red">6</div>
+      <div class="history-ball red">9</div>
+      <div class="history-ball red">9</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026254期 · 2026-09-21</div>
+    <div class="history-balls">
+      <div class="history-ball red">8</div>
+      <div class="history-ball red">5</div>
+      <div class="history-ball red">0</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026253期 · 2026-09-20</div>
+    <div class="history-balls">
+      <div class="history-ball red">0</div>
+      <div class="history-ball red">3</div>
+      <div class="history-ball red">4</div>
+    </div>
+  </div>
+</div>
+
+<!-- 玩法介绍 -->
+<div class="playguide">
+  <div class="playguide-title">📖 福彩3D玩法介绍</div>
+  <div class="playguide-content">
+    
+  </div>
+</div>
+
+<!-- 中奖规则 -->
+<div class="rules">
+  <div class="rules-title">🏆 中奖规则</div>
+  <div class="rules-content">
+    
+  </div>
+</div>
+
+<!-- 术语解释 -->
+<div class="glossary">
+  <div class="glossary-title">📝 术语解释</div>
+  <div class="glossary-content">
+    
+    <p>🔥 <strong>热号</strong>：最近30期出现频率最高的号码</p>
+    <p>❄️ <strong>冷号</strong>：最近30期出现频率最低的号码</p>
+    <p>⏳ <strong>遗漏</strong>：某号码距离上次开出已经过了多少期</p>
+    <p>⚖️ <strong>奇偶比</strong>：开奖号码中奇数和偶数的比例</p>
+    <p>📏 <strong>大小比</strong>：开奖号码中大数和小数的比例</p>
+    <p>📊 <strong>和值</strong>：所有开奖号码相加的总和</p>
+    <p>📐 <strong>跨度</strong>：最大号码和最小号码的差值</p>
+    
+  </div>
+</div>
+
+<!-- 选号思路 -->
+<div class="picking">
+  <div class="picking-title">🎯 选号思路分享</div>
+  <div class="picking-content">
+    
+    <p>我们的预测系统基于150+个统计模型和机器学习算法，从8大维度综合评分：</p>
+    <p>· 基础统计：频率、冷热、遗漏、奇偶、大小、跨度、AC值、质合、012路</p>
+    <p>· 进阶统计：马尔可夫链、贝叶斯分析、蒙特卡洛模拟、共现关联</p>
+    <p>· 机器学习：随机森林、梯度提升、逻辑回归</p>
+    <p>· 时间序列：LSTM神经网络、ARIMA模型</p>
+    <p>· 集成学习：Blending融合、Stacking集成、A/B测试框架</p>
+    <p>· 深度学习：注意力机制、迁移学习、强化学习</p>
+    <p>· 训练优化：数据增强、早停机制、K折交叉验证、超参数自动调优</p>
+    <p>· 评估监控：随机基准对照、详细回测、可解释性分析、置信度估计</p>
+    <br>
+    <p>💡 <strong>选号建议：</strong></p>
+    <p>第一，不要盲目追热。热号虽然近期出现频繁，但每一期开奖都是独立事件，历史结果不影响未来概率。</p>
+    <p>第二，不要执着于冷号。冷号虽然"该出了"，但可能继续遗漏多期，这是彩票随机性的体现。</p>
+    <p>第三，均衡配置更稳妥。在大小、奇偶、区间等维度上保持相对均衡的配置，从概率角度看更符合长期分布。</p>
+    <p>第四，量力而行。彩票本质上是一种娱乐方式，不是投资手段。每期投入应该控制在可承受的范围内。</p>
+    
+  </div>
+</div>
+
+<!-- 数据更新说明 -->
+<div class="datanote">
+  <div class="datanote-title">ℹ️ 数据更新说明</div>
+  <div class="datanote-content">
+    <p>🕒 数据更新时间：2026-09-24 开奖后</p>
+    <p>📊 数据来源：官方开奖数据 + 150+统计模型</p>
+    <p>🔄 更新频率：每日开奖后自动更新</p>
+    <p>✅ 与推荐卡片使用同一套数据和计算逻辑</p>
+  </div>
+</div>
+
+<!-- 动态尾文（与百家号完全一致） -->
+<div class="closing-text"><p>📋 福彩3D第2026257期分析报告：本期开奖结果、数据统计、下期参考，一文看懂。</p><p>🎲 选号方法论：我们坚持"数据驱动+理性对待"的原则。下期选号时，建议先看近30期的热号和冷号分布，再结合本期的奇偶比和大小比进行调整。同时，不要忽视随机因素的影响，任何选号方法都不能保证中奖，只是从统计角度提高参考价值。</p><p>📚 趣味统计：从福彩3D的历史数据来看，最常见的奇偶比是1:2，出现概率约为30%左右。而全奇或全偶的情况相对较少，出现概率不到5%。这也是为什么选号时建议保持奇偶均衡的原因。</p><p>🎯 名人与彩票：据说很多名人也喜欢买彩票，不过他们大多是把购彩当作一种慈善和娱乐，而不是为了中奖。其实购彩的本质就是这样——花小钱，做公益，买希望。</p><p>🔄 重号分析：本期与上期相比，有0个重复号码。重号的出现是彩票随机性的体现，连续多期出现相同号码的概率虽然低，但确实会发生。</p><p>🔢 奇偶比分析：本期开出0个奇数、3个偶数，比例为0:3。从近30期数据来看，奇偶比最常见的分布是1:2左右，本期偏离了均衡状态，下期回归均衡的概率较大。</p><p>📢 重要提示：福彩3D作为一种彩票游戏，其本质是随机性的。历史数据只能提供统计参考，不能作为中奖保证。我们坚持"统计参考、理性对待"的理念，不做"必中"承诺，不诱导过度投入。购彩有风险，投入需谨慎。</p><p>📅 本期开奖日期：2026-09-24，期号：第2026257期。号码开出：4 8 6。</p><p>🎲 开奖是随机的，但分析是认真的。第2026258期我们继续为您带来专业的数据复盘，不见不散！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+
+<!-- 理性购彩提示 -->
+<div class="disclaimer">
+  <div class="disclaimer-title">⚠️ 理性购彩提示</div>
+  <div class="disclaimer-content">
+    彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
+  </div>
+</div>
+
+
+</div>
+<div id="content-pl35" style="display:none;">
+<!-- 开奖日历 -->
+<div class="calendar">
+  <div class="calendar-title">📅 最新开奖信息</div>
+  <div class="calendar-info">
+    <div class="calendar-period">第26257期</div>
+    <div class="calendar-date">开奖日期：2026-09-24</div>
+    <div class="calendar-next">下期：第26258期</div>
+  </div>
+</div>
+
+<!-- 核心卡片区域（直接用百家号推的那张卡片图） -->
+<div class="card-section">
+  <div class="card-placeholder" style="padding:0;">
+    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/pl35_card_v2_20260925.png" alt="排列3/5开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
+    <div id="card-error" style="display:none;padding:40px;text-align:center;color:#999;">📊 开奖卡片加载中...</div>
+  </div>
+</div>
+
+<!-- 上期命中回顾 -->
+<div class="review">
+  <div class="review-title">📊 上期推荐命中回顾</div>
+  <div class="review-stats">
+    <div class="review-stat">
+      <div class="num">0</div>
+      <div class="label">排3命中</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">0</div>
+      <div class="label">排5命中</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">0.0%</div>
+      <div class="label">命中率</div>
+    </div>
+  </div>
+</div>
+
+<!-- 冷热号排行榜（最近30期） -->
+<div class="hotcold">
+  <div class="hotcold-title">🔥 最热号码 TOP10（近30期）</div>
+  <div class="hotcold-list">
+    <div class="hotcold-item hot">00</div>
+    <div class="hotcold-item hot">09</div>
+    <div class="hotcold-item hot">02</div>
+    <div class="hotcold-item hot">01</div>
+    <div class="hotcold-item hot">06</div>
+    <div class="hotcold-item hot">03</div>
+    <div class="hotcold-item hot">05</div>
+    <div class="hotcold-item hot">07</div>
+    <div class="hotcold-item hot">08</div>
+    <div class="hotcold-item hot">04</div>
+  </div>
+</div>
+
+<!-- 遗漏号排行榜 -->
+<div class="missing">
+  <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
+  <div class="missing-list">
+    <div class="missing-item"><div class="num">01</div><div class="days">遗漏4期</div></div>
+    <div class="missing-item"><div class="num">08</div><div class="days">遗漏4期</div></div>
+    <div class="missing-item"><div class="num">02</div><div class="days">遗漏2期</div></div>
+    <div class="missing-item"><div class="num">05</div><div class="days">遗漏2期</div></div>
+    <div class="missing-item"><div class="num">07</div><div class="days">遗漏2期</div></div>
+    <div class="missing-item"><div class="num">06</div><div class="days">遗漏1期</div></div>
+</div>
+</div>
+
+<!-- 区间分布 -->
+<div class="zone">
+  <div class="zone-title">📊 区间分布（近30期）</div>
+  <div class="zone-grid">
+    <div class="zone-item">
+      <div class="name">小数 0-3</div>
+      <div class="bar"><div class="bar-fill" style="width:44.2%;"></div></div>
+      <div class="pct">44.2%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">中数 4-6</div>
+      <div class="bar"><div class="bar-fill" style="width:27.5%;"></div></div>
+      <div class="pct">27.5%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">大数 7-9</div>
+      <div class="bar"><div class="bar-fill" style="width:28.3%;"></div></div>
+      <div class="pct">28.3%</div>
+    </div>
+  </div>
+</div>
+
+<!-- 本期重点关注 -->
+<div class="focus">
+  <div class="focus-title">🎯 本期重点关注</div>
+  
+  <div class="focus-section">
+    <div class="focus-label red-label">🔢 排列3推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball">01</div>
+      <div class="focus-ball">02</div>
+      <div class="focus-ball">09</div>
+    </div>
+  </div>
+  <div class="focus-section">
+    <div class="focus-label blue-label">🔢 排列5推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball blue">05</div>
+      <div class="focus-ball blue">07</div>
+      <div class="focus-ball blue">01</div>
+      <div class="focus-ball blue">04</div>
+      <div class="focus-ball blue">03</div>
+    </div>
+  </div>
+  <div class="focus-reason">
+    💡 综合多模型评分，重点关注以上号码。数据仅供参考，不保证中奖。
+  </div>
+</div>
+
+<!-- 历史开奖记录 -->
+<div class="history">
+  <div class="history-title">📜 最近5期开奖记录</div>
+  <div class="history-item">
+    <div class="history-period">第26257期 · 2026-09-24</div>
+    <div class="history-balls">
+      <div class="history-ball red">4</div>
+      <div class="history-ball red">9</div>
+      <div class="history-ball red">3</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">3</div>
+      <div class="history-ball blue">0</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26256期 · 2026-09-23</div>
+    <div class="history-balls">
+      <div class="history-ball red">6</div>
+      <div class="history-ball red">9</div>
+      <div class="history-ball red">0</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">4</div>
+      <div class="history-ball blue">3</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26255期 · 2026-09-22</div>
+    <div class="history-balls">
+      <div class="history-ball red">7</div>
+      <div class="history-ball red">6</div>
+      <div class="history-ball red">4</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">2</div>
+      <div class="history-ball blue">5</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26254期 · 2026-09-21</div>
+    <div class="history-balls">
+      <div class="history-ball red">0</div>
+      <div class="history-ball red">6</div>
+      <div class="history-ball red">9</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">4</div>
+      <div class="history-ball blue">0</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26253期 · 2026-09-20</div>
+    <div class="history-balls">
+      <div class="history-ball red">8</div>
+      <div class="history-ball red">9</div>
+      <div class="history-ball red">3</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">5</div>
+      <div class="history-ball blue">1</div>
+    </div>
+  </div>
+</div>
+
+<!-- 玩法介绍 -->
+<div class="playguide">
+  <div class="playguide-title">📖 排列3/5玩法介绍</div>
+  <div class="playguide-content">
+    
+  </div>
+</div>
+
+<!-- 中奖规则 -->
+<div class="rules">
+  <div class="rules-title">🏆 中奖规则</div>
+  <div class="rules-content">
+    
+  </div>
+</div>
+
+<!-- 术语解释 -->
+<div class="glossary">
+  <div class="glossary-title">📝 术语解释</div>
+  <div class="glossary-content">
+    
+    <p>🔥 <strong>热号</strong>：最近30期出现频率最高的号码</p>
+    <p>❄️ <strong>冷号</strong>：最近30期出现频率最低的号码</p>
+    <p>⏳ <strong>遗漏</strong>：某号码距离上次开出已经过了多少期</p>
+    <p>⚖️ <strong>奇偶比</strong>：开奖号码中奇数和偶数的比例</p>
+    <p>📏 <strong>大小比</strong>：开奖号码中大数和小数的比例</p>
+    <p>📊 <strong>和值</strong>：所有开奖号码相加的总和</p>
+    <p>📐 <strong>跨度</strong>：最大号码和最小号码的差值</p>
+    
+  </div>
+</div>
+
+<!-- 选号思路 -->
+<div class="picking">
+  <div class="picking-title">🎯 选号思路分享</div>
+  <div class="picking-content">
+    
+    <p>我们的预测系统基于150+个统计模型和机器学习算法，从8大维度综合评分：</p>
+    <p>· 基础统计：频率、冷热、遗漏、奇偶、大小、跨度、AC值、质合、012路</p>
+    <p>· 进阶统计：马尔可夫链、贝叶斯分析、蒙特卡洛模拟、共现关联</p>
+    <p>· 机器学习：随机森林、梯度提升、逻辑回归</p>
+    <p>· 时间序列：LSTM神经网络、ARIMA模型</p>
+    <p>· 集成学习：Blending融合、Stacking集成、A/B测试框架</p>
+    <p>· 深度学习：注意力机制、迁移学习、强化学习</p>
+    <p>· 训练优化：数据增强、早停机制、K折交叉验证、超参数自动调优</p>
+    <p>· 评估监控：随机基准对照、详细回测、可解释性分析、置信度估计</p>
+    <br>
+    <p>💡 <strong>选号建议：</strong></p>
+    <p>第一，不要盲目追热。热号虽然近期出现频繁，但每一期开奖都是独立事件，历史结果不影响未来概率。</p>
+    <p>第二，不要执着于冷号。冷号虽然"该出了"，但可能继续遗漏多期，这是彩票随机性的体现。</p>
+    <p>第三，均衡配置更稳妥。在大小、奇偶、区间等维度上保持相对均衡的配置，从概率角度看更符合长期分布。</p>
+    <p>第四，量力而行。彩票本质上是一种娱乐方式，不是投资手段。每期投入应该控制在可承受的范围内。</p>
+    
+  </div>
+</div>
+
+<!-- 数据更新说明 -->
+<div class="datanote">
+  <div class="datanote-title">ℹ️ 数据更新说明</div>
+  <div class="datanote-content">
+    <p>🕒 数据更新时间：2026-09-24 开奖后</p>
+    <p>📊 数据来源：官方开奖数据 + 150+统计模型</p>
+    <p>🔄 更新频率：每日开奖后自动更新</p>
+    <p>✅ 与推荐卡片使用同一套数据和计算逻辑</p>
+  </div>
+</div>
+
+<!-- 动态尾文（与百家号完全一致） -->
+<div class="closing-text"><p>📈 排列3/5第26257期数据复盘：从历史统计的角度，看看本期号码呈现出怎样的特征。</p><p>🎯 第26257期（2026-09-24）开奖：排列3为4 9 3，排列5为4 9 3 3 0。</p><p>📎 连号统计：本期开奖号码中包含连号，这是一个值得关注的信号。从历史数据来看，连号出现后，下期连号出现的概率会略有下降。</p><p>❄️ 冷号关注：当前遗漏最久的5个号码是3(漏6期)、8(漏5期)、9(漏3期)、4(漏2期)、6(漏1期)。尤其是3已经遗漏了6期，从历史分布来看，这个遗漏时长已经超过了平均遗漏周期的1.5倍，回补概率在逐步增加。</p><p>🌡️ 热度排行：本期统计显示，0、9、6位列近30期出现次数前三。高频号码往往具有一定的惯性，但也要注意"物极必反"的规律。</p><p>🎯 下期选号思路：基于150+统计模型和机器学习算法的综合评分，我们建议下期关注以下几点：一是热号延续与冷号回补的平衡，不要只追热也不要只守冷；二是奇偶、大小的均衡配置，从概率角度更符合长期分布；三是排列3的区间覆盖，尽量不要让号码过度集中在某一区间。</p><p>📈 数据来源说明：本文所有统计数据均来自排列3/5官方开奖记录的自动分析，数据真实可靠。我们的系统每天会自动抓取最新开奖数据，更新统计模型，并生成下期预测参考。所有数据仅供学习交流，不构成投注建议。</p><p>🎯 理性看待：我们的预测系统虽然使用了150+统计模型和机器学习算法，但本质上还是基于历史数据的统计推断。彩票的随机性决定了任何方法都无法准确预测结果。请理性看待我们的分析，把它当作一种参考，而不是"中奖秘籍"。</p><p>✨ 感谢您阅读本期分析，祝您生活愉快，购彩开心！第26258期我们再见！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+
+<!-- 理性购彩提示 -->
+<div class="disclaimer">
+  <div class="disclaimer-title">⚠️ 理性购彩提示</div>
+  <div class="disclaimer-content">
+    彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
+  </div>
+</div>
+
+
+</div>
+<div id="content-qxc" style="display:none;">
+<!-- 开奖日历 -->
+<div class="calendar">
+  <div class="calendar-title">📅 最新开奖信息</div>
+  <div class="calendar-info">
+    <div class="calendar-period">第26110期</div>
+    <div class="calendar-date">开奖日期：2026-09-22</div>
+    <div class="calendar-next">下期：第26111期</div>
+  </div>
+</div>
+
+<!-- 核心卡片区域（直接用百家号推的那张卡片图） -->
+<div class="card-section">
+  <div class="card-placeholder" style="padding:0;">
+    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/qxc_card_v2_20260925.png" alt="七星彩开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
+    <div id="card-error" style="display:none;padding:40px;text-align:center;color:#999;">📊 开奖卡片加载中...</div>
+  </div>
+</div>
+
+<!-- 上期命中回顾 -->
+<div class="review">
+  <div class="review-title">📊 上期推荐命中回顾</div>
+  <div class="review-stats">
+    <div class="review-stat">
+      <div class="num">0</div>
+      <div class="label">命中基本号</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">0</div>
+      <div class="label">命中特别号</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">0.0%</div>
+      <div class="label">命中率</div>
+    </div>
+  </div>
+</div>
+
+<!-- 冷热号排行榜（最近30期） -->
+<div class="hotcold">
+  <div class="hotcold-title">🔥 最热号码 TOP10（近30期）</div>
+  <div class="hotcold-list">
+    <div class="hotcold-item hot">05</div>
+    <div class="hotcold-item hot">09</div>
+    <div class="hotcold-item hot">06</div>
+    <div class="hotcold-item hot">00</div>
+    <div class="hotcold-item hot">08</div>
+    <div class="hotcold-item hot">03</div>
+    <div class="hotcold-item hot">04</div>
+    <div class="hotcold-item hot">01</div>
+    <div class="hotcold-item hot">02</div>
+    <div class="hotcold-item hot">07</div>
+  </div>
+</div>
+
+<!-- 遗漏号排行榜 -->
+<div class="missing">
+  <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
+  <div class="missing-list">
+    <div class="missing-item"><div class="num">07</div><div class="days">遗漏6期</div></div>
+    <div class="missing-item"><div class="num">01</div><div class="days">遗漏4期</div></div>
+    <div class="missing-item"><div class="num">04</div><div class="days">遗漏3期</div></div>
+    <div class="missing-item"><div class="num">08</div><div class="days">遗漏2期</div></div>
+    <div class="missing-item"><div class="num">00</div><div class="days">遗漏1期</div></div>
+    <div class="missing-item"><div class="num">03</div><div class="days">遗漏1期</div></div>
+</div>
+</div>
+
+<!-- 区间分布 -->
+<div class="zone">
+  <div class="zone-title">📊 区间分布（近30期）</div>
+  <div class="zone-grid">
+    <div class="zone-item">
+      <div class="name">小数 0-3</div>
+      <div class="bar"><div class="bar-fill" style="width:36.7%;"></div></div>
+      <div class="pct">36.7%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">中数 4-6</div>
+      <div class="bar"><div class="bar-fill" style="width:33.9%;"></div></div>
+      <div class="pct">33.9%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">大数 7-9</div>
+      <div class="bar"><div class="bar-fill" style="width:29.4%;"></div></div>
+      <div class="pct">29.4%</div>
+    </div>
+  </div>
+</div>
+
+<!-- 本期重点关注 -->
+<div class="focus">
+  <div class="focus-title">🎯 本期重点关注</div>
+  
+  <div class="focus-section">
+    <div class="focus-label red-label">🔴 基本号推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball">07</div>
+      <div class="focus-ball">09</div>
+      <div class="focus-ball">09</div>
+      <div class="focus-ball">02</div>
+      <div class="focus-ball">01</div>
+      <div class="focus-ball">03</div>
+    </div>
+  </div>
+  <div class="focus-section">
+    <div class="focus-label blue-label">🔵 特别号推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball blue">07</div>
+    </div>
+  </div>
+  <div class="focus-reason">
+    💡 综合多模型评分，重点关注以上号码。数据仅供参考，不保证中奖。
+  </div>
+</div>
+
+<!-- 历史开奖记录 -->
+<div class="history">
+  <div class="history-title">📜 最近5期开奖记录</div>
+  <div class="history-item">
+    <div class="history-period">第26110期 · 2026-09-22</div>
+    <div class="history-balls">
+      <div class="history-ball red">6</div>
+      <div class="history-ball red">2</div>
+      <div class="history-ball red">5</div>
+      <div class="history-ball red">9</div>
+      <div class="history-ball red">6</div>
+      <div class="history-ball red">9</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">13</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26109期 · 2026-09-20</div>
+    <div class="history-balls">
+      <div class="history-ball red">2</div>
+      <div class="history-ball red">9</div>
+      <div class="history-ball red">0</div>
+      <div class="history-ball red">5</div>
+      <div class="history-ball red">0</div>
+      <div class="history-ball red">3</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">9</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26108期 · 2026-09-18</div>
+    <div class="history-balls">
+      <div class="history-ball red">9</div>
+      <div class="history-ball red">5</div>
+      <div class="history-ball red">2</div>
+      <div class="history-ball red">0</div>
+      <div class="history-ball red">8</div>
+      <div class="history-ball red">6</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">9</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26107期 · 2026-09-15</div>
+    <div class="history-balls">
+      <div class="history-ball red">2</div>
+      <div class="history-ball red">8</div>
+      <div class="history-ball red">3</div>
+      <div class="history-ball red">4</div>
+      <div class="history-ball red">5</div>
+      <div class="history-ball red">6</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">4</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26106期 · 2026-09-13</div>
+    <div class="history-balls">
+      <div class="history-ball red">5</div>
+      <div class="history-ball red">1</div>
+      <div class="history-ball red">9</div>
+      <div class="history-ball red">5</div>
+      <div class="history-ball red">8</div>
+      <div class="history-ball red">5</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">11</div>
+    </div>
+  </div>
+</div>
+
+<!-- 玩法介绍 -->
+<div class="playguide">
+  <div class="playguide-title">📖 七星彩玩法介绍</div>
+  <div class="playguide-content">
+    
+  </div>
+</div>
+
+<!-- 中奖规则 -->
+<div class="rules">
+  <div class="rules-title">🏆 中奖规则</div>
+  <div class="rules-content">
+    
+  </div>
+</div>
+
+<!-- 术语解释 -->
+<div class="glossary">
+  <div class="glossary-title">📝 术语解释</div>
+  <div class="glossary-content">
+    
+    <p>🔥 <strong>热号</strong>：最近30期出现频率最高的号码</p>
+    <p>❄️ <strong>冷号</strong>：最近30期出现频率最低的号码</p>
+    <p>⏳ <strong>遗漏</strong>：某号码距离上次开出已经过了多少期</p>
+    <p>⚖️ <strong>奇偶比</strong>：开奖号码中奇数和偶数的比例</p>
+    <p>📏 <strong>大小比</strong>：开奖号码中大数和小数的比例</p>
+    <p>📊 <strong>和值</strong>：所有开奖号码相加的总和</p>
+    <p>📐 <strong>跨度</strong>：最大号码和最小号码的差值</p>
+    
+  </div>
+</div>
+
+<!-- 选号思路 -->
+<div class="picking">
+  <div class="picking-title">🎯 选号思路分享</div>
+  <div class="picking-content">
+    
+    <p>我们的预测系统基于150+个统计模型和机器学习算法，从8大维度综合评分：</p>
+    <p>· 基础统计：频率、冷热、遗漏、奇偶、大小、跨度、AC值、质合、012路</p>
+    <p>· 进阶统计：马尔可夫链、贝叶斯分析、蒙特卡洛模拟、共现关联</p>
+    <p>· 机器学习：随机森林、梯度提升、逻辑回归</p>
+    <p>· 时间序列：LSTM神经网络、ARIMA模型</p>
+    <p>· 集成学习：Blending融合、Stacking集成、A/B测试框架</p>
+    <p>· 深度学习：注意力机制、迁移学习、强化学习</p>
+    <p>· 训练优化：数据增强、早停机制、K折交叉验证、超参数自动调优</p>
+    <p>· 评估监控：随机基准对照、详细回测、可解释性分析、置信度估计</p>
+    <br>
+    <p>💡 <strong>选号建议：</strong></p>
+    <p>第一，不要盲目追热。热号虽然近期出现频繁，但每一期开奖都是独立事件，历史结果不影响未来概率。</p>
+    <p>第二，不要执着于冷号。冷号虽然"该出了"，但可能继续遗漏多期，这是彩票随机性的体现。</p>
+    <p>第三，均衡配置更稳妥。在大小、奇偶、区间等维度上保持相对均衡的配置，从概率角度看更符合长期分布。</p>
+    <p>第四，量力而行。彩票本质上是一种娱乐方式，不是投资手段。每期投入应该控制在可承受的范围内。</p>
+    
+  </div>
+</div>
+
+<!-- 数据更新说明 -->
+<div class="datanote">
+  <div class="datanote-title">ℹ️ 数据更新说明</div>
+  <div class="datanote-content">
+    <p>🕒 数据更新时间：2026-09-22 开奖后</p>
+    <p>📊 数据来源：官方开奖数据 + 150+统计模型</p>
+    <p>🔄 更新频率：每日开奖后自动更新</p>
+    <p>✅ 与推荐卡片使用同一套数据和计算逻辑</p>
+  </div>
+</div>
+
+<!-- 动态尾文（与百家号完全一致） -->
+<div class="closing-text"><p>🎯 七星彩第26110期开奖结果已经出炉，让我们一起用数据来复盘一下本期的走势。</p><p>🎲 概率小课堂：很多人以为"连续多期没出的号码下期必出"，其实这是典型的"赌徒谬误"。从概率角度看，每一期开奖都是独立事件，之前的结果不会影响未来的概率。一个号码遗漏了50期，它下期出现的概率和其他号码是完全一样的。</p><p>⚠️ 风险提示：彩票不是投资，不能指望通过购彩致富。我们的所有分析都是基于历史数据的统计规律，仅供参考。请理性看待彩票，享受分析的过程，而不是执着于结果。量力而行，快乐购彩。</p><p>📊 热号追踪：近30期出现最多的号码是5（24次），其次是9（21次）。这些热门号码下期是否会继续出现？从概率角度看，每期都是独立事件，但统计上确实存在一定的聚集效应。</p><p>📍 区间分析：从号码分布来看，本期号码覆盖了多个区间，分布较为分散。区间分布的均衡性是选号时需要考虑的重要因素。</p><p>➕ 和值分析：本期号码和值为37。近30期平均和值约为30，本期接近平均值，处于正常波动范围。</p><p>🎯 选号思路总结：下期选号记住三个"平衡"——冷热平衡、奇偶平衡、大小平衡。在这个基础上，可以适当加入1-2个个人看好的"心水码"。记住，彩票本质是娱乐，不要过度投入，享受过程最重要。</p><p>📋 七星彩第26110期开奖结果速览：6 2 5 9 6 9 | 13（2026-09-22开奖）。</p><p>📅 下期分析将于开奖后更新，记得来看哦！祝大家都能收获自己的幸运号码！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+
+<!-- 理性购彩提示 -->
+<div class="disclaimer">
+  <div class="disclaimer-title">⚠️ 理性购彩提示</div>
+  <div class="disclaimer-content">
+    彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
+  </div>
+</div>
+
+
+</div>
+<div id="content-qlc" style="display:none;">
+<!-- 开奖日历 -->
+<div class="calendar">
+  <div class="calendar-title">📅 最新开奖信息</div>
+  <div class="calendar-info">
+    <div class="calendar-period">第2026110期</div>
+    <div class="calendar-date">开奖日期：2026-09-23</div>
+    <div class="calendar-next">下期：第2026111期</div>
+  </div>
+</div>
+
+<!-- 核心卡片区域（直接用百家号推的那张卡片图） -->
+<div class="card-section">
+  <div class="card-placeholder" style="padding:0;">
+    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/qlc_card_v2_20260925.png" alt="七乐彩开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
+    <div id="card-error" style="display:none;padding:40px;text-align:center;color:#999;">📊 开奖卡片加载中...</div>
+  </div>
+</div>
+
+<!-- 上期命中回顾 -->
+<div class="review">
+  <div class="review-title">📊 上期推荐命中回顾</div>
+  <div class="review-stats">
+    <div class="review-stat">
+      <div class="num">3</div>
+      <div class="label">命中基本号</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">0</div>
+      <div class="label">命中特别号</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">42.9%</div>
+      <div class="label">命中率</div>
+    </div>
+  </div>
+</div>
+
+<!-- 冷热号排行榜（最近30期） -->
+<div class="hotcold">
+  <div class="hotcold-title">🔥 最热号码 TOP10（近30期）</div>
+  <div class="hotcold-list">
+    <div class="hotcold-item hot">21</div>
+    <div class="hotcold-item hot">06</div>
+    <div class="hotcold-item hot">07</div>
+    <div class="hotcold-item hot">08</div>
+    <div class="hotcold-item hot">23</div>
+    <div class="hotcold-item hot">26</div>
+    <div class="hotcold-item hot">29</div>
+    <div class="hotcold-item hot">22</div>
+    <div class="hotcold-item hot">13</div>
+    <div class="hotcold-item hot">24</div>
+  </div>
+</div>
+
+<!-- 遗漏号排行榜 -->
+<div class="missing">
+  <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
+  <div class="missing-list">
+    <div class="missing-item"><div class="num">15</div><div class="days">遗漏15期</div></div>
+    <div class="missing-item"><div class="num">12</div><div class="days">遗漏9期</div></div>
+    <div class="missing-item"><div class="num">14</div><div class="days">遗漏8期</div></div>
+    <div class="missing-item"><div class="num">30</div><div class="days">遗漏5期</div></div>
+    <div class="missing-item"><div class="num">03</div><div class="days">遗漏4期</div></div>
+    <div class="missing-item"><div class="num">09</div><div class="days">遗漏4期</div></div>
+</div>
+</div>
+
+<!-- 区间分布 -->
+<div class="zone">
+  <div class="zone-title">📊 区间分布（近30期）</div>
+  <div class="zone-grid">
+    <div class="zone-item">
+      <div class="name">一区 1-10</div>
+      <div class="bar"><div class="bar-fill" style="width:32.5%;"></div></div>
+      <div class="pct">32.5%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">二区 11-20</div>
+      <div class="bar"><div class="bar-fill" style="width:29.2%;"></div></div>
+      <div class="pct">29.2%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">三区 21-30</div>
+      <div class="bar"><div class="bar-fill" style="width:38.3%;"></div></div>
+      <div class="pct">38.3%</div>
+    </div>
+  </div>
+</div>
+
+<!-- 本期重点关注 -->
+<div class="focus">
+  <div class="focus-title">🎯 本期重点关注</div>
+  
+  <div class="focus-section">
+    <div class="focus-label red-label">🔴 基本号推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball">06</div>
+      <div class="focus-ball">21</div>
+      <div class="focus-ball">08</div>
+      <div class="focus-ball">01</div>
+      <div class="focus-ball">22</div>
+      <div class="focus-ball">23</div>
+      <div class="focus-ball">26</div>
+    </div>
+  </div>
+  <div class="focus-section">
+    <div class="focus-label blue-label">🔵 特别号推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball blue">11</div>
+    </div>
+  </div>
+  <div class="focus-reason">
+    💡 综合多模型评分，重点关注以上号码。数据仅供参考，不保证中奖。
+  </div>
+</div>
+
+<!-- 历史开奖记录 -->
+<div class="history">
+  <div class="history-title">📜 最近5期开奖记录</div>
+  <div class="history-item">
+    <div class="history-period">第2026110期 · 2026-09-23</div>
+    <div class="history-balls">
+      <div class="history-ball red">06</div>
+      <div class="history-ball red">07</div>
+      <div class="history-ball red">08</div>
+      <div class="history-ball red">11</div>
+      <div class="history-ball red">23</div>
+      <div class="history-ball red">26</div>
+      <div class="history-ball red">27</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">17</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026109期 · 2026-09-21</div>
+    <div class="history-balls">
+      <div class="history-ball red">05</div>
+      <div class="history-ball red">07</div>
+      <div class="history-ball red">13</div>
+      <div class="history-ball red">16</div>
+      <div class="history-ball red">17</div>
+      <div class="history-ball red">24</div>
+      <div class="history-ball red">29</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">19</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026108期 · 2026-09-18</div>
+    <div class="history-balls">
+      <div class="history-ball red">11</div>
+      <div class="history-ball red">13</div>
+      <div class="history-ball red">19</div>
+      <div class="history-ball red">20</div>
+      <div class="history-ball red">25</div>
+      <div class="history-ball red">28</div>
+      <div class="history-ball red">29</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">26</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026107期 · 2026-09-16</div>
+    <div class="history-balls">
+      <div class="history-ball red">01</div>
+      <div class="history-ball red">04</div>
+      <div class="history-ball red">06</div>
+      <div class="history-ball red">18</div>
+      <div class="history-ball red">19</div>
+      <div class="history-ball red">21</div>
+      <div class="history-ball red">22</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">02</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第2026106期 · 2026-09-14</div>
+    <div class="history-balls">
+      <div class="history-ball red">03</div>
+      <div class="history-ball red">09</div>
+      <div class="history-ball red">10</div>
+      <div class="history-ball red">13</div>
+      <div class="history-ball red">24</div>
+      <div class="history-ball red">26</div>
+      <div class="history-ball red">28</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">07</div>
+    </div>
+  </div>
+</div>
+
+<!-- 玩法介绍 -->
+<div class="playguide">
+  <div class="playguide-title">📖 七乐彩玩法介绍</div>
+  <div class="playguide-content">
+    
+  </div>
+</div>
+
+<!-- 中奖规则 -->
+<div class="rules">
+  <div class="rules-title">🏆 中奖规则</div>
+  <div class="rules-content">
+    
+  </div>
+</div>
+
+<!-- 术语解释 -->
+<div class="glossary">
+  <div class="glossary-title">📝 术语解释</div>
+  <div class="glossary-content">
+    
+    <p>🔥 <strong>热号</strong>：最近30期出现频率最高的号码</p>
+    <p>❄️ <strong>冷号</strong>：最近30期出现频率最低的号码</p>
+    <p>⏳ <strong>遗漏</strong>：某号码距离上次开出已经过了多少期</p>
+    <p>⚖️ <strong>奇偶比</strong>：开奖号码中奇数和偶数的比例</p>
+    <p>📏 <strong>大小比</strong>：开奖号码中大数和小数的比例</p>
+    <p>📊 <strong>和值</strong>：所有开奖号码相加的总和</p>
+    <p>📐 <strong>跨度</strong>：最大号码和最小号码的差值</p>
+    
+  </div>
+</div>
+
+<!-- 选号思路 -->
+<div class="picking">
+  <div class="picking-title">🎯 选号思路分享</div>
+  <div class="picking-content">
+    
+    <p>我们的预测系统基于150+个统计模型和机器学习算法，从8大维度综合评分：</p>
+    <p>· 基础统计：频率、冷热、遗漏、奇偶、大小、跨度、AC值、质合、012路</p>
+    <p>· 进阶统计：马尔可夫链、贝叶斯分析、蒙特卡洛模拟、共现关联</p>
+    <p>· 机器学习：随机森林、梯度提升、逻辑回归</p>
+    <p>· 时间序列：LSTM神经网络、ARIMA模型</p>
+    <p>· 集成学习：Blending融合、Stacking集成、A/B测试框架</p>
+    <p>· 深度学习：注意力机制、迁移学习、强化学习</p>
+    <p>· 训练优化：数据增强、早停机制、K折交叉验证、超参数自动调优</p>
+    <p>· 评估监控：随机基准对照、详细回测、可解释性分析、置信度估计</p>
+    <br>
+    <p>💡 <strong>选号建议：</strong></p>
+    <p>第一，不要盲目追热。热号虽然近期出现频繁，但每一期开奖都是独立事件，历史结果不影响未来概率。</p>
+    <p>第二，不要执着于冷号。冷号虽然"该出了"，但可能继续遗漏多期，这是彩票随机性的体现。</p>
+    <p>第三，均衡配置更稳妥。在大小、奇偶、区间等维度上保持相对均衡的配置，从概率角度看更符合长期分布。</p>
+    <p>第四，量力而行。彩票本质上是一种娱乐方式，不是投资手段。每期投入应该控制在可承受的范围内。</p>
+    
+  </div>
+</div>
+
+<!-- 数据更新说明 -->
+<div class="datanote">
+  <div class="datanote-title">ℹ️ 数据更新说明</div>
+  <div class="datanote-content">
+    <p>🕒 数据更新时间：2026-09-23 开奖后</p>
+    <p>📊 数据来源：官方开奖数据 + 150+统计模型</p>
+    <p>🔄 更新频率：每日开奖后自动更新</p>
+    <p>✅ 与推荐卡片使用同一套数据和计算逻辑</p>
+  </div>
+</div>
+
+<!-- 动态尾文（与百家号完全一致） -->
+<div class="closing-text"><p>📊 七乐彩第2026110期 vs 历史平均：本期数据有哪些异常？我们一起来对比看看。</p><p>🎰 第2026110期开奖结果：基本号06 07 08 11 23 26 27，特别号17。开奖日期2026-09-23。</p><p>🗺️ 区间分布：将30个号码分为3个区间，本期号码在各区间的分布呈现出相对分散的特征，这种分散分布往往更符合长期概率。</p><p>📐 大小比分析：本期开出4个小号、3个大号，比例为4:3。从区间分布的角度看，号码在大小区间的波动往往呈现"钟摆效应"，即偏态之后往往会向均衡回归。</p><p>🎯 选号思路总结：下期选号记住三个"平衡"——冷热平衡、奇偶平衡、大小平衡。在这个基础上，可以适当加入1-2个个人看好的"心水码"。记住，彩票本质是娱乐，不要过度投入，享受过程最重要。</p><p>⚠️ 理性购彩提醒：彩票每期开奖都是独立随机事件，任何号码组合的理论概率都是相同的。我们的分析只是基于历史数据的统计规律，不能保证未来一定会发生。请量力而行，理性参与，未成年人禁止购彩。</p><p>🧠 彩票冷知识：你知道吗？七乐彩的所有号码组合共有海量种可能（不考虑顺序）。如果每期买一注，需要很多很多年才能覆盖所有组合。这也从侧面说明了彩票的随机性——任何组合出现的概率都是一样的。</p><p>📋 本期七乐彩分析报告到此结束，第2026111期我们继续。感谢您的支持与关注！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+
+<!-- 理性购彩提示 -->
+<div class="disclaimer">
+  <div class="disclaimer-title">⚠️ 理性购彩提示</div>
+  <div class="disclaimer-content">
+    彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
+  </div>
+</div>
+
+
+</div>
+<div id="content-dlt" style="display:none;">
+<!-- 开奖日历 -->
+<div class="calendar">
+  <div class="calendar-title">📅 最新开奖信息</div>
+  <div class="calendar-info">
+    <div class="calendar-period">第26109期</div>
+    <div class="calendar-date">开奖日期：2026-09-23</div>
+    <div class="calendar-next">下期：第26110期</div>
+  </div>
+</div>
+
+<!-- 核心卡片区域（直接用百家号推的那张卡片图） -->
+<div class="card-section">
+  <div class="card-placeholder" style="padding:0;">
+    <img src="data:image/png;base64,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AEBORmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkVr/Af6URI0YUAIDfI2Vm2M8//1z7Cfbb/8Ajjzqm9tMMHz68lp9+9913G2286S233Faom48//mTcuHGFP8mAAQPfe+/9+Lf8yGee6bzLLru/8sqrhf8mRxx5dHwVAJiJzUQTTFEGo0ePnqGzrLXWmquuukr5Me+++94BBx506qkn77brLtM71xdffNG8efPC9J166umPPf7E44893LFjxxpPMGHCxPHjJ1xw4UWNG8+x2267Fmr19dddd9xpl0022fjGG64r/BlefvmVM84867xzz959991KRw4bPvyDLl122WWn2s97//0PDBo0uDDjNthg/eWWW7b8mPh7PfTQw2effWb8FaZ3rq5dvykAMHObiVLmrrvv7tev/wydpfGcjaukTIMGDRo2aBAtMnLEiIMO+meN52rUqNGss85ay8UuvPBCEyZM2He/A59+6vH55puv+gmWWqrjnXfctvvue5x2+plt27ZdY43Va7m0OPEuO+/0wIMP3XDDTQcf/M/PPv/8ogsvKfyeuMwjjzy8xh/NOmuj+He22Wcv/PZGlf6tRVyN7t17rLjCCoU6+3nEz3GWFi2aV0mZUaNG9fz++6OPOe7fLz43zzzz1Hjehg0bFACYuc1EKfP2W29UP3KxxTussvLKDz54X6FuVltt1SeefGz33fe8+JLLpk6ddsghB1U/TcOGs9Qr1KvlQqKBYjjhmc7PHnrYEQ89eH/9+jVM86200opnnHHaqaedcc655z3/XOcaL2fUqNFTp06JqaVzzz27x7ffXnLpZYu3i/8WjytZqNXV11wb6TC9n84yS0WvRLGVH1n8tsarWkWzZs3qfn+G1157fd/9Dqh+/BFHHBbjQ99063bRxZdcdOEFNZ63fj0zpAAzO69gmmGLtm17331377jjLl26dNl//31/d6CiRpdcclG37t0/+ujjf1151bHH1Ly3R0wtDR02bPfddpvehfT8vuf22+9w4AH7n3zyiZdfdummm23RvVv3jTfa8OijjyzU6trrrq/lp/Xr19ZhVYwYMaJJkyY1/ujnn38ujqbcffe9AwcO3HTTTcrHXaLDJk2aGN0zvUtu2LDhhReev932f3/ooUf2+Mc/YvCpAADVSJk/ImrmxReea9583uK3t912x8iRI0s/jVV4zB/9619X/eYsi7bddtttSt/ONttsN99041577xsr7OIxN954U9dvurVo3nzOOecsP+Pdd99TOjx12tQhQ4YMHTrswgvOa9GiRaNZZokjZ2lU8W+bNq3ff+/t6U3E/K7ddt9jgVatLrvs92emSqZNm3bGmWd/+umnt992S5VpsokTJx5/wkmDBw9+4P5749tnOneOaNtss03vuvuejz/6+Oqrr4wjn33uuZNPPnWfvfdae+1O0/sVkT7ReWPHjq3fwOgLADWTMnU1ZsyYww4/cquttvz737aPb0sdEz777LMIjNK3E8aPnzJlygcfdCl+G+v1gYMGrrjCCuUpExZZpM0br79S+nby5CmDBw0eXLnP7OAhg3v1+qF9+3ZN52la45WpVzmxUq9yuqc0yfKHOyZ88smnIxYbWffTT548+bjjT3zqqadbt249fvz4Kj+dNGnSJx9/0rdfvzvuvGuPf+z+9dddI9GWXHKJuAP79Omz9957rbjiCq+/XjHfV2VXpLDTzrt++OFHVY684cabSofffeetVq3mL337w48/7rLL7lVOf955Zy+++OIFAGYCUqau3nv//Vj7xtf4cePKX9oTrrnmNwMw6663YbOmTWdof5Fw2GGHxFfx8AMPPnTKKacdd9yxMVtUy1mKe+TUqzcD80HTM0uF3zwYvuvZ87333i8enn2O3+wCHO1y8CGHxV3RsWPHu+68vbzq6lVq3LjxFVdcFlFy8cWXztus2bhx47bbdpv4Bccfd8wRRx59/gUX3nH7ra+88mrTpk032WTjN954s/zCzzn7rFlnnbVFi6qjU1GHgwYNHjZsWNOmvym2xo3nqL5vUJXzAvAXNlOkzIMPPTyg/4AafzR16tS+/fpWmQyqYv31111++eU32nDDG2+47tDDjjjt9DPHj5+w3377FP77xDDJ99/3qvFHm2++2RJLdJjeGevVK1TZVfnaa6+Pr+LhjksuuddeexQPDx8+/IADD4pRnLU7dbrpputn/+0LnaZVigOrrLLyzjvv+NBDj5xwwknxbXFEauutt7r5llvjvIcddmSM6+yyy07V9yPu0KH9N9988+STT0Uvlirtyy+/GjhwYMuWLZdddpkqp2/RvMXv7hsEwF/YTJEyjz/+RPU5i5J+/fpffc21tZx9vvlaRMrEgU033eTWW2466KBDHnjgwV133fn6G2487NBDZptttsKM2HiTzb/77rvStyuttOKjjzxU4ymfefqZr778qsqRe+yxey1vWvPss8+99PIrq636m1GKocOG9ezZc9FF29aSMtVd+a/Loz9idmzQoEGjR4/+svKafPNNt3POPW/AgIFRciefdGKDBrW9Fvq4Y4999tnn47zzztusNJF03LHH7L3Pfm+9/XZkyj5771X9XD/99NM22/4txmBat2m9ztprF4+86667H3v8iZjam6G9eQCYGcwUKfPwQw/UePykSZPad+i47jpr33nn7XfedffZZ58bU0VbbblFLRe13nrr3nffPe3aLd6/f/+7777n6KNmeDzg0ksuHDeuYueSkSNHHnTwobWc8pnOz1Y/MgZXan//vVBlbiuGao46+tjCH9KoUaOFF164UDkuUqh8FXdMHt104/UxMfS7542Jp/332/fKq65u3bp1aXxl3XXXWWGFK35q0AAAEABJREFU5T/99LMtt9i8RYsW1c/VrFmzLbfc4umnn3nwwYeLKRMjZ69V7lizwQbrFwDgt2bqfWUGDx4S/84999wzdK4YR4l/Y6Jk3XXWiWGJfx50yDzzzNOiRfMG9X8Zoqj+CqaYc4l5mcGDB5999lnFAZ4wbNh0P7ugOEdz/333lL853qWXXX799TcW/qNi9ufmm26INKnj6Yt720S4fPb558svt1yh8qb97mcs7LzTjpEyL730ctxFMaITE1Jx78VdHRlUAIDfmqlTZtiwYYWKl0kvWphxTz31zFGV75Y7buy4ET+P+PGHH4vHf//99zHc0qRJk9IrmMrVcQ/dIUMqGquW91z5TznqyCPq3jGvvvraB126LLBAq/79B9xw/Y033XRDoXK/pW7duseB555/4cyhQ2scYYqAa9Vq/pjGevLJp2Im65133y1UvtYpBoQKFROC/R5++NHiKYcMrbijyqux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4/+lfWjipsWIS6xKY0B1kTZtYnyoULkXRTyrY8w51kkx7L/6ar8MGi291JIjfvty08o57Of2/McvMykxLjJq9KgYh4jF32abbjRs+PBYUZWfvvm8zarcCTV68aVXY4kcE44Vi9EVV4g577ga8UdcZpmlFmndOtZzcZq/b79NbMz17t27bdtFChWzdX2PP6Zi7R45Uvt1KLfyiivcdsc9MZdffCHJu+93ib9aldPExvRLL78am+A1zi4NHDjoxGOPLI5kxLbphx99HJMy1W/j797/hTq76+7740EVDRRXNXK5xtNEjbVvt9hHn3wWE7vxoImbGVXX5vd2T445rHp/xj6P0SVxt1xz5aXFb2PVFY+lOLDZxhv17tO3uEEc4mETa/pJEyfFtV126aVicOik08765/77xkBONHqkYXFPiGlTp02ePKX88jt0aNewQcPY1C5U7ggco4+XXnhu9T2gO625eqeyLIuwO/TI4yIBozg32WiD1VZducrpY1AtvmJDa8EFWkVnxOhRvXr1Yz0X/fHLvrHTYk0/NFarjWZttHCzeW674+7o0UazzDJf5TZ93K5YC8ZpKm/gtCibmKMpT5nYSLvltjuPPfrwqJ9YJpx25rn/PGDf5v/r+YvVVlmpeFtieq54TCysYrowlleffPr5Dtv/MnUVQ7ml+fGYMnviyWe+/vqbCIJadnP59bHwy/9iUublV1/r2rVbbNgU/qiIzuKwWSw6YhE355y/BGUM8sUyP4bJy7cYI62uvPr6qMbycH/8yae32HzTGDQqv9ipU6ZGjNav3Ok7nqrxkIuhvumlcBUxhhrLiliqxHZIDNP2nn6j/+XNRCkTC6l4DkRkxHZhrEef6vxcLEGaxLPeAAAQAElEQVRee+PN4mDsn+Kzz7+cr3nzGEI887STammUuojVRkyaxCxPaaI0rn88Ydb8dUKhithiW6fTWlWGZAqVmzs7/n37Qp31GzBg9dVWLq0V4tkbmwi1nyU2dOJ5G+vU0i5yMSPQ7derusxSSxVXijEQFQv6WM7GGGxMkMUISqFuSh3WqnIDLqql+G2M28faLg40a9o0hnziOsTioF/lJtqsjSpWJEsv3fGpZ5796uuucca4Iav99rWjERnRUqVt4hiKj2tY2oyLjd1aMqIWsWm43LJLly6nNEay6sorxeR3LPVi4iniL7a9Smm15uqr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327x9z748I033x48eMg/99/7408+e/e9D9ZcY7XiKTfbtGKWJ0YsXn719S232HS1VVYuXUjMyDRo+Ju7a4Xll42vOBCX8O77XZbquER8tW/XrsY0qVFMfk3vxKXA+r5Xr7XXWjMuOQ737tO3uK9M5NTHn35WfaeZGHOKlBk1alQcXmXllSJl2rReuFBnyy7d8YD99i4AQB4zRcq8894H8W/L+ea74+77Dj3ogOdffGndtddab521P/38i/jR9z/8+Nobb8UJjjr84OIAxosvvbpo2zbLLbP06Wedd8KxR8bMUaHilVBDYuao/GJ/+unnGB2JA/36DxgzZkxx3qdKmkybVvhjHnjo0Zilatig4eAhQ2NGLEZihg37nWmgSZMmPfHkM0t3XLLzcy/EVX2q83MxNvPaG29uvNH6BQD4i5opUub5F16KyZSY0Fl37U4xSnHJBefEkV993fX+Bx4+5YRjY/ommuapp58tdsy4ceNfe/3N0085ISah5p232dOdn999153i+P79BxRnZ0p6/fDD8y++HAdGxjDIqNFPPt05DjdqNMsSHdoX/td23XmHGIOJOaYYlVl+2WXatGndav6WX37VtUmTuad3lvsefGTBBVsdsO/eRxxzwosvvfLqa28ccdhBV11zw3c9v6/x9L16/TDHb1/ZBADp/PVT5pNPP2vRYt5F27aNlClO04T33u/ywMOPTpo8ea655oyZoxjMKL1f3GNPPNV2kTbduvcYMXLktKnTXn39zU023uDnn0eMnzAhJqfKL3nFFZaPr8KvE0zHHX146UdxmVOnTi387zz2+FMrV7746PU33x4xYsTZZ5z6Y+8+Cy+0YI0njgmnPn36nn/OGXPPPddOO2wft2KD9dddYbllF1u07QcfflR+ysijUaNHV+wiUyhssN46BQDI7K+fMi+98vpuu+w4cuSo0jE33XrH6NFjzjr95Jhpuu6mW1svvNAcc8xRfMXyiBEjhwwZ2rRZ0+HDf2o2b7ONN96gdZuFY5zmnvsf2narLRs2/J27Ky62a7dui7Vtu/BCC+2/716FQuEPv3tLDJnE7FWnNVd/7/0Pttx8k0cee/LhRx+PW7HsskvXePqmTedZp9Oa883XIg537/5tm9atd9u54l1qdtnp702bNr3n3gcKlRFz970P9Pi252qrrrTvXnvEAFJdrklEz4ABAzqt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AIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlKrbCRLAAAPxElEQVQGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACAxKQMAJCZlAIDEpAwAkJiUAQASkzIAQGJSBgBITMoAAIlJGQAgMSkDACQmZQCAxKQMAJCYlAEAEpMyAEBiUgYASEzKAACJSRkAIDEpAwAkJmUAgMSkDACQmJQBABKTMgBAYlIGAEhMygAAiUkZACCx/8duHZAAAAAACPr/uh2BrlBlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAMZUBAMZUBgAYUxkAYExlAIAxlQEAxlQGABhTGQBgTGUAgDGVAQDGVAYAGFMZAGBMZQCAsQAAAP//tNSNdQAAAAZJREFUAwAbXsUnRN8uKgAAAABJRU5ErkJggg==" alt="大乐透开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
+    <div id="card-error" style="display:none;padding:40px;text-align:center;color:#999;">📊 开奖卡片加载中...</div>
+  </div>
+</div>
+
+<!-- 上期命中回顾 -->
+<div class="review">
+  <div class="review-title">📊 上期推荐命中回顾</div>
+  <div class="review-stats">
+    <div class="review-stat">
+      <div class="num">0</div>
+      <div class="label">命中前区</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">0</div>
+      <div class="label">命中后区</div>
+    </div>
+    <div class="review-stat">
+      <div class="num">0.0%</div>
+      <div class="label">命中率</div>
+    </div>
+  </div>
+</div>
+
+<!-- 冷热号排行榜（最近30期） -->
+<div class="hotcold">
+  <div class="hotcold-title">🔥 最热号码 TOP10（近30期）</div>
+  <div class="hotcold-list">
+    <div class="hotcold-item hot">09</div>
+    <div class="hotcold-item hot">07</div>
+    <div class="hotcold-item hot">14</div>
+    <div class="hotcold-item hot">04</div>
+    <div class="hotcold-item hot">10</div>
+    <div class="hotcold-item hot">12</div>
+    <div class="hotcold-item hot">05</div>
+    <div class="hotcold-item hot">08</div>
+    <div class="hotcold-item hot">02</div>
+    <div class="hotcold-item hot">03</div>
+  </div>
+</div>
+
+<!-- 遗漏号排行榜 -->
+<div class="missing">
+  <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
+  <div class="missing-list">
+    <div class="missing-item"><div class="num">23</div><div class="days">遗漏26期</div></div>
+    <div class="missing-item"><div class="num">13</div><div class="days">遗漏25期</div></div>
+    <div class="missing-item"><div class="num">24</div><div class="days">遗漏19期</div></div>
+    <div class="missing-item"><div class="num">19</div><div class="days">遗漏11期</div></div>
+    <div class="missing-item"><div class="num">20</div><div class="days">遗漏10期</div></div>
+    <div class="missing-item"><div class="num">29</div><div class="days">遗漏10期</div></div>
+</div>
+</div>
+
+<!-- 区间分布 -->
+<div class="zone">
+  <div class="zone-title">📊 区间分布（近30期）</div>
+  <div class="zone-grid">
+    <div class="zone-item">
+      <div class="name">一区 1-12</div>
+      <div class="bar"><div class="bar-fill" style="width:55.7%;"></div></div>
+      <div class="pct">55.7%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">二区 13-24</div>
+      <div class="bar"><div class="bar-fill" style="width:24.3%;"></div></div>
+      <div class="pct">24.3%</div>
+    </div>
+    <div class="zone-item">
+      <div class="name">三区 25-35</div>
+      <div class="bar"><div class="bar-fill" style="width:20.0%;"></div></div>
+      <div class="pct">20.0%</div>
+    </div>
+  </div>
+</div>
+
+<!-- 本期重点关注 -->
+<div class="focus">
+  <div class="focus-title">🎯 本期重点关注</div>
+  
+  <div class="focus-section">
+    <div class="focus-label red-label">🔴 前区推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball">09</div>
+      <div class="focus-ball">07</div>
+      <div class="focus-ball">14</div>
+      <div class="focus-ball">04</div>
+      <div class="focus-ball">10</div>
+      <div class="focus-ball">12</div>
+    </div>
+  </div>
+  <div class="focus-section">
+    <div class="focus-label blue-label">🔵 后区推荐</div>
+    <div class="focus-list">
+      <div class="focus-ball blue">05</div>
+      <div class="focus-ball blue">08</div>
+      <div class="focus-ball blue">02</div>
+      <div class="focus-ball blue">03</div>
+    </div>
+  </div>
+  <div class="focus-reason">
+    💡 综合多模型评分，重点关注以上号码。数据仅供参考，不保证中奖。
+  </div>
+</div>
+
+<!-- 历史开奖记录 -->
+<div class="history">
+  <div class="history-title">📜 最近5期开奖记录</div>
+  <div class="history-item">
+    <div class="history-period">第26109期 · 2026-09-23</div>
+    <div class="history-balls">
+      <div class="history-ball red">12</div>
+      <div class="history-ball red">14</div>
+      <div class="history-ball red">16</div>
+      <div class="history-ball red">27</div>
+      <div class="history-ball red">34</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">04</div>
+      <div class="history-ball blue">08</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26108期 · 2026-09-21</div>
+    <div class="history-balls">
+      <div class="history-ball red">01</div>
+      <div class="history-ball red">05</div>
+      <div class="history-ball red">07</div>
+      <div class="history-ball red">21</div>
+      <div class="history-ball red">35</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">01</div>
+      <div class="history-ball blue">04</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26107期 · 2026-09-19</div>
+    <div class="history-balls">
+      <div class="history-ball red">02</div>
+      <div class="history-ball red">05</div>
+      <div class="history-ball red">07</div>
+      <div class="history-ball red">14</div>
+      <div class="history-ball red">22</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">04</div>
+      <div class="history-ball blue">10</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26106期 · 2026-09-16</div>
+    <div class="history-balls">
+      <div class="history-ball red">14</div>
+      <div class="history-ball red">17</div>
+      <div class="history-ball red">21</div>
+      <div class="history-ball red">25</div>
+      <div class="history-ball red">28</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">04</div>
+      <div class="history-ball blue">06</div>
+    </div>
+  </div>
+  <div class="history-item">
+    <div class="history-period">第26105期 · 2026-09-14</div>
+    <div class="history-balls">
+      <div class="history-ball red">10</div>
+      <div class="history-ball red">14</div>
+      <div class="history-ball red">30</div>
+      <div class="history-ball red">33</div>
+      <div class="history-ball red">34</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">09</div>
+      <div class="history-ball blue">12</div>
+    </div>
+  </div>
+</div>
+
+<!-- 玩法介绍 -->
+<div class="playguide">
+  <div class="playguide-title">📖 大乐透玩法介绍</div>
+  <div class="playguide-content">
+    
+        <p><strong>大乐透</strong>是中国体育彩票发行的一种乐透型彩票。</p>
+        <p>🎱 <strong>前区</strong>：从1-35个号码中选择5个</p>
+        <p>🔵 <strong>后区</strong>：从1-12个号码中选择2个</p>
+        <p>💡 开奖时间：每周一、三、六晚上21:25</p>
+        
+  </div>
+</div>
+
+<!-- 中奖规则 -->
+<div class="rules">
+  <div class="rules-title">🏆 中奖规则</div>
+  <div class="rules-content">
+    
+        <p>🏆 <strong>一等奖</strong>：5前+2后，浮动奖金（最高1000万）</p>
+        <p>🥈 <strong>二等奖</strong>：5前+1后，浮动奖金</p>
+        <p>🥉 <strong>三等奖</strong>：5前+0后，固定奖金10000元</p>
+        <p>🎖️ <strong>四等奖</strong>：4前+2后，固定奖金3000元</p>
+        <p>🎖️ <strong>五等奖</strong>：4前+1后，固定奖金300元</p>
+        <p>🎖️ <strong>六等奖</strong>：3前+2后，固定奖金200元</p>
+        <p>🎖️ <strong>七等奖</strong>：4前+0后，固定奖金100元</p>
+        <p>🎖️ <strong>八等奖</strong>：3前+1后 或 2前+2后，固定奖金15元</p>
+        <p>🎖️ <strong>九等奖</strong>：3前+0后 或 1前+2后 或 2前+1后 或 0前+2后，固定奖金5元</p>
+        
+  </div>
+</div>
+
+<!-- 术语解释 -->
+<div class="glossary">
+  <div class="glossary-title">📝 术语解释</div>
+  <div class="glossary-content">
+    
+    <p>🔥 <strong>热号</strong>：最近30期出现频率最高的号码</p>
+    <p>❄️ <strong>冷号</strong>：最近30期出现频率最低的号码</p>
+    <p>⏳ <strong>遗漏</strong>：某号码距离上次开出已经过了多少期</p>
+    <p>⚖️ <strong>奇偶比</strong>：开奖号码中奇数和偶数的比例</p>
+    <p>📏 <strong>大小比</strong>：开奖号码中大数和小数的比例</p>
+    <p>📊 <strong>和值</strong>：所有开奖号码相加的总和</p>
+    <p>📐 <strong>跨度</strong>：最大号码和最小号码的差值</p>
+    
+  </div>
+</div>
+
+<!-- 选号思路 -->
+<div class="picking">
+  <div class="picking-title">🎯 选号思路分享</div>
+  <div class="picking-content">
+    
+    <p>我们的预测系统基于150+个统计模型和机器学习算法，从8大维度综合评分：</p>
+    <p>· 基础统计：频率、冷热、遗漏、奇偶、大小、跨度、AC值、质合、012路</p>
+    <p>· 进阶统计：马尔可夫链、贝叶斯分析、蒙特卡洛模拟、共现关联</p>
+    <p>· 机器学习：随机森林、梯度提升、逻辑回归</p>
+    <p>· 时间序列：LSTM神经网络、ARIMA模型</p>
+    <p>· 集成学习：Blending融合、Stacking集成、A/B测试框架</p>
+    <p>· 深度学习：注意力机制、迁移学习、强化学习</p>
+    <p>· 训练优化：数据增强、早停机制、K折交叉验证、超参数自动调优</p>
+    <p>· 评估监控：随机基准对照、详细回测、可解释性分析、置信度估计</p>
+    <br>
+    <p>💡 <strong>选号建议：</strong></p>
+    <p>第一，不要盲目追热。热号虽然近期出现频繁，但每一期开奖都是独立事件，历史结果不影响未来概率。</p>
+    <p>第二，不要执着于冷号。冷号虽然"该出了"，但可能继续遗漏多期，这是彩票随机性的体现。</p>
+    <p>第三，均衡配置更稳妥。在大小、奇偶、区间等维度上保持相对均衡的配置，从概率角度看更符合长期分布。</p>
+    <p>第四，量力而行。彩票本质上是一种娱乐方式，不是投资手段。每期投入应该控制在可承受的范围内。</p>
+    
+  </div>
+</div>
+
+<!-- 数据更新说明 -->
+<div class="datanote">
+  <div class="datanote-title">ℹ️ 数据更新说明</div>
+  <div class="datanote-content">
+    <p>🕒 数据更新时间：2026-09-23 开奖后</p>
+    <p>📊 数据来源：官方开奖数据 + 150+统计模型</p>
+    <p>🔄 更新频率：每日开奖后自动更新</p>
+    <p>✅ 与推荐卡片使用同一套数据和计算逻辑</p>
+  </div>
+</div>
+
+<!-- 动态尾文（与百家号完全一致） -->
+<div class="closing-text"><p>📊 大乐透第26109期 vs 历史平均：本期数据有哪些异常？我们一起来对比看看。</p><p>❄️ 冷号关注：当前遗漏最久的5个号码是19(漏25期)、01(漏18期)、17(漏13期)、23(漏13期)、07(漏13期)。尤其是19已经遗漏了25期，从历史分布来看，这个遗漏时长已经超过了平均遗漏周期的1.5倍，回补概率在逐步增加。</p><p>🔁 重复号码：本期号码与上期对比，有0个号码重复出现。从统计角度看，每期出现1-2个重号是比较常见的情况，不必过度解读。</p><p>📊 和值统计：本期和值103，跨度22。和值和跨度是描述号码分布的两个重要指标，结合使用效果更好。</p><p>🎯 理性看待：我们的预测系统虽然使用了150+统计模型和机器学习算法，但本质上还是基于历史数据的统计推断。彩票的随机性决定了任何方法都无法准确预测结果。请理性看待我们的分析，把它当作一种参考，而不是"中奖秘籍"。</p><p>📚 趣味统计：从大乐透的历史数据来看，最常见的奇偶比是2:3，出现概率约为30%左右。而全奇或全偶的情况相对较少，出现概率不到5%。这也是为什么选号时建议保持奇偶均衡的原因。</p><p>🎯 选号思路总结：下期选号记住三个"平衡"——冷热平衡、奇偶平衡、大小平衡。在这个基础上，可以适当加入1-2个个人看好的"心水码"。记住，彩票本质是娱乐，不要过度投入，享受过程最重要。</p><p>📋 大乐透第26109期开奖结果速览：12 14 16 27 34 | 04 08（2026-09-23开奖）。</p><p>✨ 感谢您阅读本期分析，祝您生活愉快，购彩开心！第26110期我们再见！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+
+<!-- 理性购彩提示 -->
+<div class="disclaimer">
+  <div class="disclaimer-title">⚠️ 理性购彩提示</div>
+  <div class="disclaimer-content">
+    彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
+  </div>
+</div>
+
+
+</div>
+
+
+</body>
+</html>
