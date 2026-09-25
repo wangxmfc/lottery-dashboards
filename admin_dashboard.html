@@ -429,6 +429,231 @@
         .br-bar.random { background: rgba(255,255,255,0.15); }
         .br-val { font-size: 0.72em; color: #9AA3AF; min-width: 35px; text-align: right; }
         
+        /* 本周开奖日历 */
+        .week-cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+        .week-cal-day {
+            padding: 10px 6px;
+            border-radius: 10px;
+            text-align: center;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .week-cal-day.today {
+            background: rgba(201,162,39,0.1);
+            border-color: rgba(201,162,39,0.4);
+        }
+        .week-cal-day .wc-dayname {
+            font-size: 0.78em;
+            color: #9AA3AF;
+            margin-bottom: 4px;
+        }
+        .week-cal-day.today .wc-dayname {
+            color: #C9A227;
+            font-weight: 600;
+        }
+        .week-cal-day .wc-lotteries {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+            justify-content: center;
+        }
+        .week-cal-day .wc-tag {
+            font-size: 0.65em;
+            padding: 1px 5px;
+            border-radius: 8px;
+            background: rgba(201,162,39,0.12);
+            color: #C9A227;
+        }
+        .week-cal-day .wc-empty {
+            font-size: 0.68em;
+            color: rgba(255,255,255,0.2);
+        }
+        
+        /* 上期命中回顾 */
+        .prev-hit-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        .prev-hit-item {
+            padding: 12px 8px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            text-align: center;
+        }
+        .prev-hit-item .ph-name {
+            font-size: 0.8em;
+            color: #C9A227;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .prev-hit-item .ph-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 0;
+            font-size: 0.75em;
+        }
+        .prev-hit-item .ph-label { color: #9AA3AF; }
+        .prev-hit-item .ph-value { font-weight: 600; }
+        .ph-value.good { color: #28a745; }
+        .ph-value.mid { color: #f39c12; }
+        .ph-value.bad { color: #dc3545; }
+        
+        /* 孤注一掷速览 */
+        .lone-quick-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        .lone-quick-item {
+            padding: 12px 8px;
+            border-radius: 10px;
+            background: rgba(201,162,39,0.04);
+            border: 1px solid rgba(201,162,39,0.15);
+            text-align: center;
+        }
+        .lone-quick-item .lq-name {
+            font-size: 0.8em;
+            color: #C9A227;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .lone-quick-item .lq-balls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3px;
+        }
+        .lone-quick-item .lq-ball {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.68em;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(135deg, #C9A227, #b8941f);
+            box-shadow: 0 2px 6px rgba(201,162,39,0.3);
+        }
+        .lone-quick-item .lq-ball.sub {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+        
+        /* 固定号核对 */
+        .fixed-check-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .fixed-check-row:last-child { border-bottom: none; }
+        .fixed-check-label {
+            font-size: 0.82em;
+            color: #9AA3AF;
+            min-width: 50px;
+        }
+        .fixed-check-balls {
+            display: flex;
+            gap: 4px;
+            flex: 1;
+        }
+        .fixed-ball {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75em;
+            font-weight: bold;
+            color: #fff;
+        }
+        .fixed-ball.hit {
+            box-shadow: 0 0 0 2px #28a745, 0 0 10px rgba(40,167,69,0.5);
+        }
+        .fixed-check-result {
+            text-align: center;
+            padding: 10px;
+            margin-top: 8px;
+            background: rgba(40,167,69,0.08);
+            border-radius: 8px;
+        }
+        .fixed-check-result .fcr-num {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #28a745;
+        }
+        .fixed-check-result .fcr-label {
+            font-size: 0.75em;
+            color: #9AA3AF;
+        }
+        
+        /* 冷热号速览 */
+        .hot-cold-lottery {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .hot-cold-lottery:last-child { border-bottom: none; }
+        .hc-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 3px 0;
+        }
+        .hc-label {
+            font-size: 0.72em;
+            min-width: 32px;
+            font-weight: 600;
+        }
+        .hc-label.hot { color: #e74c3c; }
+        .hc-label.cold { color: #3498db; }
+        .hc-nums {
+            display: flex;
+            gap: 3px;
+            flex: 1;
+        }
+        .hc-num {
+            font-size: 0.7em;
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        .hc-num.hot { background: rgba(231,76,60,0.12); color: #e74c3c; }
+        .hc-num.cold { background: rgba(52,152,219,0.12); color: #3498db; }
+        
+        /* 选号思路一句话 */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .strategy-item {
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .strategy-item .st-name {
+            font-size: 0.82em;
+            color: #C9A227;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .strategy-item .st-text {
+            font-size: 0.78em;
+            color: #b0b8c4;
+            line-height: 1.5;
+        }
+        
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -701,6 +926,24 @@
             }
             .latest-draws-grid {
                 grid-template-columns: repeat(4, 1fr);
+                gap: 8px;
+            }
+            .prev-hit-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 8px;
+            }
+            .lone-quick-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 8px;
+            }
+            .week-cal-grid {
+                grid-template-columns: repeat(7, 1fr);
+                gap: 4px;
+            }
+            .week-cal-day { padding: 8px 4px; }
+            .week-cal-day .wc-tag { font-size: 0.58em; padding: 1px 3px; }
+            .strategy-grid {
+                grid-template-columns: 1fr;
                 gap: 8px;
             }
             .draw-banner-inner {
@@ -1652,10 +1895,58 @@
                     </div>
                 </div>
 
+                <!-- 本周开奖日历 -->
+                <div class="card" id="week-calendar" style="grid-column:1/-1;">
+                    <h2>📅 本周开奖日历</h2>
+                    <div id="week-calendar-content">
+                        <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
+                    </div>
+                </div>
+
                 <!-- 最新开奖速览 -->
                 <div class="card" id="latest-draws" style="grid-column:1/-1;">
                     <h2>🔢 最新开奖速览</h2>
                     <div id="latest-draws-content">
+                        <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
+                    </div>
+                </div>
+
+                <!-- 上期命中回顾 -->
+                <div class="card" id="prev-hit-review" style="grid-column:1/-1;">
+                    <h2>🎯 上期命中回顾</h2>
+                    <div id="prev-hit-content">
+                        <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
+                    </div>
+                </div>
+
+                <!-- 孤注一掷速览 -->
+                <div class="card" id="lone-nums-quick" style="grid-column:1/-1;">
+                    <h2>⚡ 孤注一掷速览</h2>
+                    <div id="lone-nums-content">
+                        <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
+                    </div>
+                </div>
+
+                <!-- 大乐透固定号核对 -->
+                <div class="card" id="dlt-fixed-check">
+                    <h2>🔒 大乐透固定号核对</h2>
+                    <div id="dlt-fixed-content">
+                        <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
+                    </div>
+                </div>
+
+                <!-- 冷热号速览 -->
+                <div class="card" id="hot-cold-quick">
+                    <h2>🌡️ 冷热号速览</h2>
+                    <div id="hot-cold-content">
+                        <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
+                    </div>
+                </div>
+
+                <!-- 选号思路一句话 -->
+                <div class="card" id="strategy-summary" style="grid-column:1/-1;">
+                    <h2>💡 选号思路一句话</h2>
+                    <div id="strategy-summary-content">
                         <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
                     </div>
                 </div>
@@ -2447,7 +2738,296 @@
             el.innerHTML = html;
         }
         
-        // 彩种详情标签页切换
+        // 渲染本周开奖日历
+        function renderWeekCalendar(data) {
+            const el = document.getElementById('week-calendar-content');
+            if (!el) return;
+            
+            const drawDays = {
+                ssq: [0, 2, 4], dlt: [1, 3, 6], kl8: [0,1,2,3,4,5,6],
+                fc3d: [0,1,2,3,4,5,6], pl35: [0,1,2,3,4,5,6], qxc: [0, 2, 5], qlc: [1, 3, 5]
+            };
+            const lotteryNames = {
+                ssq: '双色球', dlt: '大乐透', kl8: '快乐8',
+                fc3d: '福彩3D', pl35: '排列3/5', qxc: '七星彩', qlc: '七乐彩'
+            };
+            const dayNames = ['周日','周一','周二','周三','周四','周五','周六'];
+            
+            const today = new Date();
+            const todayDay = today.getDay();
+            // 计算本周一的日期
+            const monday = new Date(today);
+            monday.setDate(today.getDate() - ((todayDay + 6) % 7));
+            
+            let html = '<div class="week-cal-grid">';
+            for (let i = 0; i < 7; i++) {
+                const d = new Date(monday);
+                d.setDate(monday.getDate() + i);
+                const dayIdx = d.getDay();
+                const isToday = dayIdx === todayDay;
+                const dayLotteries = Object.keys(drawDays).filter(code => drawDays[code].includes(dayIdx));
+                
+                let tagsHtml = '';
+                if (dayLotteries.length > 0) {
+                    tagsHtml = '<div class="wc-lotteries">';
+                    dayLotteries.forEach(code => {
+                        tagsHtml += `<span class="wc-tag">${lotteryNames[code]}</span>`;
+                    });
+                    tagsHtml += '</div>';
+                } else {
+                    tagsHtml = '<div class="wc-empty">休市</div>';
+                }
+                
+                html += `
+                    <div class="week-cal-day ${isToday ? 'today' : ''}">
+                        <div class="wc-dayname">${dayNames[dayIdx]}${isToday ? ' · 今天' : ''}</div>
+                        ${tagsHtml}
+                    </div>
+                `;
+            }
+            html += '</div>';
+            el.innerHTML = html;
+        }
+        
+        // 渲染上期命中回顾
+        function renderPrevHitReview(data) {
+            const el = document.getElementById('prev-hit-content');
+            if (!el) return;
+            
+            const lotteryInfo = [
+                { code: 'ssq', name: '双色球' },
+                { code: 'dlt', name: '大乐透' },
+                { code: 'kl8', name: '快乐8' },
+                { code: 'fc3d', name: '福彩3D' },
+                { code: 'pl35', name: '排列3/5' },
+                { code: 'qxc', name: '七星彩' },
+                { code: 'qlc', name: '七乐彩' },
+            ];
+            
+            function hitClass(hit, threshold) {
+                if (hit >= threshold) return 'good';
+                if (hit > 0) return 'mid';
+                return 'bad';
+            }
+            
+            let html = '<div class="prev-hit-grid">';
+            for (const info of lotteryInfo) {
+                const detail = data.details && data.details[info.code] ? data.details[info.code] : {};
+                const pc = detail.prev_check || {};
+                const period = pc.period || '-';
+                const hitMain = pc.hit_main !== undefined ? pc.hit_main : '-';
+                const hitLone = pc.lone_hit_total !== undefined ? pc.lone_hit_total : 
+                                 (pc.hit_lone !== undefined ? pc.hit_lone : '-');
+                const hitTotal = pc.hit_total !== undefined ? pc.hit_total : '-';
+                
+                // 不同彩种阈值不同
+                const threshold = info.code === 'kl8' ? 5 : (info.code === 'fc3d' || info.code === 'pl35' ? 1 : 2);
+                
+                html += `
+                    <div class="prev-hit-item">
+                        <div class="ph-name">${info.name}</div>
+                        <div style="font-size:0.68em;color:#9AA3AF;margin-bottom:6px;">第${period}期</div>
+                        <div class="ph-row">
+                            <span class="ph-label">主推</span>
+                            <span class="ph-value ${typeof hitMain === 'number' ? hitClass(hitMain, threshold) : ''}">${hitMain}个</span>
+                        </div>
+                        <div class="ph-row">
+                            <span class="ph-label">孤注</span>
+                            <span class="ph-value ${typeof hitLone === 'number' ? hitClass(hitLone, threshold) : ''}">${hitLone}个</span>
+                        </div>
+                    </div>
+                `;
+            }
+            html += '</div>';
+            el.innerHTML = html;
+        }
+        
+        // 渲染孤注一掷速览
+        function renderLoneNumsQuick(data) {
+            const el = document.getElementById('lone-nums-content');
+            if (!el) return;
+            
+            const lotteryInfo = [
+                { code: 'ssq', name: '双色球', mainColor: '#e74c3c', subColor: '#3498db' },
+                { code: 'dlt', name: '大乐透', mainColor: '#e74c3c', subColor: '#2ecc71' },
+                { code: 'kl8', name: '快乐8', mainColor: '#2ecc71', subColor: null },
+                { code: 'fc3d', name: '福彩3D', mainColor: '#f1c40f', subColor: null },
+                { code: 'pl35', name: '排列3/5', mainColor: '#e67e22', subColor: null },
+                { code: 'qxc', name: '七星彩', mainColor: '#9b59b6', subColor: '#e74c3c' },
+                { code: 'qlc', name: '七乐彩', mainColor: '#95a5a6', subColor: '#e74c3c' },
+            ];
+            
+            let html = '<div class="lone-quick-grid">';
+            for (const info of lotteryInfo) {
+                const detail = data.details && data.details[info.code] ? data.details[info.code] : {};
+                const pred = detail.prediction || {};
+                const loneMain = pred.lone_main || [];
+                const loneSub = pred.lone_sub || [];
+                const nextPeriod = pred.next_period || '-';
+                
+                let ballsHtml = '';
+                loneMain.forEach(n => {
+                    ballsHtml += `<span class="lq-ball" style="background:linear-gradient(135deg,${info.mainColor},${info.mainColor}cc);">${n}</span>`;
+                });
+                if (loneSub.length > 0 && info.subColor) {
+                    loneSub.forEach(n => {
+                        ballsHtml += `<span class="lq-ball sub" style="background:linear-gradient(135deg,${info.subColor},${info.subColor}cc);">${n}</span>`;
+                    });
+                }
+                if (loneMain.length === 0) {
+                    ballsHtml = '<span style="color:#9AA3AF;font-size:0.75em;">暂无</span>';
+                }
+                
+                html += `
+                    <div class="lone-quick-item">
+                        <div class="lq-name">${info.name}</div>
+                        <div style="font-size:0.68em;color:#9AA3AF;margin-bottom:6px;">第${nextPeriod}期</div>
+                        <div class="lq-balls">${ballsHtml}</div>
+                    </div>
+                `;
+            }
+            html += '</div>';
+            el.innerHTML = html;
+        }
+        
+        // 渲染大乐透固定号核对
+        function renderDltFixedCheck(data) {
+            const el = document.getElementById('dlt-fixed-content');
+            if (!el) return;
+            
+            const dlt = data.details && data.details.dlt ? data.details.dlt : {};
+            const fn = dlt.fixed_number || {};
+            const fixed = fn.fixed || {};
+            const check = fn.current_check || {};
+            const stats = fn.stats || {};
+            
+            const frontNums = fixed.front || [];
+            const backNums = fixed.back || [];
+            const hitFrontNums = check.hit_front_nums || [];
+            const hitBackNums = check.hit_back_nums || [];
+            const hitTotal = check.hit_total !== undefined ? check.hit_total : 0;
+            const period = check.period || '-';
+            
+            let frontHtml = '';
+            frontNums.forEach(n => {
+                const isHit = hitFrontNums.includes(n);
+                frontHtml += `<span class="fixed-ball ${isHit ? 'hit' : ''}" style="background:#e74c3c;">${n}</span>`;
+            });
+            let backHtml = '';
+            backNums.forEach(n => {
+                const isHit = hitBackNums.includes(n);
+                backHtml += `<span class="fixed-ball ${isHit ? 'hit' : ''}" style="background:#2ecc71;">${n}</span>`;
+            });
+            
+            el.innerHTML = `
+                <div style="font-size:0.78em;color:#9AA3AF;margin-bottom:8px;">核对期号：第${period}期</div>
+                <div class="fixed-check-row">
+                    <span class="fixed-check-label">前区</span>
+                    <div class="fixed-check-balls">${frontHtml}</div>
+                </div>
+                <div class="fixed-check-row">
+                    <span class="fixed-check-label">后区</span>
+                    <div class="fixed-check-balls">${backHtml}</div>
+                </div>
+                <div class="fixed-check-result">
+                    <span class="fcr-num">${hitTotal}</span>
+                    <span class="fcr-label">个命中（前区${check.hit_front || 0}+后区${check.hit_back || 0}）</span>
+                </div>
+                ${stats.total_periods ? `
+                <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:0.72em;color:#9AA3AF;">
+                    <span>累计${stats.total_periods}期</span>
+                    <span>命中${stats.hit_periods || 0}期</span>
+                    <span>均命中${stats.avg_hit_f || 0}前+${stats.avg_hit_b || 0}后</span>
+                </div>
+                ` : ''}
+            `;
+        }
+        
+        // 渲染冷热号速览
+        function renderHotColdQuick(data) {
+            const el = document.getElementById('hot-cold-content');
+            if (!el) return;
+            
+            const lotteryInfo = [
+                { code: 'ssq', name: '双色球' },
+                { code: 'dlt', name: '大乐透' },
+                { code: 'kl8', name: '快乐8' },
+                { code: 'fc3d', name: '福彩3D' },
+                { code: 'pl35', name: '排列3/5' },
+                { code: 'qxc', name: '七星彩' },
+                { code: 'qlc', name: '七乐彩' },
+            ];
+            
+            let html = '';
+            for (const info of lotteryInfo) {
+                const detail = data.details && data.details[info.code] ? data.details[info.code] : {};
+                const hc = detail.hot_cold || {};
+                const hot = (hc.hot || []).slice(0, 4);
+                const cold = (hc.cold || []).slice(0, 4);
+                
+                let hotHtml = hot.length > 0 ? hot.map(n => `<span class="hc-num hot">${n}</span>`).join('') : '<span style="color:#666;font-size:0.7em;">-</span>';
+                let coldHtml = cold.length > 0 ? cold.map(n => `<span class="hc-num cold">${n}</span>`).join('') : '<span style="color:#666;font-size:0.7em;">-</span>';
+                
+                html += `
+                    <div class="hot-cold-lottery">
+                        <div style="font-size:0.8em;color:#e0e0e0;font-weight:500;margin-bottom:4px;">${info.name}</div>
+                        <div class="hc-row">
+                            <span class="hc-label hot">热</span>
+                            <div class="hc-nums">${hotHtml}</div>
+                        </div>
+                        <div class="hc-row">
+                            <span class="hc-label cold">冷</span>
+                            <div class="hc-nums">${coldHtml}</div>
+                        </div>
+                    </div>
+                `;
+            }
+            el.innerHTML = html;
+        }
+        
+        // 渲染选号思路一句话
+        function renderStrategySummary(data) {
+            const el = document.getElementById('strategy-summary-content');
+            if (!el) return;
+            
+            const lotteryInfo = [
+                { code: 'ssq', name: '双色球' },
+                { code: 'dlt', name: '大乐透' },
+                { code: 'kl8', name: '快乐8' },
+                { code: 'fc3d', name: '福彩3D' },
+                { code: 'pl35', name: '排列3/5' },
+                { code: 'qxc', name: '七星彩' },
+                { code: 'qlc', name: '七乐彩' },
+            ];
+            
+            function extractOneLine(strategy) {
+                if (!strategy || typeof strategy !== 'string') return '暂无思路';
+                // 去掉emoji和标题行，取第一个有意义的句子
+                const lines = strategy.split('\n').filter(l => l.trim().length > 10);
+                for (const line of lines) {
+                    const clean = line.replace(/^[📊🔢🌡️📋💡🎯⚡🔒]+/, '').trim();
+                    if (clean.length > 15 && clean.length < 80 && !clean.includes('分析报告') && !clean.includes('开奖号码')) {
+                        return clean.substring(0, 60) + (clean.length > 60 ? '...' : '');
+                    }
+                }
+                return strategy.substring(0, 60) + '...';
+            }
+            
+            let html = '<div class="strategy-grid">';
+            for (const info of lotteryInfo) {
+                const detail = data.details && data.details[info.code] ? data.details[info.code] : {};
+                const summary = extractOneLine(detail.strategy);
+                
+                html += `
+                    <div class="strategy-item">
+                        <div class="st-name">${info.name}</div>
+                        <div class="st-text">${summary}</div>
+                    </div>
+                `;
+            }
+            html += '</div>';
+            el.innerHTML = html;
+        }
         function switchLotteryTab(lotteryId, tabName) {
             const section = document.getElementById(lotteryId);
             if (!section) return;
@@ -3625,7 +4205,13 @@
                 renderTodayDrawBanner(data);
                 renderOverviewStatus(data);
                 renderQuickNav(data);
+                renderWeekCalendar(data);
                 renderLatestDraws(data);
+                renderPrevHitReview(data);
+                renderLoneNumsQuick(data);
+                renderDltFixedCheck(data);
+                renderHotColdQuick(data);
+                renderStrategySummary(data);
                 renderBacktestVsRandom(data);
                 renderLotteryDetails(data);
                 renderModelMonitoring(data);
