@@ -1157,14 +1157,17 @@
                 // ========== 概览标签内容 ==========
                 const latestDraw = detail.latest_draw || {};
                 const prediction = detail.prediction || {};
+                // 随机基准值：从improvement和avg_hit反推（random = avg / (1 + improvement/100)）
+                const randBase = detail.improvement !== undefined && detail.improvement !== null ? 
+                    (detail.avg_hit / (1 + detail.improvement / 100)).toFixed(2) : '-';
                 let overviewHtml = `
                 <div class="lottery-tab-content" id="${lotteryId}-tab-overview" style="display:block;">
                     <div class="hit-rate" style="margin-bottom:15px;">命中率提升 ${formatImprovement(detail.improvement)}</div>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;">
-                        <div class="stat" style="margin:0;"><span class="stat-label">平均命中</span><span class="stat-value">0.8个</span></div>
-                        <div class="stat" style="margin:0;"><span class="stat-label">对比随机基准</span><span class="stat-value">+14.3%</span></div>
-                        <div class="stat" style="margin:0;"><span class="stat-label">样本期数</span><span class="stat-value">5期</span></div>
-                        <div class="stat" style="margin:0;"><span class="stat-label">命中率</span><span class="stat-value">40.0%</span></div>
+                        <div class="stat" style="margin:0;"><span class="stat-label">平均命中</span><span class="stat-value">${detail.avg_hit || 0}个</span></div>
+                        <div class="stat" style="margin:0;"><span class="stat-label">随机基准</span><span class="stat-value">${randBase}个</span></div>
+                        <div class="stat" style="margin:0;"><span class="stat-label">样本期数</span><span class="stat-value">${detail.total_periods || 0}期</span></div>
+                        <div class="stat" style="margin:0;"><span class="stat-label">命中率</span><span class="stat-value">${detail.hit_rate || 0}%</span></div>
                     </div>
                     <div class="stat" style="margin-bottom:20px;"><span class="stat-label">状态等级</span><span class="badge ${gradeCls}">${detail.grade}</span></div>
                 `;
