@@ -2429,10 +2429,19 @@
                     </div>
                     <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;margin-top:8px;">
                         <div style="font-size:0.85em;color:#C9A227;margin-bottom:10px;">🔧 模型管理功能</div>
-                        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
-                            <div class="stat"><span class="stat-label">模型自动评估</span><span class="badge badge-good" id="feat-auto-eval">已开启</span></div>
-                            <div class="stat"><span class="stat-label">模型启用核查</span><span class="badge badge-good" id="feat-enable-check">已开启</span></div>
-                            <div class="stat"><span class="stat-label">用户偏好学习</span><span class="badge badge-good" id="feat-pref-learn">已开启</span></div>
+                        <div style="display:flex;flex-direction:column;gap:6px;">
+                            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(40,167,69,0.06);border-radius:8px;border:1px solid rgba(40,167,69,0.15);">
+                                <span style="font-size:0.85em;color:#e0e0e0;">🤖 模型自动评估</span>
+                                <span class="badge badge-good" id="feat-auto-eval" style="font-size:0.72em;padding:3px 10px;">已开启</span>
+                            </div>
+                            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(40,167,69,0.06);border-radius:8px;border:1px solid rgba(40,167,69,0.15);">
+                                <span style="font-size:0.85em;color:#e0e0e0;">✅ 模型启用核查</span>
+                                <span class="badge badge-good" id="feat-enable-check" style="font-size:0.72em;padding:3px 10px;">已开启</span>
+                            </div>
+                            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(40,167,69,0.06);border-radius:8px;border:1px solid rgba(40,167,69,0.15);">
+                                <span style="font-size:0.85em;color:#e0e0e0;">🧠 用户偏好学习</span>
+                                <span class="badge badge-good" id="feat-pref-learn" style="font-size:0.72em;padding:3px 10px;">已开启</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2502,7 +2511,7 @@
 
                 <!-- 自主学习（全宽） -->
                 <div class="card ops-full-width" id="ops-learning">
-                    <h2>🧠 自主学习 <span style="font-size:0.6em;color:#9AA3AF;font-weight:normal;" id="ops-learning-time">基于回测数据自动优化</span></h2>
+                    <h2 style="display:flex;flex-direction:column;gap:4px;">🧠 自主学习 <span style="font-size:0.65em;color:#9AA3AF;font-weight:normal;" id="ops-learning-time">基于回测数据自动优化</span></h2>
                     <div id="ops-learning-content">加载中...</div>
                 </div>
 
@@ -4882,20 +4891,28 @@
                 
                 // 学习结论
                 if (ml.conclusions && ml.conclusions.length > 0) {
-                    html += '<div style="margin-bottom:16px;"><div style="font-size:0.88em;color:#C9A227;margin-bottom:8px;">💡 学习结论</div>';
-                    ml.conclusions.forEach(c => {
-                        html += `<div style="font-size:0.82em;color:#e0e0e0;padding:5px 0;line-height:1.5;">• ${c}</div>`;
+                    html += '<div style="margin-bottom:16px;"><div style="font-size:0.88em;color:#C9A227;margin-bottom:10px;padding-left:8px;border-left:2px solid rgba(201,162,39,0.5);">💡 学习结论</div><div style="display:flex;flex-direction:column;gap:6px;">';
+                    ml.conclusions.forEach((c, i) => {
+                        const icons = ['🏆', '🎯', '📈', '✅'];
+                        const icon = icons[i % icons.length];
+                        html += `<div style="display:flex;gap:10px;padding:10px 12px;background:rgba(201,162,39,0.05);border-radius:8px;border:1px solid rgba(201,162,39,0.1);align-items:flex-start;">
+                            <span style="font-size:1em;flex-shrink:0;">${icon}</span>
+                            <span style="font-size:0.82em;color:#e0e0e0;line-height:1.5;">${c}</span>
+                        </div>`;
                     });
-                    html += '</div>';
+                    html += '</div></div>';
                 }
                 
                 // 改进建议
                 if (ml.recommendations && ml.recommendations.length > 0) {
-                    html += '<div><div style="font-size:0.88em;color:#C9A227;margin-bottom:8px;">🔧 改进建议</div>';
+                    html += '<div><div style="font-size:0.88em;color:#C9A227;margin-bottom:10px;padding-left:8px;border-left:2px solid rgba(201,162,39,0.5);">🔧 改进建议</div><div style="display:flex;flex-direction:column;gap:5px;">';
                     ml.recommendations.forEach(r => {
-                        html += `<div style="font-size:0.8em;color:#9AA3AF;padding:4px 0;line-height:1.5;">→ ${r}</div>`;
+                        html += `<div style="display:flex;gap:8px;padding:8px 10px;background:rgba(243,156,18,0.05);border-radius:6px;border-left:2px solid rgba(243,156,18,0.3);">
+                            <span style="font-size:0.75em;color:#f39c12;flex-shrink:0;">⚠️</span>
+                            <span style="font-size:0.78em;color:#b0a890;line-height:1.5;">${r}</span>
+                        </div>`;
                     });
-                    html += '</div>';
+                    html += '</div></div>';
                 }
                 
                 learnEl.innerHTML = html;
