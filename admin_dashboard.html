@@ -263,9 +263,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 30px;
+            gap: 12px;
             flex-wrap: wrap;
-            padding: 10px 0;
+            padding: 10px 0 0;
+        }
+        .draw-banner-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .draw-banner-wrap .draw-banner-countdown {
+            width: 100%;
+            text-align: center;
+            padding: 14px 20px;
         }
         .draw-banner-item {
             text-align: center;
@@ -290,22 +300,47 @@
             color: #9AA3AF;
             margin-top: 2px;
         }
+        .draw-banner-item.db-today {
+            background: rgba(201,162,39,0.1);
+            border-color: rgba(201,162,39,0.35);
+        }
+        .draw-banner-item.db-today .db-time { color: #C9A227; }
+        .draw-banner-item.db-muted {
+            opacity: 0.6;
+            background: rgba(255,255,255,0.02);
+        }
         .draw-banner-countdown {
             text-align: center;
-            padding: 12px 24px;
-            background: linear-gradient(135deg, rgba(201,162,39,0.15), rgba(201,162,39,0.05));
-            border-radius: 12px;
-            border: 1px solid rgba(201, 162, 39, 0.3);
+            padding: 16px 24px;
+            background: linear-gradient(135deg, rgba(201,162,39,0.18), rgba(201,162,39,0.05));
+            border-radius: 14px;
+            border: 1px solid rgba(201, 162, 39, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+        .draw-banner-countdown::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 100%;
+            background: radial-gradient(ellipse, rgba(201,162,39,0.15) 0%, transparent 70%);
         }
         .draw-banner-countdown .cd-label {
-            font-size: 0.78em;
-            color: #9AA3AF;
+            font-size: 0.85em;
+            color: #b0a890;
+            position: relative;
         }
         .draw-banner-countdown .cd-value {
-            font-size: 1.6em;
+            font-size: 2em;
             font-weight: bold;
             color: #C9A227;
             font-family: monospace;
+            text-shadow: 0 0 20px rgba(201,162,39,0.4);
+            position: relative;
+            letter-spacing: 2px;
         }
         
         /* 彩种快速导航 */
@@ -1197,7 +1232,12 @@
                 gap: 8px;
             }
             .draw-banner-inner {
-                gap: 12px;
+                gap: 10px;
+            }
+            .draw-banner-inner .draw-banner-item {
+                flex: 1 1 calc(50% - 5px);
+                min-width: 0;
+                padding: 12px 10px;
             }
             .draw-banner-item {
                 min-width: 90px;
@@ -2751,6 +2791,7 @@
                 ssq: '21:15', dlt: '20:30', kl8: '21:10',
                 fc3d: '20:30', pl35: '20:30', qxc: '20:30', qlc: '20:30'
             };
+            const dayNames = ['周日','周一','周二','周三','周四','周五','周六'];
             const lotteryNames = {
                 ssq: '双色球', dlt: '大乐透', kl8: '快乐8',
                 fc3d: '福彩3D', pl35: '排列3/5', qxc: '七星彩', qlc: '七乐彩'
@@ -2758,39 +2799,42 @@
             const lotteryIcons = {
                 ssq: '🔴', dlt: '🔵', kl8: '🟢', fc3d: '🟡', pl35: '🟠', qxc: '🟣', qlc: '⚪'
             };
+            const allCodes = ['ssq','dlt','kl8','fc3d','pl35','qxc','qlc'];
             
             const today = new Date();
             const todayDay = today.getDay();
-            const todayLotteries = Object.keys(drawDays).filter(code => drawDays[code].includes(todayDay));
-            
-            if (todayLotteries.length === 0) {
-                el.innerHTML = '<div style="text-align:center;padding:20px;color:#9AA3AF;">今日无开奖</div>';
-                return;
-            }
-            
-            // 找最近的开奖时间做倒计时
             const nowMin = today.getHours() * 60 + today.getMinutes();
-            let nextDraw = null;
-            let nextCode = null;
+            
+            // 找今天最近的开奖时间做倒计时
+            const todayLotteries = allCodes.filter(code => drawDays[code].includes(todayDay));
+            let nextDraw = null, nextCode = null;
             for (const code of todayLotteries) {
                 const [h, m] = drawTime[code].split(':').map(Number);
                 const drawMin = h * 60 + m;
                 if (drawMin > nowMin && (!nextDraw || drawMin < nextDraw)) {
-                    nextDraw = drawMin;
-                    nextCode = code;
+                    nextDraw = drawMin; nextCode = code;
                 }
             }
             
             let itemsHtml = '';
-            for (const code of todayLotteries) {
+            for (const code of allCodes) {
                 const detail = data.details && data.details[code] ? data.details[code] : {};
-                const latestPeriod = detail.latest_period || '-';
                 const nextPeriod = detail.prediction ? (detail.prediction.next_period || '-') : '-';
+                const isToday = drawDays[code].includes(todayDay);
+                // 找下一个开奖日
+                let nextDrawDay = todayDay;
+                for (let i = 0; i < 7; i++) {
+                    const d = (todayDay + i) % 7;
+                    if (drawDays[code].includes(d)) { nextDrawDay = d; break; }
+                }
+                const dayLabel = isToday ? '今日开奖' : dayNames[nextDrawDay] + '开奖';
+                const itemClass = isToday ? 'draw-banner-item db-today' : 'draw-banner-item db-muted';
+                
                 itemsHtml += `
-                    <div class="draw-banner-item">
+                    <div class="${itemClass}">
                         <div class="db-name">${lotteryIcons[code]} ${lotteryNames[code]}</div>
                         <div class="db-period">第${nextPeriod}期</div>
-                        <div class="db-time">${drawTime[code]} 开奖</div>
+                        <div class="db-time">${dayLabel} · ${drawTime[code]}</div>
                     </div>
                 `;
             }
@@ -2815,7 +2859,7 @@
                 `;
             }
             
-            el.innerHTML = `<div class="draw-banner-inner">${itemsHtml}${countdownHtml}</div>`;
+            el.innerHTML = `<div class="draw-banner-wrap">${countdownHtml}<div class="draw-banner-inner">${itemsHtml}</div></div>`;
         }
         
         // 渲染运行状态简表
