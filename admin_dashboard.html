@@ -450,6 +450,7 @@
             font-size: 0.78em;
             color: #9AA3AF;
             margin-bottom: 4px;
+            white-space: nowrap;
         }
         .week-cal-day.today .wc-dayname {
             color: #C9A227;
@@ -480,17 +481,23 @@
             gap: 10px;
         }
         .prev-hit-item {
-            padding: 12px 8px;
+            padding: 10px 8px;
             border-radius: 10px;
             background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.06);
             text-align: center;
         }
         .prev-hit-item .ph-name {
-            font-size: 0.8em;
+            font-size: 0.82em;
             color: #C9A227;
             font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .prev-hit-item .ph-period {
+            font-size: 0.68em;
+            color: #9AA3AF;
             margin-bottom: 8px;
+            white-space: nowrap;
         }
         .prev-hit-item .ph-row {
             display: flex;
@@ -512,17 +519,23 @@
             gap: 10px;
         }
         .lone-quick-item {
-            padding: 12px 8px;
+            padding: 10px 6px;
             border-radius: 10px;
             background: rgba(201,162,39,0.04);
             border: 1px solid rgba(201,162,39,0.15);
             text-align: center;
         }
         .lone-quick-item .lq-name {
-            font-size: 0.8em;
+            font-size: 0.82em;
             color: #C9A227;
             font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .lone-quick-item .lq-period {
+            font-size: 0.65em;
+            color: #9AA3AF;
             margin-bottom: 8px;
+            white-space: nowrap;
         }
         .lone-quick-item .lq-balls {
             display: flex;
@@ -531,13 +544,13 @@
             gap: 3px;
         }
         .lone-quick-item .lq-ball {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.68em;
+            font-size: 0.65em;
             font-weight: bold;
             color: #fff;
             background: linear-gradient(135deg, #C9A227, #b8941f);
@@ -598,11 +611,23 @@
         }
         
         /* 冷热号速览 */
-        .hot-cold-lottery {
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+        .hot-cold-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
         }
-        .hot-cold-lottery:last-child { border-bottom: none; }
+        .hot-cold-lottery {
+            padding: 10px 8px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .hot-cold-lottery .hc-lottery-name {
+            font-size: 0.78em;
+            color: #C9A227;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
         .hc-row {
             display: flex;
             align-items: center;
@@ -637,8 +662,8 @@
             gap: 10px;
         }
         .strategy-item {
-            padding: 10px 12px;
-            border-radius: 10px;
+            padding: 8px 10px;
+            border-radius: 8px;
             background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.06);
         }
@@ -893,7 +918,7 @@
         .footer {
             text-align: center;
             margin-top: 36px;
-            padding: 28px 20px 24px;
+            padding: 28px 20px 60px;
             background: linear-gradient(180deg, rgba(201,162,39,0.04) 0%, rgba(15,42,67,0.6) 100%);
             border-radius: 16px;
             border: 1px solid var(--gold-border);
@@ -1032,7 +1057,7 @@
                 gap: 8px;
             }
             .prev-hit-grid {
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(2, 1fr);
                 gap: 8px;
             }
             .lone-quick-grid {
@@ -2579,7 +2604,7 @@
             const container = document.getElementById('hit-rates');
             if (!container || !data) return;
             
-            let html = '<h2>🎯 命中率概览</h2>';
+            let html = '';
             
             data.hit_rates.forEach(item => {
                 const cls = gradeClass[item.grade] || 'badge-warning';
@@ -3018,7 +3043,7 @@
                 html += `
                     <div class="prev-hit-item">
                         <div class="ph-name">${info.name}</div>
-                        <div style="font-size:0.68em;color:#9AA3AF;margin-bottom:6px;">第${period}期</div>
+                        <div class="ph-period">第${period}期</div>
                         <div class="ph-row">
                             <span class="ph-label">主推</span>
                             <span class="ph-value ${typeof hitMain === 'number' ? hitClass(hitMain, threshold) : ''}">${hitMain}个</span>
@@ -3073,7 +3098,7 @@
                 html += `
                     <div class="lone-quick-item">
                         <div class="lq-name">${info.name}</div>
-                        <div style="font-size:0.68em;color:#9AA3AF;margin-bottom:6px;">第${nextPeriod}期</div>
+                        <div class="lq-period">第${nextPeriod}期</div>
                         <div class="lq-balls">${ballsHtml}</div>
                     </div>
                 `;
@@ -3150,7 +3175,7 @@
                 { code: 'qlc', name: '七乐彩' },
             ];
             
-            let html = '';
+            let html = '<div class="hot-cold-grid">';
             for (const info of lotteryInfo) {
                 const detail = data.details && data.details[info.code] ? data.details[info.code] : {};
                 const hc = detail.hot_cold || {};
@@ -3162,7 +3187,7 @@
                 
                 html += `
                     <div class="hot-cold-lottery">
-                        <div style="font-size:0.8em;color:#e0e0e0;font-weight:500;margin-bottom:4px;">${info.name}</div>
+                        <div class="hc-lottery-name">${info.name}</div>
                         <div class="hc-row">
                             <span class="hc-label hot">热</span>
                             <div class="hc-nums">${hotHtml}</div>
@@ -3174,6 +3199,7 @@
                     </div>
                 `;
             }
+            html += '</div>';
             el.innerHTML = html;
         }
         
@@ -3240,12 +3266,12 @@
             for (const info of lotteryInfo) {
                 const detail = data.details && data.details[info.code] ? data.details[info.code] : {};
                 const om = detail.omission || {};
-                const top5 = (om.top10 || []).slice(0, 5);
+                const top3 = (om.top10 || []).slice(0, 3);
                 const maxOmit = om.max || '-';
                 
                 let numsHtml = '';
-                if (top5.length > 0) {
-                    top5.forEach(item => {
+                if (top3.length > 0) {
+                    top3.forEach(item => {
                         numsHtml += `
                             <div class="om-num">
                                 <span class="om-ball">${item.num}</span>
@@ -3260,7 +3286,7 @@
                 html += `
                     <div class="omission-item">
                         <div class="om-name">${info.name}</div>
-                        <div style="font-size:0.68em;color:#9AA3AF;margin-bottom:6px;">最大遗漏 ${maxOmit}期</div>
+                        <div style="font-size:0.65em;color:#9AA3AF;margin-bottom:6px;white-space:nowrap;">最大遗漏 ${maxOmit}期</div>
                         <div class="om-nums">${numsHtml}</div>
                     </div>
                 `;
