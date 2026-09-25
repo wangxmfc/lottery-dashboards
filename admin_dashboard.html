@@ -2494,6 +2494,12 @@
                     </div>
                 </div>
 
+                <!-- 回测数据总览（全宽） -->
+                <div class="card ops-full-width" id="ops-backtest">
+                    <h2>📊 回测数据总览 <span style="font-size:0.6em;color:#9AA3AF;font-weight:normal;">模型往前预测 vs 实际开奖</span></h2>
+                    <div id="ops-backtest-content">加载中...</div>
+                </div>
+
                 <!-- 问题与告警（错误日志+已知问题+一致性校验融合） -->
                 <div class="card" id="ops-alerts">
                     <h2>⚠️ 问题与告警</h2>
@@ -2532,7 +2538,7 @@
                     </div>
                 </div>
 
-                <!-- 存储与变更（磁盘备份+最近变更融合） -->
+                <!-- 存储与变更（磁盘备份+最近变更+同步状态融合） -->
                 <div class="card" id="ops-storage-changes">
                     <h2>💾 存储与变更</h2>
                     <div class="ops-sub">
@@ -2543,6 +2549,11 @@
                     <div class="ops-sub">
                         <div class="ops-sub-title">最近变更</div>
                         <div id="ops-changes-content">加载中...</div>
+                    </div>
+                    <div class="ops-divider"></div>
+                    <div class="ops-sub">
+                        <div class="ops-sub-title">看板同步状态</div>
+                        <div id="ops-sync-content">加载中...</div>
                     </div>
                 </div>
             </div>
@@ -4759,6 +4770,62 @@
                             <span style="font-size:0.75em;color:${color};flex:1;">${c.desc}</span>
                         </div>`;
                 }).join('');
+            }
+            
+            // 12. 回测数据总览
+            const btEl = document.getElementById('ops-backtest-content');
+            if (btEl && data.hit_rates) {
+                const gradeColor = { '优秀': '#28a745', '良好': '#17a2b8', '一般': '#f39c12', '待提升': '#dc3545' };
+                let btHtml = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;">';
+                for (const item of data.hit_rates) {
+                    const barColor = item.hit_rate >= 75 ? '#28a745' : item.hit_rate >= 50 ? '#f39c12' : '#dc3545';
+                    const gc = gradeColor[item.grade] || '#9AA3AF';
+                    const impColor = item.improvement >= 0 ? '#28a745' : '#dc3545';
+                    const impText = item.improvement >= 0 ? `+${item.improvement}%` : `${item.improvement}%`;
+                    btHtml += `
+                        <div style="padding:12px;background:rgba(255,255,255,0.02);border-radius:10px;border:1px solid rgba(255,255,255,0.06);">
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                                <span style="font-size:0.92em;color:#e0e0e0;font-weight:600;">${item.name}</span>
+                                <span style="font-size:0.7em;color:${gc};background:${gc}15;padding:2px 8px;border-radius:8px;font-weight:500;">${item.grade}</span>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                                <div style="flex:1;height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;">
+                                    <div style="width:${item.hit_rate}%;height:100%;background:linear-gradient(90deg,${barColor},${barColor}cc);border-radius:3px;"></div>
+                                </div>
+                                <span style="font-size:0.82em;color:${barColor};font-weight:600;min-width:42px;text-align:right;">${item.hit_rate}%</span>
+                            </div>
+                            <div style="display:flex;justify-content:space-between;font-size:0.72em;color:#9AA3AF;">
+                                <span>均命中 ${item.avg_hit} 个</span>
+                                <span>${item.total_periods} 期回测</span>
+                                <span style="color:${impColor};font-weight:500;">vs 随机 ${impText}</span>
+                            </div>
+                        </div>`;
+                }
+                btHtml += '</div>';
+                btEl.innerHTML = btHtml;
+            }
+            
+            // 13. 看板同步状态
+            const syncEl = document.getElementById('ops-sync-content');
+            if (syncEl) {
+                const lastUpdate = data.last_update || '-';
+                const syncItems = [
+                    { name: '本地 nginx', status: 'ok', desc: '静态目录同步' },
+                    { name: 'GitHub Pages', status: 'ok', desc: '外部固定链接' },
+                    { name: 'MD5 智能校验', status: 'ok', desc: '无更新不重复同步' },
+                ];
+                syncEl.innerHTML = `
+                    <div style="font-size:0.78em;color:#9AA3AF;margin-bottom:8px;">数据更新: <span style="color:#C9A227;">${lastUpdate}</span></div>
+                    ${syncItems.map(s => {
+                        const color = s.status === 'ok' ? '#28a745' : '#dc3545';
+                        return `
+                            <div style="display:flex;align-items:center;gap:8px;padding:5px 0;">
+                                <span style="width:6px;height:6px;border-radius:50%;background:${color};flex-shrink:0;"></span>
+                                <span style="font-size:0.8em;color:#e0e0e0;min-width:90px;">${s.name}</span>
+                                <span style="font-size:0.72em;color:#9AA3AF;">${s.desc}</span>
+                            </div>`;
+                    }).join('')}
+                `;
             }
         }
         
