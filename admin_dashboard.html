@@ -1087,14 +1087,12 @@
         }
         .status-bar .status-detail {
             display: none;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
             margin-top: 10px;
             padding-top: 12px;
             border-top: 1px solid rgba(201,162,39,0.15);
         }
         .status-bar.status-expanded .status-detail {
-            display: grid;
+            display: block;
         }
         .status-bar .lottery-tag {
             display: flex;
@@ -1114,7 +1112,7 @@
         /* ========== 彩种数据状态网格 ========== */
         .lottery-status-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 8px;
         }
         .lottery-status-item {
@@ -1626,7 +1624,7 @@
             const detailEl = document.getElementById('status-detail');
             if (detailEl) {
                 detailEl.innerHTML = lotteryStatusHtml + 
-                    '<div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(201,162,39,0.15);font-size:0.72em;color:rgba(255,255,255,0.35);text-align:center;">📊 数据更新时间：' + updateTime + '</div>';
+                    '<div style="margin-top:14px;padding-top:10px;border-top:1px solid rgba(201,162,39,0.15);font-size:0.72em;color:rgba(255,255,255,0.35);text-align:center;">📊 数据更新时间：' + updateTime + '</div>';
             }
         }
         
