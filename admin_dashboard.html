@@ -5012,6 +5012,50 @@
                     html += '</div></div>';
                 }
                 
+                // 智能诊断监控（6模型）
+                if (ml.lotteries) {
+                    html += '<div style="margin-top:18px;"><div class="ops-sub-title">🧠 智能诊断监控（6模型）</div>';
+                    html += '<div style="display:flex;flex-direction:column;gap:8px;">';
+                    
+                    const modelDefs = [
+                        { key: 'z_test', label: 'Z检验', icon: '📊' },
+                        { key: 'effect_size', label: '效应量', icon: '📐' },
+                        { key: 'cusum', label: 'CUSUM', icon: '📈' },
+                        { key: 'trend', label: '趋势', icon: '📉' },
+                        { key: 'streak', label: '连失', icon: '🔥' },
+                        { key: 'bayesian', label: '贝叶斯', icon: '🎲' }
+                    ];
+                    
+                    Object.entries(ml.lotteries).forEach(([code, lot]) => {
+                        const diag = lot.intelligent_diagnosis || {};
+                        const conf = diag.confidence || 0;
+                        const support = diag.support_count || '0/6';
+                        const shouldAdj = diag.should_adjust;
+                        const confColor = shouldAdj ? '#f39c12' : conf >= 40 ? '#3498db' : '#28a745';
+                        const confBg = shouldAdj ? 'rgba(243,156,18,0.1)' : conf >= 40 ? 'rgba(52,152,219,0.08)' : 'rgba(40,167,69,0.06)';
+                        
+                        html += `<div style="padding:10px 12px;background:${confBg};border-radius:8px;border:1px solid rgba(255,255,255,0.06);">
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                                <span style="font-size:0.82em;color:#C9A227;font-weight:600;">${lot.name}</span>
+                                <span style="font-size:0.7em;color:${confColor};background:rgba(0,0,0,0.2);padding:2px 8px;border-radius:10px;">置信度 ${conf}% · ${support}</span>
+                            </div>
+                            <div style="display:flex;flex-wrap:wrap;gap:4px;">`;
+                        
+                        modelDefs.forEach(m => {
+                            const val = diag[m.key] || '';
+                            // 判断状态：包含"显著/大/检测到/下降/极端/高"为警告，否则正常
+                            const isWarn = /显著|大效应|检测到|下降|极端|高失效|偏多/.test(val);
+                            const badgeColor = isWarn ? '#f39c12' : '#28a745';
+                            const badgeBg = isWarn ? 'rgba(243,156,18,0.15)' : 'rgba(40,167,69,0.1)';
+                            html += `<span title="${val}" style="font-size:0.62em;color:${badgeColor};background:${badgeBg};padding:2px 6px;border-radius:6px;white-space:nowrap;">${m.icon}${m.label}</span>`;
+                        });
+                        
+                        html += '</div></div>';
+                    });
+                    
+                    html += '</div></div>';
+                }
+                
                 learnEl.innerHTML = html;
             }
         }
