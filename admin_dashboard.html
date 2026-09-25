@@ -2500,6 +2500,12 @@
                     <div id="ops-backtest-content">加载中...</div>
                 </div>
 
+                <!-- 自主学习（全宽） -->
+                <div class="card ops-full-width" id="ops-learning">
+                    <h2>🧠 自主学习 <span style="font-size:0.6em;color:#9AA3AF;font-weight:normal;" id="ops-learning-time">基于回测数据自动优化</span></h2>
+                    <div id="ops-learning-content">加载中...</div>
+                </div>
+
                 <!-- 问题与告警（错误日志+已知问题+一致性校验融合） -->
                 <div class="card" id="ops-alerts">
                     <h2>⚠️ 问题与告警</h2>
@@ -4826,6 +4832,73 @@
                             </div>`;
                     }).join('')}
                 `;
+            }
+            
+            // 14. 自主学习
+            const learnEl = document.getElementById('ops-learning-content');
+            const learnTimeEl = document.getElementById('ops-learning-time');
+            if (learnEl && data.model_learning) {
+                const ml = data.model_learning;
+                if (learnTimeEl) learnTimeEl.textContent = `学习于 ${ml.learned_at || '-'} · ${ml.total_records || 0}条记录`;
+                
+                const ov = ml.overall || {};
+                // 整体统计行
+                let html = `<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;">
+                    <div style="text-align:center;padding:10px;background:rgba(201,162,39,0.1);border-radius:10px;">
+                        <div style="font-size:1.4em;font-weight:bold;color:#C9A227;">${ov.avg_hit_rate || 0}%</div>
+                        <div style="font-size:0.75em;color:#9AA3AF;">平均命中率</div>
+                    </div>
+                    <div style="text-align:center;padding:10px;background:rgba(40,167,69,0.1);border-radius:10px;">
+                        <div style="font-size:1.4em;font-weight:bold;color:#28a745;">${ov.max_hit_rate || 0}%</div>
+                        <div style="font-size:0.75em;color:#9AA3AF;">最高命中率</div>
+                    </div>
+                    <div style="text-align:center;padding:10px;background:rgba(220,53,69,0.1);border-radius:10px;">
+                        <div style="font-size:1.4em;font-weight:bold;color:#dc3545;">${ov.min_hit_rate || 0}%</div>
+                        <div style="font-size:0.75em;color:#9AA3AF;">最低命中率</div>
+                    </div>
+                    <div style="text-align:center;padding:10px;background:rgba(23,162,184,0.1);border-radius:10px;">
+                        <div style="font-size:1.4em;font-weight:bold;color:#17a2b8;">${ov.avg_std || 0}</div>
+                        <div style="font-size:0.75em;color:#9AA3AF;">平均标准差</div>
+                    </div>
+                </div>`;
+                
+                // 彩种排名表
+                html += '<div style="margin-bottom:16px;"><div style="font-size:0.88em;color:#C9A227;margin-bottom:8px;">📊 彩种表现排名</div>';
+                html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;">';
+                (ml.ranking || []).forEach((r, i) => {
+                    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i+1}.`;
+                    const trendIcon = r.trend === '上升' ? '📈' : r.trend === '下降' ? '📉' : '➡️';
+                    const stabColor = r.stability === '优秀' ? '#28a745' : r.stability === '良好' ? '#17a2b8' : r.stability === '一般' ? '#f39c12' : '#dc3545';
+                    html += `
+                        <div style="padding:8px 10px;background:rgba(255,255,255,0.02);border-radius:8px;border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:8px;">
+                            <span style="font-size:0.9em;min-width:24px;">${medal}</span>
+                            <span style="font-size:0.85em;color:#e0e0e0;font-weight:500;flex:1;">${r.name}</span>
+                            <span style="font-size:0.82em;color:#C9A227;font-weight:600;">${r.hit_rate}%</span>
+                            <span style="font-size:0.7em;color:${stabColor};">${r.stability}</span>
+                            <span style="font-size:0.8em;">${trendIcon}</span>
+                        </div>`;
+                });
+                html += '</div></div>';
+                
+                // 学习结论
+                if (ml.conclusions && ml.conclusions.length > 0) {
+                    html += '<div style="margin-bottom:16px;"><div style="font-size:0.88em;color:#C9A227;margin-bottom:8px;">💡 学习结论</div>';
+                    ml.conclusions.forEach(c => {
+                        html += `<div style="font-size:0.82em;color:#e0e0e0;padding:5px 0;line-height:1.5;">• ${c}</div>`;
+                    });
+                    html += '</div>';
+                }
+                
+                // 改进建议
+                if (ml.recommendations && ml.recommendations.length > 0) {
+                    html += '<div><div style="font-size:0.88em;color:#C9A227;margin-bottom:8px;">🔧 改进建议</div>';
+                    ml.recommendations.forEach(r => {
+                        html += `<div style="font-size:0.8em;color:#9AA3AF;padding:4px 0;line-height:1.5;">→ ${r}</div>`;
+                    });
+                    html += '</div>';
+                }
+                
+                learnEl.innerHTML = html;
             }
         }
         
