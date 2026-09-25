@@ -1370,11 +1370,11 @@
         <div class="nav">
             <button onclick="showSection('ops', this)" style="border-color:rgba(123,91,214,0.4);color:rgba(167,139,250,0.9);">⚙️ 运维</button>
             <button class="active" onclick="showSection('overview', this)">📊 总览</button>
-            <button id="lottery-menu-btn" onclick="toggleLotteryMenu()">🎯 彩票 <span id="lottery-menu-arrow">▲</span></button>
+            <button id="lottery-menu-btn" onclick="toggleLotteryMenu()">🎯 彩票 <span id="lottery-menu-arrow">▼</span></button>
         </div>
 
-        <!-- 彩种子菜单（可展开/收起） -->
-        <div class="lottery-subnav" id="lottery-subnav">
+        <!-- 彩种子菜单（可展开/收起，默认收起） -->
+        <div class="lottery-subnav collapsed" id="lottery-subnav">
             <button onclick="showSection('ssq', this)">🔴 双色球</button>
             <button onclick="showSection('dlt', this)">🔵 大乐透</button>
             <button onclick="showSection('kl8', this)">🟢 快乐8</button>
