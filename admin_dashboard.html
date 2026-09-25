@@ -1579,9 +1579,15 @@
                 ssq: [0, 2, 4], dlt: [1, 3, 6], kl8: [0,1,2,3,4,5,6],
                 fc3d: [0,1,2,3,4,5,6], pl35: [0,1,2,3,4,5,6], qxc: [0, 2, 5], qlc: [1, 3, 5]
             };
+            // 各彩种开奖时间（小时, 分钟）
+            const drawTime = {
+                ssq: [21, 15], dlt: [20, 30], kl8: [21, 10],
+                fc3d: [20, 30], pl35: [20, 30], qxc: [20, 30], qlc: [20, 30]
+            };
             const today = new Date();
             const todayStr = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
             const todayDay = today.getDay();
+            const nowMinutes = today.getHours() * 60 + today.getMinutes();
             
             let lotteryStatusHtml = '<div class="lottery-status-grid">';
             for (const code of ['ssq','dlt','kl8','fc3d','pl35','qxc','qlc']) {
@@ -1593,16 +1599,21 @@
                 const date = latestDraw.date || '-';
                 const periodShort = String(period).slice(-3);
                 
-                // 判断数据是否最新
+                // 判断数据是否最新（含开奖时间判断）
                 const drawsToday = drawDays[code] && drawDays[code].includes(todayDay);
+                const dt = drawTime[code] || [20, 30];
+                const drawMinutes = dt[0] * 60 + dt[1];
+                const passedDrawTime = nowMinutes >= drawMinutes;
+                
                 let status, statusClass, statusIcon;
                 if (date === todayStr) {
+                    // 今天开奖且数据已更新到今天
                     status = '最新'; statusClass = 'fresh'; statusIcon = '✓';
-                } else if (drawsToday) {
-                    // 今天开奖但数据不是今天 → 待更新
+                } else if (drawsToday && passedDrawTime) {
+                    // 今天开奖 + 已过开奖时间 + 数据还没更新 → 待更新
                     status = '待更新'; statusClass = 'stale'; statusIcon = '!';
                 } else {
-                    // 今天不开奖，数据是最近一期 → 正常
+                    // 今天不开奖；或今天开奖但还没到开奖时间 → 已更新（正常）
                     status = '已更新'; statusClass = 'fresh'; statusIcon = '✓';
                 }
                 
