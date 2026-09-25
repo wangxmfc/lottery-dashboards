@@ -502,6 +502,13 @@
                 grid-template-columns: 1fr;
             }
             
+            .stat-card {
+                padding: 12px 8px;
+            }
+            .stat-card-value {
+                font-size: 1.3em;
+            }
+            
             .hit-rate {
                 font-size: 1.6em;
             }
@@ -687,6 +694,57 @@
         /* 平滑滚动 */
         html {
             scroll-behavior: smooth;
+        }
+        
+        /* ========== 概览统计卡片 ========== */
+        .stat-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 14px 12px;
+            text-align: center;
+            transition: all 0.25s ease;
+        }
+        
+        .stat-card:hover {
+            background: rgba(201, 162, 39, 0.06);
+            border-color: rgba(201, 162, 39, 0.25);
+            transform: translateY(-2px);
+        }
+        
+        .stat-card-label {
+            color: var(--text-muted);
+            font-size: 0.75em;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+        
+        .stat-card-value {
+            color: var(--gold);
+            font-size: 1.5em;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .stat-card-unit {
+            font-size: 0.55em;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-left: 2px;
+        }
+        
+        .stat-card-badge {
+            font-size: 0.68em;
+            margin-top: 5px;
+            font-weight: 500;
+            opacity: 0.9;
         }
         
         /* 系统状态条（可折叠） */
@@ -1318,14 +1376,27 @@
                 const credColor = _tp >= 100 ? '#28a745' : (_tp >= 30 ? '#C9A227' : '#dc3545');
                 let overviewHtml = `
                 <div class="lottery-tab-content" id="${lotteryId}-tab-overview" style="display:block;">
-                    <div class="hit-rate" style="margin-bottom:15px;">命中率提升 ${formatImprovement(detail.improvement)}</div>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;">
-                        <div class="stat" style="margin:0;"><span class="stat-label">平均命中</span><span class="stat-value">${detail.avg_hit || 0}个</span></div>
-                        <div class="stat" style="margin:0;"><span class="stat-label">随机基准</span><span class="stat-value">${randBase}个</span></div>
-                        <div class="stat" style="margin:0;"><span class="stat-label">样本期数</span><span class="stat-value">${_tp}期 <span style="font-size:0.65em;color:${credColor};font-weight:500;">· ${credLabel}</span></span></div>
-                        <div class="stat" style="margin:0;"><span class="stat-label">命中率</span><span class="stat-value">${detail.hit_rate || 0}%</span></div>
+                    <div class="hit-rate" style="margin-bottom:18px;">命中率提升 ${formatImprovement(detail.improvement)}</div>
+                    <div class="stat-cards">
+                        <div class="stat-card">
+                            <div class="stat-card-label">平均命中</div>
+                            <div class="stat-card-value">${detail.avg_hit || 0}<span class="stat-card-unit">个</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-label">随机基准</div>
+                            <div class="stat-card-value">${randBase}<span class="stat-card-unit">个</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-label">样本期数</div>
+                            <div class="stat-card-value">${_tp}<span class="stat-card-unit">期</span></div>
+                            <div class="stat-card-badge" style="color:${credColor};">● ${credLabel}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-label">命中率</div>
+                            <div class="stat-card-value">${detail.hit_rate || 0}<span class="stat-card-unit">%</span></div>
+                        </div>
                     </div>
-                    <div class="stat" style="margin-bottom:20px;"><span class="stat-label">状态等级</span><span class="badge ${gradeCls}">${detail.grade}</span></div>
+                    <div class="stat" style="margin:16px 0 20px;"><span class="stat-label">状态等级</span><span class="badge ${gradeCls}">${detail.grade}</span></div>
                 `;
                 
                 // 最新开奖
