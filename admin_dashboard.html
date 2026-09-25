@@ -10,6 +10,34 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
         
+        /* ========== CSS变量 - 统一颜色体系 ========== */
+        :root {
+            --gold: #C9A227;
+            --gold-light: #D4AF37;
+            --gold-dark: #b8941f;
+            --gold-glow: rgba(201, 162, 39, 0.35);
+            --gold-bg: rgba(201, 162, 39, 0.08);
+            --gold-border: rgba(201, 162, 39, 0.2);
+            --gold-border-strong: rgba(201, 162, 39, 0.4);
+            --success: #28a745;
+            --success-light: #4ade80;
+            --success-bg: rgba(40, 167, 69, 0.15);
+            --danger: #dc3545;
+            --danger-light: #f87171;
+            --danger-bg: rgba(220, 53, 69, 0.15);
+            --warning: #FFC107;
+            --warning-light: #fbbf24;
+            --warning-bg: rgba(255, 193, 7, 0.15);
+            --bg-dark: #0F2A43;
+            --bg-darker: #0A1F33;
+            --text-primary: #fff;
+            --text-secondary: rgba(255, 255, 255, 0.65);
+            --text-muted: rgba(255, 255, 255, 0.45);
+            --card-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+            --card-radius: 16px;
+            --card-padding: 24px;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -292,14 +320,15 @@
         
         .footer {
             text-align: center;
-            margin-top: 30px;
-            padding: 20px 16px;
-            background: linear-gradient(135deg, rgba(201,162,39,0.06) 0%, rgba(15,42,67,0.4) 100%);
-            border-radius: 12px;
-            border: 1px solid rgba(201,162,39,0.2);
-            color: rgba(255, 255, 255, 0.55);
+            margin-top: 36px;
+            padding: 28px 20px 24px;
+            background: linear-gradient(180deg, rgba(201,162,39,0.04) 0%, rgba(15,42,67,0.6) 100%);
+            border-radius: 16px;
+            border: 1px solid var(--gold-border);
+            color: var(--text-secondary);
             font-size: 0.82em;
             position: relative;
+            backdrop-filter: blur(8px);
         }
         
         .footer::before {
@@ -308,32 +337,60 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
+            width: 80px;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #C9A227, transparent);
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
             border-radius: 2px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        
+        .footer-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            font-size: 0.78em;
+        }
+        
+        .footer-item .dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: 0.6;
         }
         
         .footer p {
             margin: 4px 0;
-            line-height: 1.6;
+            line-height: 1.7;
         }
         .footer .footer-title {
-            color: #C9A227;
+            color: var(--gold);
             font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 0.95em;
+            margin-bottom: 10px;
+            font-size: 1em;
+            letter-spacing: 1px;
         }
         .footer .footer-desc {
-            color: rgba(255,255,255,0.5);
-            font-size: 0.68em;
-            white-space: nowrap;
-            letter-spacing: 0.3px;
+            color: var(--text-muted);
+            font-size: 0.75em;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
         }
         .footer .footer-version {
-            color: rgba(201,162,39,0.7);
-            font-size: 0.78em;
-            margin-top: 6px;
+            color: rgba(201,162,39,0.6);
+            font-size: 0.72em;
+            margin-top: 10px;
+            letter-spacing: 0.5px;
         }
         
         /* 移动端优化 */
@@ -429,6 +486,24 @@
             
             .card {
                 padding: 16px 14px;
+            }
+            
+            .footer {
+                padding: 20px 14px 18px;
+                margin-top: 24px;
+            }
+            
+            .footer-content {
+                gap: 12px;
+                flex-direction: column;
+            }
+            
+            .data-grid-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .hit-rate {
+                font-size: 1.6em;
             }
         }
         
@@ -539,6 +614,79 @@
             color: #fff !important;
             border-color: #C9A227 !important;
             box-shadow: 0 2px 10px rgba(201, 162, 39, 0.3);
+        }
+        
+        /* ========== 通用工具类 ========== */
+        .info-box {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.08), rgba(201, 162, 39, 0.03));
+            border-left: 3px solid var(--gold);
+            border-radius: 0 10px 10px 0;
+            padding: 14px 16px;
+            margin: 12px 0;
+            color: var(--text-secondary);
+            font-size: 0.88em;
+            line-height: 1.7;
+        }
+        
+        .section-subtitle {
+            color: var(--gold);
+            font-size: 0.9em;
+            font-weight: 600;
+            margin: 16px 0 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .data-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 12px 0;
+        }
+        
+        .data-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 12px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.2s ease;
+        }
+        
+        .data-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--gold-border);
+        }
+        
+        .data-item .label {
+            color: var(--text-muted);
+            font-size: 0.75em;
+            margin-bottom: 4px;
+        }
+        
+        .data-item .value {
+            color: var(--gold);
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        
+        .text-gold { color: var(--gold); }
+        .text-success { color: var(--success-light); }
+        .text-danger { color: var(--danger-light); }
+        .text-muted { color: var(--text-muted); }
+        
+        /* 号码球悬停效果 */
+        .ball-hover span {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .ball-hover span:hover {
+            transform: scale(1.12);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+        }
+        
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
         }
         
         /* 系统状态条（可折叠） */
@@ -907,7 +1055,11 @@
 
         <div class="footer">
             <p class="footer-title">🎯 王者GP · 彩票预测数据看板</p>
-            <p class="footer-desc">数据仅供统计参考 · 不构成投资建议 · 理性购彩，量力而行</p>
+            <div class="footer-content">
+                <span class="footer-item"><span class="dot"></span>数据仅供统计参考</span>
+                <span class="footer-item"><span class="dot"></span>不构成投资建议</span>
+                <span class="footer-item"><span class="dot"></span>理性购彩，量力而行</span>
+            </div>
             <p class="footer-version" id="footer-version">系统版本：v2.0 · 更新时间：加载中...</p>
         </div>
     </div>
