@@ -654,6 +654,56 @@
             line-height: 1.5;
         }
         
+        /* 遗漏值速览 */
+        .omission-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        .omission-item {
+            padding: 12px 8px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            text-align: center;
+        }
+        .omission-item .om-name {
+            font-size: 0.8em;
+            color: #C9A227;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .omission-item .om-nums {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px;
+        }
+        .omission-item .om-num {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 32px;
+        }
+        .omission-item .om-ball {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(135deg, #e67e22, #d35400);
+        }
+        .omission-item .om-count {
+            font-size: 0.65em;
+            color: #e67e22;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+        
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -944,6 +994,10 @@
             .week-cal-day .wc-tag { font-size: 0.58em; padding: 1px 3px; }
             .strategy-grid {
                 grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .omission-grid {
+                grid-template-columns: repeat(4, 1fr);
                 gap: 8px;
             }
             .draw-banner-inner {
@@ -1943,11 +1997,29 @@
                     </div>
                 </div>
 
+                <!-- 遗漏值速览 -->
+                <div class="card" id="omission-quick" style="grid-column:1/-1;">
+                    <h2>⏳ 遗漏值速览</h2>
+                    <div id="omission-content">
+                        <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
+                    </div>
+                </div>
+
                 <!-- 选号思路一句话 -->
                 <div class="card" id="strategy-summary" style="grid-column:1/-1;">
                     <h2>💡 选号思路一句话</h2>
                     <div id="strategy-summary-content">
                         <div style="text-align:center;padding:30px;color:#9AA3AF;">数据加载中...</div>
+                    </div>
+                </div>
+
+                <!-- 理性购彩提示 -->
+                <div style="grid-column:1/-1;text-align:center;padding:20px;background:linear-gradient(135deg,rgba(201,162,39,0.08),rgba(201,162,39,0.02));border-radius:12px;border:1px solid rgba(201,162,39,0.15);margin-top:4px;">
+                    <div style="font-size:1.1em;color:#C9A227;font-weight:600;margin-bottom:6px;">⚠️ 理性购彩提示</div>
+                    <div style="font-size:0.85em;color:#9AA3AF;line-height:1.8;">
+                        本看板所有数据均为历史统计参考，不构成任何投资建议或中奖承诺。<br>
+                        彩票开奖为随机事件，预测模型仅基于历史数据规律分析，请理性看待、量力而行。<br>
+                        <span style="color:#C9A227;">购彩有风险，投入需谨慎；未满18周岁禁止购买彩票。</span>
                     </div>
                 </div>
 
@@ -3028,6 +3100,55 @@
             html += '</div>';
             el.innerHTML = html;
         }
+        
+        // 渲染遗漏值速览
+        function renderOmissionQuick(data) {
+            const el = document.getElementById('omission-content');
+            if (!el) return;
+            
+            const lotteryInfo = [
+                { code: 'ssq', name: '双色球' },
+                { code: 'dlt', name: '大乐透' },
+                { code: 'kl8', name: '快乐8' },
+                { code: 'fc3d', name: '福彩3D' },
+                { code: 'pl35', name: '排列3/5' },
+                { code: 'qxc', name: '七星彩' },
+                { code: 'qlc', name: '七乐彩' },
+            ];
+            
+            let html = '<div class="omission-grid">';
+            for (const info of lotteryInfo) {
+                const detail = data.details && data.details[info.code] ? data.details[info.code] : {};
+                const om = detail.omission || {};
+                const top5 = (om.top10 || []).slice(0, 5);
+                const maxOmit = om.max || '-';
+                
+                let numsHtml = '';
+                if (top5.length > 0) {
+                    top5.forEach(item => {
+                        numsHtml += `
+                            <div class="om-num">
+                                <span class="om-ball">${item.num}</span>
+                                <span class="om-count">${item.omit}期</span>
+                            </div>
+                        `;
+                    });
+                } else {
+                    numsHtml = '<span style="color:#9AA3AF;font-size:0.75em;">暂无</span>';
+                }
+                
+                html += `
+                    <div class="omission-item">
+                        <div class="om-name">${info.name}</div>
+                        <div style="font-size:0.68em;color:#9AA3AF;margin-bottom:6px;">最大遗漏 ${maxOmit}期</div>
+                        <div class="om-nums">${numsHtml}</div>
+                    </div>
+                `;
+            }
+            html += '</div>';
+            el.innerHTML = html;
+        }
+        
         function switchLotteryTab(lotteryId, tabName) {
             const section = document.getElementById(lotteryId);
             if (!section) return;
@@ -4211,6 +4332,7 @@
                 renderLoneNumsQuick(data);
                 renderDltFixedCheck(data);
                 renderHotColdQuick(data);
+                renderOmissionQuick(data);
                 renderStrategySummary(data);
                 renderBacktestVsRandom(data);
                 renderLotteryDetails(data);
