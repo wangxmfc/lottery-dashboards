@@ -10111,5 +10111,200 @@
     "issues_found": 0,
     "issues": [],
     "status": "PASS"
+  },
+  "ops_monitoring": {
+    "system_health": {
+      "score": 96,
+      "level": "优",
+      "dimensions": [
+        {
+          "name": "定时任务",
+          "score": 100,
+          "status": "正常"
+        },
+        {
+          "name": "数据新鲜度",
+          "score": 85,
+          "status": "关注"
+        },
+        {
+          "name": "模型启用率",
+          "score": 100,
+          "status": "正常"
+        },
+        {
+          "name": "外部接口",
+          "score": 100,
+          "status": "正常"
+        },
+        {
+          "name": "错误日志",
+          "score": 90,
+          "status": "正常"
+        }
+      ]
+    },
+    "task_heartbeat": [
+      {
+        "name": "盘前必读",
+        "schedule": "工作日 08:00",
+        "status": "success",
+        "last_run": "2026-09-25 08:03",
+        "next_run": "2026-09-28 08:00"
+      },
+      {
+        "name": "午间评盘",
+        "schedule": "工作日 11:35",
+        "status": "success",
+        "last_run": "2026-09-24 12:14",
+        "next_run": "2026-09-25 11:35"
+      },
+      {
+        "name": "盘后复盘",
+        "schedule": "工作日 15:10",
+        "status": "success",
+        "last_run": "2026-09-24 15:42",
+        "next_run": "2026-09-25 15:10"
+      },
+      {
+        "name": "彩票开奖",
+        "schedule": "每天 20:10",
+        "status": "success",
+        "last_run": "2026-09-24 20:07",
+        "next_run": "2026-09-25 20:10"
+      },
+      {
+        "name": "Excel周六合集",
+        "schedule": "周六 10:00",
+        "status": "success",
+        "last_run": "2026-09-19 10:28",
+        "next_run": "2026-09-26 10:00"
+      },
+      {
+        "name": "月末综合",
+        "schedule": "每月28-31日 22:00",
+        "status": "pending",
+        "last_run": "-",
+        "next_run": "2026-09-28 22:00"
+      }
+    ],
+    "error_logs": [
+      {
+        "file": "publish_wechat.log",
+        "level": "warning",
+        "message": "公众号登录态即将过期",
+        "time": "2026-09-25 10:30",
+        "count": 2
+      }
+    ],
+    "external_apis": [
+      {
+        "name": "彩票数据源",
+        "status": "ok",
+        "latency": "156ms",
+        "last_check": "2026-09-25 14:17"
+      },
+      {
+        "name": "图床服务",
+        "status": "ok",
+        "latency": "89ms",
+        "last_check": "2026-09-25 14:17"
+      },
+      {
+        "name": "GitHub Pages",
+        "status": "ok",
+        "latency": "234ms",
+        "last_check": "2026-09-25 14:17"
+      }
+    ],
+    "run_times": [
+      {
+        "script": "lottery_pipeline.py",
+        "duration": "45秒",
+        "time": "2026-09-24 20:05"
+      },
+      {
+        "script": "gen_cards_v2.py",
+        "duration": "2分10秒",
+        "time": "2026-09-24 20:08"
+      },
+      {
+        "script": "update_dashboard.py",
+        "duration": "12秒",
+        "time": "2026-09-25 14:17"
+      },
+      {
+        "script": "sync_dashboards.py",
+        "duration": "8秒",
+        "time": "2026-09-25 14:17"
+      }
+    ],
+    "disk_usage": [
+      {
+        "name": "彩票历史数据",
+        "size": "28.5 MB"
+      },
+      {
+        "name": "预测卡片图片",
+        "size": "45.2 MB"
+      },
+      {
+        "name": "运行日志",
+        "size": "3.8 MB"
+      },
+      {
+        "name": "备份包",
+        "size": "156 MB"
+      }
+    ],
+    "backups": [
+      {
+        "name": "v12备份",
+        "size": "28.5 MB",
+        "time": "09-25 14:20"
+      },
+      {
+        "name": "v11备份",
+        "size": "28.3 MB",
+        "time": "09-24 18:30"
+      },
+      {
+        "name": "v10备份",
+        "size": "28.1 MB",
+        "time": "09-23 18:30"
+      }
+    ],
+    "recent_changes": [
+      {
+        "time": "10分钟前",
+        "module": "看板优化",
+        "desc": "玩法奖金改为卡片式可视化"
+      },
+      {
+        "time": "30分钟前",
+        "module": "状态栏",
+        "desc": "彩种数据新鲜度加入开奖时间判断"
+      },
+      {
+        "time": "2小时前",
+        "module": "数据校验",
+        "desc": "一致性校验机制建立"
+      },
+      {
+        "time": "昨天",
+        "module": "回测系统",
+        "desc": "200期回测数据生成完成"
+      }
+    ],
+    "known_issues": [
+      {
+        "level": "info",
+        "desc": "百家号账号被封，暂停百家号发布"
+      },
+      {
+        "level": "warning",
+        "desc": "部分彩种历史数据不足200期，回测样本待积累"
+      }
+    ]
   }
 }
