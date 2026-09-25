@@ -916,6 +916,104 @@
             opacity: 0.7;
         }
         
+        /* ========== 玩法与奖金折叠区 ========== */
+        .prize-collapse {
+            margin-top: 16px;
+            border: 1px solid var(--gold-border);
+            border-radius: 12px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.3s ease;
+        }
+        .prize-collapse:hover {
+            border-color: var(--gold-border-strong);
+        }
+        .prize-collapse-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            cursor: pointer;
+            color: var(--gold);
+            font-size: 0.88em;
+            font-weight: 600;
+            background: rgba(201, 162, 39, 0.05);
+            transition: background 0.2s ease;
+            user-select: none;
+        }
+        .prize-collapse-header:hover {
+            background: rgba(201, 162, 39, 0.1);
+        }
+        .prize-collapse-icon {
+            font-size: 0.7em;
+            color: var(--text-muted);
+            transition: transform 0.3s ease;
+        }
+        .prize-collapse.expanded .prize-collapse-icon {
+            transform: rotate(180deg);
+        }
+        .prize-collapse-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .prize-collapse.expanded .prize-collapse-body {
+            max-height: 800px;
+        }
+        .prize-info-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .prize-info-label {
+            color: var(--text-muted);
+            font-size: 0.78em;
+            min-width: 3.5em;
+            flex-shrink: 0;
+        }
+        .prize-info-value {
+            color: var(--text-secondary);
+            font-size: 0.8em;
+            line-height: 1.6;
+        }
+        .prize-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 8px 0;
+            font-size: 0.75em;
+        }
+        .prize-table th {
+            color: var(--gold);
+            font-weight: 600;
+            text-align: left;
+            padding: 8px 16px;
+            border-bottom: 1px solid var(--gold-border);
+            background: rgba(201, 162, 39, 0.04);
+        }
+        .prize-table td {
+            padding: 7px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--text-secondary);
+        }
+        .prize-table tr:last-child td {
+            border-bottom: none;
+        }
+        .prize-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .prize-level {
+            color: var(--gold);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .prize-amount {
+            color: var(--success-light);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
         /* 系统状态条（可折叠） */
         .status-bar {
             padding: 8px 16px;
@@ -1501,6 +1599,95 @@
             if (!data || !data.details) return;
             
             const lotteryIds = ['ssq', 'dlt', 'kl8', 'fc3d', 'pl35', 'qxc', 'qlc'];
+            
+            // ========== 各彩种玩法与奖金规则（静态数据） ==========
+            const LOTTERY_INFO = {
+                'ssq': {
+                    play: '从33个红球中选6个 + 从16个蓝球中选1个',
+                    time: '每周二、四、日开奖',
+                    prizes: [
+                        ['一等奖', '6红+1蓝', '浮动（最高1000万）'],
+                        ['二等奖', '6红+0蓝', '浮动'],
+                        ['三等奖', '5红+1蓝', '3,000元'],
+                        ['四等奖', '5红+0蓝 / 4红+1蓝', '200元'],
+                        ['五等奖', '4红+0蓝 / 3红+1蓝', '10元'],
+                        ['六等奖', '2红+1蓝 / 1红+1蓝 / 0红+1蓝', '5元'],
+                    ]
+                },
+                'dlt': {
+                    play: '从35个前区选5个 + 从12个后区选2个',
+                    time: '每周一、三、六开奖',
+                    prizes: [
+                        ['一等奖', '5+2', '浮动（追加最高1800万）'],
+                        ['二等奖', '5+1', '浮动'],
+                        ['三等奖', '5+0', '10,000元'],
+                        ['四等奖', '4+2', '3,000元'],
+                        ['五等奖', '4+1', '300元'],
+                        ['六等奖', '3+2', '200元'],
+                        ['七等奖', '4+0', '100元'],
+                        ['八等奖', '3+1 / 2+2', '15元'],
+                        ['九等奖', '3+0 / 2+1 / 1+2 / 0+2', '5元'],
+                    ]
+                },
+                'kl8': {
+                    play: '从1-80中选1-10个号码（选十玩法），开奖摇出20个号码',
+                    time: '每天开奖',
+                    prizes: [
+                        ['选十中十', '命中10个', '5,000,000元'],
+                        ['选十中九', '命中9个', '8,000元'],
+                        ['选十中八', '命中8个', '800元'],
+                        ['选十中七', '命中7个', '80元'],
+                        ['选十中六', '命中6个', '5元'],
+                        ['选十中五', '命中5个', '3元'],
+                        ['选十中零', '命中0个', '2元'],
+                    ]
+                },
+                'fc3d': {
+                    play: '从000-999中选1个3位数，分直选/组选三/组选六',
+                    time: '每天开奖',
+                    prizes: [
+                        ['直选', '定位全中', '1,040元'],
+                        ['组选三', '3位数含对子（顺序不限）', '346元'],
+                        ['组选六', '3位数全不同（顺序不限）', '173元'],
+                    ]
+                },
+                'pl35': {
+                    play: '排列3：000-999选3位数；排列5：00000-99999选5位数',
+                    time: '每天开奖',
+                    prizes: [
+                        ['排列3直选', '3位定位全中', '1,040元'],
+                        ['排列3组选三', '含对子（顺序不限）', '346元'],
+                        ['排列3组选六', '全不同（顺序不限）', '173元'],
+                        ['排列5直选', '5位定位全中', '100,000元'],
+                    ]
+                },
+                'qxc': {
+                    play: '从000000-999999选6位数 + 特别号（0-14）',
+                    time: '每周二、五、日开奖',
+                    prizes: [
+                        ['一等奖', '6位+特别号', '浮动（最高500万）'],
+                        ['二等奖', '6位全中', '浮动'],
+                        ['三等奖', '连续5位', '3,000元'],
+                        ['四等奖', '连续4位', '500元'],
+                        ['五等奖', '连续3位', '30元'],
+                        ['六等奖', '连续2位', '5元'],
+                    ]
+                },
+                'qlc': {
+                    play: '从30个号码中选7个基本号，开奖摇出7基本号+1特别号',
+                    time: '每周一、三、五开奖',
+                    prizes: [
+                        ['一等奖', '7基本号', '浮动（最高500万）'],
+                        ['二等奖', '6基本号+特别号', '浮动'],
+                        ['三等奖', '6基本号', '3,000元'],
+                        ['四等奖', '5基本号+特别号', '200元'],
+                        ['五等奖', '5基本号', '50元'],
+                        ['六等奖', '4基本号+特别号', '10元'],
+                        ['七等奖', '4基本号', '5元'],
+                    ]
+                },
+            };
+            
             const lotteryConfig = {
                 'ssq': {emoji: '🔴', name: '双色球', mainColor: '#E53935', subColor: '#1E88E5', mainLabel: '红球(6个)', subLabel: '蓝球(1个)', mainKey: 'red', subKey: 'blue', predMain: 'red', predSub: 'blue', predLoneMain: 'lone_red', predLoneSub: 'lone_blue', mainCount: 6, subCount: 1, hasSub: true, mainHitLabel: '红球', subHitLabel: '蓝球'},
                 'dlt': {emoji: '🔵', name: '大乐透', mainColor: '#7B5BD6', subColor: '#B39DDB', mainLabel: '前区(5个)', subLabel: '后区(2个)', mainKey: 'front', subKey: 'back', predMain: 'hot_front', predSub: 'hot_back', predLoneMain: 'lone_front', predLoneSub: 'lone_back', mainCount: 5, subCount: 2, hasSub: true, mainHitLabel: '前区', subHitLabel: '后区'},
@@ -1869,6 +2056,36 @@
                     });
                     checkHtml += `</div>`;
                 }
+                
+                // ========== 玩法与奖金规则（折叠区） ==========
+                const info = LOTTERY_INFO[lotteryId] || {};
+                if (info.prizes && info.prizes.length) {
+                    let prizeRows = info.prizes.map(p => 
+                        `<tr><td class="prize-level">${p[0]}</td><td class="prize-cond">${p[1]}</td><td class="prize-amount">${p[2]}</td></tr>`
+                    ).join('');
+                    checkHtml += `
+                    <div class="prize-collapse">
+                        <div class="prize-collapse-header" onclick="this.parentElement.classList.toggle('expanded')">
+                            <span>📋 玩法与奖金规则</span>
+                            <span class="prize-collapse-icon">▼</span>
+                        </div>
+                        <div class="prize-collapse-body">
+                            <div class="prize-info-row">
+                                <span class="prize-info-label">🎯 玩法</span>
+                                <span class="prize-info-value">${info.play || '-'}</span>
+                            </div>
+                            <div class="prize-info-row">
+                                <span class="prize-info-label">🕐 开奖</span>
+                                <span class="prize-info-value">${info.time || '-'}</span>
+                            </div>
+                            <table class="prize-table">
+                                <thead><tr><th>奖级</th><th>命中条件</th><th>奖金</th></tr></thead>
+                                <tbody>${prizeRows}</tbody>
+                            </table>
+                        </div>
+                    </div>`;
+                }
+                
                 checkHtml += `</div>`;
                 
                 // ========== 分析标签内容 ==========
