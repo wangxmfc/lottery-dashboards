@@ -10842,7 +10842,7 @@
   },
   "ops_monitoring": {
     "system_health": {
-      "score": 98,
+      "score": 95,
       "level": "优",
       "dimensions": [
         {
@@ -10852,7 +10852,7 @@
         },
         {
           "name": "数据新鲜度",
-          "score": 100,
+          "score": 85,
           "status": "正常"
         },
         {
@@ -10899,7 +10899,7 @@
         "schedule": "每天 20:10",
         "status": "pending",
         "last_run": "-",
-        "next_run": "2026-09-26 20:10"
+        "next_run": "2026-09-27 20:10"
       },
       {
         "name": "Excel周六合集",
@@ -10929,20 +10929,20 @@
       {
         "name": "彩票数据源",
         "status": "ok",
-        "latency": "234ms",
-        "last_check": "2026-09-26 23:49"
+        "latency": "245ms",
+        "last_check": "2026-09-27 00:14"
       },
       {
         "name": "图床服务",
         "status": "ok",
-        "latency": "843ms",
-        "last_check": "2026-09-26 23:49"
+        "latency": "1476ms",
+        "last_check": "2026-09-27 00:14"
       },
       {
         "name": "GitHub Pages",
         "status": "ok",
-        "latency": "2235ms",
-        "last_check": "2026-09-26 23:49"
+        "latency": "1026ms",
+        "last_check": "2026-09-27 00:14"
       }
     ],
     "run_times": [
@@ -10967,7 +10967,7 @@
       },
       {
         "name": "运行日志",
-        "size": "352K"
+        "size": "356K"
       },
       {
         "name": "备份包",
@@ -11003,12 +11003,12 @@
     ],
     "recent_changes": [
       {
-        "time": "44分钟前",
+        "time": "0分钟前",
         "module": "看板优化",
         "desc": "dashboard.html 更新"
       },
       {
-        "time": "9分钟前",
+        "time": "25分钟前",
         "module": "数据更新",
         "desc": "dashboard_data.json 更新"
       },
@@ -11023,7 +11023,7 @@
         "desc": "scripts/verify_consistency.py 更新"
       },
       {
-        "time": "1天前",
+        "time": "14分钟前",
         "module": "预测卡片",
         "desc": "scripts/gen_cards_v2.py 更新"
       }
@@ -11038,7 +11038,7 @@
         "desc": "部分彩种历史数据不足200期，回测样本待积累"
       }
     ],
-    "collected_at": "2026-09-26 23:49:29"
+    "collected_at": "2026-09-27 00:14:34"
   },
   "last_status_update": "2026-09-26 23:05:19"
 }
