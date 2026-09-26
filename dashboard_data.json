@@ -10880,20 +10880,20 @@
       {
         "name": "彩票数据源",
         "status": "ok",
-        "latency": "215ms",
-        "last_check": "2026-09-27 00:32"
+        "latency": "231ms",
+        "last_check": "2026-09-27 00:47"
       },
       {
         "name": "图床服务",
         "status": "ok",
-        "latency": "1038ms",
-        "last_check": "2026-09-27 00:32"
+        "latency": "867ms",
+        "last_check": "2026-09-27 00:47"
       },
       {
         "name": "GitHub Pages",
         "status": "ok",
-        "latency": "980ms",
-        "last_check": "2026-09-27 00:32"
+        "latency": "4910ms",
+        "last_check": "2026-09-27 00:47"
       }
     ],
     "run_times": [
@@ -10954,17 +10954,17 @@
     ],
     "recent_changes": [
       {
-        "time": "7分钟前",
+        "time": "22分钟前",
         "module": "看板优化",
         "desc": "dashboard.html 更新"
       },
       {
-        "time": "0分钟前",
+        "time": "15分钟前",
         "module": "数据更新",
         "desc": "dashboard_data.json 更新"
       },
       {
-        "time": "7分钟前",
+        "time": "22分钟前",
         "module": "数据脚本",
         "desc": "scripts/update_dashboard_data.py 更新"
       },
@@ -10974,7 +10974,7 @@
         "desc": "scripts/verify_consistency.py 更新"
       },
       {
-        "time": "0分钟前",
+        "time": "12分钟前",
         "module": "预测卡片",
         "desc": "scripts/gen_cards_v2.py 更新"
       }
@@ -10989,6 +10989,6 @@
         "desc": "部分彩种历史数据不足200期，回测样本待积累"
       }
     ],
-    "collected_at": "2026-09-27 00:32:05"
+    "collected_at": "2026-09-27 00:47:20"
   }
 }
