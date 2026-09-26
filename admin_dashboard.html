@@ -3985,17 +3985,10 @@
                     // 提前计算主推命中号码（简化模板字符串）
                     const predMainNums = prevCheck.prediction ? (prevCheck.prediction[cfg.predMain || 'hot_front'] || prevCheck.prediction[cfg.predMain || 'red'] || prevCheck.prediction['hot_nums'] || []) : [];
                     const predSubNums = prevCheck.prediction ? (prevCheck.prediction[cfg.predSub || 'hot_back'] || prevCheck.prediction[cfg.predSub || 'blue'] || []) : [];
-                    // 排列型彩票用后端按位置匹配的命中号码，乐透型用集合匹配
+                    // 统一使用后端计算好的命中号码，避免前后端口径不一致
                     let mainHitNums, subHitNums;
-                    if (cfg.allowDuplicate) {
-                        mainHitNums = prevCheck.hit_main_nums || [];
-                        subHitNums = prevCheck.hit_sub_nums || [];
-                    } else {
-                        const predMainSet = new Set(predMainNums.map(x => String(x).padStart(2,'0')));
-                        const predSubSet = new Set(predSubNums.map(x => String(x).padStart(2,'0')));
-                        mainHitNums = Array.isArray(actualMain) ? actualMain.filter(n => predMainSet.has(String(n).padStart(2,'0'))) : [];
-                        subHitNums = cfg.subLabel && Array.isArray(actualSub) ? actualSub.filter(n => predSubSet.has(String(n).padStart(2,'0'))) : [];
-                    }
+                    mainHitNums = prevCheck.hit_main_nums || [];
+                    subHitNums = prevCheck.hit_sub_nums || [];
                     // 位选参考标注：每组>1个候选标注"位选参考"，每组1个标注"精选号码"
                     const mainRefNumsForLabel = prevCheck.prediction ? (prevCheck.prediction[cfg.predMain + '_ref'] || prevCheck.prediction[cfg.predMain || 'hot_nums'] || []) : [];
                     const mainRefGroupSize = cfg.mainCount && mainRefNumsForLabel.length >= cfg.mainCount ? mainRefNumsForLabel.length / cfg.mainCount : 0;
