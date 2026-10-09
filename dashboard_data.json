@@ -183,7 +183,7 @@
       "avg_hit": 1.25,
       "latest_period": "2026115",
       "latest_date": "2026-10-08",
-      "card_image": "https://wangxmfc.github.io/lottery-dashboards/imgs/ssq_card_v2.png",
+      "card_image": "https://aka.doubaocdn.com/s/vsMLUDpp0k",
       "latest_draw": {
         "period": "2026115",
         "date": "2026-10-08",
@@ -1695,7 +1695,7 @@
       "avg_hit": 2.42,
       "latest_period": "2026267",
       "latest_date": "2026-10-08",
-      "card_image": "https://wangxmfc.github.io/lottery-dashboards/imgs/kl8_card_v2.png",
+      "card_image": "https://aka.doubaocdn.com/s/5mVdNPt2iP",
       "latest_draw": {
         "period": "2026267",
         "date": "2026-10-08",
@@ -2800,7 +2800,7 @@
       "avg_hit": 0.33,
       "latest_period": "2026267",
       "latest_date": "2026-10-08",
-      "card_image": "https://wangxmfc.github.io/lottery-dashboards/imgs/fc3d_card_v2.png",
+      "card_image": "https://aka.doubaocdn.com/s/P1vOlrKTv3",
       "latest_draw": {
         "period": "2026267",
         "date": "2026-10-08",
@@ -3304,7 +3304,7 @@
       "avg_hit": 0.87,
       "latest_period": "26268",
       "latest_date": "2026-10-09",
-      "card_image": "https://wangxmfc.github.io/lottery-dashboards/imgs/pl35_card_v2.png",
+      "card_image": "https://aka.doubaocdn.com/s/8rCnebrkbI",
       "latest_draw": {
         "period": "26268",
         "date": "2026-10-09",
@@ -11323,20 +11323,20 @@
       {
         "name": "彩票数据源",
         "status": "ok",
-        "latency": "226ms",
-        "last_check": "2026-10-09 21:55"
+        "latency": "204ms",
+        "last_check": "2026-10-09 21:56"
       },
       {
         "name": "图床服务",
         "status": "fail",
         "latency": "超时",
-        "last_check": "2026-10-09 21:55"
+        "last_check": "2026-10-09 21:57"
       },
       {
         "name": "GitHub Pages",
         "status": "ok",
-        "latency": "810ms",
-        "last_check": "2026-10-09 21:55"
+        "latency": "3471ms",
+        "last_check": "2026-10-09 21:57"
       }
     ],
     "run_times": [
@@ -11397,7 +11397,7 @@
     ],
     "recent_changes": [
       {
-        "time": "0分钟前",
+        "time": "1分钟前",
         "module": "看板优化",
         "desc": "dashboard.html 更新"
       },
@@ -11432,7 +11432,7 @@
         "desc": "部分彩种历史数据不足200期，回测样本待积累"
       }
     ],
-    "collected_at": "2026-10-09 21:55:15"
+    "collected_at": "2026-10-09 21:57:04"
   },
   "last_status_update": "2026-10-09 21:54:17"
 }
