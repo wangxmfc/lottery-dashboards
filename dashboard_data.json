@@ -1709,7 +1709,7 @@
       "grade": "待提升",
       "improvement": -4.5,
       "hit_rate": 93.7,
-      "total_periods": 222,
+      "total_periods": 223,
       "avg_hit": 2.39,
       "latest_period": "2026281",
       "latest_date": "2026-10-22",
@@ -1849,7 +1849,7 @@
         "lone_sub": []
       },
       "prev_check": {
-        "period": "2026281",
+        "period": "2026282",
         "prediction": {
           "hot_nums": [
             "09",
@@ -1944,15 +1944,17 @@
             "75"
           ]
         },
-        "hit_main": 5,
+        "hit_main": 7,
         "hit_sub": 0,
-        "hit_total": 5,
+        "hit_total": 7,
         "hit_main_nums": [
-          "72",
-          "01",
+          "09",
+          "73",
+          "02",
           "08",
-          "11",
-          "66"
+          "35",
+          "44",
+          "23"
         ],
         "hit_sub_nums": [],
         "lone_main": [
@@ -1968,11 +1970,15 @@
           "52"
         ],
         "lone_sub": [],
-        "lone_hit_main": 1,
+        "lone_hit_main": 5,
         "lone_hit_sub": 0,
-        "lone_hit_total": 1,
+        "lone_hit_total": 5,
         "lone_hit_main_nums": [
-          "52"
+          "44",
+          "02",
+          "73",
+          "09",
+          "35"
         ],
         "lone_hit_sub_nums": [],
         "prize_main": {
@@ -2738,9 +2744,9 @@
       "name": "福彩3D",
       "grade": "一般",
       "improvement": 12.1,
-      "hit_rate": 30.9,
-      "total_periods": 223,
-      "avg_hit": 0.34,
+      "hit_rate": 30.8,
+      "total_periods": 224,
+      "avg_hit": 0.33,
       "latest_period": "2026281",
       "latest_date": "2026-10-22",
       "card_image": "https://wangxmfc.github.io/lottery-dashboards/imgs/fc3d_card_v2.png",
@@ -2799,7 +2805,7 @@
         "lone_sub": []
       },
       "prev_check": {
-        "period": "2026281",
+        "period": "2026282",
         "prediction": {
           "hot_nums": [
             "06",
@@ -2838,12 +2844,11 @@
             "3"
           ]
         },
-        "hit_main": 2,
+        "hit_main": 1,
         "hit_sub": 0,
-        "hit_total": 2,
+        "hit_total": 1,
         "hit_main_nums": [
-          "08",
-          "01"
+          "03"
         ],
         "hit_sub_nums": [],
         "lone_main": [
@@ -3212,8 +3217,8 @@
       "name": "排列3/5",
       "grade": "一般",
       "improvement": 14.6,
-      "hit_rate": 47.3,
-      "total_periods": 222,
+      "hit_rate": 47.5,
+      "total_periods": 223,
       "avg_hit": 0.91,
       "latest_period": "26281",
       "latest_date": "2026-10-22",
@@ -3323,7 +3328,7 @@
         ]
       },
       "prev_check": {
-        "period": "26281",
+        "period": "26282",
         "prediction": {
           "hot_p3": [
             "02",
@@ -3400,15 +3405,12 @@
             "1"
           ]
         },
-        "hit_main": 1,
-        "hit_sub": 2,
-        "hit_total": 3,
-        "hit_main_nums": [
-          "03"
-        ],
+        "hit_main": 0,
+        "hit_sub": 1,
+        "hit_total": 1,
+        "hit_main_nums": [],
         "hit_sub_nums": [
-          "03",
-          "01"
+          "04"
         ],
         "lone_main": [
           "01",
@@ -3427,7 +3429,7 @@
         "lone_hit_total": 1,
         "lone_hit_main_nums": [],
         "lone_hit_sub_nums": [
-          "01"
+          "04"
         ],
         "prize_main": {
           "level": "未中奖",
@@ -3961,8 +3963,8 @@
       "name": "七星彩",
       "grade": "一般",
       "improvement": 20.8,
-      "hit_rate": 53.1,
-      "total_periods": 209,
+      "hit_rate": 52.9,
+      "total_periods": 210,
       "avg_hit": 0.71,
       "latest_period": "26120",
       "latest_date": "2026-10-20",
@@ -4063,7 +4065,7 @@
         ]
       },
       "prev_check": {
-        "period": "26120",
+        "period": "26121",
         "prediction": {
           "hot_nums": [
             "07",
@@ -4133,10 +4135,13 @@
             "5"
           ]
         },
-        "hit_main": 0,
+        "hit_main": 2,
         "hit_sub": 0,
-        "hit_total": 0,
-        "hit_main_nums": [],
+        "hit_total": 2,
+        "hit_main_nums": [
+          "05",
+          "06"
+        ],
         "hit_sub_nums": [],
         "lone_main": [
           "07",
@@ -4149,12 +4154,10 @@
         "lone_sub": [
           "00"
         ],
-        "lone_hit_main": 1,
+        "lone_hit_main": 0,
         "lone_hit_sub": 0,
-        "lone_hit_total": 1,
-        "lone_hit_main_nums": [
-          "09"
-        ],
+        "lone_hit_total": 0,
+        "lone_hit_main_nums": [],
         "lone_hit_sub_nums": [],
         "prize_main": {
           "level": "未中奖",
@@ -4625,9 +4628,9 @@
       "name": "七乐彩",
       "grade": "待提升",
       "improvement": -0.5,
-      "hit_rate": 85.7,
-      "total_periods": 210,
-      "avg_hit": 1.67,
+      "hit_rate": 85.3,
+      "total_periods": 211,
+      "avg_hit": 1.66,
       "latest_period": "2026121",
       "latest_date": "2026-10-21",
       "card_image": "https://wangxmfc.github.io/lottery-dashboards/imgs/qlc_card_v2.png",
@@ -4707,7 +4710,7 @@
         ]
       },
       "prev_check": {
-        "period": "2026121",
+        "period": "2026122",
         "prediction": {
           "hot_nums": [
             "01",
@@ -4759,8 +4762,8 @@
         "hit_sub": 0,
         "hit_total": 2,
         "hit_main_nums": [
-          "14",
-          "23"
+          "06",
+          "07"
         ],
         "hit_sub_nums": [],
         "lone_main": [
@@ -4775,12 +4778,11 @@
         "lone_sub": [
           "01"
         ],
-        "lone_hit_main": 2,
+        "lone_hit_main": 1,
         "lone_hit_sub": 0,
-        "lone_hit_total": 2,
+        "lone_hit_total": 1,
         "lone_hit_main_nums": [
-          "14",
-          "22"
+          "06"
         ],
         "lone_hit_sub_nums": [],
         "prize_main": {
@@ -11058,7 +11060,7 @@
   },
   "ops_monitoring": {
     "system_health": {
-      "score": 100,
+      "score": 97,
       "level": "优",
       "dimensions": [
         {
@@ -11068,7 +11070,7 @@
         },
         {
           "name": "数据新鲜度",
-          "score": 100,
+          "score": 85,
           "status": "正常"
         },
         {
@@ -11094,28 +11096,28 @@
         "schedule": "工作日 08:00",
         "status": "success",
         "last_run": "2026-09-24 08:28",
-        "next_run": "2026-10-22 08:00"
+        "next_run": "2026-10-23 08:00"
       },
       {
         "name": "午间评盘",
         "schedule": "工作日 11:35",
         "status": "pending",
         "last_run": "-",
-        "next_run": "2026-10-22 11:35"
+        "next_run": "2026-10-23 11:35"
       },
       {
         "name": "盘后复盘",
         "schedule": "工作日 15:10",
         "status": "pending",
         "last_run": "-",
-        "next_run": "2026-10-22 15:10"
+        "next_run": "2026-10-23 15:10"
       },
       {
         "name": "彩票开奖",
         "schedule": "每天 20:10",
         "status": "pending",
         "last_run": "-",
-        "next_run": "2026-10-22 20:10"
+        "next_run": "2026-10-23 20:10"
       },
       {
         "name": "Excel周六合集",
@@ -11137,20 +11139,20 @@
       {
         "name": "彩票数据源",
         "status": "ok",
-        "latency": "245ms",
-        "last_check": "2026-10-22 22:18"
+        "latency": "223ms",
+        "last_check": "2026-10-23 22:24"
       },
       {
         "name": "图床服务",
         "status": "ok",
-        "latency": "3040ms",
-        "last_check": "2026-10-22 22:18"
+        "latency": "835ms",
+        "last_check": "2026-10-23 22:24"
       },
       {
         "name": "GitHub Pages",
         "status": "ok",
-        "latency": "10442ms",
-        "last_check": "2026-10-22 22:18"
+        "latency": "1958ms",
+        "last_check": "2026-10-23 22:24"
       }
     ],
     "run_times": [
@@ -11175,7 +11177,7 @@
       },
       {
         "name": "运行日志",
-        "size": "152K"
+        "size": "156K"
       },
       {
         "name": "备份包",
@@ -11211,7 +11213,7 @@
     ],
     "recent_changes": [
       {
-        "time": "0分钟前",
+        "time": "5分钟前",
         "module": "看板优化",
         "desc": "dashboard.html 更新"
       },
@@ -11221,17 +11223,17 @@
         "desc": "dashboard_data.json 更新"
       },
       {
-        "time": "25天前",
+        "time": "26天前",
         "module": "数据脚本",
         "desc": "scripts/update_dashboard_data.py 更新"
       },
       {
-        "time": "27天前",
+        "time": "28天前",
         "module": "一致性校验",
         "desc": "scripts/verify_consistency.py 更新"
       },
       {
-        "time": "3天前",
+        "time": "4天前",
         "module": "预测卡片",
         "desc": "scripts/gen_cards_v2.py 更新"
       }
@@ -11246,7 +11248,7 @@
         "desc": "部分彩种历史数据不足200期，回测样本待积累"
       }
     ],
-    "collected_at": "2026-10-22 22:18:59"
+    "collected_at": "2026-10-23 22:24:33"
   },
   "last_status_update": "2026-10-22 22:18:44"
 }
