@@ -10995,20 +10995,20 @@
       {
         "name": "彩票数据源",
         "status": "ok",
-        "latency": "212ms",
-        "last_check": "2026-11-07 22:45"
+        "latency": "208ms",
+        "last_check": "2026-11-07 22:47"
       },
       {
         "name": "图床服务",
         "status": "ok",
-        "latency": "1236ms",
-        "last_check": "2026-11-07 22:45"
+        "latency": "2733ms",
+        "last_check": "2026-11-07 22:47"
       },
       {
         "name": "GitHub Pages",
-        "status": "fail",
-        "latency": "超时",
-        "last_check": "2026-11-07 22:45"
+        "status": "ok",
+        "latency": "1519ms",
+        "last_check": "2026-11-07 22:47"
       }
     ],
     "run_times": [
@@ -11069,7 +11069,7 @@
     ],
     "recent_changes": [
       {
-        "time": "1分钟前",
+        "time": "3分钟前",
         "module": "看板优化",
         "desc": "dashboard.html 更新"
       },
@@ -11104,7 +11104,7 @@
         "desc": "部分彩种历史数据不足200期，回测样本待积累"
       }
     ],
-    "collected_at": "2026-11-07 22:45:19"
+    "collected_at": "2026-11-07 22:47:11"
   },
   "last_status_update": "2026-11-07 22:43:45"
 }
