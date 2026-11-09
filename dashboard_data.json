@@ -10989,19 +10989,19 @@
       {
         "name": "彩票数据源",
         "status": "ok",
-        "latency": "215ms",
+        "latency": "223ms",
         "last_check": "2026-11-09 22:16"
       },
       {
         "name": "图床服务",
         "status": "ok",
-        "latency": "2330ms",
+        "latency": "1034ms",
         "last_check": "2026-11-09 22:16"
       },
       {
         "name": "GitHub Pages",
         "status": "ok",
-        "latency": "1205ms",
+        "latency": "8205ms",
         "last_check": "2026-11-09 22:16"
       }
     ],
@@ -11098,7 +11098,7 @@
         "desc": "部分彩种历史数据不足200期，回测样本待积累"
       }
     ],
-    "collected_at": "2026-11-09 22:16:18"
+    "collected_at": "2026-11-09 22:16:32"
   },
   "last_status_update": "2026-11-09 22:15:37"
 }
