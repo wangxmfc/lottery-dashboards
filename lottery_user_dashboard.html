@@ -2686,8 +2686,17 @@ function switchLottery(ltype) {
 <script>
 (function(){
   function esc(v){ if(v==null) return '—'; return String(v).replace(/[&<>]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
-  var LBL = {front:'前区', back:'后区', special:'特别号', nums:'号码', p3:'P3', p5:'P5'};
-  function fmtPick(v){
+  var LBL_BY_TYPE = {
+    ssq: {front:'红球', back:'蓝球'},
+    dlt: {front:'前区', back:'后区'},
+    qlc: {front:'基本号', back:'特别号'},
+    qxc: {nums:'号码', special:'特别号'},
+    pl35: {p3:'P3', p5:'P5'},
+    kl8: {nums:'号码'},
+    fc3d: {nums:'号码'}
+  };
+  function fmtPick(v, type){
+    var LBL = LBL_BY_TYPE[type] || {};
     if(v==null) return '—';
     if(Array.isArray(v)) return v.join(' ');
     if(typeof v === 'object'){
@@ -2712,7 +2721,7 @@ function switchLottery(ltype) {
           + '<span style="color:#B5B5B5;font-weight:400;font-size:11px;margin-left:6px;">' + esc(r.period) + '</span></span>'
           + '<span style="font-size:11px;color:#C8102E;background:#FDF2F2;border-radius:8px;padding:1px 7px;white-space:nowrap;">重合 ' + esc(r.overlap_pct) + '%</span>'
           + '</div>'
-          + '<div style="font-family:monospace;font-size:12.5px;color:#C8102E;letter-spacing:0.4px;margin-top:4px;word-break:break-word;">' + esc(fmtPick(r.constrained)) + '</div>'
+          + '<div style="font-family:monospace;font-size:12.5px;color:#C8102E;letter-spacing:0.4px;margin-top:4px;word-break:break-word;">' + esc(fmtPick(r.constrained, r.type)) + '</div>'
           + '</div>';
       });
       html += '<div style="margin-top:8px;font-size:11.5px;color:#999;">生成 ' + esc(p.generated_at) + ' · 仅供统计参考，理性购彩</div>';
