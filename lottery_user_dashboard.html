@@ -645,7 +645,13 @@ function switchLottery(ltype) {
 <div class="nav">
   <div class="nav-title">🎯 王者GP · 彩票分析</div>
   <div class="nav-sub">7彩种一键切换 · 数据仅供统计参考 · 理性购彩</div>
+<!-- POSTPROC-UI:BEGIN -->
+<div style="margin:14px 12px 0;background:#fff;border-radius:16px;padding:14px 16px;box-shadow:0 3px 12px rgba(0,0,0,0.06);border-left:4px solid #C9A227;">
+  <div style="font-size:15px;font-weight:800;color:#0F2A43;margin-bottom:6px;">🧪 后处理层 · 主推分散约束</div>
+  <div style="font-size:12px;color:#8A8A8A;line-height:1.65;margin-bottom:6px;">与上一期主推重合压到 ≤70%，降低连续多期同一注的风险集中；不改引擎权重。</div>
+  <div id="postproc-user-body" style="font-size:12.5px;color:#333;line-height:1.85;">加载中…</div>
 </div>
+<!-- POSTPROC-UI:END --></div>
 
 <!-- 彩种切换按钮 -->
 <div class="lottery-tabs">
@@ -2646,8 +2652,76 @@ function switchLottery(ltype) {
 </div>
 
 
-</div>
-
-
+</div><!-- POSTPROC-JS:BEGIN -->
+<script>
+(function(){
+  function esc(v){
+    if(v===null||v===undefined) return '—';
+    if(typeof v !== 'string') v = JSON.stringify(v);
+    return v.replace(/[&<>]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});
+  }
+  function load(){
+    var box = document.getElementById('postproc-user-body');
+    if(!box) return;
+    fetch('dashboard_data.json?t=' + Date.now()).then(function(r){return r.json();}).then(function(d){
+      var p = d && d.postproc_layer;
+      if(!p){ box.innerHTML = '暂无后处理数据'; return; }
+      var html = '';
+      (p.picks||[]).forEach(function(r){
+        html += '<div style="padding:5px 0;border-bottom:1px dashed #EEE;">'
+          + '<span style="display:inline-block;min-width:74px;font-weight:700;color:#0F2A43;">' + esc(r.name) + '</span>'
+          + '<span style="font-family:monospace;color:#C8102E;">' + esc(r.constrained) + '</span>'
+          + '<span style="float:right;color:#999;">重合 ' + esc(r.overlap_pct) + '%</span>'
+          + '</div>';
+      });
+      html += '<div style="margin-top:8px;font-size:11.5px;color:#999;">生成 ' + esc(p.generated_at) + ' · 仅供统计参考，理性购彩</div>';
+      box.innerHTML = html;
+    }).catch(function(){ box.innerHTML = '暂无后处理数据'; });
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', load); } else { load(); }
+})();
+</script>
+<!-- POSTPROC-JS:END -->
+<!-- POSTPROC-JS:BEGIN -->
+<script>
+(function(){
+  function esc(v){ if(v==null) return '—'; return String(v).replace(/[&<>]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
+  var LBL = {front:'前区', back:'后区', special:'特别号', nums:'号码', p3:'P3', p5:'P5'};
+  function fmtPick(v){
+    if(v==null) return '—';
+    if(Array.isArray(v)) return v.join(' ');
+    if(typeof v === 'object'){
+      return Object.keys(v).map(function(k){
+        var x = v[k];
+        return (LBL[k] || k) + ' ' + (Array.isArray(x) ? x.join(' ') : String(x));
+      }).join(' ／ ');
+    }
+    return String(v);
+  }
+  function load(){
+    var box = document.getElementById('postproc-user-body');
+    if(!box) return;
+    fetch('dashboard_data.json?t=' + Date.now()).then(function(r){return r.json();}).then(function(d){
+      var p = d && d.postproc_layer;
+      if(!p){ box.innerHTML = '暂无后处理数据'; return; }
+      var html = '';
+      (p.picks || []).forEach(function(r){
+        html += '<div style="padding:9px 0;border-bottom:1px dashed #EFEFEF;">'
+          + '<div style="display:flex;justify-content:space-between;align-items:center;">'
+          + '<span style="font-weight:700;color:#0F2A43;font-size:13px;">' + esc(r.name)
+          + '<span style="color:#B5B5B5;font-weight:400;font-size:11px;margin-left:6px;">' + esc(r.period) + '</span></span>'
+          + '<span style="font-size:11px;color:#C8102E;background:#FDF2F2;border-radius:8px;padding:1px 7px;white-space:nowrap;">重合 ' + esc(r.overlap_pct) + '%</span>'
+          + '</div>'
+          + '<div style="font-family:monospace;font-size:12.5px;color:#C8102E;letter-spacing:0.4px;margin-top:4px;word-break:break-word;">' + esc(fmtPick(r.constrained)) + '</div>'
+          + '</div>';
+      });
+      html += '<div style="margin-top:8px;font-size:11.5px;color:#999;">生成 ' + esc(p.generated_at) + ' · 仅供统计参考，理性购彩</div>';
+      box.innerHTML = html;
+    }).catch(function(){ box.innerHTML = '暂无后处理数据'; });
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', load); } else { load(); }
+})();
+</script>
+<!-- POSTPROC-JS:END -->
 </body>
 </html>
