@@ -10982,20 +10982,20 @@
       {
         "name": "彩票数据源",
         "status": "ok",
-        "latency": "222ms",
-        "last_check": "2026-11-15 11:12"
+        "latency": "419ms",
+        "last_check": "2026-11-15 11:21"
       },
       {
         "name": "图床服务",
         "status": "ok",
-        "latency": "1372ms",
-        "last_check": "2026-11-15 11:12"
+        "latency": "1000ms",
+        "last_check": "2026-11-15 11:21"
       },
       {
         "name": "GitHub Pages",
         "status": "ok",
-        "latency": "890ms",
-        "last_check": "2026-11-15 11:12"
+        "latency": "6697ms",
+        "last_check": "2026-11-15 11:21"
       }
     ],
     "run_times": [
@@ -11091,11 +11091,11 @@
         "desc": "部分彩种历史数据不足200期，回测样本待积累"
       }
     ],
-    "collected_at": "2026-11-15 11:12:45"
+    "collected_at": "2026-11-15 11:21:40"
   },
   "last_status_update": "2026-11-14 22:16:04",
   "postproc_layer": {
-    "generated_at": "2026-11-15 11:12:25",
+    "generated_at": "2026-11-15 11:21:23",
     "overlap_cap": 70,
     "eval": [
       {
@@ -11184,17 +11184,7 @@
           "02",
           "23",
           "47",
-          "58",
-          "09",
-          "51",
-          "73",
-          "56",
-          "66",
-          "60",
-          "45",
-          "44",
-          "27",
-          "48"
+          "58"
         ],
         "constrained": [
           "63",
@@ -11230,11 +11220,20 @@
         "type": "pl35",
         "name": "排列3/5",
         "period": "26305",
-        "engine": [
-          "02",
-          "09",
-          "06"
-        ],
+        "engine": {
+          "p3": [
+            "02",
+            "09",
+            "06"
+          ],
+          "p5": [
+            "02",
+            "09",
+            "06",
+            "04",
+            "03"
+          ]
+        },
         "constrained": {
           "p3": [
             "02",
@@ -11245,24 +11244,27 @@
             "02",
             "09",
             "06",
-            "05",
+            "04",
             "00"
           ]
         },
-        "overlap_pct": 40.0
+        "overlap_pct": 60.0
       },
       {
         "type": "qxc",
         "name": "七星彩",
         "period": "26131",
-        "engine": [
-          "02",
-          "09",
-          "05",
-          "05",
-          "00",
-          "00"
-        ],
+        "engine": {
+          "nums": [
+            "02",
+            "09",
+            "05",
+            "05",
+            "00",
+            "00"
+          ],
+          "special": "08"
+        },
         "constrained": {
           "nums": [
             "05",
@@ -11272,24 +11274,15 @@
             "02",
             "04"
           ],
-          "special": "08"
+          "special": "09"
         },
-        "overlap_pct": 40.0
+        "overlap_pct": 50.0
       },
       {
         "type": "qlc",
         "name": "七乐彩",
         "period": "2026132",
-        "engine": [
-          "26",
-          "14",
-          "23",
-          "04",
-          "09",
-          "22",
-          "06"
-        ],
-        "constrained": {
+        "engine": {
           "front": [
             "26",
             "14",
@@ -11299,22 +11292,27 @@
             "22",
             "06"
           ],
+          "back": "30"
+        },
+        "constrained": {
+          "front": [
+            "26",
+            "14",
+            "23",
+            "04",
+            "08",
+            "30",
+            "05"
+          ],
           "back": "16"
         },
-        "overlap_pct": 100.0
+        "overlap_pct": 50.0
       },
       {
         "type": "dlt",
         "name": "大乐透",
         "period": "26131",
-        "engine": [
-          "10",
-          "27",
-          "06",
-          "29",
-          "14"
-        ],
-        "constrained": {
+        "engine": {
           "front": [
             "10",
             "27",
@@ -11323,25 +11321,30 @@
             "14"
           ],
           "back": [
+            "06",
+            "07"
+          ]
+        },
+        "constrained": {
+          "front": [
+            "06",
+            "29",
+            "14",
+            "10",
+            "27"
+          ],
+          "back": [
             "12",
             "09"
           ]
         },
-        "overlap_pct": 60.0
+        "overlap_pct": 57.1
       },
       {
         "type": "ssq",
         "name": "双色球",
         "period": "2026131",
-        "engine": [
-          "14",
-          "30",
-          "24",
-          "22",
-          "13",
-          "06"
-        ],
-        "constrained": {
+        "engine": {
           "front": [
             "14",
             "30",
@@ -11351,10 +11354,102 @@
             "06"
           ],
           "back": [
+            "11"
+          ]
+        },
+        "constrained": {
+          "front": [
+            "14",
+            "30",
+            "24",
+            "22",
+            "06",
+            "20"
+          ],
+          "back": [
             "12"
           ]
         },
-        "overlap_pct": 83.3
+        "overlap_pct": 57.1
+      }
+    ],
+    "constraint": [
+      {
+        "type": "ssq",
+        "name": "双色球",
+        "n": 22,
+        "engine_mean": 1.55,
+        "constrained_mean": 1.64,
+        "diff": -0.091,
+        "t": -1.48,
+        "expect": 1.09,
+        "verdict": "无差异"
+      },
+      {
+        "type": "dlt",
+        "name": "大乐透",
+        "n": 22,
+        "engine_mean": 1.14,
+        "constrained_mean": 1.18,
+        "diff": -0.045,
+        "t": -1.02,
+        "expect": 1.05,
+        "verdict": "无差异"
+      },
+      {
+        "type": "qlc",
+        "name": "七乐彩",
+        "n": 22,
+        "engine_mean": 1.59,
+        "constrained_mean": 1.45,
+        "diff": 0.136,
+        "t": 1.4,
+        "expect": 1.63,
+        "verdict": "无差异"
+      },
+      {
+        "type": "kl8",
+        "name": "快乐8",
+        "n": 48,
+        "engine_mean": 2.17,
+        "constrained_mean": 2.33,
+        "diff": -0.167,
+        "t": -2.25,
+        "expect": 2.5,
+        "verdict": "约束提升命中"
+      },
+      {
+        "type": "fc3d",
+        "name": "福彩3D",
+        "n": 48,
+        "engine_mean": 0.33,
+        "constrained_mean": 0.29,
+        "diff": 0.042,
+        "t": 0.58,
+        "expect": 0.3,
+        "verdict": "无差异"
+      },
+      {
+        "type": "pl35",
+        "name": "排列3/5",
+        "n": 47,
+        "engine_mean": 0.68,
+        "constrained_mean": 0.62,
+        "diff": 0.064,
+        "t": 0.52,
+        "expect": 0.8,
+        "verdict": "无差异"
+      },
+      {
+        "type": "qxc",
+        "name": "七星彩",
+        "n": 20,
+        "engine_mean": 0.45,
+        "constrained_mean": 0.55,
+        "diff": -0.1,
+        "t": -0.83,
+        "expect": 0.7,
+        "verdict": "无差异"
       }
     ],
     "notes": []
