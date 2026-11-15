@@ -2255,7 +2255,9 @@
             <button id="lottery-menu-btn" onclick="toggleLotteryMenu()">🎯 彩票 <span id="lottery-menu-arrow">▼</span></button>
 <!-- POSTPROC-NAV:BEGIN -->
             <button onclick="showSection('postproc', this)">🧪 后处理</button>
-<!-- POSTPROC-NAV:END -->        </div>
+<!-- POSTPROC-NAV:END -->
+
+        </div>
 
         <!-- 彩种子菜单（可展开/收起，默认收起） -->
         <div class="lottery-subnav collapsed" id="lottery-subnav">
@@ -2489,6 +2491,7 @@
 
         <!-- 运维监控 -->
         
+
         <!-- POSTPROC-UI:BEGIN -->
         <div id="postproc" class="section">
             <div class="grid">
@@ -5168,55 +5171,8 @@
                 isRefreshing = false;
             }, 800);
         }
-    </script><!-- POSTPROC-JS:BEGIN -->
-<script>
-(function(){
-  function esc(v){
-    if(v===null||v===undefined) return '—';
-    if(typeof v !== 'string') v = JSON.stringify(v);
-    return v.replace(/[&<>]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});
-  }
-  function load(){
-    var box = document.getElementById('postproc-body');
-    if(!box) return;
-    fetch('dashboard_data.json?t=' + Date.now()).then(function(r){return r.json();}).then(function(d){
-      var p = d && d.postproc_layer;
-      if(!p){ box.innerHTML = '<div style="padding:8px;">暂无后处理数据</div>'; return; }
-      var html = '<div style="font-size:0.92em;opacity:0.6;margin-bottom:10px;">生成 ' + esc(p.generated_at)
-               + ' · 约束上限：与上期重合 ≤' + esc(p.overlap_cap) + '%</div>';
-      html += '<div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;">';
-      html += '<thead><tr>' + ['彩种','期号','引擎原主推','约束后主推','与上期重合','近100期/期望','t','判定']
-        .map(function(h){return '<th style="text-align:left;padding:6px 8px;border-bottom:1px solid rgba(128,128,128,0.35);white-space:nowrap;">'+h+'</th>';}).join('') + '</tr></thead><tbody>';
-      var evMap = {};
-      (p.eval||[]).forEach(function(r){ evMap[r.type] = r; });
-      (p.picks||[]).forEach(function(r){
-        var e = evMap[r.type] || {};
-        var hit = (e.mean_100===undefined||e.mean_100===null) ? '—' : (e.mean_100 + ' / ' + e.expect);
-        html += '<tr>'
-          + '<td style="padding:6px 8px;border-bottom:1px solid rgba(128,128,128,0.18);white-space:nowrap;">' + esc(r.name) + '</td>'
-          + '<td style="padding:6px 8px;border-bottom:1px solid rgba(128,128,128,0.18);white-space:nowrap;">' + esc(r.period) + '</td>'
-          + '<td style="padding:6px 8px;border-bottom:1px solid rgba(128,128,128,0.18);font-family:monospace;">' + esc(r.engine) + '</td>'
-          + '<td style="padding:6px 8px;border-bottom:1px solid rgba(128,128,128,0.18);font-family:monospace;font-weight:600;">' + esc(r.constrained) + '</td>'
-          + '<td style="padding:6px 8px;border-bottom:1px solid rgba(128,128,128,0.18);white-space:nowrap;">' + esc(r.overlap_pct) + '%</td>'
-          + '<td style="padding:6px 8px;border-bottom:1px solid rgba(128,128,128,0.18);white-space:nowrap;">' + hit + '</td>'
-          + '<td style="padding:6px 8px;border-bottom:1px solid rgba(128,128,128,0.18);">' + esc(e.t_100) + '</td>'
-          + '<td style="padding:6px 8px;border-bottom:1px solid rgba(128,128,128,0.18);white-space:nowrap;">' + esc(e.verdict) + '</td>'
-          + '</tr>';
-      });
-      html += '</tbody></table></div>';
-      if((p.notes||[]).length){
-        html += '<div style="margin-top:10px;font-size:0.88em;opacity:0.65;">注：' + p.notes.map(esc).join('；') + '</div>';
-      }
-      html += '<div style="margin-top:10px;font-size:0.85em;opacity:0.6;">后处理层只做号码分散与评估口径校准，不改引擎权重；模型为统计参考，非预测工具。</div>';
-      box.innerHTML = html;
-    }).catch(function(err){
-      box.innerHTML = '<div style="padding:8px;opacity:0.6;">后处理数据加载失败：' + esc(String(err)) + '</div>';
-    });
-  }
-  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', load); } else { load(); }
-})();
-</script>
-<!-- POSTPROC-JS:END -->
+    </script>
+
 <!-- POSTPROC-JS:BEGIN -->
 <script>
 (function(){
@@ -5307,6 +5263,13 @@
           var c2 = it.level === 'err' ? '#E5484D' : (it.level === 'warn' ? '#E0A800' : 'rgba(128,128,128,0.7)');
           h += '<div style="margin-top:4px;font-size:0.78em;color:' + c2 + ';">· ' + esc(it.text) + '</div>';
         });
+      }
+      if(p.guard){
+        var g = p.guard, gc = (g.level === 'ok') ? '#3CB371' : '#E5484D';
+        h += '<div style="margin-top:14px;font-size:0.9em;">有效性守卫'
+           + '<span style="margin-left:8px;color:' + gc + ';">' + (g.level === 'ok' ? '无漂移' : '发现漂移') + '</span>'
+           + '<span style="margin-left:8px;font-size:0.78em;opacity:0.55;">已累计复检 ' + esc(g.days) + ' 天 · 连续3次 t≥1.5 才告警</span></div>';
+        (g.alerts||[]).forEach(function(a){ h += '<div style="margin-top:3px;font-size:0.78em;color:#E5484D;">· ' + esc(a.text) + '</div>'; });
       }
       if((p.fill_test||[]).length){
         h += '<div style="margin-top:16px;font-size:0.92em;font-weight:600;">补位策略 A/B/C（换号后从池里补哪类号）</div>';
