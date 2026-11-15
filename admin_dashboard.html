@@ -5221,8 +5221,17 @@
 <script>
 (function(){
   function esc(v){ if(v==null) return '—'; return String(v).replace(/[&<>]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
-  var LBL = {front:'前区', back:'后区', special:'特别号', nums:'号码', p3:'P3', p5:'P5'};
-  function fmtPick(v){
+  var LBL_BY_TYPE = {
+    ssq: {front:'红球', back:'蓝球'},
+    dlt: {front:'前区', back:'后区'},
+    qlc: {front:'基本号', back:'特别号'},
+    qxc: {nums:'号码', special:'特别号'},
+    pl35: {p3:'P3', p5:'P5'},
+    kl8: {nums:'号码'},
+    fc3d: {nums:'号码'}
+  };
+  function fmtPick(v, type){
+    var LBL = LBL_BY_TYPE[type] || {};
     if(v==null) return '—';
     if(Array.isArray(v)) return v.join(' ');
     if(typeof v === 'object'){
@@ -5253,14 +5262,32 @@
         h += '<tr>'
           + '<td style="padding:6px;border-bottom:1px solid rgba(128,128,128,0.18);">' + esc(r.name) + '</td>'
           + '<td style="padding:6px;border-bottom:1px solid rgba(128,128,128,0.18);">' + esc(r.period) + '</td>'
-          + '<td style="padding:6px;border-bottom:1px solid rgba(128,128,128,0.18);font-family:monospace;word-break:break-word;opacity:0.62;">' + esc(fmtPick(r.engine)) + '</td>'
-          + '<td style="padding:6px;border-bottom:1px solid rgba(128,128,128,0.18);font-family:monospace;word-break:break-word;font-weight:600;">' + esc(fmtPick(r.constrained)) + '</td>'
+          + '<td style="padding:6px;border-bottom:1px solid rgba(128,128,128,0.18);font-family:monospace;word-break:break-word;opacity:0.62;">' + esc(fmtPick(r.engine, r.type)) + '</td>'
+          + '<td style="padding:6px;border-bottom:1px solid rgba(128,128,128,0.18);font-family:monospace;word-break:break-word;font-weight:600;">' + esc(fmtPick(r.constrained, r.type)) + '</td>'
           + '<td style="padding:6px;border-bottom:1px solid rgba(128,128,128,0.18);white-space:nowrap;">' + esc(r.overlap_pct) + '%</td>'
           + '<td style="padding:6px;border-bottom:1px solid rgba(128,128,128,0.18);white-space:nowrap;">' + hit + '</td>'
           + '<td style="padding:6px;border-bottom:1px solid rgba(128,128,128,0.18);white-space:nowrap;">' + verdict + '</td>'
           + '</tr>';
       });
       h += '</tbody></table>';
+      if((p.constraint||[]).length){
+        h += '<div style="margin-top:18px;font-size:0.92em;font-weight:600;">约束实证（walk-forward，约束注 vs 引擎原注）</div>';
+        h += '<table style="width:100%;table-layout:fixed;border-collapse:collapse;font-size:0.78em;margin-top:6px;">';
+        h += '<thead><tr>' + [['彩种','30%'],['样本','12%'],['引擎原注','18%'],['约束后','18%'],['t','12%'],['判定','12%']]
+          .map(function(c){ return '<th style="width:' + c[1] + ';text-align:left;padding:5px;border-bottom:1px solid rgba(128,128,128,0.3);white-space:nowrap;">' + c[0] + '</th>'; }).join('') + '</tr></thead><tbody>';
+        (p.constraint||[]).forEach(function(r){
+          h += '<tr>'
+            + '<td style="padding:5px;border-bottom:1px solid rgba(128,128,128,0.15);">' + esc(r.name) + '</td>'
+            + '<td style="padding:5px;border-bottom:1px solid rgba(128,128,128,0.15);">' + esc(r.n) + '</td>'
+            + '<td style="padding:5px;border-bottom:1px solid rgba(128,128,128,0.15);">' + esc(r.engine_mean) + '</td>'
+            + '<td style="padding:5px;border-bottom:1px solid rgba(128,128,128,0.15);">' + esc(r.constrained_mean) + '</td>'
+            + '<td style="padding:5px;border-bottom:1px solid rgba(128,128,128,0.15);">' + esc(r.t) + '</td>'
+            + '<td style="padding:5px;border-bottom:1px solid rgba(128,128,128,0.15);white-space:nowrap;">' + esc(r.verdict) + '</td>'
+            + '</tr>';
+        });
+        h += '</tbody></table>';
+        h += '<div style="margin-top:6px;font-size:0.8em;opacity:0.55;">样本20-48期，差异均在噪声量级（快乐8 单点 t=-2.25 但属21次多重比较，不作结论）。</div>';
+      }
       h += '<div style="margin-top:10px;font-size:0.85em;opacity:0.6;">后处理层只做号码分散与评估口径校准，不改引擎权重；模型为统计参考，非预测工具。</div>';
       box.innerHTML = h;
     }).catch(function(){ box.innerHTML = '<div style="padding:8px;opacity:0.6;">后处理数据加载失败</div>'; });
