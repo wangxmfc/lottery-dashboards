@@ -10982,20 +10982,20 @@
       {
         "name": "彩票数据源",
         "status": "ok",
-        "latency": "220ms",
-        "last_check": "2026-11-15 11:52"
+        "latency": "213ms",
+        "last_check": "2026-11-15 13:02"
       },
       {
         "name": "图床服务",
         "status": "ok",
-        "latency": "1103ms",
-        "last_check": "2026-11-15 11:52"
+        "latency": "1237ms",
+        "last_check": "2026-11-15 13:02"
       },
       {
         "name": "GitHub Pages",
-        "status": "ok",
-        "latency": "1246ms",
-        "last_check": "2026-11-15 11:52"
+        "status": "fail",
+        "latency": "超时",
+        "last_check": "2026-11-15 13:02"
       }
     ],
     "run_times": [
@@ -11091,11 +11091,11 @@
         "desc": "部分彩种历史数据不足200期，回测样本待积累"
       }
     ],
-    "collected_at": "2026-11-15 11:52:38"
+    "collected_at": "2026-11-15 13:02:45"
   },
   "last_status_update": "2026-11-14 22:16:04",
   "postproc_layer": {
-    "generated_at": "2026-11-15 11:52:15",
+    "generated_at": "2026-11-15 13:02:17",
     "overlap_cap": 70,
     "eval": [
       {
@@ -11453,7 +11453,7 @@
       }
     ],
     "freshness": {
-      "checked_at": "2026-11-15 11:52:15",
+      "checked_at": "2026-11-15 13:01:25",
       "level": "ok",
       "items": [
         {
@@ -11465,22 +11465,22 @@
         {
           "file": "backtest_stats.json",
           "mtime": "2026-11-14 22:11",
-          "age_h": 13.7
+          "age_h": 14.8
         },
         {
           "file": "pred_state.json",
           "mtime": "2026-11-14 22:13",
-          "age_h": 13.6
+          "age_h": 14.8
         },
         {
           "file": "history_raw.json",
           "mtime": "2026-11-14 22:10",
-          "age_h": 13.7
+          "age_h": 14.8
         },
         {
           "file": "pred_history.json",
           "mtime": "2026-11-14 22:13",
-          "age_h": 13.6
+          "age_h": 14.8
         }
       ],
       "rows": [
@@ -11635,6 +11635,35 @@
         "random_t": 0.0
       }
     ],
+    "guard": {
+      "checked_at": "2026-11-15 13:01:25",
+      "days": 1,
+      "level": "ok",
+      "alerts": [],
+      "trend": {
+        "ssq": [
+          -1.48
+        ],
+        "dlt": [
+          -1.02
+        ],
+        "qlc": [
+          1.4
+        ],
+        "kl8": [
+          -2.25
+        ],
+        "fc3d": [
+          0.58
+        ],
+        "pl35": [
+          0.52
+        ],
+        "qxc": [
+          -0.83
+        ]
+      }
+    },
     "notes": []
   }
 }
