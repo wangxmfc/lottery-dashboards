@@ -10982,20 +10982,20 @@
       {
         "name": "彩票数据源",
         "status": "ok",
-        "latency": "211ms",
-        "last_check": "2026-11-15 13:52"
+        "latency": "203ms",
+        "last_check": "2026-11-15 15:02"
       },
       {
         "name": "图床服务",
         "status": "ok",
-        "latency": "1433ms",
-        "last_check": "2026-11-15 13:52"
+        "latency": "4581ms",
+        "last_check": "2026-11-15 15:02"
       },
       {
         "name": "GitHub Pages",
-        "status": "fail",
-        "latency": "超时",
-        "last_check": "2026-11-15 13:52"
+        "status": "ok",
+        "latency": "1610ms",
+        "last_check": "2026-11-15 15:02"
       }
     ],
     "run_times": [
@@ -11071,7 +11071,7 @@
         "desc": "scripts/update_dashboard_data.py 更新"
       },
       {
-        "time": "50天前",
+        "time": "51天前",
         "module": "一致性校验",
         "desc": "scripts/verify_consistency.py 更新"
       },
@@ -11091,11 +11091,11 @@
         "desc": "部分彩种历史数据不足200期，回测样本待积累"
       }
     ],
-    "collected_at": "2026-11-15 13:52:17"
+    "collected_at": "2026-11-15 15:02:47"
   },
   "last_status_update": "2026-11-14 22:16:04",
   "postproc_layer": {
-    "generated_at": "2026-11-15 13:51:46",
+    "generated_at": "2026-11-15 15:02:25",
     "overlap_cap": 70,
     "eval": [
       {
@@ -11453,7 +11453,7 @@
       }
     ],
     "freshness": {
-      "checked_at": "2026-11-15 13:51:20",
+      "checked_at": "2026-11-15 15:02:15",
       "level": "ok",
       "items": [
         {
@@ -11465,22 +11465,22 @@
         {
           "file": "backtest_stats.json",
           "mtime": "2026-11-14 22:11",
-          "age_h": 15.7
+          "age_h": 16.9
         },
         {
           "file": "pred_state.json",
           "mtime": "2026-11-14 22:13",
-          "age_h": 15.6
+          "age_h": 16.8
         },
         {
           "file": "history_raw.json",
           "mtime": "2026-11-14 22:10",
-          "age_h": 15.7
+          "age_h": 16.9
         },
         {
           "file": "pred_history.json",
           "mtime": "2026-11-14 22:13",
-          "age_h": 15.6
+          "age_h": 16.8
         }
       ],
       "rows": [
@@ -11636,7 +11636,7 @@
       }
     ],
     "guard": {
-      "checked_at": "2026-11-15 13:51:20",
+      "checked_at": "2026-11-15 15:02:15",
       "days": 1,
       "level": "ok",
       "alerts": [],
@@ -11792,6 +11792,96 @@
           "period": "2026251"
         }
       ]
+    },
+    "baseline_audit": {
+      "rows": [
+        {
+          "type": "ssq",
+          "name": "双色球",
+          "n": 219,
+          "shown_avg": 1.26,
+          "recomputed": 1.26,
+          "theory": 1.153,
+          "baseline": 1.13,
+          "baseline_gap_pct": -2.0,
+          "shown_improvement": 11.5,
+          "verdict": "口径一致"
+        },
+        {
+          "type": "dlt",
+          "name": "大乐透",
+          "n": 221,
+          "shown_avg": 1.06,
+          "recomputed": 1.059,
+          "theory": 1.048,
+          "baseline": 1.05,
+          "baseline_gap_pct": 0.2,
+          "shown_improvement": 0.8,
+          "verdict": "口径一致"
+        },
+        {
+          "type": "qlc",
+          "name": "七乐彩",
+          "n": 220,
+          "shown_avg": 1.67,
+          "recomputed": 1.668,
+          "theory": 1.867,
+          "baseline": 1.66,
+          "baseline_gap_pct": -11.1,
+          "shown_improvement": 0.5,
+          "verdict": "基准偏离理论 -11.1% → improvement 0.5% 不可信"
+        },
+        {
+          "type": "kl8",
+          "name": "快乐8",
+          "n": 245,
+          "shown_avg": 2.39,
+          "recomputed": 2.388,
+          "theory": 2.5,
+          "baseline": 2.51,
+          "baseline_gap_pct": 0.4,
+          "shown_improvement": -4.9,
+          "verdict": "口径一致"
+        },
+        {
+          "type": "fc3d",
+          "name": "福彩3D",
+          "n": 246,
+          "shown_avg": 0.33,
+          "recomputed": 0.329,
+          "theory": 0.3,
+          "baseline": 0.3,
+          "baseline_gap_pct": 0.0,
+          "shown_improvement": 9.8,
+          "verdict": "口径一致"
+        },
+        {
+          "type": "pl35",
+          "name": "排列3/5",
+          "n": 241,
+          "shown_avg": 0.86,
+          "recomputed": 0.863,
+          "theory": 0.8,
+          "baseline": 0.8,
+          "baseline_gap_pct": 0.0,
+          "shown_improvement": 7.9,
+          "verdict": "口径一致"
+        },
+        {
+          "type": "qxc",
+          "name": "七星彩",
+          "n": 218,
+          "shown_avg": 0.69,
+          "recomputed": 0.693,
+          "theory": 0.7,
+          "baseline": 0.59,
+          "baseline_gap_pct": -15.7,
+          "shown_improvement": 17.4,
+          "verdict": "基准偏离理论 -15.7% → improvement 17.4% 不可信"
+        }
+      ],
+      "level": "warn",
+      "checked_at": "2026-11-15 15:02:15"
     },
     "notes": []
   }
