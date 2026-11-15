@@ -5244,6 +5244,26 @@
         h += '</tbody></table>';
         h += '<div style="margin-top:6px;font-size:0.8em;opacity:0.55;">样本20-48期，差异均在噪声量级（快乐8 单点 t=-2.25 但属21次多重比较，不作结论）。</div>';
       }
+      if((p.winrate||[]).length){
+        h += '<div style="margin-top:20px;font-size:0.96em;font-weight:600;">中奖率实证（这一注到底中没中奖）</div>';
+        h += '<div style="margin-top:8px;overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:0.82em;">';
+        h += '<tr style="opacity:0.65;text-align:left;"><th style="padding:6px 4px;">彩种</th><th>期数</th><th>中奖次数</th><th>实测中奖率</th><th>理论</th><th>p</th><th>判定</th></tr>';
+        (p.winrate||[]).forEach(function(r){
+          var col = r.verdict.indexOf('高于') === 0 ? '#3CB371' : (r.verdict.indexOf('低于') === 0 ? '#E5484D' : 'inherit');
+          h += '<tr style="border-top:1px solid rgba(255,255,255,0.06);"><td style="padding:6px 4px;">' + esc(r.name) + '</td><td>' + esc(r.n)
+             + '</td><td>' + esc(r.wins) + '</td><td>' + (r.rate == null ? '—' : esc(r.rate) + '%')
+             + '</td><td>' + (r.theory == null ? '—' : esc(r.theory) + '%') + '</td><td>' + (r.p_value == null ? '—' : esc(r.p_value))
+             + '</td><td style="color:' + col + ';">' + esc(r.verdict) + '</td></tr>';
+        });
+        h += '</table></div>';
+        h += '<div style="margin-top:6px;font-size:0.76em;opacity:0.55;">口径：按官方奖级判“是否中奖”（不分档、不计奖金）；快乐8 单点 p=0.019 属 8 次比较，Bonferroni 阈值 0.006，不作结论。七乐彩/七星彩奖级规则未固化，标待补充。</div>';
+      }
+      if(p.pred_check){
+        var pc = p.pred_check;
+        h += '<div style="margin-top:12px;font-size:0.8em;">数据一致性：pred_history vs backtest_stats 同期单注，比对 ' + esc(pc.checked)
+           + ' 期、不一致 ' + esc(pc.mismatch) + ' 期（' + esc(pc.rate) + '%）'
+           + '<span style="opacity:0.6;"> · 属引擎重算导致的历史分歧，后处理只做提示不改动</span></div>';
+      }
       if(p.freshness){
         var f = p.freshness;
         var lv = {ok:'正常', warn:'有提示', err:'有异常'}[f.level] || f.level;
