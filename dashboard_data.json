@@ -10903,7 +10903,7 @@
   },
   "ops_monitoring": {
     "system_health": {
-      "score": 100,
+      "score": 97,
       "level": "优",
       "dimensions": [
         {
@@ -10913,7 +10913,7 @@
         },
         {
           "name": "数据新鲜度",
-          "score": 100,
+          "score": 85,
           "status": "正常"
         },
         {
@@ -10960,7 +10960,7 @@
         "schedule": "每天 20:10",
         "status": "pending",
         "last_run": "-",
-        "next_run": "2026-11-14 20:10"
+        "next_run": "2026-11-15 20:10"
       },
       {
         "name": "Excel周六合集",
@@ -10982,20 +10982,20 @@
       {
         "name": "彩票数据源",
         "status": "ok",
-        "latency": "217ms",
-        "last_check": "2026-11-14 22:16"
+        "latency": "222ms",
+        "last_check": "2026-11-15 11:12"
       },
       {
         "name": "图床服务",
         "status": "ok",
-        "latency": "1269ms",
-        "last_check": "2026-11-14 22:16"
+        "latency": "1372ms",
+        "last_check": "2026-11-15 11:12"
       },
       {
         "name": "GitHub Pages",
         "status": "ok",
-        "latency": "4534ms",
-        "last_check": "2026-11-14 22:16"
+        "latency": "890ms",
+        "last_check": "2026-11-15 11:12"
       }
     ],
     "run_times": [
@@ -11066,7 +11066,7 @@
         "desc": "dashboard_data.json 更新"
       },
       {
-        "time": "48天前",
+        "time": "49天前",
         "module": "数据脚本",
         "desc": "scripts/update_dashboard_data.py 更新"
       },
@@ -11076,7 +11076,7 @@
         "desc": "scripts/verify_consistency.py 更新"
       },
       {
-        "time": "17天前",
+        "time": "18天前",
         "module": "预测卡片",
         "desc": "scripts/gen_cards_v2.py 更新"
       }
@@ -11091,7 +11091,272 @@
         "desc": "部分彩种历史数据不足200期，回测样本待积累"
       }
     ],
-    "collected_at": "2026-11-14 22:16:14"
+    "collected_at": "2026-11-15 11:12:45"
   },
-  "last_status_update": "2026-11-14 22:16:04"
+  "last_status_update": "2026-11-14 22:16:04",
+  "postproc_layer": {
+    "generated_at": "2026-11-15 11:12:25",
+    "overlap_cap": 70,
+    "eval": [
+      {
+        "type": "ssq",
+        "name": "双色球",
+        "expect": 1.091,
+        "mean_20": 1.5,
+        "mean_100": 1.2,
+        "diff_100": 0.11,
+        "t_100": 1.16,
+        "verdict": "噪声"
+      },
+      {
+        "type": "dlt",
+        "name": "大乐透",
+        "expect": 1.048,
+        "mean_20": 1.25,
+        "mean_100": 1.11,
+        "diff_100": 0.06,
+        "t_100": 0.75,
+        "verdict": "噪声"
+      },
+      {
+        "type": "qlc",
+        "name": "七乐彩",
+        "expect": 1.633,
+        "mean_20": 1.65,
+        "mean_100": 1.64,
+        "diff_100": 0.01,
+        "t_100": 0.07,
+        "verdict": "噪声"
+      },
+      {
+        "type": "kl8",
+        "name": "快乐8",
+        "expect": 2.5,
+        "mean_20": 2.35,
+        "mean_100": 2.29,
+        "diff_100": -0.21,
+        "t_100": -1.62,
+        "verdict": "接近显著"
+      },
+      {
+        "type": "fc3d",
+        "name": "福彩3D",
+        "expect": 0.3,
+        "mean_20": 0.3,
+        "mean_100": 0.35,
+        "diff_100": 0.05,
+        "t_100": 0.97,
+        "verdict": "噪声"
+      },
+      {
+        "type": "pl35",
+        "name": "排列3/5",
+        "expect": 0.8,
+        "mean_20": 0.4,
+        "mean_100": 0.92,
+        "diff_100": 0.12,
+        "t_100": 1.04,
+        "verdict": "噪声"
+      },
+      {
+        "type": "qxc",
+        "name": "七星彩",
+        "expect": 0.7,
+        "mean_20": 0.4,
+        "mean_100": 0.66,
+        "diff_100": -0.04,
+        "t_100": -0.51,
+        "verdict": "噪声"
+      }
+    ],
+    "picks": [
+      {
+        "type": "kl8",
+        "name": "快乐8",
+        "period": "2026305",
+        "engine": [
+          "63",
+          "61",
+          "75",
+          "07",
+          "78",
+          "17",
+          "02",
+          "23",
+          "47",
+          "58",
+          "09",
+          "51",
+          "73",
+          "56",
+          "66",
+          "60",
+          "45",
+          "44",
+          "27",
+          "48"
+        ],
+        "constrained": [
+          "63",
+          "61",
+          "75",
+          "07",
+          "78",
+          "17",
+          "02",
+          "23",
+          "47",
+          "58"
+        ],
+        "overlap_pct": 70.0
+      },
+      {
+        "type": "fc3d",
+        "name": "福彩3D",
+        "period": "2026305",
+        "engine": [
+          "08",
+          "02",
+          "05"
+        ],
+        "constrained": [
+          "01",
+          "06",
+          "02"
+        ],
+        "overlap_pct": 33.3
+      },
+      {
+        "type": "pl35",
+        "name": "排列3/5",
+        "period": "26305",
+        "engine": [
+          "02",
+          "09",
+          "06"
+        ],
+        "constrained": {
+          "p3": [
+            "02",
+            "09",
+            "06"
+          ],
+          "p5": [
+            "02",
+            "09",
+            "06",
+            "05",
+            "00"
+          ]
+        },
+        "overlap_pct": 40.0
+      },
+      {
+        "type": "qxc",
+        "name": "七星彩",
+        "period": "26131",
+        "engine": [
+          "02",
+          "09",
+          "05",
+          "05",
+          "00",
+          "00"
+        ],
+        "constrained": {
+          "nums": [
+            "05",
+            "01",
+            "06",
+            "04",
+            "02",
+            "04"
+          ],
+          "special": "08"
+        },
+        "overlap_pct": 40.0
+      },
+      {
+        "type": "qlc",
+        "name": "七乐彩",
+        "period": "2026132",
+        "engine": [
+          "26",
+          "14",
+          "23",
+          "04",
+          "09",
+          "22",
+          "06"
+        ],
+        "constrained": {
+          "front": [
+            "26",
+            "14",
+            "23",
+            "04",
+            "09",
+            "22",
+            "06"
+          ],
+          "back": "16"
+        },
+        "overlap_pct": 100.0
+      },
+      {
+        "type": "dlt",
+        "name": "大乐透",
+        "period": "26131",
+        "engine": [
+          "10",
+          "27",
+          "06",
+          "29",
+          "14"
+        ],
+        "constrained": {
+          "front": [
+            "10",
+            "27",
+            "06",
+            "29",
+            "14"
+          ],
+          "back": [
+            "12",
+            "09"
+          ]
+        },
+        "overlap_pct": 60.0
+      },
+      {
+        "type": "ssq",
+        "name": "双色球",
+        "period": "2026131",
+        "engine": [
+          "14",
+          "30",
+          "24",
+          "22",
+          "13",
+          "06"
+        ],
+        "constrained": {
+          "front": [
+            "14",
+            "30",
+            "24",
+            "22",
+            "13",
+            "06"
+          ],
+          "back": [
+            "12"
+          ]
+        },
+        "overlap_pct": 83.3
+      }
+    ],
+    "notes": []
+  }
 }
