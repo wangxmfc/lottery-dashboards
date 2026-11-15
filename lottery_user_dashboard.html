@@ -586,7 +586,6 @@ body {
   line-height: 1.8; 
 }
 
-
 /* 单页面切换的额外样式 */
 .lottery-tabs {
   display: flex;
@@ -645,6 +644,13 @@ function switchLottery(ltype) {
 <div class="nav">
   <div class="nav-title">🎯 王者GP · 彩票分析</div>
   <div class="nav-sub">7彩种一键切换 · 数据仅供统计参考 · 理性购彩</div>
+<!-- POSTPROC-UI:BEGIN -->
+<div style="margin:14px 12px 0;background:#fff;border-radius:16px;padding:14px 16px;box-shadow:0 3px 12px rgba(0,0,0,0.06);border-left:4px solid #C9A227;">
+  <div style="font-size:15px;font-weight:800;color:#0F2A43;margin-bottom:6px;">🧪 后处理层 · 主推分散约束</div>
+  <div style="font-size:12px;color:#8A8A8A;line-height:1.65;margin-bottom:6px;">与上一期主推重合压到 ≤70%，降低连续多期同一注的风险集中；不改引擎权重。</div>
+  <div id="postproc-user-body" style="font-size:12.5px;color:#333;line-height:1.85;">加载中…</div>
+</div>
+<!-- POSTPROC-UI:END -->
 </div>
 
 <!-- 彩种切换按钮 -->
@@ -938,7 +944,6 @@ function switchLottery(ltype) {
     彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
   </div>
 </div>
-
 
 </div>
 <div id="content-kl8" style="display:none;">
@@ -1280,7 +1285,7 @@ function switchLottery(ltype) {
 </div>
 
 <!-- 动态尾文（与百家号完全一致） -->
-<div class="closing-text"><p>❓ 很多彩民朋友问：快乐8第2026305期开奖结果怎么看？下期该怎么选？我们用数据来回答这些问题。</p><p>🎯 理性看待：我们的预测系统虽然使用了150+统计模型和机器学习算法，但本质上还是基于历史数据的统计推断。彩票的随机性决定了任何方法都无法准确预测结果。请理性看待我们的分析，把它当作一种参考，而不是"中奖秘籍"。</p><p>📋 快乐8第2026305期开奖结果速览：01 07 08 09 15 18 26 30 43 45 48 52 58 59 62 65 76 77 78 80（2026-11-15开奖）。</p><p>🔬 统计方法说明：我们的热号统计基于近30期数据，冷号统计基于全部历史数据的遗漏期数，奇偶比和大小比基于本期开奖结果。不同的统计周期会得出不同的结论，建议结合多个维度综合判断。</p><p>🎯 名人与彩票：据说很多名人也喜欢买彩票，不过他们大多是把购彩当作一种慈善和娱乐，而不是为了中奖。其实购彩的本质就是这样——花小钱，做公益，买希望。</p><p>🔗 连号观察：本期出现了连号组合，这在快乐8中出现的概率约为7%。连号的出现往往具有一定的聚集效应，连续两期出现连号的概率相对较低。</p><p>❄️ 冷号关注：当前遗漏最久的5个号码是35(漏14期)、63(漏14期)、60(漏11期)、15(漏11期)、22(漏10期)。尤其是35已经遗漏了14期，从历史分布来看，这个遗漏时长已经超过了平均遗漏周期的1.5倍，回补概率在逐步增加。</p><p>🔢 奇偶比分析：本期开出9个奇数、11个偶数，比例为9:11。从近30期数据来看，奇偶比最常见的分布是10:10左右，本期偏离了均衡状态，下期回归均衡的概率较大。</p><p>🎯 下期选号思路：基于150+统计模型和机器学习算法的综合评分，我们建议下期关注以下几点：一是热号延续与冷号回补的平衡，不要只追热也不要只守冷；二是奇偶、大小的均衡配置，从概率角度更符合长期分布；三是号码的区间覆盖，尽量不要让号码过度集中在某一区间。</p><p>🎯 本期内容结束，第2026306期我们继续用数据说话。理性购彩，快乐生活！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+<div class="closing-text"><p>❓ 很多彩民朋友问：快乐8第2026305期开奖结果怎么看？下期该怎么选？我们用数据来回答这些问题。</p><p>🎯 理性看待：我们的预测系统虽然使用了150+统计模型和机器学习算法，但本质上还是基于历史数据的统计推断。彩票的随机性决定了任何方法都无法准确预测结果。请理性看待我们的分析，把它当作一种参考，而不是"中奖秘籍"。</p><p>📋 快乐8第2026305期开奖结果速览：01 07 08 09 15 18 26 30 43 45 48 52 58 59 62 65 76 77 78 80（2026-11-15开奖）。</p><p>🔬 统计方法说明：我们的热号统计基于近30期数据，冷号统计基于全部历史数据的遗漏期数，奇偶比和大小比基于本期开奖结果。不同的统计周期会得出不同的结论，建议结合多个维度综合判断。</p><p>🎯 名人与彩票：据说很多名人也喜欢买彩票，不过他们大多是把购彩当作一种慈善和娱乐，而不是为了中奖。其实购彩的本质就是这样——花小钱，做公益，买希望。</p><p>🔗 连号观察：本期出现了连号组合，这在快乐8中出现的概率约为7%。连号的出现往往具有一定的聚集效应，连续两期出现连号的概率相对较低。</p><p>❄️ 冷号关注：当前遗漏最久的5个号码是63(漏14期)、35(漏14期)、60(漏11期)、15(漏11期)、22(漏10期)。尤其是63已经遗漏了14期，从历史分布来看，这个遗漏时长已经超过了平均遗漏周期的1.5倍，回补概率在逐步增加。</p><p>🔢 奇偶比分析：本期开出9个奇数、11个偶数，比例为9:11。从近30期数据来看，奇偶比最常见的分布是10:10左右，本期偏离了均衡状态，下期回归均衡的概率较大。</p><p>🎯 下期选号思路：基于150+统计模型和机器学习算法的综合评分，我们建议下期关注以下几点：一是热号延续与冷号回补的平衡，不要只追热也不要只守冷；二是奇偶、大小的均衡配置，从概率角度更符合长期分布；三是号码的区间覆盖，尽量不要让号码过度集中在某一区间。</p><p>🎯 本期内容结束，第2026306期我们继续用数据说话。理性购彩，快乐生活！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
 
 <!-- 理性购彩提示 -->
 <div class="disclaimer">
@@ -1289,7 +1294,6 @@ function switchLottery(ltype) {
     彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
   </div>
 </div>
-
 
 </div>
 <div id="content-fc3d" style="display:none;">
@@ -1533,7 +1537,6 @@ function switchLottery(ltype) {
     彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
   </div>
 </div>
-
 
 </div>
 <div id="content-pl35" style="display:none;">
@@ -1791,7 +1794,7 @@ function switchLottery(ltype) {
 </div>
 
 <!-- 动态尾文（与百家号完全一致） -->
-<div class="closing-text"><p>📋 排列3/5第26305期复盘清单：5个关键点带你看懂本期开奖。</p><p>🎰 第26305期开奖结果：排列32 6 0，排列52 6 0 8 1。开奖日期2026-11-15。</p><p>📏 大小分布：本期排列3大小比为2:1（1-4为小，5-9为大）。小号偏多，下期大号可能会回补。</p><p>❄️ 冷号关注：当前遗漏最久的5个号码是3(漏5期)、4(漏3期)、5(漏2期)、0(漏2期)、9(漏2期)。尤其是3已经遗漏了5期，从历史分布来看，这个遗漏时长已经超过了平均遗漏周期的1.5倍，回补概率在逐步增加。</p><p>💪 理性购彩者的五个特征：①每期投入固定，不随意加码；②不追热不守冷，保持平常心；③把购彩当娱乐，不影响生活；④中奖不骄傲，不中奖不气馁；⑤坚持做公益，快乐每一天。你中了几条？</p><p>📊 模型回测表现：我们的预测系统经过历史数据回测，比随机基准提升了100%-370%（不同彩种表现不同）。需要说明的是，回测表现不代表未来结果，彩票的随机性决定了任何方法都无法保证中奖。我们的目标是提供有价值的统计参考，而不是"必中神器"。</p><p>💡 选号策略分享：我们的预测系统从8大维度综合评分，包括基础统计（频率/冷热/遗漏/奇偶/大小/跨度/AC值/质合/012路）、进阶统计（马尔可夫链/贝叶斯分析/蒙特卡洛模拟）、机器学习（随机森林/梯度提升/逻辑回归）、时间序列（LSTM/ARIMA）等。下期选号建议在这些维度的基础上，结合个人感觉进行微调。</p><p>⚠️ 温馨提醒：请记住，彩票每期开奖相互独立，任何组合理论概率相同。不要因为"某某号码很久没出了"就盲目加倍投入，也不要因为"某某号码最近很热"就疯狂追买。理性购彩，快乐生活。</p><p>🎯 本期内容结束，第26306期我们继续用数据说话。理性购彩，快乐生活！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+<div class="closing-text"><p>📋 排列3/5第26305期复盘清单：5个关键点带你看懂本期开奖。</p><p>🎰 第26305期开奖结果：排列32 6 0，排列52 6 0 8 1。开奖日期2026-11-15。</p><p>📏 大小分布：本期排列3大小比为2:1（1-4为小，5-9为大）。小号偏多，下期大号可能会回补。</p><p>❄️ 冷号关注：当前遗漏最久的5个号码是3(漏5期)、4(漏3期)、9(漏2期)、5(漏2期)、0(漏2期)。尤其是3已经遗漏了5期，从历史分布来看，这个遗漏时长已经超过了平均遗漏周期的1.5倍，回补概率在逐步增加。</p><p>💪 理性购彩者的五个特征：①每期投入固定，不随意加码；②不追热不守冷，保持平常心；③把购彩当娱乐，不影响生活；④中奖不骄傲，不中奖不气馁；⑤坚持做公益，快乐每一天。你中了几条？</p><p>📊 模型回测表现：我们的预测系统经过历史数据回测，比随机基准提升了100%-370%（不同彩种表现不同）。需要说明的是，回测表现不代表未来结果，彩票的随机性决定了任何方法都无法保证中奖。我们的目标是提供有价值的统计参考，而不是"必中神器"。</p><p>💡 选号策略分享：我们的预测系统从8大维度综合评分，包括基础统计（频率/冷热/遗漏/奇偶/大小/跨度/AC值/质合/012路）、进阶统计（马尔可夫链/贝叶斯分析/蒙特卡洛模拟）、机器学习（随机森林/梯度提升/逻辑回归）、时间序列（LSTM/ARIMA）等。下期选号建议在这些维度的基础上，结合个人感觉进行微调。</p><p>⚠️ 温馨提醒：请记住，彩票每期开奖相互独立，任何组合理论概率相同。不要因为"某某号码很久没出了"就盲目加倍投入，也不要因为"某某号码最近很热"就疯狂追买。理性购彩，快乐生活。</p><p>🎯 本期内容结束，第26306期我们继续用数据说话。理性购彩，快乐生活！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
 
 <!-- 理性购彩提示 -->
 <div class="disclaimer">
@@ -1800,7 +1803,6 @@ function switchLottery(ltype) {
     彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
   </div>
 </div>
-
 
 </div>
 <div id="content-qxc" style="display:none;">
@@ -2078,7 +2080,6 @@ function switchLottery(ltype) {
     彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
   </div>
 </div>
-
 
 </div>
 <div id="content-qlc" style="display:none;">
@@ -2364,7 +2365,6 @@ function switchLottery(ltype) {
   </div>
 </div>
 
-
 </div>
 <div id="content-dlt" style="display:none;">
 <!-- 开奖日历 -->
@@ -2645,9 +2645,57 @@ function switchLottery(ltype) {
   </div>
 </div>
 
-
 </div>
 
-
+<!-- POSTPROC-JS:BEGIN -->
+<script>
+(function(){
+  function esc(v){ if(v==null) return '—'; return String(v).replace(/[&<>]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
+  var LBL_BY_TYPE = {
+    ssq: {front:'红球', back:'蓝球'},
+    dlt: {front:'前区', back:'后区'},
+    qlc: {front:'基本号', back:'特别号'},
+    qxc: {nums:'号码', special:'特别号'},
+    pl35: {p3:'P3', p5:'P5'},
+    kl8: {nums:'号码'},
+    fc3d: {nums:'号码'}
+  };
+  function fmtPick(v, type){
+    var LBL = LBL_BY_TYPE[type] || {};
+    if(v==null) return '—';
+    if(Array.isArray(v)) return v.join(' ');
+    if(typeof v === 'object'){
+      return Object.keys(v).map(function(k){
+        var x = v[k];
+        return (LBL[k] || k) + ' ' + (Array.isArray(x) ? x.join(' ') : String(x));
+      }).join(' ／ ');
+    }
+    return String(v);
+  }
+  function load(){
+    var box = document.getElementById('postproc-user-body');
+    if(!box) return;
+    fetch('dashboard_data.json?t=' + Date.now()).then(function(r){return r.json();}).then(function(d){
+      var p = d && d.postproc_layer;
+      if(!p){ box.innerHTML = '暂无后处理数据'; return; }
+      var html = '';
+      (p.picks || []).forEach(function(r){
+        html += '<div style="padding:9px 0;border-bottom:1px dashed #EFEFEF;">'
+          + '<div style="display:flex;justify-content:space-between;align-items:center;">'
+          + '<span style="font-weight:700;color:#0F2A43;font-size:13px;">' + esc(r.name)
+          + '<span style="color:#B5B5B5;font-weight:400;font-size:11px;margin-left:6px;">' + esc(r.period) + '</span></span>'
+          + '<span style="font-size:11px;color:#C8102E;background:#FDF2F2;border-radius:8px;padding:1px 7px;white-space:nowrap;">重合 ' + esc(r.overlap_pct) + '%</span>'
+          + '</div>'
+          + '<div style="font-family:monospace;font-size:12.5px;color:#C8102E;letter-spacing:0.4px;margin-top:4px;word-break:break-word;">' + esc(fmtPick(r.constrained, r.type)) + '</div>'
+          + '</div>';
+      });
+      html += '<div style="margin-top:8px;font-size:11.5px;color:#999;">生成 ' + esc(p.generated_at) + ' · 仅供统计参考，理性购彩</div>';
+      box.innerHTML = html;
+    }).catch(function(){ box.innerHTML = '暂无后处理数据'; });
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', load); } else { load(); }
+})();
+</script>
+<!-- POSTPROC-JS:END -->
 </body>
 </html>
