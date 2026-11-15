@@ -5244,6 +5244,22 @@
         h += '</tbody></table>';
         h += '<div style="margin-top:6px;font-size:0.8em;opacity:0.55;">样本20-48期，差异均在噪声量级（快乐8 单点 t=-2.25 但属21次多重比较，不作结论）。</div>';
       }
+      if(p.baseline_audit && (p.baseline_audit.rows||[]).length){
+        h += '<div style="margin-top:20px;font-size:0.96em;font-weight:600;">基准口径审计'
+           + '<span style="margin-left:8px;font-size:0.82em;color:' + (p.baseline_audit.level === 'ok' ? '#3CB371' : '#E0A800') + ';">'
+           + (p.baseline_audit.level === 'ok' ? '一致' : '有基准偏差') + '</span></div>';
+        h += '<div style="margin-top:8px;overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:0.8em;">';
+        h += '<tr style="opacity:0.65;text-align:left;"><th style="padding:6px 4px;">彩种</th><th>n</th><th>展示均值</th><th>逐期重算</th><th>理论期望</th><th>官方基准</th><th>基准偏差</th><th>判定</th></tr>';
+        (p.baseline_audit.rows||[]).forEach(function(r){
+          var bad = r.verdict !== '口径一致';
+          h += '<tr style="border-top:1px solid rgba(255,255,255,0.06);"><td style="padding:6px 4px;">' + esc(r.name) + '</td><td>' + esc(r.n)
+             + '</td><td>' + esc(r.shown_avg) + '</td><td>' + esc(r.recomputed) + '</td><td>' + esc(r.theory)
+             + '</td><td>' + esc(r.baseline) + '</td><td>' + (r.baseline_gap_pct == null ? '—' : esc(r.baseline_gap_pct) + '%')
+             + '</td><td style="color:' + (bad ? '#E0A800' : 'inherit') + ';">' + esc(r.verdict) + '</td></tr>';
+        });
+        h += '</table></div>';
+        h += '<div style="margin-top:6px;font-size:0.76em;opacity:0.55;">基准偏差≥5% 即标“improvement 不可信”：七乐彩基准只算基本号、七星彩基准偏低，两者“跑赢基准”的说法作废；其余 5 彩种口径一致。</div>';
+      }
       if((p.winrate||[]).length){
         h += '<div style="margin-top:20px;font-size:0.96em;font-weight:600;">中奖率实证（这一注到底中没中奖）</div>';
         h += '<div style="margin-top:8px;overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:0.82em;">';
