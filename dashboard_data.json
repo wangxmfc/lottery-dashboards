@@ -10982,20 +10982,20 @@
       {
         "name": "彩票数据源",
         "status": "ok",
-        "latency": "213ms",
-        "last_check": "2026-11-15 13:02"
+        "latency": "211ms",
+        "last_check": "2026-11-15 13:52"
       },
       {
         "name": "图床服务",
         "status": "ok",
-        "latency": "1237ms",
-        "last_check": "2026-11-15 13:02"
+        "latency": "1433ms",
+        "last_check": "2026-11-15 13:52"
       },
       {
         "name": "GitHub Pages",
         "status": "fail",
         "latency": "超时",
-        "last_check": "2026-11-15 13:02"
+        "last_check": "2026-11-15 13:52"
       }
     ],
     "run_times": [
@@ -11091,11 +11091,11 @@
         "desc": "部分彩种历史数据不足200期，回测样本待积累"
       }
     ],
-    "collected_at": "2026-11-15 13:02:45"
+    "collected_at": "2026-11-15 13:52:17"
   },
   "last_status_update": "2026-11-14 22:16:04",
   "postproc_layer": {
-    "generated_at": "2026-11-15 13:02:17",
+    "generated_at": "2026-11-15 13:51:46",
     "overlap_cap": 70,
     "eval": [
       {
@@ -11453,7 +11453,7 @@
       }
     ],
     "freshness": {
-      "checked_at": "2026-11-15 13:01:25",
+      "checked_at": "2026-11-15 13:51:20",
       "level": "ok",
       "items": [
         {
@@ -11465,22 +11465,22 @@
         {
           "file": "backtest_stats.json",
           "mtime": "2026-11-14 22:11",
-          "age_h": 14.8
+          "age_h": 15.7
         },
         {
           "file": "pred_state.json",
           "mtime": "2026-11-14 22:13",
-          "age_h": 14.8
+          "age_h": 15.6
         },
         {
           "file": "history_raw.json",
           "mtime": "2026-11-14 22:10",
-          "age_h": 14.8
+          "age_h": 15.7
         },
         {
           "file": "pred_history.json",
           "mtime": "2026-11-14 22:13",
-          "age_h": 14.8
+          "age_h": 15.6
         }
       ],
       "rows": [
@@ -11636,7 +11636,7 @@
       }
     ],
     "guard": {
-      "checked_at": "2026-11-15 13:01:25",
+      "checked_at": "2026-11-15 13:51:20",
       "days": 1,
       "level": "ok",
       "alerts": [],
@@ -11663,6 +11663,135 @@
           -0.83
         ]
       }
+    },
+    "winrate": [
+      {
+        "type": "ssq",
+        "name": "双色球",
+        "n": 219,
+        "wins": 18,
+        "rate": 8.22,
+        "theory": 6.71,
+        "p_value": 0.3446,
+        "verdict": "与随机无差异"
+      },
+      {
+        "type": "dlt",
+        "name": "大乐透",
+        "n": 221,
+        "wins": 16,
+        "rate": 7.24,
+        "theory": 6.67,
+        "p_value": 0.6858,
+        "verdict": "与随机无差异"
+      },
+      {
+        "type": "qlc",
+        "name": "七乐彩",
+        "n": 0,
+        "wins": 0,
+        "rate": null,
+        "theory": null,
+        "p_value": null,
+        "verdict": "待补充（奖级规则未固化）"
+      },
+      {
+        "type": "kl8",
+        "name": "快乐8",
+        "n": 245,
+        "wins": 39,
+        "rate": 15.92,
+        "theory": 11.05,
+        "p_value": 0.0188,
+        "verdict": "高于随机"
+      },
+      {
+        "type": "fc3d",
+        "name": "福彩3D",
+        "n": 246,
+        "wins": 0,
+        "rate": 0.0,
+        "theory": 0.1,
+        "p_value": 1.0,
+        "verdict": "与随机无差异"
+      },
+      {
+        "type": "pl35_p3",
+        "name": "排列3（直选）",
+        "n": 237,
+        "wins": 1,
+        "rate": 0.422,
+        "theory": 0.1,
+        "p_value": 0.2111,
+        "verdict": "与随机无差异"
+      },
+      {
+        "type": "pl35_p5",
+        "name": "排列5（直选）",
+        "n": 237,
+        "wins": 0,
+        "rate": 0.0,
+        "theory": 0.001,
+        "p_value": 1.0,
+        "verdict": "与随机无差异"
+      },
+      {
+        "type": "qxc",
+        "name": "七星彩",
+        "n": 0,
+        "wins": 0,
+        "rate": null,
+        "theory": null,
+        "p_value": null,
+        "verdict": "待补充（奖级规则未固化）"
+      }
+    ],
+    "pred_check": {
+      "checked": 228,
+      "mismatch": 65,
+      "rate": 28.5,
+      "samples": [
+        {
+          "type": "ssq",
+          "period": "2026107"
+        },
+        {
+          "type": "ssq",
+          "period": "2026108"
+        },
+        {
+          "type": "ssq",
+          "period": "2026109"
+        },
+        {
+          "type": "ssq",
+          "period": "2026110"
+        },
+        {
+          "type": "ssq",
+          "period": "2026111"
+        },
+        {
+          "type": "ssq",
+          "period": "2026112"
+        },
+        {
+          "type": "kl8",
+          "period": "2026248"
+        },
+        {
+          "type": "kl8",
+          "period": "2026249"
+        },
+        {
+          "type": "kl8",
+          "period": "2026250"
+        },
+        {
+          "type": "kl8",
+          "period": "2026251"
+        }
+      ]
     },
     "notes": []
   }
