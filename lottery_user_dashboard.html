@@ -586,7 +586,6 @@ body {
   line-height: 1.8; 
 }
 
-
 /* 单页面切换的额外样式 */
 .lottery-tabs {
   display: flex;
@@ -651,7 +650,9 @@ function switchLottery(ltype) {
   <div style="font-size:12px;color:#8A8A8A;line-height:1.65;margin-bottom:6px;">与上一期主推重合压到 ≤70%，降低连续多期同一注的风险集中；不改引擎权重。</div>
   <div id="postproc-user-body" style="font-size:12.5px;color:#333;line-height:1.85;">加载中…</div>
 </div>
-<!-- POSTPROC-UI:END --></div>
+<!-- POSTPROC-UI:END -->
+
+</div>
 
 <!-- 彩种切换按钮 -->
 <div class="lottery-tabs">
@@ -944,7 +945,6 @@ function switchLottery(ltype) {
     彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
   </div>
 </div>
-
 
 </div>
 <div id="content-kl8" style="display:none;">
@@ -1296,7 +1296,6 @@ function switchLottery(ltype) {
   </div>
 </div>
 
-
 </div>
 <div id="content-fc3d" style="display:none;">
 <!-- 开奖日历 -->
@@ -1539,7 +1538,6 @@ function switchLottery(ltype) {
     彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
   </div>
 </div>
-
 
 </div>
 <div id="content-pl35" style="display:none;">
@@ -1806,7 +1804,6 @@ function switchLottery(ltype) {
     彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
   </div>
 </div>
-
 
 </div>
 <div id="content-qxc" style="display:none;">
@@ -2084,7 +2081,6 @@ function switchLottery(ltype) {
     彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
   </div>
 </div>
-
 
 </div>
 <div id="content-qlc" style="display:none;">
@@ -2370,7 +2366,6 @@ function switchLottery(ltype) {
   </div>
 </div>
 
-
 </div>
 <div id="content-dlt" style="display:none;">
 <!-- 开奖日历 -->
@@ -2651,37 +2646,8 @@ function switchLottery(ltype) {
   </div>
 </div>
 
+</div>
 
-</div><!-- POSTPROC-JS:BEGIN -->
-<script>
-(function(){
-  function esc(v){
-    if(v===null||v===undefined) return '—';
-    if(typeof v !== 'string') v = JSON.stringify(v);
-    return v.replace(/[&<>]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});
-  }
-  function load(){
-    var box = document.getElementById('postproc-user-body');
-    if(!box) return;
-    fetch('dashboard_data.json?t=' + Date.now()).then(function(r){return r.json();}).then(function(d){
-      var p = d && d.postproc_layer;
-      if(!p){ box.innerHTML = '暂无后处理数据'; return; }
-      var html = '';
-      (p.picks||[]).forEach(function(r){
-        html += '<div style="padding:5px 0;border-bottom:1px dashed #EEE;">'
-          + '<span style="display:inline-block;min-width:74px;font-weight:700;color:#0F2A43;">' + esc(r.name) + '</span>'
-          + '<span style="font-family:monospace;color:#C8102E;">' + esc(r.constrained) + '</span>'
-          + '<span style="float:right;color:#999;">重合 ' + esc(r.overlap_pct) + '%</span>'
-          + '</div>';
-      });
-      html += '<div style="margin-top:8px;font-size:11.5px;color:#999;">生成 ' + esc(p.generated_at) + ' · 仅供统计参考，理性购彩</div>';
-      box.innerHTML = html;
-    }).catch(function(){ box.innerHTML = '暂无后处理数据'; });
-  }
-  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', load); } else { load(); }
-})();
-</script>
-<!-- POSTPROC-JS:END -->
 <!-- POSTPROC-JS:BEGIN -->
 <script>
 (function(){
