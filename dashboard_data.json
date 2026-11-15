@@ -10982,20 +10982,20 @@
       {
         "name": "彩票数据源",
         "status": "ok",
-        "latency": "419ms",
-        "last_check": "2026-11-15 11:21"
+        "latency": "220ms",
+        "last_check": "2026-11-15 11:52"
       },
       {
         "name": "图床服务",
         "status": "ok",
-        "latency": "1000ms",
-        "last_check": "2026-11-15 11:21"
+        "latency": "1103ms",
+        "last_check": "2026-11-15 11:52"
       },
       {
         "name": "GitHub Pages",
         "status": "ok",
-        "latency": "6697ms",
-        "last_check": "2026-11-15 11:21"
+        "latency": "1246ms",
+        "last_check": "2026-11-15 11:52"
       }
     ],
     "run_times": [
@@ -11091,11 +11091,11 @@
         "desc": "部分彩种历史数据不足200期，回测样本待积累"
       }
     ],
-    "collected_at": "2026-11-15 11:21:40"
+    "collected_at": "2026-11-15 11:52:38"
   },
   "last_status_update": "2026-11-14 22:16:04",
   "postproc_layer": {
-    "generated_at": "2026-11-15 11:21:23",
+    "generated_at": "2026-11-15 11:52:15",
     "overlap_cap": 70,
     "eval": [
       {
@@ -11450,6 +11450,189 @@
         "t": -0.83,
         "expect": 0.7,
         "verdict": "无差异"
+      }
+    ],
+    "freshness": {
+      "checked_at": "2026-11-15 11:52:15",
+      "level": "ok",
+      "items": [
+        {
+          "level": "info",
+          "text": "backtest_stats.last_updated 仍为 2026-10-19 22:19:57（滞后26天），records 已含最新，属元数据字段未刷新"
+        }
+      ],
+      "files": [
+        {
+          "file": "backtest_stats.json",
+          "mtime": "2026-11-14 22:11",
+          "age_h": 13.7
+        },
+        {
+          "file": "pred_state.json",
+          "mtime": "2026-11-14 22:13",
+          "age_h": 13.6
+        },
+        {
+          "file": "history_raw.json",
+          "mtime": "2026-11-14 22:10",
+          "age_h": 13.7
+        },
+        {
+          "file": "pred_history.json",
+          "mtime": "2026-11-14 22:13",
+          "age_h": 13.6
+        }
+      ],
+      "rows": [
+        {
+          "type": "ssq",
+          "name": "双色球",
+          "latest_period": 2026130,
+          "draw_date": "2026-11-12",
+          "days_ago": 3,
+          "next_period": "2026131",
+          "period_ok": true,
+          "schedule_today": true,
+          "status": "今日应开待更新"
+        },
+        {
+          "type": "dlt",
+          "name": "大乐透",
+          "latest_period": 26130,
+          "draw_date": "2026-11-14",
+          "days_ago": 1,
+          "next_period": "26131",
+          "period_ok": true,
+          "schedule_today": false,
+          "status": "正常"
+        },
+        {
+          "type": "qlc",
+          "name": "七乐彩",
+          "latest_period": 2026131,
+          "draw_date": "2026-11-13",
+          "days_ago": 2,
+          "next_period": "2026132",
+          "period_ok": true,
+          "schedule_today": false,
+          "status": "正常"
+        },
+        {
+          "type": "kl8",
+          "name": "快乐8",
+          "latest_period": 2026304,
+          "draw_date": "2026-11-14",
+          "days_ago": 1,
+          "next_period": "2026305",
+          "period_ok": true,
+          "schedule_today": true,
+          "status": "今日应开待更新"
+        },
+        {
+          "type": "fc3d",
+          "name": "福彩3D",
+          "latest_period": 2026304,
+          "draw_date": "2026-11-14",
+          "days_ago": 1,
+          "next_period": "2026305",
+          "period_ok": true,
+          "schedule_today": true,
+          "status": "今日应开待更新"
+        },
+        {
+          "type": "pl35",
+          "name": "排列3/5",
+          "latest_period": 26304,
+          "draw_date": "2026-11-14",
+          "days_ago": 1,
+          "next_period": "26305",
+          "period_ok": true,
+          "schedule_today": true,
+          "status": "今日应开待更新"
+        },
+        {
+          "type": "qxc",
+          "name": "七星彩",
+          "latest_period": 26130,
+          "draw_date": "2026-11-13",
+          "days_ago": 2,
+          "next_period": "26131",
+          "period_ok": true,
+          "schedule_today": true,
+          "status": "今日应开待更新"
+        }
+      ]
+    },
+    "fill_test": [
+      {
+        "type": "ssq",
+        "name": "双色球",
+        "n": 22,
+        "hot": 1.64,
+        "cold": 1.68,
+        "cold_t": 1.02,
+        "random": 1.73,
+        "random_t": 1.48
+      },
+      {
+        "type": "dlt",
+        "name": "大乐透",
+        "n": 22,
+        "hot": 1.18,
+        "cold": 1.23,
+        "cold_t": 1.02,
+        "random": 1.23,
+        "random_t": 0.58
+      },
+      {
+        "type": "qlc",
+        "name": "七乐彩",
+        "n": 22,
+        "hot": 1.45,
+        "cold": 1.45,
+        "cold_t": 0.0,
+        "random": 1.59,
+        "random_t": 1.86
+      },
+      {
+        "type": "kl8",
+        "name": "快乐8",
+        "n": 48,
+        "hot": 2.33,
+        "cold": 2.17,
+        "cold_t": -2.72,
+        "random": 2.25,
+        "random_t": -1.08
+      },
+      {
+        "type": "fc3d",
+        "name": "福彩3D",
+        "n": 48,
+        "hot": 0.29,
+        "cold": 0.23,
+        "cold_t": -1.79,
+        "random": 0.27,
+        "random_t": -0.45
+      },
+      {
+        "type": "pl35",
+        "name": "排列3/5",
+        "n": 47,
+        "hot": 0.62,
+        "cold": 0.55,
+        "cold_t": -0.91,
+        "random": 0.55,
+        "random_t": -1.01
+      },
+      {
+        "type": "qxc",
+        "name": "七星彩",
+        "n": 20,
+        "hot": 0.55,
+        "cold": 0.65,
+        "cold_t": 1.49,
+        "random": 0.55,
+        "random_t": 0.0
       }
     ],
     "notes": []
