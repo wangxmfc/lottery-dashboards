@@ -10972,20 +10972,20 @@
       {
         "name": "彩票数据源",
         "status": "ok",
-        "latency": "216ms",
-        "last_check": "2026-11-16 09:39"
+        "latency": "243ms",
+        "last_check": "2026-11-16 09:42"
       },
       {
         "name": "图床服务",
         "status": "ok",
-        "latency": "1175ms",
-        "last_check": "2026-11-16 09:39"
+        "latency": "1162ms",
+        "last_check": "2026-11-16 09:42"
       },
       {
         "name": "GitHub Pages",
-        "status": "fail",
-        "latency": "超时",
-        "last_check": "2026-11-16 09:39"
+        "status": "ok",
+        "latency": "969ms",
+        "last_check": "2026-11-16 09:42"
       }
     ],
     "run_times": [
@@ -11081,11 +11081,11 @@
         "desc": "部分彩种历史数据不足200期，回测样本待积累"
       }
     ],
-    "collected_at": "2026-11-16 09:39:59"
+    "collected_at": "2026-11-16 09:42:32"
   },
   "last_status_update": "2026-11-15 22:17:16",
   "postproc_layer": {
-    "generated_at": "2026-11-16 09:39:30",
+    "generated_at": "2026-11-16 09:42:25",
     "overlap_cap": 70,
     "eval": [
       {
@@ -11443,7 +11443,7 @@
       }
     ],
     "freshness": {
-      "checked_at": "2026-11-16 09:38:52",
+      "checked_at": "2026-11-16 09:42:25",
       "level": "warn",
       "items": [
         {
@@ -11464,7 +11464,7 @@
         {
           "file": "pred_state.json",
           "mtime": "2026-11-15 22:15",
-          "age_h": 11.4
+          "age_h": 11.5
         },
         {
           "file": "history_raw.json",
@@ -11474,7 +11474,7 @@
         {
           "file": "pred_history.json",
           "mtime": "2026-11-15 22:15",
-          "age_h": 11.4
+          "age_h": 11.5
         }
       ],
       "rows": [
@@ -11889,7 +11889,7 @@
         }
       ],
       "level": "warn",
-      "checked_at": "2026-11-16 09:38:52"
+      "checked_at": "2026-11-16 09:42:25"
     },
     "notes": []
   }
