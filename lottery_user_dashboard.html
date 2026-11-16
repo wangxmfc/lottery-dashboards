@@ -586,6 +586,7 @@ body {
   line-height: 1.8; 
 }
 
+
 /* 单页面切换的额外样式 */
 .lottery-tabs {
   display: flex;
@@ -644,14 +645,6 @@ function switchLottery(ltype) {
 <div class="nav">
   <div class="nav-title">🎯 王者GP · 彩票分析</div>
   <div class="nav-sub">7彩种一键切换 · 数据仅供统计参考 · 理性购彩</div>
-<!-- POSTPROC-UI:BEGIN -->
-<div style="margin:14px 12px 0;background:#fff;border-radius:16px;padding:14px 16px;box-shadow:0 3px 12px rgba(0,0,0,0.06);border-left:4px solid #C9A227;">
-  <div style="font-size:15px;font-weight:800;color:#0F2A43;margin-bottom:6px;">🧪 后处理层 · 主推分散约束</div>
-  <div style="font-size:12px;color:#8A8A8A;line-height:1.65;margin-bottom:6px;">与上一期主推重合压到 ≤70%，降低连续多期同一注的风险集中；不改引擎权重。</div>
-  <div id="postproc-user-body" style="font-size:12.5px;color:#333;line-height:1.85;">加载中…</div>
-</div>
-<!-- POSTPROC-UI:END -->
-
 </div>
 
 <!-- 彩种切换按钮 -->
@@ -710,15 +703,15 @@ function switchLottery(ltype) {
   <div class="hotcold-title">🔥 最热号码 TOP10（近30期）</div>
   <div class="hotcold-list">
     <div class="hotcold-item hot">04</div>
+    <div class="hotcold-item hot">14</div>
     <div class="hotcold-item hot">30</div>
     <div class="hotcold-item hot">11</div>
-    <div class="hotcold-item hot">14</div>
     <div class="hotcold-item hot">20</div>
     <div class="hotcold-item hot">13</div>
-    <div class="hotcold-item hot">12</div>
+    <div class="hotcold-item hot">22</div>
     <div class="hotcold-item hot">06</div>
-    <div class="hotcold-item hot">09</div>
     <div class="hotcold-item hot">05</div>
+    <div class="hotcold-item hot">12</div>
   </div>
 </div>
 
@@ -726,7 +719,7 @@ function switchLottery(ltype) {
 <div class="missing">
   <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
   <div class="missing-list">
-    <div class="missing-item"><div class="num">08</div><div class="days">遗漏25期</div></div>
+    <div class="missing-item"><div class="num">08</div><div class="days">遗漏26期</div></div>
     <div class="missing-item"><div class="num">33</div><div class="days">遗漏14期</div></div>
     <div class="missing-item"><div class="num">18</div><div class="days">遗漏10期</div></div>
     <div class="missing-item"><div class="num">31</div><div class="days">遗漏10期</div></div>
@@ -741,13 +734,13 @@ function switchLottery(ltype) {
   <div class="zone-grid">
     <div class="zone-item">
       <div class="name">一区 1-11</div>
-      <div class="bar"><div class="bar-fill" style="width:36.7%;"></div></div>
-      <div class="pct">36.7%</div>
+      <div class="bar"><div class="bar-fill" style="width:36.2%;"></div></div>
+      <div class="pct">36.2%</div>
     </div>
     <div class="zone-item">
       <div class="name">二区 12-22</div>
-      <div class="bar"><div class="bar-fill" style="width:33.3%;"></div></div>
-      <div class="pct">33.3%</div>
+      <div class="bar"><div class="bar-fill" style="width:33.8%;"></div></div>
+      <div class="pct">33.8%</div>
     </div>
     <div class="zone-item">
       <div class="name">三区 23-33</div>
@@ -936,7 +929,7 @@ function switchLottery(ltype) {
 </div>
 
 <!-- 动态尾文（与百家号完全一致） -->
-<div class="closing-text"><p>📋 双色球第2026130期复盘清单：5个关键点带你看懂本期开奖。</p><p>📈 本期开奖数据：第2026130期，2026-11-12，红球01 02 06 16 20 28，蓝球02。</p><p>⚠️ 温馨提醒：请记住，彩票每期开奖相互独立，任何组合理论概率相同。不要因为"某某号码很久没出了"就盲目加倍投入，也不要因为"某某号码最近很热"就疯狂追买。理性购彩，快乐生活。</p><p>🧠 彩票冷知识：你知道吗？双色球的所有号码组合共有海量种可能（不考虑顺序）。如果每期买一注，需要很多很多年才能覆盖所有组合。这也从侧面说明了彩票的随机性——任何组合出现的概率都是一样的。</p><p>🔬 统计方法说明：我们的热号统计基于近30期数据，冷号统计基于全部历史数据的遗漏期数，奇偶比和大小比基于本期开奖结果。不同的统计周期会得出不同的结论，建议结合多个维度综合判断。</p><p>📊 大小统计：本期和值为73，平均每个号码约12。近30期平均和值约为102左右，本期偏低，下期和值有望回升。</p><p>🧊 冷号盘点：12已经连续20期没有出现了，14也遗漏了17期。这些"冷到极致"的号码，往往会在某个时点集中回补，这是概率统计中的常见现象。</p><p>📝 选号参考：下期可以考虑以下策略——①热号选2-3个，冷号选1-2个，温号选2-3个；②奇偶比控制在3:3附近；③大小比同样保持均衡；④可以考虑1组连号或1个重号，但不要过多。以上仅供参考，不构成投注建议。</p><p>🎲 开奖是随机的，但分析是认真的。第2026131期我们继续为您带来专业的数据复盘，不见不散！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+<div class="closing-text"><p>📋 双色球第2026130期复盘清单：5个关键点带你看懂本期开奖。</p><p>📈 本期开奖数据：第2026130期，2026-11-12，红球01 02 06 16 20 28，蓝球02。</p><p>⚠️ 温馨提醒：请记住，彩票每期开奖相互独立，任何组合理论概率相同。不要因为"某某号码很久没出了"就盲目加倍投入，也不要因为"某某号码最近很热"就疯狂追买。理性购彩，快乐生活。</p><p>🧠 彩票冷知识：你知道吗？双色球的所有号码组合共有海量种可能（不考虑顺序）。如果每期买一注，需要很多很多年才能覆盖所有组合。这也从侧面说明了彩票的随机性——任何组合出现的概率都是一样的。</p><p>🔬 统计方法说明：我们的热号统计基于近30期数据，冷号统计基于全部历史数据的遗漏期数，奇偶比和大小比基于本期开奖结果。不同的统计周期会得出不同的结论，建议结合多个维度综合判断。</p><p>📊 大小统计：本期和值为73，平均每个号码约12。近30期平均和值约为102左右，本期偏低，下期和值有望回升。</p><p>🧊 冷号盘点：12已经连续19期没有出现了，14也遗漏了16期。这些"冷到极致"的号码，往往会在某个时点集中回补，这是概率统计中的常见现象。</p><p>📝 选号参考：下期可以考虑以下策略——①热号选2-3个，冷号选1-2个，温号选2-3个；②奇偶比控制在3:3附近；③大小比同样保持均衡；④可以考虑1组连号或1个重号，但不要过多。以上仅供参考，不构成投注建议。</p><p>🎲 开奖是随机的，但分析是认真的。第2026131期我们继续为您带来专业的数据复盘，不见不散！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
 
 <!-- 理性购彩提示 -->
 <div class="disclaimer">
@@ -946,22 +939,23 @@ function switchLottery(ltype) {
   </div>
 </div>
 
+
 </div>
 <div id="content-kl8" style="display:none;">
 <!-- 开奖日历 -->
 <div class="calendar">
   <div class="calendar-title">📅 最新开奖信息</div>
   <div class="calendar-info">
-    <div class="calendar-period">第2026305期</div>
-    <div class="calendar-date">开奖日期：2026-11-15</div>
-    <div class="calendar-next">下期：第2026306期</div>
+    <div class="calendar-period">第2026306期</div>
+    <div class="calendar-date">开奖日期：2026-11-16</div>
+    <div class="calendar-next">下期：第2026307期</div>
   </div>
 </div>
 
 <!-- 核心卡片区域（直接用百家号推的那张卡片图） -->
 <div class="card-section">
   <div class="card-placeholder" style="padding:0;">
-    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/kl8_card_v2_20261115.png" alt="快乐8开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
+    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/kl8_card_v2_20261116.png" alt="快乐8开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
     <div id="card-error" style="display:none;padding:40px;text-align:center;color:#999;">📊 开奖卡片加载中...</div>
   </div>
 </div>
@@ -987,14 +981,14 @@ function switchLottery(ltype) {
   <div class="hotcold-list">
     <div class="hotcold-item hot">58</div>
     <div class="hotcold-item hot">75</div>
+    <div class="hotcold-item hot">25</div>
     <div class="hotcold-item hot">43</div>
+    <div class="hotcold-item hot">52</div>
+    <div class="hotcold-item hot">69</div>
     <div class="hotcold-item hot">16</div>
     <div class="hotcold-item hot">61</div>
     <div class="hotcold-item hot">72</div>
     <div class="hotcold-item hot">05</div>
-    <div class="hotcold-item hot">25</div>
-    <div class="hotcold-item hot">01</div>
-    <div class="hotcold-item hot">07</div>
   </div>
 </div>
 
@@ -1002,12 +996,12 @@ function switchLottery(ltype) {
 <div class="missing">
   <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
   <div class="missing-list">
-    <div class="missing-item"><div class="num">55</div><div class="days">遗漏18期</div></div>
-    <div class="missing-item"><div class="num">06</div><div class="days">遗漏10期</div></div>
-    <div class="missing-item"><div class="num">21</div><div class="days">遗漏10期</div></div>
-    <div class="missing-item"><div class="num">24</div><div class="days">遗漏10期</div></div>
-    <div class="missing-item"><div class="num">32</div><div class="days">遗漏10期</div></div>
-    <div class="missing-item"><div class="num">19</div><div class="days">遗漏9期</div></div>
+    <div class="missing-item"><div class="num">55</div><div class="days">遗漏19期</div></div>
+    <div class="missing-item"><div class="num">06</div><div class="days">遗漏11期</div></div>
+    <div class="missing-item"><div class="num">21</div><div class="days">遗漏11期</div></div>
+    <div class="missing-item"><div class="num">32</div><div class="days">遗漏11期</div></div>
+    <div class="missing-item"><div class="num">19</div><div class="days">遗漏10期</div></div>
+    <div class="missing-item"><div class="num">41</div><div class="days">遗漏9期</div></div>
 </div>
 </div>
 
@@ -1017,18 +1011,18 @@ function switchLottery(ltype) {
   <div class="zone-grid">
     <div class="zone-item">
       <div class="name">一区 1-20</div>
-      <div class="bar"><div class="bar-fill" style="width:24.7%;"></div></div>
-      <div class="pct">24.7%</div>
+      <div class="bar"><div class="bar-fill" style="width:24.2%;"></div></div>
+      <div class="pct">24.2%</div>
     </div>
     <div class="zone-item">
       <div class="name">二区 21-40</div>
-      <div class="bar"><div class="bar-fill" style="width:23.8%;"></div></div>
-      <div class="pct">23.8%</div>
+      <div class="bar"><div class="bar-fill" style="width:24.0%;"></div></div>
+      <div class="pct">24.0%</div>
     </div>
     <div class="zone-item">
       <div class="name">三区 41-60</div>
-      <div class="bar"><div class="bar-fill" style="width:25.2%;"></div></div>
-      <div class="pct">25.2%</div>
+      <div class="bar"><div class="bar-fill" style="width:25.5%;"></div></div>
+      <div class="pct">25.5%</div>
     </div>
     <div class="zone-item">
       <div class="name">四区 61-80</div>
@@ -1047,24 +1041,24 @@ function switchLottery(ltype) {
     <div class="focus-list">
       <div class="focus-ball">58</div>
       <div class="focus-ball">75</div>
+      <div class="focus-ball">25</div>
       <div class="focus-ball">43</div>
       <div class="focus-ball">05</div>
       <div class="focus-ball">16</div>
-      <div class="focus-ball">25</div>
+      <div class="focus-ball">52</div>
       <div class="focus-ball">61</div>
+      <div class="focus-ball">69</div>
       <div class="focus-ball">72</div>
-      <div class="focus-ball">01</div>
-      <div class="focus-ball">07</div>
     </div>
   </div>
   <div class="focus-section">
     <div class="focus-label blue-label">⭐ 精选推荐</div>
     <div class="focus-list">
-      <div class="focus-ball blue">35</div>
-      <div class="focus-ball blue">07</div>
-      <div class="focus-ball blue">63</div>
+      <div class="focus-ball blue">73</div>
       <div class="focus-ball blue">61</div>
       <div class="focus-ball blue">78</div>
+      <div class="focus-ball blue">75</div>
+      <div class="focus-ball blue">35</div>
     </div>
   </div>
   <div class="focus-reason">
@@ -1075,6 +1069,31 @@ function switchLottery(ltype) {
 <!-- 历史开奖记录 -->
 <div class="history">
   <div class="history-title">📜 最近5期开奖记录</div>
+  <div class="history-item">
+    <div class="history-period">第2026306期 · 2026-11-16</div>
+    <div class="history-balls">
+      <div class="history-ball red">10</div>
+      <div class="history-ball red">17</div>
+      <div class="history-ball red">18</div>
+      <div class="history-ball red">24</div>
+      <div class="history-ball red">25</div>
+      <div class="history-ball red">28</div>
+      <div class="history-ball red">31</div>
+      <div class="history-ball red">34</div>
+      <div class="history-ball red">37</div>
+      <div class="history-ball red">39</div>
+      <div class="history-ball red">48</div>
+      <div class="history-ball red">49</div>
+      <div class="history-ball red">52</div>
+      <div class="history-ball red">54</div>
+      <div class="history-ball red">57</div>
+      <div class="history-ball red">62</div>
+      <div class="history-ball red">63</div>
+      <div class="history-ball red">69</div>
+      <div class="history-ball red">71</div>
+      <div class="history-ball red">78</div>
+    </div>
+  </div>
   <div class="history-item">
     <div class="history-period">第2026305期 · 2026-11-15</div>
     <div class="history-balls">
@@ -1175,31 +1194,6 @@ function switchLottery(ltype) {
       <div class="history-ball red">75</div>
     </div>
   </div>
-  <div class="history-item">
-    <div class="history-period">第2026301期 · 2026-11-11</div>
-    <div class="history-balls">
-      <div class="history-ball red">08</div>
-      <div class="history-ball red">13</div>
-      <div class="history-ball red">14</div>
-      <div class="history-ball red">17</div>
-      <div class="history-ball red">22</div>
-      <div class="history-ball red">23</div>
-      <div class="history-ball red">33</div>
-      <div class="history-ball red">34</div>
-      <div class="history-ball red">35</div>
-      <div class="history-ball red">36</div>
-      <div class="history-ball red">47</div>
-      <div class="history-ball red">49</div>
-      <div class="history-ball red">51</div>
-      <div class="history-ball red">54</div>
-      <div class="history-ball red">60</div>
-      <div class="history-ball red">63</div>
-      <div class="history-ball red">68</div>
-      <div class="history-ball red">69</div>
-      <div class="history-ball red">75</div>
-      <div class="history-ball red">79</div>
-    </div>
-  </div>
 </div>
 
 <!-- 玩法介绍 -->
@@ -1278,7 +1272,7 @@ function switchLottery(ltype) {
 <div class="datanote">
   <div class="datanote-title">ℹ️ 数据更新说明</div>
   <div class="datanote-content">
-    <p>🕒 数据更新时间：2026-11-15 开奖后</p>
+    <p>🕒 数据更新时间：2026-11-16 开奖后</p>
     <p>📊 数据来源：官方开奖数据 + 150+统计模型</p>
     <p>🔄 更新频率：每日开奖后自动更新</p>
     <p>✅ 与推荐卡片使用同一套数据和计算逻辑</p>
@@ -1286,7 +1280,7 @@ function switchLottery(ltype) {
 </div>
 
 <!-- 动态尾文（与百家号完全一致） -->
-<div class="closing-text"><p>❓ 很多彩民朋友问：快乐8第2026305期开奖结果怎么看？下期该怎么选？我们用数据来回答这些问题。</p><p>🎯 理性看待：我们的预测系统虽然使用了150+统计模型和机器学习算法，但本质上还是基于历史数据的统计推断。彩票的随机性决定了任何方法都无法准确预测结果。请理性看待我们的分析，把它当作一种参考，而不是"中奖秘籍"。</p><p>📋 快乐8第2026305期开奖结果速览：01 07 08 09 15 18 26 30 43 45 48 52 58 59 62 65 76 77 78 80（2026-11-15开奖）。</p><p>🔬 统计方法说明：我们的热号统计基于近30期数据，冷号统计基于全部历史数据的遗漏期数，奇偶比和大小比基于本期开奖结果。不同的统计周期会得出不同的结论，建议结合多个维度综合判断。</p><p>🎯 名人与彩票：据说很多名人也喜欢买彩票，不过他们大多是把购彩当作一种慈善和娱乐，而不是为了中奖。其实购彩的本质就是这样——花小钱，做公益，买希望。</p><p>🔗 连号观察：本期出现了连号组合，这在快乐8中出现的概率约为7%。连号的出现往往具有一定的聚集效应，连续两期出现连号的概率相对较低。</p><p>❄️ 冷号关注：当前遗漏最久的5个号码是63(漏14期)、35(漏14期)、60(漏11期)、15(漏11期)、22(漏10期)。尤其是63已经遗漏了14期，从历史分布来看，这个遗漏时长已经超过了平均遗漏周期的1.5倍，回补概率在逐步增加。</p><p>🔢 奇偶比分析：本期开出9个奇数、11个偶数，比例为9:11。从近30期数据来看，奇偶比最常见的分布是10:10左右，本期偏离了均衡状态，下期回归均衡的概率较大。</p><p>🎯 下期选号思路：基于150+统计模型和机器学习算法的综合评分，我们建议下期关注以下几点：一是热号延续与冷号回补的平衡，不要只追热也不要只守冷；二是奇偶、大小的均衡配置，从概率角度更符合长期分布；三是号码的区间覆盖，尽量不要让号码过度集中在某一区间。</p><p>🎯 本期内容结束，第2026306期我们继续用数据说话。理性购彩，快乐生活！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+<div class="closing-text"><p>📊 快乐8第2026306期 vs 历史平均：本期数据有哪些异常？我们一起来对比看看。</p><p>📈 本期开奖数据：第2026306期，2026-11-16，号码10 17 18 24 25 28 31 34 37 39 48 49 52 54 57 62 63 69 71 78。</p><p>🔄 重号分析：本期与上期相比，有5个重复号码。重号的出现是彩票随机性的体现，连续多期出现相同号码的概率虽然低，但确实会发生。</p><p>⚖️ 奇偶分布：本期号码奇偶比为10:10。奇偶均衡，这种状态往往会持续1-2期。</p><p>🗺️ 区间分布：将80个号码分为3个区间，本期号码在各区间的分布呈现出相对分散的特征，这种分散分布往往更符合长期概率。</p><p>🎯 选号思路总结：下期选号记住三个"平衡"——冷热平衡、奇偶平衡、大小平衡。在这个基础上，可以适当加入1-2个个人看好的"心水码"。记住，彩票本质是娱乐，不要过度投入，享受过程最重要。</p><p>⚠️ 温馨提醒：请记住，彩票每期开奖相互独立，任何组合理论概率相同。不要因为"某某号码很久没出了"就盲目加倍投入，也不要因为"某某号码最近很热"就疯狂追买。理性购彩，快乐生活。</p><p>💪 理性购彩者的五个特征：①每期投入固定，不随意加码；②不追热不守冷，保持平常心；③把购彩当娱乐，不影响生活；④中奖不骄傲，不中奖不气馁；⑤坚持做公益，快乐每一天。你中了几条？</p><p>📝 本期内容就这些，希望对您有参考价值。理性购彩，量力而行，下期见！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
 
 <!-- 理性购彩提示 -->
 <div class="disclaimer">
@@ -1296,22 +1290,23 @@ function switchLottery(ltype) {
   </div>
 </div>
 
+
 </div>
 <div id="content-fc3d" style="display:none;">
 <!-- 开奖日历 -->
 <div class="calendar">
   <div class="calendar-title">📅 最新开奖信息</div>
   <div class="calendar-info">
-    <div class="calendar-period">第2026305期</div>
-    <div class="calendar-date">开奖日期：2026-11-15</div>
-    <div class="calendar-next">下期：第2026306期</div>
+    <div class="calendar-period">第2026306期</div>
+    <div class="calendar-date">开奖日期：2026-11-16</div>
+    <div class="calendar-next">下期：第2026307期</div>
   </div>
 </div>
 
 <!-- 核心卡片区域（直接用百家号推的那张卡片图） -->
 <div class="card-section">
   <div class="card-placeholder" style="padding:0;">
-    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/fc3d_card_v2_20261115.png" alt="福彩3D开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
+    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/fc3d_card_v2_20261116.png" alt="福彩3D开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
     <div id="card-error" style="display:none;padding:40px;text-align:center;color:#999;">📊 开奖卡片加载中...</div>
   </div>
 </div>
@@ -1337,9 +1332,9 @@ function switchLottery(ltype) {
   <div class="hotcold-list">
     <div class="hotcold-item hot">02</div>
     <div class="hotcold-item hot">01</div>
+    <div class="hotcold-item hot">03</div>
     <div class="hotcold-item hot">00</div>
     <div class="hotcold-item hot">08</div>
-    <div class="hotcold-item hot">03</div>
     <div class="hotcold-item hot">06</div>
     <div class="hotcold-item hot">09</div>
     <div class="hotcold-item hot">04</div>
@@ -1352,12 +1347,12 @@ function switchLottery(ltype) {
 <div class="missing">
   <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
   <div class="missing-list">
-    <div class="missing-item"><div class="num">07</div><div class="days">遗漏9期</div></div>
-    <div class="missing-item"><div class="num">05</div><div class="days">遗漏7期</div></div>
-    <div class="missing-item"><div class="num">01</div><div class="days">遗漏5期</div></div>
-    <div class="missing-item"><div class="num">04</div><div class="days">遗漏3期</div></div>
-    <div class="missing-item"><div class="num">06</div><div class="days">遗漏2期</div></div>
-    <div class="missing-item"><div class="num">09</div><div class="days">遗漏2期</div></div>
+    <div class="missing-item"><div class="num">07</div><div class="days">遗漏10期</div></div>
+    <div class="missing-item"><div class="num">05</div><div class="days">遗漏8期</div></div>
+    <div class="missing-item"><div class="num">01</div><div class="days">遗漏6期</div></div>
+    <div class="missing-item"><div class="num">06</div><div class="days">遗漏3期</div></div>
+    <div class="missing-item"><div class="num">09</div><div class="days">遗漏3期</div></div>
+    <div class="missing-item"><div class="num">08</div><div class="days">遗漏2期</div></div>
 </div>
 </div>
 
@@ -1367,8 +1362,8 @@ function switchLottery(ltype) {
   <div class="zone-grid">
     <div class="zone-item">
       <div class="name">小数 0-3</div>
-      <div class="bar"><div class="bar-fill" style="width:50.0%;"></div></div>
-      <div class="pct">50.0%</div>
+      <div class="bar"><div class="bar-fill" style="width:51.1%;"></div></div>
+      <div class="pct">51.1%</div>
     </div>
     <div class="zone-item">
       <div class="name">中数 4-6</div>
@@ -1377,8 +1372,8 @@ function switchLottery(ltype) {
     </div>
     <div class="zone-item">
       <div class="name">大数 7-9</div>
-      <div class="bar"><div class="bar-fill" style="width:27.8%;"></div></div>
-      <div class="pct">27.8%</div>
+      <div class="bar"><div class="bar-fill" style="width:26.7%;"></div></div>
+      <div class="pct">26.7%</div>
     </div>
   </div>
 </div>
@@ -1392,14 +1387,14 @@ function switchLottery(ltype) {
     <div class="focus-list">
       <div class="focus-ball">01</div>
       <div class="focus-ball">08</div>
-      <div class="focus-ball">09</div>
+      <div class="focus-ball">00</div>
     </div>
   </div>
   <div class="focus-section">
     <div class="focus-label blue-label">⭐ 孤码推荐</div>
     <div class="focus-list">
-      <div class="focus-ball blue">02</div>
       <div class="focus-ball blue">08</div>
+      <div class="focus-ball blue">02</div>
       <div class="focus-ball blue">05</div>
     </div>
   </div>
@@ -1411,6 +1406,14 @@ function switchLottery(ltype) {
 <!-- 历史开奖记录 -->
 <div class="history">
   <div class="history-title">📜 最近5期开奖记录</div>
+  <div class="history-item">
+    <div class="history-period">第2026306期 · 2026-11-16</div>
+    <div class="history-balls">
+      <div class="history-ball red">4</div>
+      <div class="history-ball red">3</div>
+      <div class="history-ball red">2</div>
+    </div>
+  </div>
   <div class="history-item">
     <div class="history-period">第2026305期 · 2026-11-15</div>
     <div class="history-balls">
@@ -1441,14 +1444,6 @@ function switchLottery(ltype) {
       <div class="history-ball red">4</div>
       <div class="history-ball red">2</div>
       <div class="history-ball red">8</div>
-    </div>
-  </div>
-  <div class="history-item">
-    <div class="history-period">第2026301期 · 2026-11-11</div>
-    <div class="history-balls">
-      <div class="history-ball red">8</div>
-      <div class="history-ball red">4</div>
-      <div class="history-ball red">9</div>
     </div>
   </div>
 </div>
@@ -1521,7 +1516,7 @@ function switchLottery(ltype) {
 <div class="datanote">
   <div class="datanote-title">ℹ️ 数据更新说明</div>
   <div class="datanote-content">
-    <p>🕒 数据更新时间：2026-11-15 开奖后</p>
+    <p>🕒 数据更新时间：2026-11-16 开奖后</p>
     <p>📊 数据来源：官方开奖数据 + 150+统计模型</p>
     <p>🔄 更新频率：每日开奖后自动更新</p>
     <p>✅ 与推荐卡片使用同一套数据和计算逻辑</p>
@@ -1529,7 +1524,7 @@ function switchLottery(ltype) {
 </div>
 
 <!-- 动态尾文（与百家号完全一致） -->
-<div class="closing-text"><p>❓ 很多彩民朋友问：福彩3D第2026305期开奖结果怎么看？下期该怎么选？我们用数据来回答这些问题。</p><p>💡 选号策略分享：我们的预测系统从8大维度综合评分，包括基础统计（频率/冷热/遗漏/奇偶/大小/跨度/AC值/质合/012路）、进阶统计（马尔可夫链/贝叶斯分析/蒙特卡洛模拟）、机器学习（随机森林/梯度提升/逻辑回归）、时间序列（LSTM/ARIMA）等。下期选号建议在这些维度的基础上，结合个人感觉进行微调。</p><p>⚠️ 温馨提醒：请记住，彩票每期开奖相互独立，任何组合理论概率相同。不要因为"某某号码很久没出了"就盲目加倍投入，也不要因为"某某号码最近很热"就疯狂追买。理性购彩，快乐生活。</p><p>🎯 名人与彩票：据说很多名人也喜欢买彩票，不过他们大多是把购彩当作一种慈善和娱乐，而不是为了中奖。其实购彩的本质就是这样——花小钱，做公益，买希望。</p><p>📚 趣味统计：从福彩3D的历史数据来看，最常见的奇偶比是1:2，出现概率约为30%左右。而全奇或全偶的情况相对较少，出现概率不到5%。这也是为什么选号时建议保持奇偶均衡的原因。</p><p>📈 本期开奖数据：第2026305期，2026-11-15，号码2 0 0。</p><p>📏 大小分布：本期号码大小比为3:0（1-4为小，5-9为大）。小号偏多，下期大号可能会回补。</p><p>➕ 和值分析：本期号码和值为2。近30期平均和值约为15，本期低于平均值，下期和值有望回升。</p><p>🗺️ 区间分布：将9个号码分为3个区间，本期号码在各区间的分布呈现出集中在某一区间的特征，下期可以关注其他区间的回补。</p><p>📝 本期分析就到这里，感谢您的阅读。第2026306期我们再见，祝您好运！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+<div class="closing-text"><p>📊 福彩3D第2026306期 vs 历史平均：本期数据有哪些异常？我们一起来对比看看。</p><p>🎯 理性看待：我们的预测系统虽然使用了150+统计模型和机器学习算法，但本质上还是基于历史数据的统计推断。彩票的随机性决定了任何方法都无法准确预测结果。请理性看待我们的分析，把它当作一种参考，而不是"中奖秘籍"。</p><p>📋 福彩3D第2026306期开奖结果速览：4 3 2（2026-11-16开奖）。</p><p>🎲 概率小课堂：很多人以为"连续多期没出的号码下期必出"，其实这是典型的"赌徒谬误"。从概率角度看，每一期开奖都是独立事件，之前的结果不会影响未来的概率。一个号码遗漏了50期，它下期出现的概率和其他号码是完全一样的。</p><p>😊 购彩心态分享：有一位老彩民说过，"我买彩票不是为了中奖，而是为了每天有个盼头"。这句话道出了很多彩民的心声。其实购彩的乐趣不在于结果，而在于期待的过程。每期开奖前的那种期待感，才是购彩最大的魅力。</p><p>🎯 下期选号思路：基于150+统计模型和机器学习算法的综合评分，我们建议下期关注以下几点：一是热号延续与冷号回补的平衡，不要只追热也不要只守冷；二是奇偶、大小的均衡配置，从概率角度更符合长期分布；三是号码的区间覆盖，尽量不要让号码过度集中在某一区间。</p><p>🔄 重号分析：本期与上期相比，有1个重复号码。重号的出现是彩票随机性的体现，连续多期出现相同号码的概率虽然低，但确实会发生。</p><p>📊 奇偶统计：本期奇数1个，偶数2个。历史数据显示，福彩3D连续两期奇偶比相同的概率约为28%，所以下期奇偶比发生变化的可能性更大。</p><p>✨ 感谢您阅读本期分析，祝您生活愉快，购彩开心！第2026307期我们再见！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
 
 <!-- 理性购彩提示 -->
 <div class="disclaimer">
@@ -1539,22 +1534,23 @@ function switchLottery(ltype) {
   </div>
 </div>
 
+
 </div>
 <div id="content-pl35" style="display:none;">
 <!-- 开奖日历 -->
 <div class="calendar">
   <div class="calendar-title">📅 最新开奖信息</div>
   <div class="calendar-info">
-    <div class="calendar-period">第26305期</div>
-    <div class="calendar-date">开奖日期：2026-11-15</div>
-    <div class="calendar-next">下期：第26306期</div>
+    <div class="calendar-period">第26306期</div>
+    <div class="calendar-date">开奖日期：2026-11-16</div>
+    <div class="calendar-next">下期：第26307期</div>
   </div>
 </div>
 
 <!-- 核心卡片区域（直接用百家号推的那张卡片图） -->
 <div class="card-section">
   <div class="card-placeholder" style="padding:0;">
-    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/pl35_card_v2_20261115.png" alt="排列3/5开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
+    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/pl35_card_v2_20261116.png" alt="排列3/5开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
     <div id="card-error" style="display:none;padding:40px;text-align:center;color:#999;">📊 开奖卡片加载中...</div>
   </div>
 </div>
@@ -1564,7 +1560,7 @@ function switchLottery(ltype) {
   <div class="review-title">📊 上期推荐命中回顾</div>
   <div class="review-stats">
     <div class="review-stat">
-      <div class="num">1</div>
+      <div class="num">0</div>
       <div class="label">排3命中</div>
     </div>
     <div class="review-stat">
@@ -1572,7 +1568,7 @@ function switchLottery(ltype) {
       <div class="label">排5命中</div>
     </div>
     <div class="review-stat">
-      <div class="num">33.3%</div>
+      <div class="num">0.0%</div>
       <div class="label">命中率</div>
     </div>
   </div>
@@ -1584,14 +1580,14 @@ function switchLottery(ltype) {
   <div class="hotcold-list">
     <div class="hotcold-item hot">02</div>
     <div class="hotcold-item hot">08</div>
-    <div class="hotcold-item hot">09</div>
     <div class="hotcold-item hot">07</div>
-    <div class="hotcold-item hot">01</div>
     <div class="hotcold-item hot">04</div>
-    <div class="hotcold-item hot">06</div>
-    <div class="hotcold-item hot">05</div>
+    <div class="hotcold-item hot">09</div>
+    <div class="hotcold-item hot">01</div>
     <div class="hotcold-item hot">03</div>
+    <div class="hotcold-item hot">06</div>
     <div class="hotcold-item hot">00</div>
+    <div class="hotcold-item hot">05</div>
   </div>
 </div>
 
@@ -1599,12 +1595,12 @@ function switchLottery(ltype) {
 <div class="missing">
   <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
   <div class="missing-list">
-    <div class="missing-item"><div class="num">03</div><div class="days">遗漏4期</div></div>
-    <div class="missing-item"><div class="num">04</div><div class="days">遗漏4期</div></div>
-    <div class="missing-item"><div class="num">05</div><div class="days">遗漏4期</div></div>
-    <div class="missing-item"><div class="num">07</div><div class="days">遗漏1期</div></div>
-    <div class="missing-item"><div class="num">09</div><div class="days">遗漏1期</div></div>
-    <div class="missing-item"><div class="num">00</div><div class="days">遗漏0期</div></div>
+    <div class="missing-item"><div class="num">05</div><div class="days">遗漏5期</div></div>
+    <div class="missing-item"><div class="num">07</div><div class="days">遗漏2期</div></div>
+    <div class="missing-item"><div class="num">09</div><div class="days">遗漏2期</div></div>
+    <div class="missing-item"><div class="num">01</div><div class="days">遗漏1期</div></div>
+    <div class="missing-item"><div class="num">06</div><div class="days">遗漏1期</div></div>
+    <div class="missing-item"><div class="num">08</div><div class="days">遗漏1期</div></div>
 </div>
 </div>
 
@@ -1614,18 +1610,18 @@ function switchLottery(ltype) {
   <div class="zone-grid">
     <div class="zone-item">
       <div class="name">小数 0-3</div>
-      <div class="bar"><div class="bar-fill" style="width:38.8%;"></div></div>
-      <div class="pct">38.8%</div>
+      <div class="bar"><div class="bar-fill" style="width:40.4%;"></div></div>
+      <div class="pct">40.4%</div>
     </div>
     <div class="zone-item">
       <div class="name">中数 4-6</div>
-      <div class="bar"><div class="bar-fill" style="width:27.1%;"></div></div>
-      <div class="pct">27.1%</div>
+      <div class="bar"><div class="bar-fill" style="width:26.2%;"></div></div>
+      <div class="pct">26.2%</div>
     </div>
     <div class="zone-item">
       <div class="name">大数 7-9</div>
-      <div class="bar"><div class="bar-fill" style="width:34.2%;"></div></div>
-      <div class="pct">34.2%</div>
+      <div class="bar"><div class="bar-fill" style="width:33.3%;"></div></div>
+      <div class="pct">33.3%</div>
     </div>
   </div>
 </div>
@@ -1649,7 +1645,7 @@ function switchLottery(ltype) {
       <div class="focus-ball blue">09</div>
       <div class="focus-ball blue">00</div>
       <div class="focus-ball blue">04</div>
-      <div class="focus-ball blue">01</div>
+      <div class="focus-ball blue">03</div>
     </div>
   </div>
   <div class="focus-reason">
@@ -1660,6 +1656,17 @@ function switchLottery(ltype) {
 <!-- 历史开奖记录 -->
 <div class="history">
   <div class="history-title">📜 最近5期开奖记录</div>
+  <div class="history-item">
+    <div class="history-period">第26306期 · 2026-11-16</div>
+    <div class="history-balls">
+      <div class="history-ball red">0</div>
+      <div class="history-ball red">3</div>
+      <div class="history-ball red">2</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">4</div>
+      <div class="history-ball blue">3</div>
+    </div>
+  </div>
   <div class="history-item">
     <div class="history-period">第26305期 · 2026-11-15</div>
     <div class="history-balls">
@@ -1702,17 +1709,6 @@ function switchLottery(ltype) {
       <div class="history-sep">+</div>
       <div class="history-ball blue">9</div>
       <div class="history-ball blue">2</div>
-    </div>
-  </div>
-  <div class="history-item">
-    <div class="history-period">第26301期 · 2026-11-11</div>
-    <div class="history-balls">
-      <div class="history-ball red">5</div>
-      <div class="history-ball red">4</div>
-      <div class="history-ball red">4</div>
-      <div class="history-sep">+</div>
-      <div class="history-ball blue">6</div>
-      <div class="history-ball blue">3</div>
     </div>
   </div>
 </div>
@@ -1787,7 +1783,7 @@ function switchLottery(ltype) {
 <div class="datanote">
   <div class="datanote-title">ℹ️ 数据更新说明</div>
   <div class="datanote-content">
-    <p>🕒 数据更新时间：2026-11-15 开奖后</p>
+    <p>🕒 数据更新时间：2026-11-16 开奖后</p>
     <p>📊 数据来源：官方开奖数据 + 150+统计模型</p>
     <p>🔄 更新频率：每日开奖后自动更新</p>
     <p>✅ 与推荐卡片使用同一套数据和计算逻辑</p>
@@ -1795,7 +1791,7 @@ function switchLottery(ltype) {
 </div>
 
 <!-- 动态尾文（与百家号完全一致） -->
-<div class="closing-text"><p>📋 排列3/5第26305期复盘清单：5个关键点带你看懂本期开奖。</p><p>🎰 第26305期开奖结果：排列32 6 0，排列52 6 0 8 1。开奖日期2026-11-15。</p><p>📏 大小分布：本期排列3大小比为2:1（1-4为小，5-9为大）。小号偏多，下期大号可能会回补。</p><p>❄️ 冷号关注：当前遗漏最久的5个号码是3(漏5期)、4(漏3期)、9(漏2期)、5(漏2期)、0(漏2期)。尤其是3已经遗漏了5期，从历史分布来看，这个遗漏时长已经超过了平均遗漏周期的1.5倍，回补概率在逐步增加。</p><p>💪 理性购彩者的五个特征：①每期投入固定，不随意加码；②不追热不守冷，保持平常心；③把购彩当娱乐，不影响生活；④中奖不骄傲，不中奖不气馁；⑤坚持做公益，快乐每一天。你中了几条？</p><p>📊 模型回测表现：我们的预测系统经过历史数据回测，比随机基准提升了100%-370%（不同彩种表现不同）。需要说明的是，回测表现不代表未来结果，彩票的随机性决定了任何方法都无法保证中奖。我们的目标是提供有价值的统计参考，而不是"必中神器"。</p><p>💡 选号策略分享：我们的预测系统从8大维度综合评分，包括基础统计（频率/冷热/遗漏/奇偶/大小/跨度/AC值/质合/012路）、进阶统计（马尔可夫链/贝叶斯分析/蒙特卡洛模拟）、机器学习（随机森林/梯度提升/逻辑回归）、时间序列（LSTM/ARIMA）等。下期选号建议在这些维度的基础上，结合个人感觉进行微调。</p><p>⚠️ 温馨提醒：请记住，彩票每期开奖相互独立，任何组合理论概率相同。不要因为"某某号码很久没出了"就盲目加倍投入，也不要因为"某某号码最近很热"就疯狂追买。理性购彩，快乐生活。</p><p>🎯 本期内容结束，第26306期我们继续用数据说话。理性购彩，快乐生活！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+<div class="closing-text"><p>❓ 很多彩民朋友问：排列3/5第26306期开奖结果怎么看？下期该怎么选？我们用数据来回答这些问题。</p><p>📊 本期（2026-11-16）排列3/5第26306期开奖号码：0 3 2 + 0 3 2 4 3。</p><p>🌡️ 热度排行：本期统计显示，2、7、9位列近30期出现次数前三。高频号码往往具有一定的惯性，但也要注意"物极必反"的规律。</p><p>📊 奇偶统计：本期奇数1个，偶数2个。历史数据显示，排列3/5连续两期奇偶比相同的概率约为28%，所以下期奇偶比发生变化的可能性更大。</p><p>➕ 和值分析：本期排列3和值为5。近30期平均和值约为15，本期接近平均值，处于正常波动范围。</p><p>🤖 关于我们的预测系统：我们使用了150+个统计模型，包括基础统计、进阶统计、机器学习、时间序列、集成学习、深度学习、训练优化、评估监控8大维度。每个彩种都有定制的权重配置，并且会根据历史回测数据自动调整权重。当然，再强大的模型也无法改变彩票的随机性。</p><p>🔬 统计方法说明：我们的热号统计基于近30期数据，冷号统计基于全部历史数据的遗漏期数，奇偶比和大小比基于本期开奖结果。不同的统计周期会得出不同的结论，建议结合多个维度综合判断。</p><p>💡 选号策略分享：我们的预测系统从8大维度综合评分，包括基础统计（频率/冷热/遗漏/奇偶/大小/跨度/AC值/质合/012路）、进阶统计（马尔可夫链/贝叶斯分析/蒙特卡洛模拟）、机器学习（随机森林/梯度提升/逻辑回归）、时间序列（LSTM/ARIMA）等。下期选号建议在这些维度的基础上，结合个人感觉进行微调。</p><p>⚠️ 风险提示：彩票不是投资，不能指望通过购彩致富。我们的所有分析都是基于历史数据的统计规律，仅供参考。请理性看待彩票，享受分析的过程，而不是执着于结果。量力而行，快乐购彩。</p><p>✨ 感谢您阅读本期分析，祝您生活愉快，购彩开心！第26307期我们再见！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
 
 <!-- 理性购彩提示 -->
 <div class="disclaimer">
@@ -1804,6 +1800,7 @@ function switchLottery(ltype) {
     彩票每期开奖相互独立，任何组合理论概率相同，历史统计只能给出倾向性参考，不能保证中奖。请量力而行、理性参与，未成年人禁止购彩。本内容仅供学习交流，不构成任何购彩建议。
   </div>
 </div>
+
 
 </div>
 <div id="content-qxc" style="display:none;">
@@ -2082,22 +2079,23 @@ function switchLottery(ltype) {
   </div>
 </div>
 
+
 </div>
 <div id="content-qlc" style="display:none;">
 <!-- 开奖日历 -->
 <div class="calendar">
   <div class="calendar-title">📅 最新开奖信息</div>
   <div class="calendar-info">
-    <div class="calendar-period">第2026131期</div>
-    <div class="calendar-date">开奖日期：2026-11-13</div>
-    <div class="calendar-next">下期：第2026132期</div>
+    <div class="calendar-period">第2026132期</div>
+    <div class="calendar-date">开奖日期：2026-11-16</div>
+    <div class="calendar-next">下期：第2026133期</div>
   </div>
 </div>
 
 <!-- 核心卡片区域（直接用百家号推的那张卡片图） -->
 <div class="card-section">
   <div class="card-placeholder" style="padding:0;">
-    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/qlc_card_v2_20261113.png" alt="七乐彩开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
+    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/qlc_card_v2_20261116.png" alt="七乐彩开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
     <div id="card-error" style="display:none;padding:40px;text-align:center;color:#999;">📊 开奖卡片加载中...</div>
   </div>
 </div>
@@ -2125,16 +2123,16 @@ function switchLottery(ltype) {
 <div class="hotcold">
   <div class="hotcold-title">🔥 最热号码 TOP10（近30期）</div>
   <div class="hotcold-list">
-    <div class="hotcold-item hot">30</div>
     <div class="hotcold-item hot">23</div>
+    <div class="hotcold-item hot">30</div>
     <div class="hotcold-item hot">26</div>
+    <div class="hotcold-item hot">06</div>
+    <div class="hotcold-item hot">07</div>
+    <div class="hotcold-item hot">17</div>
     <div class="hotcold-item hot">14</div>
     <div class="hotcold-item hot">04</div>
-    <div class="hotcold-item hot">08</div>
-    <div class="hotcold-item hot">17</div>
-    <div class="hotcold-item hot">27</div>
-    <div class="hotcold-item hot">07</div>
-    <div class="hotcold-item hot">06</div>
+    <div class="hotcold-item hot">13</div>
+    <div class="hotcold-item hot">21</div>
   </div>
 </div>
 
@@ -2142,12 +2140,12 @@ function switchLottery(ltype) {
 <div class="missing">
   <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
   <div class="missing-list">
-    <div class="missing-item"><div class="num">19</div><div class="days">遗漏13期</div></div>
-    <div class="missing-item"><div class="num">01</div><div class="days">遗漏11期</div></div>
-    <div class="missing-item"><div class="num">12</div><div class="days">遗漏7期</div></div>
-    <div class="missing-item"><div class="num">02</div><div class="days">遗漏6期</div></div>
-    <div class="missing-item"><div class="num">03</div><div class="days">遗漏6期</div></div>
-    <div class="missing-item"><div class="num">05</div><div class="days">遗漏6期</div></div>
+    <div class="missing-item"><div class="num">19</div><div class="days">遗漏14期</div></div>
+    <div class="missing-item"><div class="num">01</div><div class="days">遗漏12期</div></div>
+    <div class="missing-item"><div class="num">12</div><div class="days">遗漏8期</div></div>
+    <div class="missing-item"><div class="num">02</div><div class="days">遗漏7期</div></div>
+    <div class="missing-item"><div class="num">03</div><div class="days">遗漏7期</div></div>
+    <div class="missing-item"><div class="num">05</div><div class="days">遗漏7期</div></div>
 </div>
 </div>
 
@@ -2157,18 +2155,18 @@ function switchLottery(ltype) {
   <div class="zone-grid">
     <div class="zone-item">
       <div class="name">一区 1-10</div>
-      <div class="bar"><div class="bar-fill" style="width:31.7%;"></div></div>
-      <div class="pct">31.7%</div>
+      <div class="bar"><div class="bar-fill" style="width:31.2%;"></div></div>
+      <div class="pct">31.2%</div>
     </div>
     <div class="zone-item">
       <div class="name">二区 11-20</div>
-      <div class="bar"><div class="bar-fill" style="width:30.0%;"></div></div>
-      <div class="pct">30.0%</div>
+      <div class="bar"><div class="bar-fill" style="width:30.8%;"></div></div>
+      <div class="pct">30.8%</div>
     </div>
     <div class="zone-item">
       <div class="name">三区 21-30</div>
-      <div class="bar"><div class="bar-fill" style="width:38.3%;"></div></div>
-      <div class="pct">38.3%</div>
+      <div class="bar"><div class="bar-fill" style="width:37.9%;"></div></div>
+      <div class="pct">37.9%</div>
     </div>
   </div>
 </div>
@@ -2183,10 +2181,10 @@ function switchLottery(ltype) {
       <div class="focus-ball">23</div>
       <div class="focus-ball">26</div>
       <div class="focus-ball">04</div>
+      <div class="focus-ball">06</div>
       <div class="focus-ball">08</div>
-      <div class="focus-ball">14</div>
+      <div class="focus-ball">17</div>
       <div class="focus-ball">30</div>
-      <div class="focus-ball">05</div>
     </div>
   </div>
   <div class="focus-section">
@@ -2203,6 +2201,20 @@ function switchLottery(ltype) {
 <!-- 历史开奖记录 -->
 <div class="history">
   <div class="history-title">📜 最近5期开奖记录</div>
+  <div class="history-item">
+    <div class="history-period">第2026132期 · 2026-11-16</div>
+    <div class="history-balls">
+      <div class="history-ball red">04</div>
+      <div class="history-ball red">06</div>
+      <div class="history-ball red">07</div>
+      <div class="history-ball red">13</div>
+      <div class="history-ball red">17</div>
+      <div class="history-ball red">21</div>
+      <div class="history-ball red">29</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">14</div>
+    </div>
+  </div>
   <div class="history-item">
     <div class="history-period">第2026131期 · 2026-11-13</div>
     <div class="history-balls">
@@ -2257,20 +2269,6 @@ function switchLottery(ltype) {
       <div class="history-ball red">30</div>
       <div class="history-sep">+</div>
       <div class="history-ball blue">21</div>
-    </div>
-  </div>
-  <div class="history-item">
-    <div class="history-period">第2026127期 · 2026-11-04</div>
-    <div class="history-balls">
-      <div class="history-ball red">08</div>
-      <div class="history-ball red">11</div>
-      <div class="history-ball red">15</div>
-      <div class="history-ball red">24</div>
-      <div class="history-ball red">26</div>
-      <div class="history-ball red">27</div>
-      <div class="history-ball red">30</div>
-      <div class="history-sep">+</div>
-      <div class="history-ball blue">28</div>
     </div>
   </div>
 </div>
@@ -2348,7 +2346,7 @@ function switchLottery(ltype) {
 <div class="datanote">
   <div class="datanote-title">ℹ️ 数据更新说明</div>
   <div class="datanote-content">
-    <p>🕒 数据更新时间：2026-11-13 开奖后</p>
+    <p>🕒 数据更新时间：2026-11-16 开奖后</p>
     <p>📊 数据来源：官方开奖数据 + 150+统计模型</p>
     <p>🔄 更新频率：每日开奖后自动更新</p>
     <p>✅ 与推荐卡片使用同一套数据和计算逻辑</p>
@@ -2356,7 +2354,7 @@ function switchLottery(ltype) {
 </div>
 
 <!-- 动态尾文（与百家号完全一致） -->
-<div class="closing-text"><p>📋 七乐彩第2026131期复盘清单：5个关键点带你看懂本期开奖。</p><p>🎰 第2026131期开奖结果：基本号04 08 10 14 17 24 27，特别号30。开奖日期2026-11-13。</p><p>🧊 冷号盘点：04已经连续16期没有出现了，20也遗漏了10期。这些"冷到极致"的号码，往往会在某个时点集中回补，这是概率统计中的常见现象。</p><p>🔁 重复号码：本期号码与上期对比，有1个号码重复出现。从统计角度看，每期出现1-2个重号是比较常见的情况，不必过度解读。</p><p>💪 理性购彩者的五个特征：①每期投入固定，不随意加码；②不追热不守冷，保持平常心；③把购彩当娱乐，不影响生活；④中奖不骄傲，不中奖不气馁；⑤坚持做公益，快乐每一天。你中了几条？</p><p>🎯 名人与彩票：据说很多名人也喜欢买彩票，不过他们大多是把购彩当作一种慈善和娱乐，而不是为了中奖。其实购彩的本质就是这样——花小钱，做公益，买希望。</p><p>🎲 选号方法论：我们坚持"数据驱动+理性对待"的原则。下期选号时，建议先看近30期的热号和冷号分布，再结合本期的奇偶比和大小比进行调整。同时，不要忽视随机因素的影响，任何选号方法都不能保证中奖，只是从统计角度提高参考价值。</p><p>📋 免责声明：本文所有内容均基于历史开奖数据的自动统计分析，仅供学习交流和参考，不构成任何投资或购彩建议。彩票开奖具有随机性，历史表现不代表未来结果。购彩有风险，请理性参与，未成年人禁止购彩。</p><p>📌 以上就是七乐彩第2026131期的全部分析内容，第2026132期开奖后我们会继续为您带来复盘分析，敬请期待！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+<div class="closing-text"><p>📋 七乐彩第2026132期复盘清单：5个关键点带你看懂本期开奖。</p><p>📏 大小分布：本期基本号大小比为4:3（1-15为小，16-30为大）。小号偏多，下期大号可能会回补。</p><p>🌡️ 热度排行：本期统计显示，23、26、04位列近30期出现次数前三。高频号码往往具有一定的惯性，但也要注意"物极必反"的规律。</p><p>🔁 重复号码：本期号码与上期对比，有2个号码重复出现。从统计角度看，每期出现1-2个重号是比较常见的情况，不必过度解读。</p><p>📈 本期开奖数据：第2026132期，2026-11-16，基本号04 06 07 13 17 21 29，特别号14。</p><p>📊 模型选号逻辑：我们的系统使用了在线学习权重校准，每个彩种都有定制的权重配置。以七乐彩为例，当前权重配置为全史频次+近因加权+遗漏回补为主，辅以形态分析和冷热转换。下期预测号码就是基于这些权重综合计算得出的。</p><p>🎯 理性看待：我们的预测系统虽然使用了150+统计模型和机器学习算法，但本质上还是基于历史数据的统计推断。彩票的随机性决定了任何方法都无法准确预测结果。请理性看待我们的分析，把它当作一种参考，而不是"中奖秘籍"。</p><p>📚 趣味统计：从七乐彩的历史数据来看，最常见的奇偶比是3:4，出现概率约为30%左右。而全奇或全偶的情况相对较少，出现概率不到5%。这也是为什么选号时建议保持奇偶均衡的原因。</p><p>🔔 第2026133期开奖当晚，我们会第一时间更新数据分析。关注我们，不错过每一期的精彩分析！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
 
 <!-- 理性购彩提示 -->
 <div class="disclaimer">
@@ -2366,22 +2364,23 @@ function switchLottery(ltype) {
   </div>
 </div>
 
+
 </div>
 <div id="content-dlt" style="display:none;">
 <!-- 开奖日历 -->
 <div class="calendar">
   <div class="calendar-title">📅 最新开奖信息</div>
   <div class="calendar-info">
-    <div class="calendar-period">第26130期</div>
-    <div class="calendar-date">开奖日期：2026-11-14</div>
-    <div class="calendar-next">下期：第26131期</div>
+    <div class="calendar-period">第26131期</div>
+    <div class="calendar-date">开奖日期：2026-11-16</div>
+    <div class="calendar-next">下期：第26132期</div>
   </div>
 </div>
 
 <!-- 核心卡片区域（直接用百家号推的那张卡片图） -->
 <div class="card-section">
   <div class="card-placeholder" style="padding:0;">
-    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/dlt_card_v2_20261114.png" alt="大乐透开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
+    <img src="https://wangxmfc.github.io/lottery-dashboards/cards/dlt_card_v2_20261116.png" alt="大乐透开奖卡片" style="width:100%;display:block;border-radius:14px;" onerror="this.style.display='none';document.getElementById('card-error').style.display='block';">
     <div id="card-error" style="display:none;padding:40px;text-align:center;color:#999;">📊 开奖卡片加载中...</div>
   </div>
 </div>
@@ -2412,11 +2411,11 @@ function switchLottery(ltype) {
     <div class="hotcold-item hot">12</div>
     <div class="hotcold-item hot">01</div>
     <div class="hotcold-item hot">06</div>
-    <div class="hotcold-item hot">09</div>
     <div class="hotcold-item hot">07</div>
-    <div class="hotcold-item hot">03</div>
     <div class="hotcold-item hot">02</div>
     <div class="hotcold-item hot">04</div>
+    <div class="hotcold-item hot">03</div>
+    <div class="hotcold-item hot">09</div>
     <div class="hotcold-item hot">10</div>
     <div class="hotcold-item hot">14</div>
   </div>
@@ -2426,12 +2425,12 @@ function switchLottery(ltype) {
 <div class="missing">
   <div class="missing-title">⏳ 遗漏号排行榜（最久未出）</div>
   <div class="missing-list">
-    <div class="missing-item"><div class="num">16</div><div class="days">遗漏21期</div></div>
-    <div class="missing-item"><div class="num">30</div><div class="days">遗漏16期</div></div>
-    <div class="missing-item"><div class="num">35</div><div class="days">遗漏14期</div></div>
-    <div class="missing-item"><div class="num">31</div><div class="days">遗漏13期</div></div>
-    <div class="missing-item"><div class="num">26</div><div class="days">遗漏12期</div></div>
-    <div class="missing-item"><div class="num">15</div><div class="days">遗漏10期</div></div>
+    <div class="missing-item"><div class="num">16</div><div class="days">遗漏22期</div></div>
+    <div class="missing-item"><div class="num">30</div><div class="days">遗漏17期</div></div>
+    <div class="missing-item"><div class="num">35</div><div class="days">遗漏15期</div></div>
+    <div class="missing-item"><div class="num">31</div><div class="days">遗漏14期</div></div>
+    <div class="missing-item"><div class="num">26</div><div class="days">遗漏13期</div></div>
+    <div class="missing-item"><div class="num">15</div><div class="days">遗漏11期</div></div>
 </div>
 </div>
 
@@ -2446,13 +2445,13 @@ function switchLottery(ltype) {
     </div>
     <div class="zone-item">
       <div class="name">二区 13-24</div>
-      <div class="bar"><div class="bar-fill" style="width:23.3%;"></div></div>
-      <div class="pct">23.3%</div>
+      <div class="bar"><div class="bar-fill" style="width:23.8%;"></div></div>
+      <div class="pct">23.8%</div>
     </div>
     <div class="zone-item">
       <div class="name">三区 25-35</div>
-      <div class="bar"><div class="bar-fill" style="width:21.9%;"></div></div>
-      <div class="pct">21.9%</div>
+      <div class="bar"><div class="bar-fill" style="width:21.4%;"></div></div>
+      <div class="pct">21.4%</div>
     </div>
   </div>
 </div>
@@ -2465,17 +2464,17 @@ function switchLottery(ltype) {
     <div class="focus-label red-label">🔴 前区推荐</div>
     <div class="focus-list">
       <div class="focus-ball">25</div>
+      <div class="focus-ball">29</div>
+      <div class="focus-ball">02</div>
+      <div class="focus-ball">18</div>
       <div class="focus-ball">14</div>
-      <div class="focus-ball">12</div>
-      <div class="focus-ball">17</div>
-      <div class="focus-ball">06</div>
     </div>
   </div>
   <div class="focus-section">
     <div class="focus-label blue-label">🔵 后区推荐</div>
     <div class="focus-list">
       <div class="focus-ball blue">12</div>
-      <div class="focus-ball blue">09</div>
+      <div class="focus-ball blue">07</div>
     </div>
   </div>
   <div class="focus-reason">
@@ -2486,6 +2485,19 @@ function switchLottery(ltype) {
 <!-- 历史开奖记录 -->
 <div class="history">
   <div class="history-title">📜 最近5期开奖记录</div>
+  <div class="history-item">
+    <div class="history-period">第26131期 · 2026-11-16</div>
+    <div class="history-balls">
+      <div class="history-ball red">02</div>
+      <div class="history-ball red">11</div>
+      <div class="history-ball red">18</div>
+      <div class="history-ball red">19</div>
+      <div class="history-ball red">29</div>
+      <div class="history-sep">+</div>
+      <div class="history-ball blue">04</div>
+      <div class="history-ball blue">07</div>
+    </div>
+  </div>
   <div class="history-item">
     <div class="history-period">第26130期 · 2026-11-14</div>
     <div class="history-balls">
@@ -2536,19 +2548,6 @@ function switchLottery(ltype) {
       <div class="history-sep">+</div>
       <div class="history-ball blue">03</div>
       <div class="history-ball blue">12</div>
-    </div>
-  </div>
-  <div class="history-item">
-    <div class="history-period">第26126期 · 2026-11-04</div>
-    <div class="history-balls">
-      <div class="history-ball red">05</div>
-      <div class="history-ball red">11</div>
-      <div class="history-ball red">17</div>
-      <div class="history-ball red">25</div>
-      <div class="history-ball red">34</div>
-      <div class="history-sep">+</div>
-      <div class="history-ball blue">04</div>
-      <div class="history-ball blue">06</div>
     </div>
   </div>
 </div>
@@ -2628,7 +2627,7 @@ function switchLottery(ltype) {
 <div class="datanote">
   <div class="datanote-title">ℹ️ 数据更新说明</div>
   <div class="datanote-content">
-    <p>🕒 数据更新时间：2026-11-14 开奖后</p>
+    <p>🕒 数据更新时间：2026-11-16 开奖后</p>
     <p>📊 数据来源：官方开奖数据 + 150+统计模型</p>
     <p>🔄 更新频率：每日开奖后自动更新</p>
     <p>✅ 与推荐卡片使用同一套数据和计算逻辑</p>
@@ -2636,7 +2635,7 @@ function switchLottery(ltype) {
 </div>
 
 <!-- 动态尾文（与百家号完全一致） -->
-<div class="closing-text"><p>🎯 大乐透第26130期开奖结果已经出炉，让我们一起用数据来复盘一下本期的走势。</p><p>📊 本期（2026-11-14）大乐透第26130期开奖号码：01 07 11 27 29 + 02 06。</p><p>📝 选号参考：下期可以考虑以下策略——①热号选2-3个，冷号选1-2个，温号选2-3个；②奇偶比控制在2:3附近；③大小比同样保持均衡；④可以考虑1组连号或1个重号，但不要过多。以上仅供参考，不构成投注建议。</p><p>🔗 连号观察：本期没有出现连号，这也是比较常见的情况。连号的出现往往具有一定的聚集效应，连续两期出现连号的概率相对较低。</p><p>📍 区间分析：从号码分布来看，本期号码覆盖了多个区间，分布较为分散。区间分布的均衡性是选号时需要考虑的重要因素。</p><p>😊 购彩心态分享：有一位老彩民说过，"我买彩票不是为了中奖，而是为了每天有个盼头"。这句话道出了很多彩民的心声。其实购彩的乐趣不在于结果，而在于期待的过程。每期开奖前的那种期待感，才是购彩最大的魅力。</p><p>📋 免责声明：本文所有内容均基于历史开奖数据的自动统计分析，仅供学习交流和参考，不构成任何投资或购彩建议。彩票开奖具有随机性，历史表现不代表未来结果。购彩有风险，请理性参与，未成年人禁止购彩。</p><p>📅 下期分析将于开奖后更新，记得来看哦！祝大家都能收获自己的幸运号码！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
+<div class="closing-text"><p>📊 大乐透第26131期 vs 历史平均：本期数据有哪些异常？我们一起来对比看看。</p><p>🔥 热号观察：近30期最热的5个前区是14(8次)、25(7次)、02(6次)、29(6次)、01(6次)。这些号码近期表现活跃，是否会继续延续？从历史回测来看，热号连续出现3期以上的概率约为35%，需要警惕热号转冷的拐点。</p><p>❄️ 冷号关注：当前遗漏最久的5个号码是10(漏31期)、27(漏28期)、01(漏23期)、25(漏21期)、33(漏18期)。尤其是10已经遗漏了31期，从历史分布来看，这个遗漏时长已经超过了平均遗漏周期的1.5倍，回补概率在逐步增加。</p><p>🔢 奇偶比分析：本期开出3个奇数、2个偶数，比例为3:2。从近30期数据来看，奇偶比最常见的分布是2:3左右，本期相对均衡，可以继续保持关注。</p><p>🤖 关于我们的预测系统：我们使用了150+个统计模型，包括基础统计、进阶统计、机器学习、时间序列、集成学习、深度学习、训练优化、评估监控8大维度。每个彩种都有定制的权重配置，并且会根据历史回测数据自动调整权重。当然，再强大的模型也无法改变彩票的随机性。</p><p>🎲 概率小课堂：很多人以为"连续多期没出的号码下期必出"，其实这是典型的"赌徒谬误"。从概率角度看，每一期开奖都是独立事件，之前的结果不会影响未来的概率。一个号码遗漏了50期，它下期出现的概率和其他号码是完全一样的。</p><p>💭 购彩哲学：有人说"彩票是穷人的智商税"，也有人说"彩票是花小钱买希望"。其实关键在于心态——把购彩当作一种娱乐，享受期待的过程，而不是执着于中奖结果。每期花几块钱，给自己一个希望，也是一种生活乐趣。</p><p>📅 本期开奖日期：2026-11-16，期号：第26131期。前区开出：02 11 18 19 29。后区开出：04 07。</p><p>🎯 下期选号思路：基于150+统计模型和机器学习算法的综合评分，我们建议下期关注以下几点：一是热号延续与冷号回补的平衡，不要只追热也不要只守冷；二是奇偶、大小的均衡配置，从概率角度更符合长期分布；三是前区的区间覆盖，尽量不要让号码过度集中在某一区间。</p><p>📝 本期分析就到这里，感谢您的阅读。第26132期我们再见，祝您好运！</p><p>📊 数据仅供统计参考，不构成投资或购彩建议<br>⚠️ 理性购彩，量力而行，未成年人禁止购彩</p></div>
 
 <!-- 理性购彩提示 -->
 <div class="disclaimer">
@@ -2646,58 +2645,9 @@ function switchLottery(ltype) {
   </div>
 </div>
 
+
 </div>
 
-<!-- POSTPROC-JS:BEGIN -->
-<script>
-(function(){
-  function esc(v){ if(v==null) return '—'; return String(v).replace(/[&<>]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
-  var LBL_BY_TYPE = {
-    ssq: {front:'红球', back:'蓝球'},
-    dlt: {front:'前区', back:'后区'},
-    qlc: {front:'基本号', back:'特别号'},
-    qxc: {nums:'号码', special:'特别号'},
-    pl35: {p3:'P3', p5:'P5'},
-    kl8: {nums:'号码'},
-    fc3d: {nums:'号码'}
-  };
-  function fmtPick(v, type){
-    var LBL = LBL_BY_TYPE[type] || {};
-    if(v==null) return '—';
-    if(Array.isArray(v)) return v.join(' ');
-    if(typeof v === 'object'){
-      return Object.keys(v).map(function(k){
-        var x = v[k];
-        return (LBL[k] || k) + ' ' + (Array.isArray(x) ? x.join(' ') : String(x));
-      }).join(' ／ ');
-    }
-    return String(v);
-  }
-  function load(){
-    var box = document.getElementById('postproc-user-body');
-    if(!box) return;
-    fetch('dashboard_data.json?t=' + Date.now()).then(function(r){return r.json();}).then(function(d){
-      var p = d && d.postproc_layer;
-      if(!p){ box.innerHTML = '暂无后处理数据'; return; }
-      var html = '';
-      (p.picks || []).forEach(function(r){
-        html += '<div style="padding:9px 0;border-bottom:1px dashed #EFEFEF;">'
-          + '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">'
-          + '<span style="font-weight:700;color:#0F2A43;font-size:13px;">' + esc(r.name)
-          + '<span style="color:#B5B5B5;font-weight:400;font-size:11px;margin-left:6px;">' + esc(r.period) + '</span></span>'
-          + '<span style="font-size:11px;color:#C8102E;background:#FDF2F2;border-radius:8px;padding:1px 7px;white-space:nowrap;">重合 ' + esc(r.overlap_pct) + '%</span>'
-          + '</div>'
-          + '<div style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;color:#C8102E;letter-spacing:0.4px;margin-top:4px;word-break:break-word;">' + esc(fmtPick(r.constrained, r.type)) + '</div>'
-          + '<div style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;color:#B5B5B5;margin-top:3px;word-break:break-word;">引擎原注 ' + esc(fmtPick(r.engine, r.type)) + '</div>'
-          + '</div>';
-      });
-      html += '<div style="margin-top:8px;font-size:11.5px;color:#999;">生成 ' + esc(p.generated_at) + ' · 仅供统计参考，理性购彩</div>';
-      box.innerHTML = html;
-    }).catch(function(){ box.innerHTML = '暂无后处理数据'; });
-  }
-  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', load); } else { load(); }
-})();
-</script>
-<!-- POSTPROC-JS:END -->
+
 </body>
 </html>
