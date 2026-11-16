@@ -2253,9 +2253,6 @@
             <button class="active" onclick="showSection('overview', this)">📊 总览</button>
             <button class="nav-ops" onclick="showSection('ops', this)">⚙️ 运维</button>
             <button id="lottery-menu-btn" onclick="toggleLotteryMenu()">🎯 彩票 <span id="lottery-menu-arrow">▼</span></button>
-<!-- POSTPROC-NAV:BEGIN -->
-            <button onclick="showSection('postproc', this)">🧪 后处理</button>
-<!-- POSTPROC-NAV:END -->
 
         </div>
 
@@ -2492,22 +2489,48 @@
         <!-- 运维监控 -->
         
 
-        <!-- POSTPROC-UI:BEGIN -->
-        <div id="postproc" class="section">
-            <div class="grid">
-                <div class="card">
-                    <h2 class="no-bar">🧪 后处理层 · 多样性约束 + 100期评估</h2>
-                    <div style="font-size:0.82em;line-height:1.7;opacity:0.8;margin-bottom:12px;">
-                        引擎输出为只读输入，本层不改预测链：① 主推号码加「相邻两期重合 ≤70%」约束，降低连续多期同注的风险集中；
-                        ② 评估统一用近100期 + t 检验口径，防止按20期小样本波动调参。
-                    </div>
-                    <div id="postproc-body" style="font-size:0.85em;opacity:0.78;">加载中…</div>
-                </div>
-            </div>
-        </div>
-<!-- POSTPROC-UI:END -->
         <div id="ops" class="section">
             <div class="grid">
+<!-- POSTPROC-UI:BEGIN -->
+<style>
+#postproc{grid-column:1/-1;}
+.pp-lead{font-size:12.5px;line-height:1.75;opacity:.75;margin:2px 0 14px;}
+.pp-sec{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin:22px 0 10px;padding-top:14px;border-top:1px solid rgba(128,128,128,.22);}
+.pp-sec.first{border-top:0;padding-top:0;margin-top:6px;}
+.pp-sec-t{font-size:14.5px;font-weight:700;letter-spacing:.2px;}
+.pp-sec-s{font-size:11.5px;opacity:.6;}
+.pp-chip{display:inline-block;font-size:11px;padding:1px 8px;border-radius:999px;border:1px solid rgba(128,128,128,.35);}
+.pp-chip.ok{color:#2FA36B;border-color:rgba(47,163,107,.45);background:rgba(47,163,107,.08);}
+.pp-chip.warn{color:#C08A00;border-color:rgba(192,138,0,.45);background:rgba(192,138,0,.1);}
+.pp-chip.bad{color:#D2453F;border-color:rgba(210,69,63,.45);background:rgba(210,69,63,.09);}
+.pp-row{padding:11px 0;border-bottom:1px solid rgba(128,128,128,.14);}
+.pp-row:last-child{border-bottom:0;}
+.pp-h{display:flex;align-items:center;flex-wrap:wrap;gap:7px;}
+.pp-name{font-size:13px;font-weight:700;}
+.pp-per{font-size:11px;opacity:.5;font-variant-numeric:tabular-nums;}
+.pp-pill{font-size:11px;padding:1px 7px;border-radius:999px;background:rgba(201,162,39,.16);color:#C9A227;white-space:nowrap;}
+.pp-nums{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13.5px;letter-spacing:.6px;line-height:1.6;margin-top:5px;word-break:break-word;}
+.pp-sub{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;opacity:.45;line-height:1.6;margin-top:3px;word-break:break-word;}
+.pp-meta{font-size:11.5px;line-height:1.7;opacity:.72;margin-top:4px;font-variant-numeric:tabular-nums;}
+.pp-v{font-size:11.5px;margin-left:auto;white-space:nowrap;}
+.pp-note{font-size:11px;line-height:1.65;opacity:.5;margin-top:6px;}
+.pp-wrap{display:flex;flex-wrap:wrap;gap:6px 14px;}
+.pp-item{font-size:12px;line-height:1.8;}
+@media(max-width:760px){
+  #postproc{grid-column:auto;}
+}
+@media(max-width:520px){
+  .pp-nums{font-size:12.5px;letter-spacing:.2px;}
+  .pp-v{margin-left:0;width:100%;}
+}
+</style>
+<div class="card" id="postproc">
+  <h2 class="no-bar">🧪 后处理层<span class="pp-sec-s" style="margin-left:8px;">多样性约束 + 100期评估</span></h2>
+  <div class="pp-lead">引擎输出为只读输入，本层不改预测链：① 主推号码加「相邻两期重合 ≤70%」约束，降低连续多期同注的风险集中；② 评估统一用近100期 + t 检验口径，防止按20期小样本波动调参。</div>
+  <div id="postproc-body">加载中…</div>
+</div>
+<!-- POSTPROC-UI:END -->
+
                 <!-- 全量模型监控（不动） -->
                 <div class="card" id="full-model-monitoring">
                     <h2 class="no-bar">📦 全量模型监控 <span style="font-size:0.6em;color:#9AA3AF;font-weight:normal;">639个模型</span></h2>
@@ -5198,128 +5221,127 @@
     }
     return String(v);
   }
+  function sec(title, sub, first){
+    return '<div class="pp-sec' + (first ? ' first' : '') + '"><span class="pp-sec-t">' + title + '</span>'
+         + (sub ? '<span class="pp-sec-s">' + sub + '</span>' : '') + '</div>';
+  }
+  function lvlChip(lv){
+    var m = {ok:['ok','正常'], warn:['warn','有提示'], err:['bad','有异常']};
+    var x = m[lv] || ['', lv];
+    return '<span class="pp-chip ' + x[0] + '">' + esc(x[1]) + '</span>';
+  }
   function load(){
     var box = document.getElementById('postproc-body');
     if(!box) return;
     fetch('dashboard_data.json?t=' + Date.now()).then(function(r){return r.json();}).then(function(d){
       var p = d && d.postproc_layer;
-      if(!p){ box.innerHTML = '<div style="padding:8px;">暂无后处理数据</div>'; return; }
+      if(!p){ box.innerHTML = '<div class="pp-note">暂无后处理数据</div>'; return; }
       var evMap = {};
       (p.eval || []).forEach(function(r){ evMap[r.type] = r; });
-      var h = '<div style="font-size:0.9em;opacity:0.62;margin-bottom:10px;">生成 ' + esc(p.generated_at)
-            + ' · 约束上限：与上期重合 ≤' + esc(p.overlap_cap) + '% · 引擎只读</div>';
-      h += '<table style="width:100%;table-layout:fixed;border-collapse:collapse;font-size:0.78em;">';
-      h += '<thead><tr>' + [['彩种','66px'],['期号','74px'],['引擎原主推','31%'],['约束后主推','31%'],['重合','50px'],['近100／期望','84px'],['判定','104px']]
-        .map(function(c){ return '<th style="width:' + c[1] + ';text-align:left;padding:6px;border-bottom:1px solid rgba(128,128,128,0.35);white-space:nowrap;">' + c[0] + '</th>'; }).join('') + '</tr></thead><tbody>';
+      var h = '<div class="pp-note" style="margin-top:0;margin-bottom:2px;">生成 ' + esc(p.generated_at)
+            + ' · 与上期重合 ≤' + esc(p.overlap_cap) + '% · 引擎只读</div>';
+
+      h += sec('本期主推（约束后）', '重合率 = 与上期主推的重复比例', true);
       (p.picks || []).forEach(function(r){
         var e = evMap[r.type] || {};
-        var hit = (e.mean_100 == null) ? '—' : (e.mean_100 + ' / ' + e.expect);
-        var verdict = esc(e.verdict) + '<span style="opacity:0.45;"> t=' + esc(e.t_100) + '</span>';
-        h += '<tr>'
-          + '<td style="padding:6px;border-bottom:1px solid rgba(128,128,128,0.18);">' + esc(r.name) + '</td>'
-          + '<td style="padding:6px;border-bottom:1px solid rgba(128,128,128,0.18);">' + esc(r.period) + '</td>'
-          + '<td style="padding:6px;border-bottom:1px solid rgba(128,128,128,0.18);font-family:monospace;word-break:break-word;opacity:0.62;">' + esc(fmtPick(r.engine, r.type)) + '</td>'
-          + '<td style="padding:6px;border-bottom:1px solid rgba(128,128,128,0.18);font-family:monospace;word-break:break-word;font-weight:600;">' + esc(fmtPick(r.constrained, r.type)) + '</td>'
-          + '<td style="padding:6px;border-bottom:1px solid rgba(128,128,128,0.18);white-space:nowrap;">' + esc(r.overlap_pct) + '%</td>'
-          + '<td style="padding:6px;border-bottom:1px solid rgba(128,128,128,0.18);white-space:nowrap;">' + hit + '</td>'
-          + '<td style="padding:6px;border-bottom:1px solid rgba(128,128,128,0.18);white-space:nowrap;">' + verdict + '</td>'
-          + '</tr>';
+        h += '<div class="pp-row">'
+          + '<div class="pp-h"><span class="pp-name">' + esc(r.name) + '</span>'
+          + '<span class="pp-per">第' + esc(r.period) + '期</span>'
+          + '<span class="pp-pill">重合 ' + esc(r.overlap_pct) + '%</span>'
+          + '<span class="pp-v" style="opacity:.62;">' + esc(e.mean_100) + ' vs ' + esc(e.expect)
+          + ' · t=' + esc(e.t_100) + '</span></div>'
+          + '<div class="pp-nums">' + esc(fmtPick(r.constrained, r.type)) + '</div>'
+          + '<div class="pp-sub">引擎原注 ' + esc(fmtPick(r.engine, r.type)) + '</div>'
+          + '</div>';
       });
-      h += '</tbody></table>';
+
       if((p.constraint||[]).length){
-        h += '<div style="margin-top:18px;font-size:0.92em;font-weight:600;">约束实证（walk-forward，约束注 vs 引擎原注）</div>';
-        h += '<table style="width:100%;table-layout:fixed;border-collapse:collapse;font-size:0.78em;margin-top:6px;">';
-        h += '<thead><tr>' + [['彩种','30%'],['样本','12%'],['引擎原注','18%'],['约束后','18%'],['t','12%'],['判定','12%']]
-          .map(function(c){ return '<th style="width:' + c[1] + ';text-align:left;padding:5px;border-bottom:1px solid rgba(128,128,128,0.3);white-space:nowrap;">' + c[0] + '</th>'; }).join('') + '</tr></thead><tbody>';
+        h += sec('约束实证', '同一开奖对比 引擎原注 vs 约束注');
         (p.constraint||[]).forEach(function(r){
-          h += '<tr>'
-            + '<td style="padding:5px;border-bottom:1px solid rgba(128,128,128,0.15);">' + esc(r.name) + '</td>'
-            + '<td style="padding:5px;border-bottom:1px solid rgba(128,128,128,0.15);">' + esc(r.n) + '</td>'
-            + '<td style="padding:5px;border-bottom:1px solid rgba(128,128,128,0.15);">' + esc(r.engine_mean) + '</td>'
-            + '<td style="padding:5px;border-bottom:1px solid rgba(128,128,128,0.15);">' + esc(r.constrained_mean) + '</td>'
-            + '<td style="padding:5px;border-bottom:1px solid rgba(128,128,128,0.15);">' + esc(r.t) + '</td>'
-            + '<td style="padding:5px;border-bottom:1px solid rgba(128,128,128,0.15);white-space:nowrap;">' + esc(r.verdict) + '</td>'
-            + '</tr>';
+          h += '<div class="pp-row"><div class="pp-h"><span class="pp-name">' + esc(r.name) + '</span>'
+             + '<span class="pp-per">n=' + esc(r.n) + '</span>'
+             + '<span class="pp-v" style="opacity:' + (r.verdict === '无差异' ? '.6' : '.95') + ';">' + esc(r.verdict)
+             + ' · t=' + esc(r.t) + '</span></div>'
+             + '<div class="pp-meta">原注 ' + esc(r.engine_mean) + ' → 约束后 ' + esc(r.constrained_mean) + '</div></div>';
         });
-        h += '</tbody></table>';
-        h += '<div style="margin-top:6px;font-size:0.8em;opacity:0.55;">样本20-48期，差异均在噪声量级（快乐8 单点 t=-2.25 但属21次多重比较，不作结论）。</div>';
+        h += '<div class="pp-note">样本 20–48 期，差异均在噪声量级；快乐8 单点 t=−2.25 属 21 次多重比较，不作结论。</div>';
       }
+
       if(p.baseline_audit && (p.baseline_audit.rows||[]).length){
-        h += '<div style="margin-top:20px;font-size:0.96em;font-weight:600;">基准口径审计'
-           + '<span style="margin-left:8px;font-size:0.82em;color:' + (p.baseline_audit.level === 'ok' ? '#3CB371' : '#E0A800') + ';">'
-           + (p.baseline_audit.level === 'ok' ? '一致' : '有基准偏差') + '</span></div>';
-        h += '<div style="margin-top:8px;overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:0.8em;">';
-        h += '<tr style="opacity:0.65;text-align:left;"><th style="padding:6px 4px;">彩种</th><th>n</th><th>展示均值</th><th>逐期重算</th><th>理论期望</th><th>官方基准</th><th>基准偏差</th><th>判定</th></tr>';
-        (p.baseline_audit.rows||[]).forEach(function(r){
+        var ba = p.baseline_audit, badN = 0;
+        (ba.rows||[]).forEach(function(r){ if(r.verdict !== '口径一致') badN++; });
+        h += sec('基准口径审计', badN ? (badN + ' 个彩种基准偏离理论') : '全部与理论一致');
+        (ba.rows||[]).forEach(function(r){
           var bad = r.verdict !== '口径一致';
-          h += '<tr style="border-top:1px solid rgba(255,255,255,0.06);"><td style="padding:6px 4px;">' + esc(r.name) + '</td><td>' + esc(r.n)
-             + '</td><td>' + esc(r.shown_avg) + '</td><td>' + esc(r.recomputed) + '</td><td>' + esc(r.theory)
-             + '</td><td>' + esc(r.baseline) + '</td><td>' + (r.baseline_gap_pct == null ? '—' : esc(r.baseline_gap_pct) + '%')
-             + '</td><td style="color:' + (bad ? '#E0A800' : 'inherit') + ';">' + esc(r.verdict) + '</td></tr>';
+          h += '<div class="pp-row"><div class="pp-h"><span class="pp-name">' + esc(r.name) + '</span>'
+             + '<span class="pp-per">n=' + esc(r.n) + '</span>'
+             + '<span class="pp-v" style="color:' + (bad ? '#C08A00' : 'inherit') + ';opacity:' + (bad ? '1' : '.55') + ';">'
+             + (bad ? '基准偏差 ' + esc(r.baseline_gap_pct) + '% → improvement 不可信' : '口径一致') + '</span></div>'
+             + '<div class="pp-meta">展示 ' + esc(r.shown_avg) + '｜重算 ' + esc(r.recomputed)
+             + '｜理论 ' + esc(r.theory) + '｜官方基准 ' + esc(r.baseline) + '</div></div>';
         });
-        h += '</table></div>';
-        h += '<div style="margin-top:6px;font-size:0.76em;opacity:0.55;">基准偏差≥5% 即标“improvement 不可信”：七乐彩基准只算基本号、七星彩基准偏低，两者“跑赢基准”的说法作废；其余 5 彩种口径一致。</div>';
+        h += '<div class="pp-note">偏差 ≥5% 即标“improvement 不可信”：七乐彩基准漏特别号、七星彩基准偏低，两者“跑赢基准”的说法作废；其余 5 彩种口径一致。</div>';
       }
+
       if((p.winrate||[]).length){
-        h += '<div style="margin-top:20px;font-size:0.96em;font-weight:600;">中奖率实证（这一注到底中没中奖）</div>';
-        h += '<div style="margin-top:8px;overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:0.82em;">';
-        h += '<tr style="opacity:0.65;text-align:left;"><th style="padding:6px 4px;">彩种</th><th>期数</th><th>中奖次数</th><th>实测中奖率</th><th>理论</th><th>p</th><th>判定</th></tr>';
+        h += sec('中奖率实证', '这一注到底中没中奖');
         (p.winrate||[]).forEach(function(r){
-          var col = r.verdict.indexOf('高于') === 0 ? '#3CB371' : (r.verdict.indexOf('低于') === 0 ? '#E5484D' : 'inherit');
-          h += '<tr style="border-top:1px solid rgba(255,255,255,0.06);"><td style="padding:6px 4px;">' + esc(r.name) + '</td><td>' + esc(r.n)
-             + '</td><td>' + esc(r.wins) + '</td><td>' + (r.rate == null ? '—' : esc(r.rate) + '%')
-             + '</td><td>' + (r.theory == null ? '—' : esc(r.theory) + '%') + '</td><td>' + (r.p_value == null ? '—' : esc(r.p_value))
-             + '</td><td style="color:' + col + ';">' + esc(r.verdict) + '</td></tr>';
+          var col = r.verdict.indexOf('高于') === 0 ? '#2FA36B' : (r.verdict.indexOf('低于') === 0 ? '#D2453F' : 'inherit');
+          h += '<div class="pp-row"><div class="pp-h"><span class="pp-name">' + esc(r.name) + '</span>'
+             + '<span class="pp-per">' + esc(r.wins) + '/' + esc(r.n) + ' 期</span>'
+             + '<span class="pp-v" style="color:' + col + ';">' + esc(r.verdict) + '</span></div>'
+             + '<div class="pp-meta">实测 ' + (r.rate == null ? '—' : esc(r.rate) + '%')
+             + '｜理论 ' + (r.theory == null ? '—' : esc(r.theory) + '%')
+             + '｜p=' + (r.p_value == null ? '—' : esc(r.p_value)) + '</div></div>';
         });
-        h += '</table></div>';
-        h += '<div style="margin-top:6px;font-size:0.76em;opacity:0.55;">口径：按官方奖级判“是否中奖”（不分档、不计奖金）；快乐8 单点 p=0.019 属 8 次比较，Bonferroni 阈值 0.006，不作结论。七乐彩/七星彩奖级规则未固化，标待补充。</div>';
+        h += '<div class="pp-note">按官方奖级判“是否中奖”，不分档不计奖金；快乐8 单点 p=0.019 属 8 次比较（Bonferroni 阈值 0.006），不作结论。七乐彩/七星彩奖级规则未固化，标待补充。</div>';
       }
-      if(p.pred_check){
-        var pc = p.pred_check;
-        h += '<div style="margin-top:12px;font-size:0.8em;">数据一致性：pred_history vs backtest_stats 同期单注，比对 ' + esc(pc.checked)
-           + ' 期、不一致 ' + esc(pc.mismatch) + ' 期（' + esc(pc.rate) + '%）'
-           + '<span style="opacity:0.6;"> · 属引擎重算导致的历史分歧，后处理只做提示不改动</span></div>';
+
+      if((p.fill_test||[]).length){
+        h += sec('补位策略 A/B/C', '换号后从池里补哪类号');
+        (p.fill_test||[]).forEach(function(r){
+          h += '<div class="pp-row"><div class="pp-h"><span class="pp-name">' + esc(r.name) + '</span></div>'
+             + '<div class="pp-meta">高频 ' + esc(r.hot) + '｜冷号 ' + esc(r.cold) + '（t=' + esc(r.cold_t) + '）'
+             + '｜随机 ' + esc(r.random) + '（t=' + esc(r.random_t) + '）</div></div>';
+        });
+        h += '<div class="pp-note">冷号补位在快乐8/福彩3D 变差，随机补位仅噪声级波动 → 维持高频池顺序，不引入策略参数。</div>';
       }
+
       if(p.freshness){
         var f = p.freshness;
-        var lv = {ok:'正常', warn:'有提示', err:'有异常'}[f.level] || f.level;
-        var col = f.level === 'ok' ? '#3CB371' : (f.level === 'warn' ? '#E0A800' : '#E5484D');
-        h += '<div style="margin-top:18px;font-size:0.92em;font-weight:600;">数据体检'
-           + '<span style="margin-left:8px;font-size:0.85em;color:' + col + ';">' + esc(lv) + '</span>'
-           + '<span style="margin-left:8px;font-size:0.78em;opacity:0.5;">' + esc(f.checked_at) + '</span></div>';
-        h += '<div style="margin-top:6px;font-size:0.78em;line-height:1.9;">';
+        h += sec('数据体检', esc(f.checked_at));
+        h += '<div style="margin:-4px 0 8px;">' + lvlChip(f.level) + '</div>';
+        h += '<div class="pp-wrap">';
         (f.rows||[]).forEach(function(r){
-          var c = r.status === '正常' ? 'rgba(128,128,128,0.75)' : '#E0A800';
-          h += '<span style="display:inline-block;margin-right:14px;white-space:nowrap;">' + esc(r.name)
-             + ' <span style="opacity:0.6;">期' + esc(r.latest_period) + '·' + esc(r.draw_date) + '</span>'
-             + ' <span style="color:' + c + ';">' + esc(r.status) + '</span></span>';
+          var c = r.status === '正常' ? 'ok' : 'warn';
+          h += '<span class="pp-item"><b>' + esc(r.name) + '</b> <span style="opacity:.55;">' + esc(r.latest_period)
+             + '·' + esc(r.draw_date) + '</span> <span class="pp-chip ' + c + '" style="font-size:10.5px;">' + esc(r.status) + '</span></span>';
         });
         h += '</div>';
         (f.items||[]).forEach(function(it){
-          var c2 = it.level === 'err' ? '#E5484D' : (it.level === 'warn' ? '#E0A800' : 'rgba(128,128,128,0.7)');
-          h += '<div style="margin-top:4px;font-size:0.78em;color:' + c2 + ';">· ' + esc(it.text) + '</div>';
+          var c2 = it.level === 'err' ? '#D2453F' : (it.level === 'warn' ? '#C08A00' : 'rgba(128,128,128,.7)');
+          h += '<div class="pp-note" style="color:' + c2 + ';">· ' + esc(it.text) + '</div>';
         });
       }
+
+      if(p.pred_check){
+        var pc = p.pred_check;
+        h += sec('数据一致性', 'pred_history vs backtest_stats');
+        h += '<div class="pp-note" style="margin-top:0;">比对 ' + esc(pc.checked) + ' 期，不一致 ' + esc(pc.mismatch)
+           + ' 期（' + esc(pc.rate) + '%）· 属引擎重算导致的历史分歧，后处理只提示不改动</div>';
+      }
+
       if(p.guard){
-        var g = p.guard, gc = (g.level === 'ok') ? '#3CB371' : '#E5484D';
-        h += '<div style="margin-top:14px;font-size:0.9em;">有效性守卫'
-           + '<span style="margin-left:8px;color:' + gc + ';">' + (g.level === 'ok' ? '无漂移' : '发现漂移') + '</span>'
-           + '<span style="margin-left:8px;font-size:0.78em;opacity:0.55;">已累计复检 ' + esc(g.days) + ' 天 · 连续3次 t≥1.5 才告警</span></div>';
-        (g.alerts||[]).forEach(function(a){ h += '<div style="margin-top:3px;font-size:0.78em;color:#E5484D;">· ' + esc(a.text) + '</div>'; });
+        var g = p.guard;
+        h += sec('有效性守卫', '连续 3 次 t≥1.5 才告警');
+        h += '<div class="pp-h" style="gap:10px;">' + lvlChip(g.level)
+           + '<span class="pp-sec-s">已累计复检 ' + esc(g.days) + ' 天</span></div>';
+        (g.alerts||[]).forEach(function(a){ h += '<div class="pp-note" style="color:#D2453F;">· ' + esc(a.text) + '</div>'; });
       }
-      if((p.fill_test||[]).length){
-        h += '<div style="margin-top:16px;font-size:0.92em;font-weight:600;">补位策略 A/B/C（换号后从池里补哪类号）</div>';
-        h += '<div style="margin-top:6px;font-size:0.78em;line-height:1.9;">';
-        (p.fill_test||[]).forEach(function(r){
-          h += '<span style="display:inline-block;margin-right:14px;white-space:nowrap;">' + esc(r.name)
-             + '：高频 ' + esc(r.hot) + ' / 冷号 ' + esc(r.cold) + '(t=' + esc(r.cold_t) + ') / 随机 '
-             + esc(r.random) + '(t=' + esc(r.random_t) + ')</span>';
-        });
-        h += '</div><div style="margin-top:4px;font-size:0.78em;opacity:0.55;">冷号补位在快乐8/福彩3D 变差，随机补位仅噪声级波动 → 维持高频池顺序，不引入策略参数。</div>';
-      }
-      h += '<div style="margin-top:10px;font-size:0.85em;opacity:0.6;">后处理层只做号码分散与评估口径校准，不改引擎权重；模型为统计参考，非预测工具。</div>';
+
+      h += '<div class="pp-note" style="margin-top:16px;">后处理层只做号码分散与评估口径校准，不改引擎权重；模型为统计参考，非预测工具。</div>';
       box.innerHTML = h;
-    }).catch(function(){ box.innerHTML = '<div style="padding:8px;opacity:0.6;">后处理数据加载失败</div>'; });
+    }).catch(function(){ box.innerHTML = '<div class="pp-note">后处理数据加载失败</div>'; });
   }
   if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', load); } else { load(); }
 })();
