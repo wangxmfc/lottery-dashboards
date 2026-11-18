@@ -10860,7 +10860,7 @@
   },
   "ops_monitoring": {
     "system_health": {
-      "score": 100,
+      "score": 97,
       "level": "优",
       "dimensions": [
         {
@@ -10870,7 +10870,7 @@
         },
         {
           "name": "数据新鲜度",
-          "score": 100,
+          "score": 85,
           "status": "正常"
         },
         {
@@ -10896,28 +10896,28 @@
         "schedule": "工作日 08:00",
         "status": "success",
         "last_run": "2026-09-24 08:28",
-        "next_run": "2026-11-17 08:00"
+        "next_run": "2026-11-18 08:00"
       },
       {
         "name": "午间评盘",
         "schedule": "工作日 11:35",
         "status": "pending",
         "last_run": "-",
-        "next_run": "2026-11-17 11:35"
+        "next_run": "2026-11-18 11:35"
       },
       {
         "name": "盘后复盘",
         "schedule": "工作日 15:10",
         "status": "pending",
         "last_run": "-",
-        "next_run": "2026-11-17 15:10"
+        "next_run": "2026-11-18 15:10"
       },
       {
         "name": "彩票开奖",
         "schedule": "每天 20:10",
         "status": "pending",
         "last_run": "-",
-        "next_run": "2026-11-17 20:10"
+        "next_run": "2026-11-18 20:10"
       },
       {
         "name": "Excel周六合集",
@@ -10939,20 +10939,20 @@
       {
         "name": "彩票数据源",
         "status": "ok",
-        "latency": "221ms",
-        "last_check": "2026-11-17 22:30"
+        "latency": "235ms",
+        "last_check": "2026-11-18 13:46"
       },
       {
         "name": "图床服务",
         "status": "ok",
-        "latency": "1205ms",
-        "last_check": "2026-11-17 22:30"
+        "latency": "1294ms",
+        "last_check": "2026-11-18 13:46"
       },
       {
         "name": "GitHub Pages",
         "status": "ok",
-        "latency": "7985ms",
-        "last_check": "2026-11-17 22:30"
+        "latency": "934ms",
+        "last_check": "2026-11-18 13:46"
       }
     ],
     "run_times": [
@@ -10977,7 +10977,7 @@
       },
       {
         "name": "运行日志",
-        "size": "100K"
+        "size": "104K"
       },
       {
         "name": "备份包",
@@ -11023,7 +11023,7 @@
         "desc": "dashboard_data.json 更新"
       },
       {
-        "time": "51天前",
+        "time": "52天前",
         "module": "数据脚本",
         "desc": "scripts/update_dashboard_data.py 更新"
       },
@@ -11033,7 +11033,7 @@
         "desc": "scripts/verify_consistency.py 更新"
       },
       {
-        "time": "20天前",
+        "time": "21天前",
         "module": "预测卡片",
         "desc": "scripts/gen_cards_v2.py 更新"
       }
@@ -11048,11 +11048,11 @@
         "desc": "部分彩种历史数据不足200期，回测样本待积累"
       }
     ],
-    "collected_at": "2026-11-17 22:30:43"
+    "collected_at": "2026-11-18 13:46:11"
   },
   "last_status_update": "2026-11-17 22:30:27",
   "postproc_layer": {
-    "generated_at": "2026-11-17 22:30:30",
+    "generated_at": "2026-11-18 13:45:59",
     "overlap_cap": 70,
     "eval": [
       {
@@ -11410,34 +11410,38 @@
       }
     ],
     "freshness": {
-      "checked_at": "2026-11-17 22:30:30",
-      "level": "ok",
+      "checked_at": "2026-11-18 13:45:59",
+      "level": "warn",
       "items": [
         {
           "level": "info",
           "text": "backtest_stats.last_updated 仍为 2026-10-19 22:19:57（滞后29天），records 已含最新，属元数据字段未刷新"
+        },
+        {
+          "level": "warn",
+          "text": "双色球 自 2026-11-15 起漏 1 期未抓到（应开日 11-17），看板延续上期数据"
         }
       ],
       "files": [
         {
           "file": "backtest_stats.json",
           "mtime": "2026-11-17 22:25",
-          "age_h": 0.1
+          "age_h": 15.3
         },
         {
           "file": "pred_state.json",
           "mtime": "2026-11-17 22:28",
-          "age_h": 0.0
+          "age_h": 15.3
         },
         {
           "file": "history_raw.json",
           "mtime": "2026-11-17 22:25",
-          "age_h": 0.1
+          "age_h": 15.3
         },
         {
           "file": "pred_history.json",
           "mtime": "2026-11-17 22:28",
-          "age_h": 0.0
+          "age_h": 15.3
         }
       ],
       "rows": [
@@ -11446,82 +11450,82 @@
           "name": "双色球",
           "latest_period": 2026131,
           "draw_date": "2026-11-15",
-          "days_ago": 2,
+          "days_ago": 3,
           "next_period": "2026132",
           "period_ok": true,
-          "schedule_today": true,
-          "miss": 0,
-          "status": "今日应开待更新"
+          "schedule_today": false,
+          "miss": 1,
+          "status": "漏期 1 次"
         },
         {
           "type": "dlt",
           "name": "大乐透",
           "latest_period": 26131,
           "draw_date": "2026-11-16",
-          "days_ago": 1,
+          "days_ago": 2,
           "next_period": "26132",
           "period_ok": true,
-          "schedule_today": false,
+          "schedule_today": true,
           "miss": 0,
-          "status": "正常"
+          "status": "今日应开待更新"
         },
         {
           "type": "qlc",
           "name": "七乐彩",
           "latest_period": 2026132,
           "draw_date": "2026-11-16",
-          "days_ago": 1,
+          "days_ago": 2,
           "next_period": "2026133",
           "period_ok": true,
-          "schedule_today": false,
+          "schedule_today": true,
           "miss": 0,
-          "status": "正常"
+          "status": "今日应开待更新"
         },
         {
           "type": "kl8",
           "name": "快乐8",
           "latest_period": 2026307,
           "draw_date": "2026-11-17",
-          "days_ago": 0,
+          "days_ago": 1,
           "next_period": "2026308",
           "period_ok": true,
           "schedule_today": true,
           "miss": 0,
-          "status": "正常"
+          "status": "今日应开待更新"
         },
         {
           "type": "fc3d",
           "name": "福彩3D",
           "latest_period": 2026307,
           "draw_date": "2026-11-17",
-          "days_ago": 0,
+          "days_ago": 1,
           "next_period": "2026308",
           "period_ok": true,
           "schedule_today": true,
           "miss": 0,
-          "status": "正常"
+          "status": "今日应开待更新"
         },
         {
           "type": "pl35",
           "name": "排列3/5",
           "latest_period": 26307,
           "draw_date": "2026-11-17",
-          "days_ago": 0,
+          "days_ago": 1,
           "next_period": "26308",
           "period_ok": true,
           "schedule_today": true,
           "miss": 0,
-          "status": "正常"
+          "status": "今日应开待更新"
         },
         {
           "type": "qxc",
           "name": "七星彩",
           "latest_period": 26132,
           "draw_date": "2026-11-17",
-          "days_ago": 0,
+          "days_ago": 1,
           "next_period": "26133",
           "period_ok": true,
-          "schedule_today": true,
+          "schedule_today": false,
           "miss": 0,
           "status": "正常"
         }
@@ -11852,7 +11856,7 @@
         }
       ],
       "level": "warn",
-      "checked_at": "2026-11-17 22:30:30"
+      "checked_at": "2026-11-18 13:45:59"
     },
     "notes": []
   }
