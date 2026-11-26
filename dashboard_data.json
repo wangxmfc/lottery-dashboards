@@ -11098,20 +11098,20 @@
       {
         "name": "彩票数据源",
         "status": "ok",
-        "latency": "232ms",
-        "last_check": "2026-11-26 23:45"
+        "latency": "223ms",
+        "last_check": "2026-11-26 23:53"
       },
       {
         "name": "图床服务",
         "status": "ok",
-        "latency": "834ms",
-        "last_check": "2026-11-26 23:45"
+        "latency": "933ms",
+        "last_check": "2026-11-26 23:53"
       },
       {
         "name": "GitHub Pages",
         "status": "ok",
-        "latency": "1810ms",
-        "last_check": "2026-11-26 23:45"
+        "latency": "8936ms",
+        "last_check": "2026-11-26 23:54"
       }
     ],
     "run_times": [
@@ -11177,7 +11177,7 @@
         "desc": "dashboard.html 更新"
       },
       {
-        "time": "0分钟前",
+        "time": "1分钟前",
         "module": "数据更新",
         "desc": "dashboard_data.json 更新"
       },
@@ -11192,7 +11192,7 @@
         "desc": "scripts/verify_consistency.py 更新"
       },
       {
-        "time": "15分钟前",
+        "time": "23分钟前",
         "module": "预测卡片",
         "desc": "scripts/gen_cards_v2.py 更新"
       }
@@ -11207,11 +11207,11 @@
         "desc": "部分彩种历史数据不足200期，回测样本待积累"
       }
     ],
-    "collected_at": "2026-11-26 23:45:31"
+    "collected_at": "2026-11-26 23:54:06"
   },
   "last_status_update": "2026-11-26 23:45:27",
   "postproc_layer": {
-    "generated_at": "2026-11-26 23:45:27",
+    "generated_at": "2026-11-26 23:52:54",
     "overlap_cap": 70,
     "eval": [
       {
@@ -11569,7 +11569,7 @@
       }
     ],
     "freshness": {
-      "checked_at": "2026-11-26 23:45:27",
+      "checked_at": "2026-11-26 23:52:54",
       "level": "ok",
       "items": [
         {
@@ -11581,22 +11581,22 @@
         {
           "file": "backtest_stats.json",
           "mtime": "2026-11-26 23:14",
-          "age_h": 0.5
+          "age_h": 0.6
         },
         {
           "file": "pred_state.json",
           "mtime": "2026-11-26 23:43",
-          "age_h": 0.0
+          "age_h": 0.2
         },
         {
           "file": "history_raw.json",
           "mtime": "2026-11-26 23:41",
-          "age_h": 0.1
+          "age_h": 0.2
         },
         {
           "file": "pred_history.json",
           "mtime": "2026-11-26 23:43",
-          "age_h": 0.0
+          "age_h": 0.2
         }
       ],
       "rows": [
@@ -11613,55 +11613,9 @@
           "status": "正常",
           "fetch_status": "updated",
           "degraded": false,
-          "alt_scan": [
-            {
-              "source": "cwl_official",
-              "url": "https://www.cwl.gov.cn/cwl_admin/front/cwlkj/search/kjxx/findDrawNotice?name=ssq&issueCount=5",
-              "enabled": true,
-              "attempts": 1,
-              "status": 200,
-              "elapsed_s": 0.208,
-              "got_period": "2026136",
-              "error": "",
-              "valid": true
-            },
-            {
-              "source": "500com",
-              "url": "https://datachart.500.com/ssq/history/newinc/history.php?start=26136&end=26136",
-              "enabled": true,
-              "attempts": 1,
-              "status": 200,
-              "elapsed_s": 0.285,
-              "got_period": "2026136",
-              "error": "",
-              "valid": true
-            },
-            {
-              "source": "zhcw",
-              "url": "https://kaijiang.zhcw.com/zhcw/html/ssq/list.html",
-              "enabled": true,
-              "attempts": 1,
-              "status": 200,
-              "elapsed_s": 0.22,
-              "got_period": "2026135",
-              "error": "",
-              "valid": false
-            },
-            {
-              "source": "sina",
-              "url": "https://lotto.sina.com.cn/lottery/ssq/",
-              "enabled": true,
-              "attempts": 2,
-              "status": null,
-              "elapsed_s": 0.091,
-              "got_period": null,
-              "error": "curl: (56) Received HTTP code 502 from proxy after CONNECT",
-              "valid": false
-            }
-          ],
+          "alt_scan": [],
           "fetch_reasons": [
-            "[zhcw] 期号不符: 取到 2026135，期望 2026136",
-            "[zhcw] 与上期开奖号码完全相同（异常重号）"
+            "下期未到开奖时刻，历史已覆盖最近已过开奖日 2026-11-26，无需抓取"
           ]
         },
         {
@@ -11811,7 +11765,7 @@
       }
     ],
     "guard": {
-      "checked_at": "2026-11-26 23:18:15",
+      "checked_at": "2026-11-26 23:52:48",
       "days": 3,
       "level": "ok",
       "alerts": [],
@@ -12070,7 +12024,7 @@
         }
       ],
       "level": "warn",
-      "checked_at": "2026-11-26 23:45:27"
+      "checked_at": "2026-11-26 23:52:54"
     },
     "notes": []
   }
